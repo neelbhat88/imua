@@ -1,5 +1,5 @@
 <style type="text/css">
-	.square { height: 100px; width: 100px; border: 1px solid red; border-style: solid; display: inline-block; }
+	.square { height: 100px; width: 100px; border: 1px solid green; border-style: solid; display: inline-block; position: relative; }
 
 	.pyramidContainer>div {font-size: 0;}
 
@@ -15,41 +15,52 @@
 
 	.level1Slots { position: relative; bottom: 0px;}
 
-	.level2Slots .square {border-color: green;}
-	.level3Slots .square {border-color: blue;}
-	.level4Slots .square {border-color: orange;}
-
 	.level  {margin-bottom: -10px;}
+
+	.squareText{position: absolute; color: black; font-size: 22px; left:0; top:0; padding:30px; }
 </style>
 
 <h1> Welcome to your profile! </h1>
 <div class='pageContainer' style="height: 500px; width: 1055px">
 	<div class="pyramidContainer" style="float: left; height: 500px; width: 550px; border: 0px solid black; text-align: center">		
 		<div class="level4Slots level">
-			<div class="square emptySquare" level="4"></div>			
+			<div class="square emptySquare" level="4"><span class="squareText" style="">$40</span></div>		
+			<div class="square emptySquare" level="4"></div>
+			<div class="square emptySquare" level="4"></div>
+			<div class="square emptySquare" level="4"></div>
 		</div>
 		<div class="level3Slots level">
 			<div class="square emptySquare" level="3"></div>
-			<div class="square emptySquare" level="3"></div>			
+			<div class="square emptySquare" level="3"></div>		
+			<div class="square emptySquare" level="3"><span class="squareText" style="">$30</span></div>
+			<div class="square emptySquare" level="3"></div>
 		</div>
 		<div class="level2Slots level">
 			<div class="square emptySquare" level="2"></div>
 			<div class="square emptySquare" level="2"></div>
 			<div class="square emptySquare" level="2"></div>
+			<div class="square emptySquare" level="2"><span class="squareText" style="">$20</span></div>
 		</div>
 		<div class="level1Slots level">
 			<div class="square emptySquare" level="1"></div>
+			<div class="square emptySquare" level="1"><span class="squareText" style="">$10</span></div>
 			<div class="square emptySquare" level="1"></div>
-			<div class="square emptySquare" level="1"></div>
-			<div class="square emptySquare" level="1"></div>
+			<div class="square emptySquare" level="1"><span class="squareText" style="">$10</span></div>
 		</div>
 	</div>
 	<div class="badgesContainer" style="float: left; height: 500px; width: 450px; border: 1px solid blue; padding: 10px">
-		<div level="1" class="square filledSquare red"></div>
-		<div level="1" class="square filledSquare red"></div>
 		<div level="2" class="square filledSquare green"></div>
 		<div level="2" class="square filledSquare green"></div>
-		<div level="3" class="square filledSquare blue"></div>
-		<div level="4" class="square filledSquare yellow"></div>
+		<div level="2" class="square filledSquare green"></div>
+		<div level="2" class="square filledSquare green"></div>
+		<div level="2" class="square filledSquare green"></div>
+		<div level="2" class="square filledSquare green"></div>
 	</div>
 </div>
+
+<!--<br>
+<p>First name: <strong data-bind="text: firstName"></strong></p>
+<p>Last name: <strong data-bind="text: lastName"></strong></p>
+
+<p>First name: <input data-bind="value: firstName" /></p>
+<p>Last name: <input data-bind="value: lastName" /></p>-->

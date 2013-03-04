@@ -25,6 +25,8 @@ $(document).ready(function(){
 			out: handleOutEvent
 		}
 	);
+
+	//ko.applyBindings(new AppViewModel());
 });
 
 function handleEmptySquareDropEvent(event, ui)
@@ -32,11 +34,11 @@ function handleEmptySquareDropEvent(event, ui)
 	var slotLevel = $(this).attr('level');
 	var badgeLevel = ui.draggable.attr('level');
 
-	if (slotLevel == badgeLevel)
-	{
+	//if (slotLevel == badgeLevel)
+	//{
 		ui.draggable.position( { my: 'left top', at: 'left top', of: $(this) } );
 		ui.draggable.draggable('option', 'revert', false);
-	}
+	//}
 }
 
 function handleBadgesContainerDropEvent(event, ui)
@@ -48,4 +50,9 @@ function handleBadgesContainerDropEvent(event, ui)
 function handleOutEvent(event, ui)
 {
 	ui.draggable.draggable('option', 'revert', true);	
+}
+
+function AppViewModel() {
+	this.firstName = ko.observable("Neel");
+	this.lastName = ko.observable("Bhat");
 }

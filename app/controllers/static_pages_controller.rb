@@ -4,4 +4,7 @@ class StaticPagesController < ApplicationController
 
   def profile
   end
+
+  def academics
+  end
 end
