@@ -1,0 +1,47 @@
+var Summary = new function()
+{
+	var self = this;
+
+	self.init = function()
+	{
+		$(document).ready(function() {			
+			ko.applyBindings(new GridViewModel());
+		});
+	};
+};
+
+function GridViewModel()
+{
+	var self = this;
+
+	self.rows = ko.observableArray([
+			new Row(0, 10), 
+			new Row(1, 20), 
+			new Row(2, 30),
+			new Row(3, 40)
+		]);
+	//self.totalDollars = ko.computable
+}
+
+function Row(dependsOn, dollarValue)
+{
+	var self = this;
+
+	self.dependsOn = dependsOn;
+	self.squares = ko.observableArray([
+			new Square(0), 
+			new Square(dollarValue), 
+			new Square(5),
+			new Square(0)
+		]);
+}
+
+function Square(dollarValue)
+{
+	var self = this;
+
+	self.dollarValue = ko.observable(dollarValue);
+	self.isEmpty = ko.observable(true);
+	self.canPlacePiece = ko.observable();
+	self.isLocked = ko.observable(false);
+}

@@ -9,7 +9,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body jsinit="<%= @jsinit %>">
     <%= render 'layouts/header' %>
     <div class="" style="padding: 0 30px">
       <% flash.each do |key, value| %>

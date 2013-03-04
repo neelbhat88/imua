@@ -1,6 +1,12 @@
-$(document).ready(function() {
-	ko.applyBindings(new ClassesViewModel());
-});
+var Academics = new function() {
+	var self = this;
+
+	self.init = function() {
+		$(document).ready(function() {
+			ko.applyBindings(new ClassesViewModel());
+		});
+	};
+};
 
 function Class(name, classLevel, grade)
 {

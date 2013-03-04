@@ -2,6 +2,7 @@ Wcsf::Application.routes.draw do
   get "static_pages/home"
   match '/profile', to: 'static_pages#profile'
   match '/academics', to: 'static_pages#academics'
+  match '/summary', to: 'static_pages#summary'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

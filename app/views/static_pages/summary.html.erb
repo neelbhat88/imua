@@ -1,0 +1,28 @@
+<% @jsinit = "Summary" %>
+
+<style type="text/css">
+	.square { height: 100px; width: 100px; border: 1px solid green; border-style: solid; display: inline-block; position: relative; }
+
+	.gridContainer>div {font-size: 0;}
+	
+	.hovered { background-color: #CCC;}
+	.filledSquare.ui-draggable-dragging {box-shadow: 0 0 10px #333; }
+
+	.square.filledSquare {border-color: black;}
+
+	.level  {margin-bottom: -10px;}
+
+	.squareText{position: absolute; color: black; font-size: 22px; left:0; top:0; padding:30px; }
+</style>
+
+<h1>Student Summary</h1>
+
+<div class="gridContainer">
+	<div data-bind="foreach: { data: rows, as: 'row' }">
+		<div data-bind="foreach: { data: squares, as: 'square'}" class="level">
+			<div class="square emptySquare">
+				<span data-bind="text: square.dollarValue() > 0 ? square.dollarValue : ''" class="squareText"></span>
+			</div>
+		</div>
+	</div>
+</div>

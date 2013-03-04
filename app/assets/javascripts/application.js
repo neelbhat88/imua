@@ -16,3 +16,10 @@
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
 //= require jquery.ui.position
+
+$(function(){
+	var jsobj = $("body").attr("jsinit");
+
+	if (jsobj != "")
+		window[jsobj].init();
+});
