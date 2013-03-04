@@ -25,7 +25,8 @@ gem "paperclip", "~> 3.0"
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+#gem 'bcrypt-ruby', '~> 3.0.0'
+
 gem 'bootstrap-sass', '2.1'
 
 # To use Jbuilder templates for JSON
