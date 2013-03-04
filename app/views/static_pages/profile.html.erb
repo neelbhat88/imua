@@ -1,0 +1,32 @@
+<style type="text/css">
+	.square { height: 100px; width: 100px; border: 1px solid red; position: relative; display: inline-block;}
+	.red { background-color: red; }
+	.green { background-color: green; border-color: green;}
+	.hovered { background-color: #CCC;}
+	.filledSquare.ui-draggable-dragging {box-shadow: 0 0 10px #333;}
+
+	.level2Slots .square {border-color: green;}
+</style>
+
+<h1> Welcome to your profile! </h1>
+<div class='pageContainer' style="height: 500px; width: 705px">
+	<div class="pyramidContainer" style="float: left; height: 500px; width: 500px; border: 1px solid black;">
+		<div class="level1Slots">
+			<div class="square emptySquare" level="1"></div>
+			<div class="square emptySquare" level="1"></div>
+			<div class="square emptySquare" level="1"></div>
+			<div class="square emptySquare" level="1"></div>
+		</div>
+		<div class="level2Slots">
+			<div class="square emptySquare" level="2"></div>
+			<div class="square emptySquare" level="2"></div>
+			<div class="square emptySquare" level="2"></div>
+			<div class="square emptySquare" level="2"></div>
+		</div>
+	</div>
+	<div class="badgesContainer" style="float: left; height: 500px; width: 200px; border: 1px solid blue">
+		<div level="1" class="square filledSquare red"></div>
+		<div level="1" class="square filledSquare red"></div>
+		<div level="2" class="square filledSquare green"></div>
+	</div>
+</div>

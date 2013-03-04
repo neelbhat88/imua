@@ -13,3 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
+//= require jquery.ui.position
