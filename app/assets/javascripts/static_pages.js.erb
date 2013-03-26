@@ -1,33 +1,39 @@
-$(document).ready(function(){
-	$('.filledSquare').draggable(
-		{
-			cursor: 'move',
-			containment: '.pageContainer',
-			revert: true,
-			stack: '.filledSquare'
-			//snap: '.emptySquare'
-		}
-	);
+var Profile = new function() {
+	var self = this;
 
-	$('.emptySquare').droppable( 
-		{
-			accept: '.filledSquare',
-			hoverClass: 'hovered',
-			drop: handleEmptySquareDropEvent,
-			out: handleOutEvent
-		}
-	);
+	self.init = function() {
+		$(document).ready(function(){
+			$('.filledSquare').draggable(
+				{
+					cursor: 'move',
+					containment: '.pageContainer',
+					revert: true,
+					stack: '.filledSquare'
+					//snap: '.emptySquare'
+				}
+			);
 
-	$('.badgesContainer').droppable(
-		{
-			accept: '.filledSquare',
-			drop: handleBadgesContainerDropEvent,
-			out: handleOutEvent
-		}
-	);
+			$('.emptySquare').droppable( 
+				{
+					accept: '.filledSquare',
+					hoverClass: 'hovered',
+					drop: handleEmptySquareDropEvent,
+					out: handleOutEvent
+				}
+			);
 
-	//ko.applyBindings(new AppViewModel());
-});
+			$('.badgesContainer').droppable(
+				{
+					accept: '.filledSquare',
+					drop: handleBadgesContainerDropEvent,
+					out: handleOutEvent
+				}			
+			);
+
+			//ko.applyBindings(new AppViewModel());
+		});
+	};
+};
 
 function handleEmptySquareDropEvent(event, ui)
 {

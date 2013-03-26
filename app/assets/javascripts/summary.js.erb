@@ -6,6 +6,33 @@ var Summary = new function()
 	{
 		$(document).ready(function() {			
 			ko.applyBindings(new GridViewModel());
+
+			$('.badgeSquare').draggable(
+				{
+					cursor: 'move',
+					containment: '.pageContainer',
+					revert: true,
+					stack: '.badgeSquare'
+					//snap: '.emptySquare'
+				}
+			);
+
+			$('.emptySquare').droppable( 
+				{
+					accept: '.badgeSquare',
+					hoverClass: 'hovered',
+					drop: handleEmptySquareDropEvent,
+					out: handleOutEvent
+				}
+			);
+
+			$('.badgesContainer').droppable(
+				{
+					accept: '.badgeSquare',
+					drop: handleBadgesContainerDropEvent,
+					out: handleOutEvent
+				}			
+			);
 		});
 	};
 };
@@ -20,28 +47,159 @@ function GridViewModel()
 			new Row(2, 30),
 			new Row(3, 40)
 		]);
-	//self.totalDollars = ko.computable
+
+	self.totalDollars = ko.computed(function() {
+		var total;
+		
+		$('.filledSquare').each(function() {
+			total += ko.dataFor(this).dollarValue();
+		});
+
+		return total;
+	});
 }
 
-function Row(dependsOn, dollarValue)
+function Row(row, dollarValue)
 {
 	var self = this;
 
-	self.dependsOn = dependsOn;
+	self.rowNum = 4 - row;
 	self.squares = ko.observableArray([
-			new Square(0), 
-			new Square(dollarValue), 
-			new Square(5),
-			new Square(0)
+			new Square(self.rowNum, 0, 0), 
+			new Square(self.rowNum, 1, dollarValue), 
+			new Square(self.rowNum, 2, 5),
+			new Square(self.rowNum, 3, 0)
 		]);
+
+	self.squares.row = this;
 }
 
-function Square(dollarValue)
+function Square(rowNum, squareNum, dollarValue)
 {
 	var self = this;
 
 	self.dollarValue = ko.observable(dollarValue);
-	self.isEmpty = ko.observable(true);
-	self.canPlacePiece = ko.observable();
-	self.isLocked = ko.observable(false);
+	self.isEmpty = true;
+	self.isLocked = false;
+
+	self.rowNum = ko.observable(rowNum);
+	self.squareNum = ko.observable(squareNum);
+
+	self.canPlacePiece = function(previousCellElement) {
+		var previousCell = ko.dataFor(previousCellElement);
+
+		var rowBelowNum = self.rowNum() - 1;		
+		var newSquareBelow = getSquareBelow(rowBelowNum, self.squareNum());		
+
+		var oldSquareAbove = {};
+		if ($(previousCellElement).hasClass('badgesContainer'))
+		{
+			// Default this to true since we don't care about badgesContainer
+			oldSquareAbove.isEmpty = true;
+		}
+		else
+		{
+			var rowAboveNum = previousCell.rowNum() + 1;
+			oldSquareAbove = getSquareAbove(rowAboveNum, previousCell.squareNum());
+		}		
+
+		var squareFrom = previousCell;
+
+		// Check cell below current cell	
+		if(rowBelowNum <= 0)
+		{
+			// No squaresBelow so don't check that
+			if (self.isEmpty && oldSquareAbove.isEmpty)
+				return true;
+		}
+		else
+		{						
+			if (squareFrom != newSquareBelow && // Keep from being able to put current square right above itself
+				!newSquareBelow.isEmpty && 
+				self.isEmpty && // Square being placed into should be empty
+				oldSquareAbove.isEmpty) 
+			{
+				return true;
+			}
+		}					
+
+		return false;
+	}
+}
+
+function handleEmptySquareDropEvent(event, ui)
+{
+	var newSquareElement = this;
+	var newSquare = ko.dataFor(this);
+	var oldSquareElement = ui.draggable.parent()[0];
+	var oldSquare = ko.dataFor(oldSquareElement);
+
+	// Check if piece can be placed
+	if (newSquare.canPlacePiece(oldSquareElement))
+	{		
+		newSquare.isEmpty = false;
+		newSquare.dollarValue(10);
+		$(newSquareElement).addClass('filledSquare');
+	
+		if (!$(oldSquareElement).hasClass('badgesContainer'))
+		{
+			oldSquare.isEmpty = true;
+			$(oldSquareElement).removeClass('filledSquare');
+		}
+		
+		ui.draggable.position( { my: 'left top', at: 'left top', of: $(this) } );
+		ui.draggable.draggable('option', 'revert', false);
+
+		// Add badge to current container to set parent()		
+		ui.draggable.attr('style', 'position: absolute');
+		$(this).append(ui.draggable);		
+	}
+}
+
+function handleBadgesContainerDropEvent(event, ui)
+{
+	//ui.draggable.position( { my: 'left', at: 'left', of: $(this) } );
+	ui.draggable.draggable('option', 'revert', false);
+
+	ui.draggable.attr('style', 'position: relative');
+	$(this).append(ui.draggable);
+}
+
+function handleOutEvent(event, ui)
+{
+	ui.draggable.draggable('option', 'revert', true);	
+}
+
+// Returns KO object
+function getSquareBelow(rowBelowNum, colNum)
+{
+	if (rowBelowNum <= 0)
+		return null;
+
+	var mapArray = jQuery.map($('.level'), function(value) { 
+				return value.attributes['level'].value == rowBelowNum;
+			});
+
+	var index = jQuery.inArray(true, mapArray);
+	var level = ko.dataFor($('.level')[index]);
+	var squareBelow = level.squares()[colNum];
+
+	return squareBelow;
+}
+
+function getSquareAbove(rowAboveNum, colNum)
+{
+	var mapArray = jQuery.map($('.level'), function(value) { 
+				return value.attributes['level'].value == rowAboveNum;
+			});
+
+	var index = jQuery.inArray(true, mapArray);
+
+	if (index == -1)
+		return null;
+
+	var level = ko.dataFor($('.level')[index]);
+	var squareAbove = level.squares()[colNum];
+
+	return squareAbove;
 }

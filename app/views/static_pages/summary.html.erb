@@ -5,10 +5,12 @@
 
 	.gridContainer>div {font-size: 0;}
 	
-	.hovered { background-color: #CCC;}
-	.filledSquare.ui-draggable-dragging {box-shadow: 0 0 10px #333; }
+	.green { background-color: green; border-color: green;}
 
-	.square.filledSquare {border-color: black;}
+	.hovered { background-color: #CCC;}
+	.badgeSquare.ui-draggable-dragging {box-shadow: 0 0 10px #333; }
+
+	.square.badgeSquare {border-color: black;}
 
 	.level  {margin-bottom: -10px;}
 
@@ -17,10 +19,24 @@
 
 <h1>Student Summary</h1>
 
+<div class="badgesContainer" style="border: 1px solid black; width: 400px; height: 800px; float: right; padding: 5px;">
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+	<div class="square badgeSquare green"></div>
+</div>
+
+<div id="totalAmount" data-bind="text: totalDollars">
+</div>
+
 <div class="gridContainer">
 	<div data-bind="foreach: { data: rows, as: 'row' }">
-		<div data-bind="foreach: { data: squares, as: 'square'}" class="level">
-			<div class="square emptySquare">
+		<div data-bind="foreach: { data: squares, as: 'square'}, attr: {'level':rowNum}" class="level">
+			<div data-bind="attr:{'col':squareNum}" class="square emptySquare">
 				<span data-bind="text: square.dollarValue() > 0 ? square.dollarValue : ''" class="squareText"></span>
 			</div>
 		</div>
