@@ -82,7 +82,7 @@ function Square(rowNum, squareNum, dollarValue)
 		var previousCell = ko.dataFor(previousCellElement);
 
 		var rowBelowNum = self.rowNum() - 1;		
-		var newSquareBelow = getSquareBelow(rowBelowNum, self.squareNum());		
+		var newSquareBelow = getSquareBelow(rowBelowNum, self.squareNum());
 
 		var oldSquareAbove = {};
 		if ($(previousCellElement).hasClass('badgesContainer'))
@@ -98,23 +98,13 @@ function Square(rowNum, squareNum, dollarValue)
 
 		var squareFrom = previousCell;
 
-		// Check cell below current cell	
-		if(rowBelowNum <= 0)
+		if (squareFrom != newSquareBelow && // Keep from being able to put current square right above itself
+			!newSquareBelow.isEmpty && 
+			self.isEmpty && // Square being placed into should be empty
+			oldSquareAbove.isEmpty) 
 		{
-			// No squaresBelow so don't check that
-			if (self.isEmpty && oldSquareAbove.isEmpty)
-				return true;
+			return true;
 		}
-		else
-		{						
-			if (squareFrom != newSquareBelow && // Keep from being able to put current square right above itself
-				!newSquareBelow.isEmpty && 
-				self.isEmpty && // Square being placed into should be empty
-				oldSquareAbove.isEmpty) 
-			{
-				return true;
-			}
-		}					
 
 		return false;
 	}
@@ -154,7 +144,7 @@ function handleBadgesContainerDropEvent(event, ui)
 {
 	var oldSquareElement = ui.draggable.parent()[0];
 	var oldSquare = ko.dataFor(oldSquareElement);
-	
+
 	if (!$(oldSquareElement).hasClass('badgesContainer'))
 	{
 		oldSquare.isEmpty = true;
@@ -197,7 +187,12 @@ function getDollarValue(row, col)
 function getSquareBelow(rowBelowNum, colNum)
 {
 	if (rowBelowNum <= 0)
-		return null;
+	{
+		var emptySquare = {};
+		emptySquare.isEmpty = false; // False since we want to be able to place piece here
+
+		return emptySquare;
+	}
 
 	var mapArray = jQuery.map($('.level'), function(value) { 
 				return value.attributes['level'].value == rowBelowNum;
@@ -219,8 +214,14 @@ function getSquareAbove(rowAboveNum, colNum)
 
 	var index = jQuery.inArray(true, mapArray);
 
+	// If no squareAbove return empty object
 	if (index == -1)
-		return null;
+	{
+		var emptySquare = {};
+		emptySquare.isEmpty = true;
+
+		return emptySquare;
+	}
 
 	var level = ko.dataFor($('.level')[index]);
 	var squareAbove = level.squares()[colNum];
