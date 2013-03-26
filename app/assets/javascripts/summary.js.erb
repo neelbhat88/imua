@@ -47,16 +47,6 @@ function GridViewModel()
 			new Row(2, 30),
 			new Row(3, 40)
 		]);
-
-	self.totalDollars = ko.computed(function() {
-		var total;
-		
-		$('.filledSquare').each(function() {
-			total += ko.dataFor(this).dollarValue();
-		});
-
-		return total;
-	});
 }
 
 function Row(row, dollarValue)
@@ -70,15 +60,18 @@ function Row(row, dollarValue)
 			new Square(self.rowNum, 2, 5),
 			new Square(self.rowNum, 3, 0)
 		]);
-
-	self.squares.row = this;
 }
 
 function Square(rowNum, squareNum, dollarValue)
 {
 	var self = this;
 
-	self.dollarValue = ko.observable(dollarValue);
+	self.allValues = [[10, 0, 10, 0],
+					  [0, 20, 20, 0],
+					  [40, 30, 0, 40],
+					  [50, 70, 0, 90]];
+
+	self.dollarValue = ko.observable(self.allValues[rowNum-1][squareNum]);
 	self.isEmpty = true;
 	self.isLocked = false;
 
@@ -138,7 +131,6 @@ function handleEmptySquareDropEvent(event, ui)
 	if (newSquare.canPlacePiece(oldSquareElement))
 	{		
 		newSquare.isEmpty = false;
-		newSquare.dollarValue(10);
 		$(newSquareElement).addClass('filledSquare');
 	
 		if (!$(oldSquareElement).hasClass('badgesContainer'))
@@ -152,22 +144,53 @@ function handleEmptySquareDropEvent(event, ui)
 
 		// Add badge to current container to set parent()		
 		ui.draggable.attr('style', 'position: absolute');
-		$(this).append(ui.draggable);		
+		$(this).append(ui.draggable);
+
+		$('#totalAmount').val(getTotalDollars());
 	}
 }
 
 function handleBadgesContainerDropEvent(event, ui)
 {
-	//ui.draggable.position( { my: 'left', at: 'left', of: $(this) } );
+	var oldSquareElement = ui.draggable.parent()[0];
+	var oldSquare = ko.dataFor(oldSquareElement);
+	
+	if (!$(oldSquareElement).hasClass('badgesContainer'))
+	{
+		oldSquare.isEmpty = true;
+		$(oldSquareElement).removeClass('filledSquare');
+	}
+
 	ui.draggable.draggable('option', 'revert', false);
 
 	ui.draggable.attr('style', 'position: relative');
 	$(this).append(ui.draggable);
+
+	$('#totalAmount').val(getTotalDollars());
 }
 
 function handleOutEvent(event, ui)
 {
 	ui.draggable.draggable('option', 'revert', true);	
+}
+
+function getTotalDollars() 
+{
+	var total = 0;
+	
+	$.each($('.filledSquare'), function() {
+		total += ko.dataFor(this).dollarValue();
+	});
+
+	return "$" + total;
+}
+
+function getDollarValue(row, col)
+{
+	var dollarValues = [[10, 0, 10, 0],
+						[0, 20, 20, 0],
+						[40, 30, 0, 40],
+						[50, 70, 0, 90]];
 }
 
 // Returns KO object
@@ -187,6 +210,7 @@ function getSquareBelow(rowBelowNum, colNum)
 	return squareBelow;
 }
 
+// Returns KO object
 function getSquareAbove(rowAboveNum, colNum)
 {
 	var mapArray = jQuery.map($('.level'), function(value) { 

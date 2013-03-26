@@ -19,6 +19,11 @@
 
 <h1>Student Summary</h1>
 
+<div>
+	<span style="font-size: 16px; font-weight: bold">Your total:</span>
+<input id="totalAmount" value="$0" style="width: 100px" readonly></input>
+</div>
+
 <div class="badgesContainer" style="border: 1px solid black; width: 400px; height: 800px; float: right; padding: 5px;">
 	<div class="square badgeSquare green"></div>
 	<div class="square badgeSquare green"></div>
@@ -30,14 +35,11 @@
 	<div class="square badgeSquare green"></div>
 </div>
 
-<div id="totalAmount" data-bind="text: totalDollars">
-</div>
-
 <div class="gridContainer">
 	<div data-bind="foreach: { data: rows, as: 'row' }">
 		<div data-bind="foreach: { data: squares, as: 'square'}, attr: {'level':rowNum}" class="level">
 			<div data-bind="attr:{'col':squareNum}" class="square emptySquare">
-				<span data-bind="text: square.dollarValue() > 0 ? square.dollarValue : ''" class="squareText"></span>
+				<span data-bind="text: square.dollarValue() > 0 ? square.dollarValue() : ''" class="squareText"></span>
 			</div>
 		</div>
 	</div>
