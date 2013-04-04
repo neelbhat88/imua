@@ -20,6 +20,9 @@ Wcsf::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Done for Devise
+  config.action_mailer.default_url_options = { :host => 'http://www.wscf.heroku.com' }
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 

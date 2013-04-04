@@ -5,9 +5,15 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>  
-          <li><%= link_to "Summary", summary_path %></li>
-          <li><%= link_to "Academics", academics_path %></li>
-          <li><%= link_to "My Badges", global_badges_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Summary", summary_path %></li>
+            <li><%= link_to "Academics", academics_path %></li>
+            <li><%= link_to "My Badges", global_badges_path %></li>
+            <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to "Login", new_user_session_path %></li>
+          <% end %>
+
         </ul>
       </nav>
     </div>
