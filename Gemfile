@@ -26,6 +26,9 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '2.1'
 
+# Used for authentication
+gem 'devise'
+
 # To use ActiveModel has_secure_password
 #gem 'bcrypt-ruby', '~> 3.0.0'
 
