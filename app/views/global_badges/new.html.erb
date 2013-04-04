@@ -1,0 +1,20 @@
+<h1>New Badge</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <!-- ToDo: Add global error message panel -->
+
+    <%= form_for(@badge) do |f| %>
+
+      <%= f.label :Title %>
+      <%= f.text_field :Title %>
+
+      <%= f.label :Category %>
+      <%= f.select :Category, @badge.GetCategories(), {:prompt => "Select a category"} %>
+
+      <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Cancel", class: "btn btn-large btn-secondary" %>
+      <!--<%= f.submit "Save and Add Another", class: "btn btn-large btn-primary", :name => "save_add_another" %>-->
+    <% end %>
+  </div>
+</div>

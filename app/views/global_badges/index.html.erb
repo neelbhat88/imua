@@ -1,0 +1,14 @@
+<h1>Badges</h1>
+
+<%= link_to "Add Badge", new_global_badge_path %>
+
+<div id='badgesContainer' style="padding-top: 10px">
+	<% @allbadges.each do |b| %>
+		<div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 100px; display: inline-block;">
+			<span style="font-weight: bold"><%= b.title %></span>
+			<div><%= b.category %></div>
+			<div>Semester <%= b.semester %></div>
+			<div>Required? <%= b.isminrequirement ? 'Yes' : 'No' %></div>
+		</div>
+	<% end %>
+</div>

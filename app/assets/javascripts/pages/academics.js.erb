@@ -35,8 +35,8 @@ function ClassesViewModel() {
 	];
 
 	self.subjects = ko.observableArray([
-			new Class("Math", self.classLevels[1], self.possibleGrades[0]),
-			new Class("History", self.classLevels[2], self.possibleGrades[3])
+			//new Class("Math", self.classLevels[1], self.possibleGrades[0]),
+			//new Class("History", self.classLevels[2], self.possibleGrades[3])
 		]);
 
 	self.totalGPA = ko.computed(function(){
@@ -60,5 +60,15 @@ function ClassesViewModel() {
 
 	self.removeClass = function(classToRemove) {
 		self.subjects.remove(classToRemove);
+	}
+
+	self.saveClasses = function()
+	{
+		$.ajax({
+			url: '/saveClasses',
+			data: {totalGPA: self.totalGPA()},
+			success: function() {},
+			error: function() {alert('fail!');}
+		});
 	}
 }

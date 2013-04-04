@@ -1,9 +1,14 @@
-Wcsf::Application.routes.draw do
+Wcsf::Application.routes.draw do  
   get "static_pages/home"
-  match '/profile', to: 'static_pages#profile'
-  match '/academics', to: 'static_pages#academics'
+
+  resources :global_badges
+
+  match '/profile', to: 'static_pages#profile'  
   match '/summary', to: 'static_pages#summary'
 
+  match '/academics', to: 'academics#index'
+  match '/saveClasses', to: 'academics#saveClasses'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

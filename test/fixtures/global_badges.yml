@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  Title: MyString
+  Category: MyString
+  Semester: 1
+  IsMinRequirement: 
+  SubCategory: 1
+  CompareValue: 1
+
+two:
+  Title: MyString
+  Category: MyString
+  Semester: 1
+  IsMinRequirement: 
+  SubCategory: 1
+  CompareValue: 1

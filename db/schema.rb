@@ -11,6 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130404130357) do
+
+  create_table "global_badges", :force => true do |t|
+    t.string   "title"
+    t.string   "category"
+    t.integer  "semester"
+    t.boolean  "isminrequirement"
+    t.text     "description"
+    t.integer  "subcategory"
+    t.string   "comparevalue",     :default => "3.0"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
 
 end
