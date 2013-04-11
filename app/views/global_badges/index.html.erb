@@ -1,12 +1,21 @@
-<h1>Badges</h1>
+<% @jsinit = 'Badges' %>
 
-<div id='badgesContainer' style="padding-top: 10px">
-	<% @allbadges.each do |b| %>
+<h1>Badges</h1>
+<select data-bind="options: $root.semesters, value: semester"></select>
+
+<div id='badgesContainer' data-bind="visible: badges().length > 0" style="padding-top: 10px">	
+	<div data-bind="foreach: { data: badges, as: 'badge' }">	
 		<div style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 100px; display: inline-block;">
-			<span style="font-weight: bold"><%= b.title %></span>
-			<div><%= b.category %></div>
-			<div>Semester <%= b.semester %></div>
-			<div>Required? <%= b.isminrequirement ? 'Yes' : 'No' %></div>
+			<span data-bind="text: badge.title(), css: {required: badge.isminrequirement() == true}" style="font-weight: bold"></span>
+			<div data-bind="text: badge.category()"></div>	
+			<div data-bind="text: 'Semester ' + badge.semester()"></div>
 		</div>
-	<% end %>
+	</div>	
 </div>
+<div data-bind="visible: badges().length <= 0">
+	<h2>There are no badges yet for this semster.</h2>
+</div>
+
+<hr>
+<h2>KO Debug</h2>
+<div data-bind="text: ko.toJSON(Badges.viewModel.badges())"></div>
