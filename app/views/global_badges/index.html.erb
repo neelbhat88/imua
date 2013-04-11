@@ -1,7 +1,10 @@
 <% @jsinit = 'Badges' %>
 
 <h1>Badges</h1>
-<select data-bind="options: $root.semesters, value: semester"></select>
+<div style="width: 400px">
+	Semester: 
+	<select data-bind="options: $root.semesters, value: semester" style="width: 100px;"></select>
+</div>
 
 <div id='badgesContainer' data-bind="visible: badges().length > 0" style="padding-top: 10px">	
 	<div data-bind="foreach: { data: badges, as: 'badge' }">	
@@ -17,5 +20,9 @@
 </div>
 
 <hr>
+<h2>Admin</h2>
+<div style="width: 300px;">	
+</div>
+
 <h2>KO Debug</h2>
 <div data-bind="text: ko.toJSON(Badges.viewModel.badges())"></div>
