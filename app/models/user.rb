@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
   					:role, :current_semester
   # attr_accessible :title, :body
+
+  has_many :user_classes
+  has_many :user_badges
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  userid: 1
+  name: MyString
+  level: 1
+  grade: MyString
+  gpa: 1.5
+  semester: 1
+
+two:
+  userid: 1
+  name: MyString
+  level: 1
+  grade: MyString
+  gpa: 1.5
+  semester: 1

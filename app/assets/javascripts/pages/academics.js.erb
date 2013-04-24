@@ -1,74 +1,145 @@
 var Academics = new function() {
 	var self = this;
 
+	self.viewModel = {};
+
 	self.init = function() {
 		$(document).ready(function() {
-			ko.applyBindings(new ClassesViewModel());
+			//ko.applyBindings(new ClassesViewModel());
+			$.ajax({
+				url: '/academics',
+				success: function(data) {					
+					self.viewModel.subjects = ko.mapping.fromJS(data);
+					self.viewModel.originalSubjects = data;
+
+					ViewModelPropertiesInit(self.viewModel);			
+
+					ko.applyBindings(self.viewModel);
+				},
+				error: function() { alert("Failed initial badge load");}
+			});			
 		});
 	};
+
+	// self.initKOMapping = function () {
+	// 	$.ajax({
+	// 		url: '/academics',
+	// 		success: function(data) {					
+	// 			 var newData = ko.mapping.fromJS(data);
+	// 			 self.viewModel.subjects(newData());
+	// 			//ViewModelPropertiesInit(self.viewModel);			
+	// 		},
+	// 		error: function() { alert("Failed initial badge load");}
+	// 	});
+	// };
 };
 
+// This class has to match the ClassViewModel.rb definition
 function Class(name, classLevel, grade)
 {
 	var self = this;
 
 	self.name = ko.observable(name);
-	self.grade = ko.observable(grade);
 	self.level = ko.observable(classLevel);
+	self.grade = ko.observable(grade);
+	self.dbid = ko.observable("");
 }
 
-function ClassesViewModel() {
-	var self = this;
-
-	self.classLevels = ['Regular', 'Honors', 'AP'];	
-	self.possibleGrades = 
+function ViewModelPropertiesInit(viewModel) 
+{
+	viewModel.name = ko.observable().extend({editable: true});
+	viewModel.classLevels = 
 	[
-		{letter: "A", gpa: 4.0},
-		{letter: "A-", gpa: 3.67},
-		{letter: "B+", gpa: 3.33},
-		{letter: "B", gpa: 3.0},
-		{letter: "B-", gpa: 2.67},
-		{letter: "C+", gpa: 2.33},
-		{letter: "C", gpa: 2.0},
-		{letter: "D", gpa: 1.0},
-		{letter: "F", gpa: 0.0}
+		{levelid: 0, levelname: 'Regular'}, 
+		{levelid: 1, levelname: 'Honors'},
+		{levelid: 2, levelname: 'AP'}
 	];
 
-	self.subjects = ko.observableArray([
-			//new Class("Math", self.classLevels[1], self.possibleGrades[0]),
-			//new Class("History", self.classLevels[2], self.possibleGrades[3])
-		]);
+	viewModel.possibleGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F'];	
+	viewModel.gpaHash = {
+		'A':  4.0,  'A-': 3.67, 
+		'B+': 3.33, 'B':  3.00, 'B-': 2.67, 
+		'C+': 2.33, 'C':  2.00, 'C-': 1.67, 
+		'D':  1.33, 
+		'F':  1.0
+	};
 
-	self.totalGPA = ko.computed(function(){
-		var numClasses = self.subjects().length;
+	viewModel.calculateTotalGpa = function() {
+	//ko.computed(function(){
+		var numClasses = viewModel.subjects().length;
 		var nonNullClasses = 0;
 		var fullGPA = 0;
 
 		for (var i = 0; i < numClasses; i++)
-			if (self.subjects()[i].grade() != null)
+		{
+			if (viewModel.subjects()[i].grade() != null)
 			{
-				fullGPA += self.subjects()[i].grade().gpa;
+				fullGPA += viewModel.gpaHash[viewModel.subjects()[i].grade()];
 				nonNullClasses++;
 			}
+		}
 
 		return fullGPA/nonNullClasses;
-	});
+	}	
 
-	self.addClass = function() {
-		self.subjects.push(new Class("", null, null))
+	viewModel.totalGPA = ko.observable(viewModel.calculateTotalGpa());
+
+	viewModel.editing = ko.observable(false);
+	viewModel.rowsToRemove = [];
+
+	viewModel.addClass = function() {
+		viewModel.subjects.push(new Class("", null, null));
 	}
 
-	self.removeClass = function(classToRemove) {
-		self.subjects.remove(classToRemove);
+	viewModel.removeClass = function(classToRemove) {				
+		if (classToRemove.dbid() != null)
+			viewModel.rowsToRemove.push(classToRemove);
+
+		viewModel.subjects.remove(classToRemove);			
 	}
 
-	self.saveClasses = function()
+	viewModel.saveClasses = function()
 	{
+		var newGpa = viewModel.calculateTotalGpa();
+
 		$.ajax({
 			url: '/saveClasses',
-			data: {totalGPA: self.totalGPA()},
-			success: function() {},
-			error: function() {alert('fail!');}
-		});
+			data: {
+				totalGPA: newGpa, 
+				classes: ko.toJSON(viewModel.subjects()), 
+				classesToRemove: ko.toJSON(viewModel.rowsToRemove)
+			},
+			success: function(data) 
+			{
+				alert('You earned ' + data.newbadgecount + ' new badges!');
+				viewModel.subjects = ko.mapping.fromJS(data.newclasses);
+
+				viewModel.originalSubjects = data.newclasses;
+				viewModel.totalGPA(newGpa);
+
+				viewModel.rowsToRemove = [];
+				viewModel.editing(false);
+			},
+			error: function() {alert('SaveClasses fail!');}
+		});		
 	}
+
+	viewModel.cancelEdit = function()
+	{
+		// Set back to original subjects
+		viewModel.subjects = ko.mapping.fromJS(viewModel.originalSubjects);
+
+		viewModel.rowsToRemove = [];
+		viewModel.editing(false);
+	}
+
+	viewModel.editClasses = function()
+	{		
+		viewModel.editing(true);
+	}
+
+	viewModel.templateToUse = function()
+	{
+		return viewModel.editing() ? 'edit-classes' : 'view-classes';
+	}	
 }
