@@ -21,9 +21,9 @@ class AcademicsController < ApplicationController
   end
 
   def saveClasses
-  	##################################################
-	# ------------------ Classes ---------------------
-	##################################################
+    ##################################################
+	  # ------------------ Classes ---------------------
+    ##################################################
   	classesJson = JSON.parse(params[:classes])
   	removeJson = JSON.parse(params[:classesToRemove])
 
@@ -33,16 +33,21 @@ class AcademicsController < ApplicationController
   	# Add or Edit classes
   	classesJson.each do | c |  		
   		if c["dbid"] == ""
-  			logger.debug "DEBUG: New UserClass id = #{c["dbid"]} name = #{c["name"]} grade = #{c["grade"]} level = #{c["level"]} }"
-  			current_user.user_classes.create(:name=>c["name"], :level=>c["level"], :grade=>c["grade"], :semester=>current_user.user_info.current_semester)
+  			#logger.debug "DEBUG: New UserClass id = #{c["dbid"]} name = #{c["name"]} grade = #{c["grade"]} level = #{c["level"]} }"
+  			#current_user.user_classes.create(:name=>c["name"], :level=>c["level"], :grade=>c["grade"], :semester=>current_user.user_info.current_semester)
+        logger.debug "DEBUG: New UserClass school_class_id = #{c["school_class_id"]} grade = #{c["grade"]} }"
+        current_user.user_classes.create(:school_class_id =>c["school_class_id"].to_i, :grade=>c["grade"], :semester=>current_user.user_info.current_semester)
   		else
   			classToEdit = current_user.user_classes.find(c["dbid"].to_i)
   			logger.debug "DEBUG: Existing UserClass id = #{c["dbid"]}"
-  			logger.debug "DEBUG: Old values Name = #{classToEdit.name}, Level = #{classToEdit.level}, Grade #{classToEdit.grade}"  			
+  			#logger.debug "DEBUG: Old values Name = #{classToEdit.name}, Level = #{classToEdit.level}, Grade #{classToEdit.grade}"  			
+        logger.debug "DEBUG: Old values school_class_id = #{classToEdit.school_class_id}, Grade #{classToEdit.grade}"
 
-  			classToEdit.update_attributes(:name => c["name"], :level => c["level"], :grade => c["grade"])
-  			logger.debug "DEBUG: New values Name = #{classToEdit.name}, Level = #{classToEdit.level}, Grade #{classToEdit.grade}"
-		end
+  			#classToEdit.update_attributes(:name => c["name"], :level => c["level"], :grade => c["grade"])        
+  			#logger.debug "DEBUG: New values Name = #{classToEdit.name}, Level = #{classToEdit.level}, Grade #{classToEdit.grade}"
+        classToEdit.update_attributes(:school_class_id => c["school_class_id"].to_i, :grade => c["grade"])
+        logger.debug "DEBUG: New values school_class_id = #{classToEdit.school_class_id}, Grade #{classToEdit.grade}"
+		  end
   	end
 
   	# Remove classes
@@ -56,16 +61,16 @@ class AcademicsController < ApplicationController
   	# Reload all classes
   	allclasses = UserClass.where('semester = ? and user_id = ?', current_user.user_info.current_semester, current_user.id)
 
-	returnclasses = []
-	allclasses.each do | a |		
-		returnclasses << ClassViewModel.new(a)
-	end
+    returnclasses = []
+    allclasses.each do | a |		
+    	returnclasses << ClassViewModel.new(a)
+    end
 
-	##################################################
-	# ------------------ BADGES ----------------------
-	##################################################
-	totalGpa = params[:totalGPA]
-	logger.debug "DEBUG: TotalGPA - #{totalGpa}"
+    ##################################################
+    # ------------------ BADGES ----------------------
+    ##################################################
+    totalGpa = params[:totalGPA]
+    logger.debug "DEBUG: TotalGPA - #{totalGpa}"
 
   	# Load all Academics-GPA badges
   	allBadges = GlobalBadge.where("category = 'Academics' and subcategory = 1 and semester = ?", current_user.user_info.current_semester)
@@ -85,6 +90,6 @@ class AcademicsController < ApplicationController
   	# Return new badges received
   	respond_to do |format|
   		format.json { render :json => { :newclasses => returnclasses, :newbadgecount => @newbadgecount} }
-	end
+    end
   end
 end

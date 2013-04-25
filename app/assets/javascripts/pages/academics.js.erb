@@ -18,7 +18,7 @@ var Academics = new function() {
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial badge load");}
-			});			
+			});
 		});
 	};
 
@@ -43,6 +43,7 @@ function Class(name, classLevel, grade)
 	self.name = ko.observable(name);
 	self.level = ko.observable(classLevel);
 	self.grade = ko.observable(grade);
+	self.school_class_id = ko.observable()
 	self.dbid = ko.observable("");
 }
 
@@ -96,7 +97,7 @@ function ViewModelPropertiesInit(viewModel)
 		if (classToRemove.dbid() != null)
 			viewModel.rowsToRemove.push(classToRemove);
 
-		viewModel.subjects.remove(classToRemove);			
+		viewModel.subjects.remove(classToRemove);
 	}
 
 	viewModel.saveClasses = function()

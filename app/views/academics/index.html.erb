@@ -11,8 +11,8 @@
 			<tbody data-bind="foreach: subjects">
 				<tr>
 					<!--<td><input data-bind="value: name" /></td>-->
-					<td><select data-bind="options: $root.globalsubjects, value: level, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select></td>
-					<td><select data-bind="options: $root.classLevels, value: level, optionsCaption: 'Choose...', optionsText:'levelname', optionsValue:'levelid'"></select></td>					
+					<td><select data-bind="options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select></td>
+					<!--<td><select data-bind="options: $root.classLevels, value: level, optionsCaption: 'Choose...', optionsText:'levelname', optionsValue:'levelid'"></select></td>-->
 					<td><select data-bind="options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select></td>
 					<td><a href="#" data-bind="click: $root.removeClass">Remove</a></td>
 				</tr>
@@ -37,7 +37,7 @@
 			<tbody data-bind="foreach: subjects">
 				<tr>
 					<td><span data-bind="text: name"></span></td>
-					<td><span data-bind="text: $root.classLevels[level()].levelname"></span></td>					
+					<!-- <td><span data-bind="text: $root.classLevels[level()].levelname"></span></td> -->
 					<td><span data-bind="text: grade"></span></td>					
 				</tr>
 			</tbody>
