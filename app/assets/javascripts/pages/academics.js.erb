@@ -9,8 +9,9 @@ var Academics = new function() {
 			$.ajax({
 				url: '/academics',
 				success: function(data) {					
-					self.viewModel.subjects = ko.mapping.fromJS(data);
-					self.viewModel.originalSubjects = data;
+					self.viewModel.subjects = ko.mapping.fromJS(data.userclasses);
+					self.viewModel.originalSubjects = data.userclasses;
+					self.viewModel.globalsubjects = ko.mapping.fromJS(data.globalclasses);
 
 					ViewModelPropertiesInit(self.viewModel);			
 

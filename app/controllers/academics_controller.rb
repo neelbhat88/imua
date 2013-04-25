@@ -2,17 +2,22 @@ class AcademicsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-	allclasses = current_user.user_classes.where('semester = ?', current_user.user_info.current_semester)
+  	allclasses = current_user.user_classes.where('semester = ?', current_user.user_info.current_semester)
 
-	classes = []
-	allclasses.each do | a |		
-		classes << ClassViewModel.new(a)
-	end
+  	classes = []
+  	allclasses.each do | a |		
+  		classes << ClassViewModel.new(a)
+  	end
 
-	respond_to do |format|
-		format.json { render :json => classes }
-		format.html # index.html.erb
-	end
+    # Get all global classes to put into dropdown
+    globalclasses = SchoolClass.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
+
+    #customers = Customer.find(:all,  rder => 'first_name').map{|x| [x.full_name] + [x.id]}
+
+  	respond_to do |format|
+  		format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses} }
+  		format.html # index.html.erb
+  	end
   end
 
   def saveClasses

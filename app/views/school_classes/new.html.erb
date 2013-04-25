@@ -1,0 +1,7 @@
+<h1>Add New Class to <%= current_user.user_info.school.name %></h1>
+
+<%= render 'form', :isEdit => false %>
+
+<div class="span6 offset3">
+	<%= link_to 'Back', school_classes_path %>
+</div>

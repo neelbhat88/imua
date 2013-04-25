@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@school_class) do |f| %>
+      <% if @school_class.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@school_class.errors.count, "error") %> prohibited this school_class from being saved:</h2>
+
+          <ul>
+          <% @school_class.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :level %><br />
+        <%= f.select :level, [['Regular', 0], ['Honors', 1], ['AP', 2]] %>
+      </div>
+      <div class="actions">
+        <% if isEdit == false %>
+          <%= f.submit "Save and Add Another", class: "btn btn-large btn-primary", :name => "save_add_another" %>
+        <% end %>
+        <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

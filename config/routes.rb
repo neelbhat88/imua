@@ -1,4 +1,7 @@
 Wcsf::Application.routes.draw do  
+  resources :school_classes
+
+
   devise_for :users
 
   get "static_pages/home"

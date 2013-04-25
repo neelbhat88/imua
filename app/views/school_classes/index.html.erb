@@ -1,0 +1,21 @@
+<h1>Add Classes to <%= current_user.user_info.school.name %></h1>
+
+<table>
+  <tr>
+    <th>Name</th>    
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @school_classes.each do |school_class| %>
+  <tr>    
+    <td style="font-weight: bold"><%= school_class.name %></td>    
+    <td>| <%= link_to 'Edit', edit_school_class_path(school_class) %></td>
+    <td> <%= link_to 'Delete', school_class, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Class', new_school_class_path %>
