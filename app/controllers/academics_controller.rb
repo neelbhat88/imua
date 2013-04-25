@@ -2,7 +2,7 @@ class AcademicsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-	allclasses = current_user.user_classes.where('semester = ?', current_user.current_semester)
+	allclasses = current_user.user_classes.where('semester = ?', current_user.user_info.current_semester)
 
 	classes = []
 	allclasses.each do | a |		
@@ -29,7 +29,7 @@ class AcademicsController < ApplicationController
   	classesJson.each do | c |  		
   		if c["dbid"] == ""
   			logger.debug "DEBUG: New UserClass id = #{c["dbid"]} name = #{c["name"]} grade = #{c["grade"]} level = #{c["level"]} }"
-  			current_user.user_classes.create(:name=>c["name"], :level=>c["level"], :grade=>c["grade"], :semester=>current_user.current_semester)
+  			current_user.user_classes.create(:name=>c["name"], :level=>c["level"], :grade=>c["grade"], :semester=>current_user.user_info.current_semester)
   		else
   			classToEdit = current_user.user_classes.find(c["dbid"].to_i)
   			logger.debug "DEBUG: Existing UserClass id = #{c["dbid"]}"
@@ -49,7 +49,7 @@ class AcademicsController < ApplicationController
   	end
 
   	# Reload all classes
-  	allclasses = UserClass.where('semester = ? and user_id = ?', current_user.current_semester, current_user.id)
+  	allclasses = UserClass.where('semester = ? and user_id = ?', current_user.user_info.current_semester, current_user.id)
 
 	returnclasses = []
 	allclasses.each do | a |		
@@ -63,7 +63,7 @@ class AcademicsController < ApplicationController
 	logger.debug "DEBUG: TotalGPA - #{totalGpa}"
 
   	# Load all Academics-GPA badges
-  	allBadges = GlobalBadge.where("category = 'Academics' and subcategory = 1 and semester = ?", current_user.current_semester)
+  	allBadges = GlobalBadge.where("category = 'Academics' and subcategory = 1 and semester = ?", current_user.user_info.current_semester)
 
   	# Call compare and pass in totalGPA
   	@newbadgecount = 0

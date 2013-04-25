@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  current_semester: 1
+  school_id: 1
+
+two:
+  current_semester: 1
+  school_id: 1

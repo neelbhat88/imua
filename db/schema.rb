@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424033145) do
+ActiveRecord::Schema.define(:version => 20130425043403) do
 
   create_table "global_badges", :force => true do |t|
     t.string   "title"
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(:version => 20130424033145) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "user_infos", :force => true do |t|
+    t.integer  "current_semester", :default => 1
+    t.integer  "school_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "user_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -57,7 +65,6 @@ ActiveRecord::Schema.define(:version => 20130424033145) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "role",                   :default => 0
-    t.integer  "current_semester",       :default => 1
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
