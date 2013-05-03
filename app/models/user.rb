@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # role: 0-student, 1-teacher, 2-admin
   attr_accessible :email, :password, :password_confirmation, :remember_me, 
-  					:role, :user_info_id
+  					:role
 
 
   # attr_accessible :title, :body
@@ -27,5 +27,9 @@ class User < ActiveRecord::Base
 
   def is_teacher?
     return (self.role == 1)
+  end
+
+  def GetSchools
+    return School.all.map{|x| x.name}
   end
 end

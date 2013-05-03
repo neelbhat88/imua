@@ -5,7 +5,7 @@ class SchoolClassesController < ApplicationController
   # GET /school_classes
   # GET /school_classes.json
   def index
-    @school_classes = SchoolClass.order("name")
+    @school_classes = SchoolClass.where('school_id = ?', current_user.user_info.school_id).order("name")
 
     respond_to do |format|
       format.html # index.html.erb

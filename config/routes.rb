@@ -2,7 +2,7 @@ Wcsf::Application.routes.draw do
   resources :school_classes
 
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   get "static_pages/home"
 
