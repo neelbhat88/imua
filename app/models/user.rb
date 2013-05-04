@@ -17,10 +17,6 @@ class User < ActiveRecord::Base
   has_many :user_badges
   has_one :user_info, :dependent => :destroy
 
-  def is_admin?    
-    return (self.role == 2)
-  end
-
   def is_student?
     return (self.role == 0)
   end
@@ -29,7 +25,16 @@ class User < ActiveRecord::Base
     return (self.role == 1)
   end
 
-  def GetSchools
-    return School.all.map{|x| x.name}
+  def is_admin?    
+    return (self.role == 2)
+  end 
+
+##################
+# Static methods
+##################
+  def self.GetRoleText(role)
+    role_array = ['Student', 'Teacher', 'Admin']
+
+    return role_array[role.to_i]
   end
 end

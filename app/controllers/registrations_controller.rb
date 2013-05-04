@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
 	end
 
 	def create
-		@role = params[:user][:role] == nil ? 0 : params[:role]
+		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
 		@email = params[:user][:email]
 		@school_id = params[:school][:id]
 
@@ -20,13 +20,14 @@ class RegistrationsController < Devise::RegistrationsController
 		num_after = User.all.length
 		logger.debug("DEBUG: Users after #{num_after}")
 
+		# Add to user_info only if saved successfully
 		if num_after > num_before
 			User.find_by_email(params[:user][:email]).create_user_info(:school_id => @school_id)
 		end
 	end
 
 	def update
-		@role = params[:user][:role] == nil ? 0 : params[:role]
+		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
 		@school_id = params[:school][:id]
 
 		super
