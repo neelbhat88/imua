@@ -1,0 +1,31 @@
+<% @jsinit = "MyBadges" %>
+
+<h1>My Badges</h1>
+
+<style type="text/css">
+	.gridCell { height: 100px; width: 100px; border-top: 1px solid black; border-right: 1px solid black; display: table-cell; position: relative; }	
+	.gridCell:first-child {border-left: 1px solid black;}
+	.gridRow:last-child .gridCell {border-bottom: 1px solid black;}	
+	.gridRow:last-child .gridCell.minreq {border-color: red;}
+	.gridCell.minreq {border-color: red;}
+	
+	.green { background-color: green; border-color: green;}
+
+	.hovered { background-color: #CCC;}
+	.badgeSquare.ui-draggable-dragging {box-shadow: 0 0 10px #333; }
+
+	.gridCell.badgeSquare {border-color: black;}
+
+	.level  {margin-bottom: -10px;}
+
+	.squareText{position: absolute; color: black; font-size: 22px; left:0; top:0; padding:30px; }
+</style>
+
+<div class="gridContainer">
+	<div class="gridRow" style="display:table">
+		<span class="gridCell minreq"></span><span class="gridCell"></span>
+	</div>
+	<div class="gridRow">
+		<span class="gridCell minreq"></span><span class="gridCell minreq"></span>
+	</div>
+</div>

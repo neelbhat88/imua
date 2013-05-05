@@ -10,4 +10,7 @@ class StaticPagesController < ApplicationController
 
   def summary
   end
+
+  def mybadges
+  end
 end

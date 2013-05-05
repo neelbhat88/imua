@@ -10,6 +10,7 @@ Wcsf::Application.routes.draw do
 
   match '/profile', to: 'static_pages#profile'  
   match '/summary', to: 'static_pages#summary'
+  match '/mybadges', to: 'static_pages#mybadges'
 
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
