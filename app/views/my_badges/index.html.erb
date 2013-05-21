@@ -26,19 +26,22 @@
 	.squareText{position: absolute; color: black; font-size: 22px; left:0; top:0; padding:30px; }
 </style>
 
-<div style="text-align: center; font-size: 1.7em">Total: <span id="totalAmount" data-bind="text: '$' + totalAmount()"></span></div>
+<!-- This first div hides the initial blip -->
+<div style="display:none" data-bind="visible: true">
+	<div style="text-align: center; font-size: 1.7em">Total: <span id="totalAmount" data-bind="text: '$' + totalAmount()"></span></div>
 
-<div class="badgesContainer" style="float:right; border: 1px solid black; height: 400px; width: 400px;" data-bind="foreach: gridBadges">	
-		<div class="badgeSquare" data-bind="visible: gridcellnum != null, text: title() + ', Semester: ' + semester(),
-		css: $parent.getBadgeBGColor($data.semester())"></div>	
-</div>
+	<div class="badgesContainer" style="float:right; border: 1px solid black; height: 400px; width: 400px;" data-bind="foreach: gridBadges">	
+			<div class="badgeSquare" data-bind="visible: gridcellnum != null, text: title() + ', Semester: ' + semester(),
+			css: $parent.getBadgeBGColor($data.semester())"></div>	
+	</div>
 
-<div class="gridContainer">	
-	<div data-bind="foreach: {data: gridRows, as: 'row'}">
-		<div class="gridRow" style="display: table" data-bind="foreach: {data: gridcells, as: 'cell'}">
-			<div class="gridCell" data-bind="css: {emptySquare: cell.isempty(), minreq: cell.isminreq()}, 
-			text: cell.cellnum() + ' (' + cell.rownum() + ',' + cell.colnum() + ') $' + cell.value(),
-			style: {backgroundColor: $root.getGridBGColor(cell.colnum())}"></div>	
+	<div class="gridContainer">	
+		<div data-bind="foreach: {data: gridRows, as: 'row'}">
+			<div class="gridRow" style="display: table" data-bind="foreach: {data: gridcells, as: 'cell'}">
+				<div class="gridCell" data-bind="css: {emptySquare: cell.isempty(), minreq: cell.isminreq()}, 
+				text: cell.cellnum() + ' (' + cell.rownum() + ',' + cell.colnum() + ') $' + cell.value(),
+				style: {backgroundColor: $root.getGridBGColor(cell.colnum())}"></div>	
+			</div>
 		</div>
 	</div>
 </div>

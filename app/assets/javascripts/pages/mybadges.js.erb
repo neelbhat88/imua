@@ -50,6 +50,7 @@ var MyBadges = new function()
 				cursor: 'move',
 				containment: '.pageContainer',
 				revert: true,
+				revertDuration: 300,
 				stack: '.badgeSquare'
 				//snap: '.emptySquare'
 			}
@@ -86,7 +87,7 @@ var MyBadges = new function()
 		{
 			ui.draggable.position( { my: 'left top', at: 'left top', of: $(this) } );
 			ui.draggable.draggable('option', 'revert', false);			
-			
+
 			return true;
 		}
 

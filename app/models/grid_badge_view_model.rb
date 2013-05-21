@@ -1,6 +1,6 @@
 class GridBadgeViewModel
 	attr_accessor :category, :comparevalue, :description, :isminrequirement, :semester,
-                   :subcategory, :title, :gridcellnum, :bgcolor
+                   :subcategory, :title, :gridcellnum
 
 	def initialize(userbadge)
 		@category = userbadge.global_badge.category		
@@ -9,11 +9,5 @@ class GridBadgeViewModel
 		@semester = userbadge.global_badge.semester
 		@title = userbadge.global_badge.title
 		@gridcellnum = userbadge.gridcellnum
-		@bgcolor = GetBGColor()
-	end
-
-	def GetBGColor()
-		colorArray = ['green', 'blue', 'orange', 'purple']
-		return colorArray[self.semester - 1];
 	end
 end
