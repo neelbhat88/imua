@@ -1,17 +1,15 @@
 Wcsf::Application.routes.draw do  
   resources :school_classes
-
+  resources :global_badges
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 
-  get "static_pages/home"
-
-  resources :global_badges
+  get "static_pages/home"  
 
   match '/profile', to: 'static_pages#profile'  
   match '/summary', to: 'static_pages#summary'
-  match '/mybadges', to: 'static_pages#mybadges'
 
+  match '/mybadges', to: 'my_badges#index'
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
   

@@ -1,0 +1,45 @@
+<% @jsinit = "MyBadges" %>
+
+<h1>My Badges</h1>
+
+<style type="text/css">
+	.gridCell { height: 100px; width: 100px; border-top: 1px solid black; border-right: 1px solid black; display: table-cell; position: relative; }	
+	.gridCell:first-child {border-left: 1px solid black;}
+	.gridRow:last-child .gridCell {border-bottom: 1px solid black;}	
+	.gridRow:last-child .gridCell.minreq {border-color: red;}
+	.gridCell.minreq {border-color: red;}
+	
+	.green { background-color: green; border-color: green !important;}
+	.blue { background-color: blue; border-color: blue !important;}
+	.orange { background-color: orange; border-color: orange;}
+	.purple { background-color: purple; border-color: purple;}
+
+	.hovered { background-color: #CCC !important;}
+	.badgeSquare.ui-draggable-dragging {box-shadow: 0 0 10px #333; }
+
+	.gridCell.badgeSquare {border-color: black;}
+
+	.badgeSquare { border: 1px solid black; margin: 5px; height: 100px; width: 100px; position: relative; display: inline-table; color: white;}
+
+	.level  {margin-bottom: -10px;}
+
+	.squareText{position: absolute; color: black; font-size: 22px; left:0; top:0; padding:30px; }
+</style>
+
+<div style="text-align: center; font-size: 1.7em">Total: <span id="totalAmount" data-bind="text: '$' + totalAmount()"></span></div>
+
+<div class="badgesContainer" style="float:right; border: 1px solid black; height: 400px; width: 400px;" data-bind="foreach: gridBadges">	
+		<div class="badgeSquare" data-bind="visible: gridcellnum != null, text: title() + ', Semester: ' + semester(),
+		css: $parent.getBadgeBGColor($data.semester())"></div>	
+</div>
+
+<div class="gridContainer">	
+	<div data-bind="foreach: {data: gridRows, as: 'row'}">
+		<div class="gridRow" style="display: table" data-bind="foreach: {data: gridcells, as: 'cell'}">
+			<div class="gridCell" data-bind="css: {emptySquare: cell.isempty(), minreq: cell.isminreq()}, 
+			text: cell.cellnum() + ' (' + cell.rownum() + ',' + cell.colnum() + ') $' + cell.value(),
+			style: {backgroundColor: $root.getGridBGColor(cell.colnum())}"></div>	
+		</div>
+	</div>
+</div>
+
