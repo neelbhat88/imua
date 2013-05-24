@@ -3,6 +3,7 @@ class GridBadgeViewModel
                    :subcategory, :title, :gridcellnum
 
 	def initialize(userbadge)
+		@id = userbadge.id
 		@category = userbadge.global_badge.category		
 		@description = userbadge.global_badge.description
 		@isminrequirement = userbadge.global_badge.isminrequirement

@@ -23,7 +23,7 @@ var MyBadges = new function()
 	self.init = function()
 	{
 		$(document).ready(function() {
-			mybadgesinit();
+			//mybadgesinit();
 
 			$.ajax({
 				url: '/mybadges',
@@ -37,11 +37,41 @@ var MyBadges = new function()
 					ko.applyBindings(self.viewModel);
 
 					mybadgesinit();
+
+					placeBadges();					
 				},
 				error: function() { alert("Failed initial MyBadges load");}
 			});		
 		});		
 	};
+
+	function placeBadges()
+	{
+		jQuery.each(self.viewModel.gridBadges(), function(){
+			if (this.gridcellnum() != null)
+			{
+				var badge = this;
+				var badgeElement = $('.badgeSquare[id=' + badge.id() + ']')[0];
+				var cellElement = $(".gridCell[cellnum=" + badge.gridcellnum() + "]")[0];
+				var cell = ko.dataFor(cellElement);
+
+				cell.isempty(false);
+				$(cellElement).addClass('filledSquare');
+				
+				// Add badge to current container to set parent()		
+				$(badgeElement).attr('style', 'position: absolute');
+				$(cellElement).append(badgeElement);
+
+				//badgeElement.position( { my: 'left top', at: 'left top', of: $(this) } );
+				$(badgeElement).offset({
+					left: $(cellElement).position().left,
+					top: $(cellElement).position().top
+				});			
+
+				updateTotalDollars();
+			}
+		});
+	}
 
 	function mybadgesinit()
 	{
@@ -111,6 +141,7 @@ var MyBadges = new function()
 			ui.draggable.draggable('option', 'revert', false);			
 
 			updateTotalDollars();
+			updateBadgePosition(badge.id(), newSquare.cellnum());
 
 			return;
 		}	
@@ -154,6 +185,7 @@ var MyBadges = new function()
 	{
 		var oldSquareElement = ui.draggable.parent()[0];
 		var oldSquare = ko.dataFor(oldSquareElement);
+		var badge = ko.dataFor(ui.draggable[0]);
 
 		if (!$(oldSquareElement).hasClass('badgesContainer'))
 		{
@@ -178,6 +210,7 @@ var MyBadges = new function()
 		}
 
 		updateTotalDollars();
+		updateBadgePosition(badge.id(), -1);
 	}
 
 	function handleOutEvent(event, ui)
@@ -194,6 +227,18 @@ var MyBadges = new function()
 		});
 
 		self.viewModel.totalAmount(total);
+	}
+
+	function updateBadgePosition(id, cellnum)
+	{
+		$.ajax({
+			url:'/updateGrid',
+			data: {id: id, gridcellnum: cellnum},
+			// Instead of passing id and cell num, update badge.gridcellnum() and
+			// pass the full badge object down and update accordingly
+			success: function() {},
+			error: function() {alert("updateBadgePosition failed.")}
+		});
 	}
 
 	// Returns KO object

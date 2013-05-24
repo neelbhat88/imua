@@ -32,7 +32,8 @@
 
 	<div class="badgesContainer" style="float:right; border: 1px solid black; height: 400px; width: 400px;" data-bind="foreach: gridBadges">	
 			<div class="badgeSquare" data-bind="visible: gridcellnum != null, text: title() + ', Semester: ' + semester(),
-			css: $parent.getBadgeBGColor($data.semester())"></div>	
+			css: $parent.getBadgeBGColor($data.semester()),
+			attr: {'id': id()}"></div>	
 	</div>
 
 	<div class="gridContainer">	
@@ -40,7 +41,8 @@
 			<div class="gridRow" style="display: table" data-bind="foreach: {data: gridcells, as: 'cell'}">
 				<div class="gridCell" data-bind="css: {emptySquare: cell.isempty(), minreq: cell.isminreq()}, 
 				text: cell.cellnum() + ' (' + cell.rownum() + ',' + cell.colnum() + ') $' + cell.value(),
-				style: {backgroundColor: $root.getGridBGColor(cell.colnum())}"></div>	
+				style: {backgroundColor: $root.getGridBGColor(cell.colnum())},
+				attr: {'cellnum': cell.cellnum()}"></div>	
 			</div>
 		</div>
 	</div>

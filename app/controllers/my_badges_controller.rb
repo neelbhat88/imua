@@ -36,4 +36,19 @@ class MyBadgesController < ApplicationController
 	  		format.html # index.html.erb
   		end
 	end
+
+	def updateGrid
+		id = params[:id].to_i
+		gridcellnum = params[:gridcellnum].to_i
+
+		logger.debug{"DEBUG: BadgeId: #{id}, GridCellNum: #{gridcellnum}"}
+
+		if (gridcellnum != -1)
+			UserBadge.find(id).update_attributes(:gridcellnum => gridcellnum)
+			logger.debug("DEBUG: Updated badgeid #{id} to #{gridcellnum}")
+		else
+			UserBadge.find(id).update_attributes(:gridcellnum => nil)
+			logger.debug("DEBUG: Updated badgeid #{id} to null")
+		end		
+	end
 end

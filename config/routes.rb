@@ -8,10 +8,12 @@ Wcsf::Application.routes.draw do
 
   match '/profile', to: 'static_pages#profile'  
   match '/summary', to: 'static_pages#summary'
-
-  match '/mybadges', to: 'my_badges#index'
+  
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
+
+  match '/mybadges', to: 'my_badges#index'
+  match '/updateGrid', to: 'my_badges#updateGrid'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
