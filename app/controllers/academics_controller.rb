@@ -72,24 +72,14 @@ class AcademicsController < ApplicationController
     totalGpa = params[:totalGPA]
     logger.debug "DEBUG: TotalGPA - #{totalGpa}"
 
-  	# Load all Academics-GPA badges
-  	allBadges = GlobalBadge.where("category = 'Academics' and subcategory = 1 and semester = ?", current_user.user_info.current_semester)
-
-  	# Call compare and pass in totalGPA
-  	@newbadgecount = 0
-  	allBadges.each do |b|
-  		if b.Compare(totalGpa) == true && current_user.user_badges.find_by_global_badge_id(b.id) == nil
-  			@newbadgecount += 1
-
-  			# Save earned badge to db
-  			current_user.user_badges.create(:global_badge_id => b.id)
-  		end
-  	end
+    badgeProcessor = BadgeProcessor.new(current_user)
+    newBadgeCount = badgeProcessor.CheckSemesterAcademics()
+  	
   	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newclasses => returnclasses, :newbadgecount => @newbadgecount} }
+  		format.json { render :json => { :newclasses => returnclasses, :newbadgecount => newBadgeCount} }
     end
   end
 end

@@ -8,17 +8,17 @@ class GlobalBadge < ActiveRecord::Base
 
   def GetSubCategories(category)
   	subcategories = {
-  		'Academics' => ['GPA']
+  		'Academics' => ['GPA', 'RunningGPA', 'LetterGrade', 'APScore', 'ClassCredit']
   	}  	
 
   	return subcategories[category]
   end
 
-  def Compare(totalGpa)
-    if (totalGpa.to_f >= self.comparevalue.to_f)
-      return true
-    end
+  # def Compare(totalGpa)
+  #   if (totalGpa.to_f >= self.comparevalue.to_f)
+  #     return true
+  #   end
 
-    return false
-  end
+  #   return false
+  # end
 end
