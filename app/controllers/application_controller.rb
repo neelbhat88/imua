@@ -15,5 +15,8 @@ class ApplicationController < ActionController::Base
 		end
 
 		return root_path
+
+		# Set global AppContext.CurrentUser here so it can be used by non-controllers. Replace 
+		# passing in user to all the badges
 	end
 end

@@ -5,6 +5,7 @@ class UserInfo < ActiveRecord::Base
   belongs_to :school
 
   def GetTotalGpa
+    # NEED TO TAKE INTO ACCOUNT SEMESTERS HERE!
   	numclasses = self.user.user_classes.length
   	classeswithgrade = 0
   	totalGpa = 0.0
