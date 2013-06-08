@@ -8,9 +8,9 @@
           <% if user_signed_in? %>
             <% if current_user.is_student? %>
               <!-- <li><%= link_to "Summary", summary_path %></li> -->
-              <li><%= link_to "My Badges", mybadges_path %></li>
-              <li><%= link_to "Academics", academics_path %></li>
+              <!-- <li><%= link_to "My Badges", mybadges_path %></li> -->
               <li><%= link_to "All Badges", global_badges_path %></li>
+              <li><%= link_to "Academics", academics_path %></li>
             <% elsif current_user.is_admin? %>
               <li><%= link_to "All Classes", school_classes_path %></li>
             <% end %>

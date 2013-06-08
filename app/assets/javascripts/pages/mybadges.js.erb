@@ -4,17 +4,19 @@ var MyBadges = new function()
 
 	self.viewModel = {
 		rows: 4,
-		cols: 4,
+		cols: 8,
 		totalAmount: ko.observable(0),
 		getGridBGColor: function(colnum)
 		{
-			var colorArray = ['#92ed6b', '#5ccccc', '#FFcd73', '#d861c9'];
+			var colorArray = ['#92ed6b', '#5ccccc', '#FFcd73', '#d861c9',
+							  '#92ed6b', '#5ccccc', '#FFcd73', '#d861c9'];
 
 			return colorArray[colnum];
 		},
 		getBadgeBGColor: function(semester)
 		{
-			var colorArray = ['green', 'blue', 'orange', 'purple'];
+			var colorArray = ['green', 'blue', 'orange', 'purple',
+							  'green', 'blue', 'orange', 'purple'];
 
 			return colorArray[semester - 1];
 		}
@@ -141,7 +143,7 @@ var MyBadges = new function()
 			ui.draggable.draggable('option', 'revert', false);			
 
 			updateTotalDollars();
-			updateBadgePosition(badge.id(), newSquare.cellnum());
+			updateBadgePosition(badge.id(), newSquare.cellnum(), newSquare.rownum());
 
 			return;
 		}	
@@ -210,7 +212,8 @@ var MyBadges = new function()
 		}
 
 		updateTotalDollars();
-		updateBadgePosition(badge.id(), -1);
+
+		updateBadgePosition(badge.id(), null, null);
 	}
 
 	function handleOutEvent(event, ui)
@@ -229,11 +232,11 @@ var MyBadges = new function()
 		self.viewModel.totalAmount(total);
 	}
 
-	function updateBadgePosition(id, cellnum)
+	function updateBadgePosition(id, cellnum, rownum)
 	{
 		$.ajax({
 			url:'/updateGrid',
-			data: {id: id, gridcellnum: cellnum},
+			data: {id: id, gridcellnum: cellnum, rownum: rownum},
 			// Instead of passing id and cell num, update badge.gridcellnum() and
 			// pass the full badge object down and update accordingly
 			success: function() {},

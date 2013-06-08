@@ -21,14 +21,14 @@ class MyBadgesController < ApplicationController
 		(0...rows).each do |r|
 			gridcells = []
 			(0...cols).each do | i |
-				logger.debug("DEBUG: Row: #{r}")
+				#logger.debug("DEBUG: Row: #{r}")
 			 	gridcells << GridCellViewModel.new(r, cellnum, i+1)
-			 	logger.debug("DEBUG: #{gridcells}")
+			 	#logger.debug("DEBUG: #{gridcells}")
 			 	cellnum += 1
 			 end
 
 			 gridrows << {"gridcells" => gridcells}
-			 logger.debug("DEBUG: #{gridrows}")
+			 #logger.debug("DEBUG: #{gridrows}")
 		end
 
 		respond_to do |format|
@@ -37,18 +37,18 @@ class MyBadgesController < ApplicationController
   		end
 	end
 
-	def updateGrid
-		id = params[:id].to_i
-		gridcellnum = params[:gridcellnum].to_i
+	def updateGrid		
+		if params[:id] == ""
+			raise "Error: BadgeId in method updageGrid cannot be null"
+		end
 
-		logger.debug{"DEBUG: BadgeId: #{id}, GridCellNum: #{gridcellnum}"}
+		id = params[:id].to_i		
+		gridcellnum = params[:gridcellnum] == "" ? nil : params[:gridcellnum].to_i	
+		rownum = params[:rownum] == "" ? nil : params[:rownum].to_i
 
-		if (gridcellnum != -1)
-			UserBadge.find(id).update_attributes(:gridcellnum => gridcellnum)
-			logger.debug("DEBUG: Updated badgeid #{id} to #{gridcellnum}")
-		else
-			UserBadge.find(id).update_attributes(:gridcellnum => nil)
-			logger.debug("DEBUG: Updated badgeid #{id} to null")
-		end		
+		logger.debug{"DEBUG: BadgeId: #{id}, GridCellNum: #{gridcellnum}, RowNum: #{rownum}"}
+
+		UserBadge.find(id).update_attributes(:gridcellnum => gridcellnum, :rownum => rownum)
+		logger.debug("DEBUG: Updated badgeid #{id} to #{gridcellnum}")	
 	end
 end

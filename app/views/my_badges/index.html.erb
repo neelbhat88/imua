@@ -28,7 +28,7 @@
 
 <!-- This first div hides the initial blip -->
 <div style="display:none" data-bind="visible: true">
-	<div style="text-align: center; font-size: 1.7em">Total: <span id="totalAmount" data-bind="text: '$' + totalAmount()"></span></div>
+	<div style="text-align: center; font-size: 1.7em; padding-bottom: 20px">Total: <span id="totalAmount" data-bind="text: '$' + totalAmount()"></span></div>
 
 	<div class="badgesContainer" style="float:right; border: 1px solid black; height: 400px; width: 400px;" data-bind="foreach: gridBadges">	
 			<div class="badgeSquare" data-bind="visible: gridcellnum != null, text: title() + ', Semester: ' + semester(),

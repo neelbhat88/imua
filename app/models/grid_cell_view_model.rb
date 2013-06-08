@@ -8,8 +8,13 @@ class GridCellViewModel
 		@value = GetValue(rownum)
 		@cellnum = cellnum
 		@semester = semester
-		@isminreq = IsMinReq(semester, rownum)
+		@isminreq = false #IsMinReq(semester, rownum)
 	end
+
+	# Grid setup
+	# (0,0) (0,1) (0,2)
+	# (1,0) (1,1) (1,2)
+	# (2,0) (2,1) (2,2)
 
 	def GetValue(rownum)
 		valueArray = [50, 40, 30, 20, 10]
