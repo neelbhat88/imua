@@ -2,26 +2,38 @@
   <div class="navbar-inner">
     <div class="" style="padding: 0 10px">
       <%= link_to "Wai`anae Coast Scholarship Fund", 'https://wcsf.heroku.com', id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>  
-          <% if user_signed_in? %>
-            <% if current_user.is_student? %>
-              <!-- <li><%= link_to "Summary", summary_path %></li> -->
-              <!-- <li><%= link_to "My Badges", mybadges_path %></li> -->
-              <li><%= link_to "All Badges", global_badges_path %></li>
-              <li><%= link_to "Academics", academics_path %></li>
-            <% elsif current_user.is_admin? %>
-              <li><%= link_to "All Classes", school_classes_path %></li>
-            <% end %>
-            
-            <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-          <% else %>
-            <li><%= link_to "Login", new_user_session_path %></li>
-          <% end %>
-
-        </ul>
-      </nav>
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
+        <div class="nav-collapse collapse" id="nav-collapse-01">
+          <ul class="nav pull-right">
+            <% if user_signed_in? %>
+              <% if current_user.is_student? %>
+                <li class="active"><%= link_to "All Badges", global_badges_path %></li>
+                <!-- <li>
+                  <%= link_to current_user.email, global_badges_path %>
+                  <ul>
+                    <li><%= link_to "My Profile", global_badges_path %></li>
+                    <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+                  </ul>
+                </li>-->
+              <% elsif current_user.is_admin? %>
+                <li><%= link_to "All Classes", school_classes_path %></li>
+                <!-- <li class="active">
+                  <%= link_to current_user.email, global_badges_path %>
+                  <ul>
+                    <li><%= link_to "My Profile", global_badges_path %></li>
+                    <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+                  </ul> 
+                </li> -->
+              <% end %>
+              <li class=""><%= link_to "My Profile", global_badges_path %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+              <li><%= link_to "Login", new_user_session_path %></li>
+            <% end %>          
+          </ul>
+        </div><!--/.nav -->
+      </div>
     </div>
   </div>
 </header>

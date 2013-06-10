@@ -1,4 +1,0 @@
-1) Add global AppContext.CurrentUser to application controller
-   what about if user closes browser and comes back? Session is saved but will AppContext be saved? Maybe use session to set it in the Get or clear session when browser is closed.
-2) Refactor AcademicsBadge classes and remove User being passed in
-3) AcademicsGPABadge Compare() should only compare classes for that given semester

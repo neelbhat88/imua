@@ -15,7 +15,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  #gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -24,7 +24,13 @@ gem "paperclip", "~> 3.0"
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'bootstrap-sass', '2.1'
+gem 'bootstrap-sass', '2.2.2'
+
+gem "less-rails"
+gem "therubyracer", :require => 'v8'
+
+#gem 'flatui-rails' #, :git => 'https://github.com/pkurek/flatui-rails.git'
+#gem "flat-ui-rails"
 
 # Used for authentication
 gem 'devise'

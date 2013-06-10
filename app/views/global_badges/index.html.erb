@@ -1,11 +1,65 @@
 <% @jsinit = 'Badges' %>
 
-<h1>Badges</h1>
-<div style="width: 400px">
-	Semester: 
-	<select data-bind="options: $root.semesters, value: semester" style="width: 100px;"></select>
-</div>
+<div id="badgeContainer">
+	<div id="tabContainer" >
+		<div class="tab selectedTab"><span class="tabNum">1</span></div>
+		<div class="tab"><span class="tabNum">2</span></div>
+		<div class="tab"><span class="tabNum">3</span></div>
+		<div class="tab"><span class="tabNum">4</span></div>
+		<div class="tab"><span class="tabNum">5</span></div>
+		<div class="tab"><span class="tabNum">6</span></div>
+		<div class="tab"><span class="tabNum">7</span></div>
+		<div class="tab"><span class="tabNum">8</span></div>
+	</div>
+	<div style="text-align: center; position: relative; padding-bottom: 20px;">
+		<span class="headerText" style="">Semester 1</span>
+		<div id="categoryFilter">
+			<span style="font-weight: bold; font-size: 14px; color: #7f8c8d; position: relative; top: -5px;">Filter: </span>		
+			<div class="categoryBox leftBox"></div>
+			<div class="categoryBox academics"></div>
+			<div class="categoryBox service"></div>
+			<div class="categoryBox pdu"></div>
+			<div class="categoryBox rightBox extracurricular"></div>
+		</div>
+	</div>
+	<div style="left: 0px; background-color: white; position: absolute; width: 100%; border-top: 1px solid #666; border-bottom: 1px solid #666; text-align: center;">
+		<div class="globalBadge" style="">
+			<span style="font-size: 1.3em">GPA > 3.5</span>
+			<div >Academics</div>	
+			<div >Semester 1</div>
+		</div>
 
+		<div class="globalBadge pdu" style="">
+			<span style="font-size: 1.3em">GPA > 3.5</span>
+			<div >Academics</div>	
+			<div >Semester 1</div>
+		</div>
+
+		<div class="globalBadge service" style="">
+			<span style="font-size: 1.3em">GPA > 3.5</span>
+			<div >Academics</div>	
+			<div >Semester 1</div>
+		</div>
+	</div>
+	<div style="padding-top: 110px;" data-bind="foreach: { data: badges, as: 'badge' }">	
+		<div data-bind="css: {hasEarned: badge.hasEarned, globalBadge: true}" style="">
+			<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 1.3em"></span>
+			<div data-bind="text: badge.category()"></div>	
+			<div data-bind="text: 'Semester ' + badge.semester()"></div>
+		</div>
+		<div data-bind="css: {hasEarned: badge.hasEarned, globalBadge: true}" style="">
+			<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 1.3em"></span>
+			<div data-bind="text: badge.category()"></div>	
+			<div data-bind="text: 'Semester ' + badge.semester()"></div>
+		</div>
+	</div>	
+
+</div>
+<!-- <div style="width: 400px">
+	Semester: 
+	<select data-bind="options: $root.semesters, value: semester" style="width: 100px;" class="select-block"></select>
+	<%= image_tag("rails.png", :alt => "rss feed") %>	
+</div> 
 <div id='badgesContainer' data-bind="visible: badges().length > 0" style="padding-top: 10px">	
 	<div data-bind="foreach: { data: badges, as: 'badge' }">	
 		<div data-bind="css: {hasEarned: badge.hasEarned}" style="border: 1px solid black; border-radius: 5px; padding: 10px; width: 100px; display: inline-block;">
@@ -17,7 +71,7 @@
 </div>
 <div data-bind="visible: badges().length <= 0">
 	<h2>There are no badges yet for this semster.</h2>
-</div>
+</div> -->
 
 <!-- <hr>
 <h2>Admin</h2>
