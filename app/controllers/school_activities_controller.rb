@@ -1,4 +1,7 @@
 class SchoolActivitiesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :teacher_only
+  
   # GET /school_activities
   # GET /school_activities.json
   def index
@@ -65,12 +68,11 @@ class SchoolActivitiesController < ApplicationController
   # PUT /school_activities/1
   # PUT /school_activities/1.json
   def update
-    @school_activity = SchoolActivity.find(params[:id])
-    @school_activity.school_id = curr_user.user_info.school_id
+    @school_activity = SchoolActivity.find(params[:id])    
 
     respond_to do |format|
       if @school_activity.update_attributes(params[:school_activity])
-        format.html { redirect_to @school_activity, notice: 'School activity was successfully updated.' }
+        format.html { redirect_to school_activities_url, notice: 'School activity was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
