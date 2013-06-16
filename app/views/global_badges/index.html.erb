@@ -41,17 +41,15 @@
 			<div >Semester 1</div>
 		</div>
 	</div>
-	<div style="padding-top: 110px;" data-bind="foreach: { data: badges, as: 'badge' }">	
-		<div data-bind="css: {hasEarned: badge.hasEarned, globalBadge: true}" style="">
+	<div style="padding-top: 110px;" data-bind="foreach: { data: badges, as: 'badge' }">
+		<!-- The following is used by KO -->
+		<!-- asdfasdfko if: badge.isminrequirement() == false -->	
+		<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}" style="">
 			<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 1.3em"></span>
 			<div data-bind="text: badge.category()"></div>	
 			<div data-bind="text: 'Semester ' + badge.semester()"></div>
-		</div>
-		<div data-bind="css: {hasEarned: badge.hasEarned, globalBadge: true}" style="">
-			<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 1.3em"></span>
-			<div data-bind="text: badge.category()"></div>	
-			<div data-bind="text: 'Semester ' + badge.semester()"></div>
-		</div>
+		</div>		
+		<!-- /ko -->
 	</div>	
 
 </div>

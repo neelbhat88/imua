@@ -1,16 +1,17 @@
 class AcademicsGpaBadge < AcademicsBadge
-	attr_accessor :comparevalue, :curr_user, :id
+	attr_accessor :gpa
 
 	def initialize(globalbadge, user)
-		@comparevalue = globalbadge.comparevalue.to_f
-		@curr_user = user
-		@id = globalbadge.id
+		# call AcademicsBadge contructor
+		super
+
+		self.gpa = globalbadge.comparevalue.to_f		
 	end
 
 	def Compare()
-		if (@curr_user.user_info.GetTotalGpa >= @comparevalue)
-	      return true
-	    end
+		if (self.curr_user.user_info.GetTotalGpa() >= self.gpa)
+			return true
+		end		
 
 	    return false
 	end

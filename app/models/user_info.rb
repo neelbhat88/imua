@@ -24,4 +24,16 @@ class UserInfo < ActiveRecord::Base
 
     return (totalGpa / classeswithgrade).round(2)
   end
+
+  def MetAllMinRequirements
+    minreq_badges = GlobalBadge.where('semester = ? and isminrequirement = true', self.current_semester)
+
+    minreq_badges.each do |b|
+      if self.user.user_badges.find_by_global_badge_id(b.id) == nil
+        return false
+      end
+    end
+
+    return true
+  end
 end

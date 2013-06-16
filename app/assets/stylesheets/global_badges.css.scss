@@ -25,8 +25,9 @@ $asbestos:      #7f8c8d;
 
 $teal: #1ABC9C;
 
-.hasEarned {
-	background-color: green;
+.hasNotEarned {
+	background-color: $clouds !important;
+	color: $asbestos !important;
 }
 
 .headerText 

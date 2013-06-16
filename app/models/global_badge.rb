@@ -13,12 +13,4 @@ class GlobalBadge < ActiveRecord::Base
 
   	return subcategories[category]
   end
-
-  # def Compare(totalGpa)
-  #   if (totalGpa.to_f >= self.comparevalue.to_f)
-  #     return true
-  #   end
-
-  #   return false
-  # end
 end
