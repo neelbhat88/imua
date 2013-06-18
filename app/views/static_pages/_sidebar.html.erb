@@ -1,7 +1,7 @@
-<div id="sidebar pull-right">
-	<div class="user-action">
-		<%= link_to 'Login', user_registration_path %>
-		<%= link_to 'Donate now', '#' %>
+<div class="sidebar pull-right">
+	<div class="user-actions">
+		<%= link_to 'Login', new_user_session_path %>
+		<%= link_to 'Donate now', 'https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=WOeLgJJ3vGjRLoX0GC1d6R33FaZg5SeMMGnjDC9T6gRwJW6LLOYX4wCWmzK&dispatch=5885d80a13c0db1f8e263663d3faee8d4e181b3aff599f99e8c17bd6c7fe2f56', target: 'blank' %>
 	</div>
 	<div class="logo">
 		<%= link_to root_path do %>
@@ -10,15 +10,15 @@
 	</div>
 	<div class="navigation">
 		<ul>
-			<li><%= link_to 'What is the WSCF?' %></li>
-			<li><%= link_to 'Our Students' %></li>
-			<li><%= link_to 'Community Partners' %></li>
-			<li><%= link_to 'Who are our Donors' %></li>
-			<li><%= link_to 'Donate Now' %></li>
-			<li><%= link_to 'Calandar' %></li>
-			<li><%= link_to 'Apply Now' %></li>
-			<li><%= link_to 'Resources' %></li>
-			<li><%= link_to 'Contact us' %></li>
+			<%= link_to '<li>What is the WSCF?</li>'.html_safe %>
+			<%= link_to '<li>Our Students</li>'.html_safe %>
+			<%= link_to '<li>Community Partners</li>'.html_safe %>
+			<%= link_to '<li>Who are our Donors</li>'.html_safe %>
+			<%= link_to '<li>Donate Now</li>'.html_safe %>
+			<%= link_to '<li>Calandar</li>'.html_safe %>
+			<%= link_to '<li>Apply Now</li>'.html_safe %>
+			<%= link_to '<li>Resources</li>'.html_safe %>
+			<%= link_to '<li class="last-nav-link">Contact us</li>'.html_safe, '#' %>
 		</ul>
 	</div>
 	<div class="sign-in">
@@ -29,9 +29,9 @@
 		  <%= f.label :password %>
 		  <%= f.password_field :password %>
 
-	    <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+	    <%= f.check_box :remember_me %> <%= f.label :remember_me, class: 'remember-me' %>
 
-		  <%= f.submit "Sign in" %>
+		  <%= f.submit "Sign in", class: 'btn btn-info pull-right' %>
 		<% end %>
 	</div>
 </div>

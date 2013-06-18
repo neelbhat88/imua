@@ -4,6 +4,8 @@
   <title>WCSF</title> <!--full_title(yield(:title)) %> -->
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript" src="//use.typekit.net/sja0fwm.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,5 +22,6 @@
 			</div>
 		</div>
 	</div>
+	<%= render 'static_pages/backstretch' %>
 </body>
 </html>
