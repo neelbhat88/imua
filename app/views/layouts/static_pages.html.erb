@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WCSF</title> <!--full_title(yield(:title)) %> -->
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body class="static-pages">
+	<div class="container">
+		<div class="row">
+			<div class="span8">
+			  <%= yield %>
+			</div>
+			<div class="span4">
+			  <%= render 'static_pages/sidebar' %>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
