@@ -1,6 +1,9 @@
-body.static-pages {
+body.static_pages {
 	padding-top: 0;
 	background: #ddd;
+	h2 {
+		text-align: left;
+	}
 }
 
 .container {
@@ -14,6 +17,32 @@ a:hover {
 
 #slideshow {
 	height: 287px
+}
+
+// Quick Links
+.quick-links {
+	font-family: "cubano", sans-serif;
+	ul {
+		list-style-type: none;
+		margin: 20px 0;
+	}
+	li {
+		float: left;
+		padding: 20px;
+		color: #fff;
+		&.quick-red {
+			background: #ef2029;
+		}
+		&.quick-yellow {
+			background: #ffc50f;
+		}
+		&.quick-green {
+			background: #b0cf35;
+		}
+		&.quick-purple {
+			background: #f5a0e6;
+		}
+	}
 }
 
 
@@ -66,6 +95,8 @@ a:hover {
 	}
 }
 
+// Sign in
+
 .sign-in {
 	background: #c3d5e3;
 	text-align: left;
@@ -78,4 +109,22 @@ a:hover {
 	display: inline;
 	position: relative;
 	top: 4px;
+}
+
+// Home
+
+.news-announcments {
+	h2 {
+		color: #ff6b6b;
+		font-family: "cubano", sans-serif;
+
+	}
+}
+
+
+// Footer
+
+.copyright {
+	text-align: center;
+	font-size: 12px;
 }
