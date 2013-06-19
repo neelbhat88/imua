@@ -11,13 +11,14 @@ body.static_pages {
 	h2 {
 		text-align: left;
 	}
-	p {
-		color: #434343;
-		line-height: 1.6em;
-	}
 	a:hover {
 		text-decoration: none;
 	}
+}
+
+p {
+	color: #434343;
+	line-height: 1.6em;
 }
 
 .pages-container {
@@ -35,32 +36,6 @@ body.static_pages {
 	width: 260px
 }
 
-// Quick Links
-.quick-links {
-	font-family: "cubano", sans-serif;
-	ul {
-		list-style-type: none;
-		margin: 20px 0;
-	}
-	li {
-		float: left;
-		padding: 20px;
-		color: #fff;
-		&.quick-red {
-			background: #ef2029;
-		}
-		&.quick-yellow {
-			background: #ffc50f;
-		}
-		&.quick-green {
-			background: #b0cf35;
-		}
-		&.quick-purple {
-			background: #f5a0e6;
-		}
-	}
-}
-
 
 // Sidebar
 
@@ -72,18 +47,28 @@ body.static_pages {
 	text-transform: uppercase;
 	margin-bottom: 40px;
 	font-family: "cubano", sans-serif;
+	font-size: 20px;
+	line-height: 60px;
 	a {
 		display: inline-block;
-		background: #87318c;
 		color: #fff;
-		padding: 10px;
+	}
+	a.login-button {
+		background: url('purple-rectangle-left.png') no-repeat;
+		width: 92px;
+		height: 60px;
+		float: left;
+	}
+	a.donate-button {
+		background: url('purple-rectangle-right.png') no-repeat;
+		width: 168px;
+		height: 60px;
 	}
 	a:hover {
-		background: #b744bd;
+		color: #ddd;
 	}
 
 }
-
 
 // Navigation
 
@@ -145,8 +130,10 @@ body.static_pages {
 		color: #000;
 		width: 430px;
 		font-size: 28px;
+		line-height: 32px;
 		font-weight: normal;
 		font-style: italic;
+		margin: 45px;
 	}
 }
 
@@ -157,12 +144,36 @@ body.static_pages {
 	background: url('home-try-app-background.png') no-repeat;
 	position: relative;
 	top: -15px;
+	h4 {
+		color: #00446a;
+		width: 250px;
+		font-weight: 300;
+		font-size: 24px;
+		line-height: 30px;
+		margin: 35px 40px 10px;
+	}
+	a {
+		color: #fff;
+		margin-left: 40px;
+	}
 }
 
 .news-announcments {
+	width: 460px;
+	float: left;
+	padding: 0 20px;
 	h2 {
 		color: #ff6b6b;
 		font-family: "cubano", sans-serif;
+	}
+}
+
+.testimonial {
+	width: 260px;
+	float: right;
+	padding: 20px;
+	p {
+		color: #83a038;
 	}
 }
 
@@ -177,13 +188,37 @@ body.static_pages {
 	}
 }
 
-
-
 p.donate-address {
 	font-weight: bold;
 	text-align: center;
 }
 
+// Quick Links
+
+.quick-links {
+	font-family: "cubano", sans-serif;
+	ul {
+		list-style-type: none;
+		margin: 20px 0;
+	}
+	li {
+		float: left;
+		padding: 20px;
+		color: #fff;
+		&.quick-red {
+			background: #ef2029;
+		}
+		&.quick-yellow {
+			background: #ffc50f;
+		}
+		&.quick-green {
+			background: #b0cf35;
+		}
+		&.quick-purple {
+			background: #f5a0e6;
+		}
+	}
+}
 
 // Footer
 
