@@ -20,8 +20,14 @@ class BadgeFactory
 			when 1
 				badgeList << AcademicsGpaBadge.new(b, curr_user)
 			# Letter Grade
-			#when 2
-			#	badgeList << AcademicsLetter
+			when 2
+				badgeList << AcademicsGradeBadge.new(b, curr_user)
+			# AP Score
+			#when 3
+				#badgeList << AcademicsAPScoreBadge.new(b, curr_user)
+			# Class Credit
+			#when 4
+			#	badgeList << AcademicsClassCreditBadge.new(b, curr_user)
 			else
 				badgeList << AcademicsBadge.new(b, curr_user)
 			end

@@ -1,4 +1,5 @@
 Wcsf::Application.routes.draw do
+  resources :school_activities
   resources :school_classes
   resources :global_badges
 

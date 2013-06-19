@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505165021) do
+ActiveRecord::Schema.define(:version => 20130615214606) do
 
   create_table "global_badges", :force => true do |t|
     t.string   "title"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20130505165021) do
     t.string   "comparevalue"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "school_activities", :force => true do |t|
+    t.integer  "school_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "school_classes", :force => true do |t|
@@ -45,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20130505165021) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "gridcellnum"
+    t.integer  "rownum"
   end
 
   create_table "user_classes", :force => true do |t|

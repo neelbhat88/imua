@@ -5,17 +5,35 @@ class UserInfo < ActiveRecord::Base
   belongs_to :school
 
   def GetTotalGpa
-  	numclasses = self.user.user_classes.length
+    semester_classes = self.user.user_classes.where('semester = ?', self.current_semester)
+  	numclasses = semester_classes.length    
   	classeswithgrade = 0
-  	totalGpa = 0.0
+  	totalGpa = 0.0    
 
-  	self.user.user_classes.each do |c|
+  	semester_classes.each do |c|
   		unless c.grade.nil?        
         totalGpa += c.gpa
         classeswithgrade += 1
       end
   	end
 
+    # Must have at least 5 classes with grade to earn GPA badges
+    if (classeswithgrade < 5)
+      return 0
+    end
+
     return (totalGpa / classeswithgrade).round(2)
+  end
+
+  def MetAllMinRequirements
+    minreq_badges = GlobalBadge.where('semester = ? and isminrequirement = true', self.current_semester)
+
+    minreq_badges.each do |b|
+      if self.user.user_badges.find_by_global_badge_id(b.id) == nil
+        return false
+      end
+    end
+
+    return true
   end
 end
