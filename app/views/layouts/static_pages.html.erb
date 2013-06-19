@@ -12,23 +12,22 @@
   <![endif]-->
 </head>
 <body class="<%= controller_name -%> <%= action_name -%>">
-	<div class="container">
-		<div class="row">
-			<div class="span8">
+	<div class="pages-container">
+		<div class="wrapper clearfix">
+			<div class="main-content">
 			  <%= yield %>
 			  <%= render 'static_pages/quick_links' %>
 			</div>
-			<div class="span4">
+			<div class="sidebar">
 			  <%= render 'static_pages/sidebar' %>
 			</div>
 		</div>
-		<div class="row">
-			<div class="span8 copyright">
-				<p>
-					The Waianae Coast Scholarship Fund (WCSF) is a federally recognized 501c3 non-profit organization. All contributions will be tax-exempt.<br>
-					Copyright 2013 Waianae Coast Scholasrhip Fund
-				</p>
-			</div>
+		<div class="copyright">
+			<p>
+				The Waianae Coast Scholarship Fund (WCSF) is a federally recognized 501c3 non-profit organization.<br>
+				All contributions will be tax-exempt.<br>
+				Copyright 2013 Waianae Coast Scholasrhip Fund
+			</p>
 		</div>
 	</div>
 	<%= render 'static_pages/backstretch' %>

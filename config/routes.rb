@@ -1,20 +1,21 @@
-Wcsf::Application.routes.draw do  
+Wcsf::Application.routes.draw do
   resources :school_classes
   resources :global_badges
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 
-  get "static_pages/home"  
+  root :to => 'static_pages#home'
+  get '/donate/', to: 'static_pages#donate'
 
-  match '/profile', to: 'static_pages#profile'  
+  match '/profile', to: 'static_pages#profile'
   match '/summary', to: 'static_pages#summary'
-  
+
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
 
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -64,7 +65,6 @@ Wcsf::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'static_pages#home'
 
   # See how all your routes lay out with "rake routes"
 
