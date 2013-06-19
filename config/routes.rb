@@ -5,7 +5,9 @@ Wcsf::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
 
   root :to => 'static_pages#home'
-  get '/donate/', to: 'static_pages#donate'
+  get '/donors', to: 'static_pages#donors'
+  get '/apply', to: 'static_pages#apply'
+  get '/donate', to: 'static_pages#donate'
 
   match '/profile', to: 'static_pages#profile'
   match '/summary', to: 'static_pages#summary'

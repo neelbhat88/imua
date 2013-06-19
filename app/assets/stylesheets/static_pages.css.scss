@@ -1,7 +1,6 @@
 body.static_pages {
 	padding-top: 0;
 	margin: 0 10px;
-	background: #ddd;
 	color: #434343;
 	h1 {
 		font-family: "cubano", sans-serif;
@@ -18,7 +17,8 @@ body.static_pages {
 
 p {
 	color: #434343;
-	line-height: 1.6em;
+	font-size: 16px;
+	line-height: 22px;
 }
 
 .pages-container {
@@ -29,6 +29,7 @@ p {
 
 .main-content {
 	float: left;
+	width: 800px;
 }
 
 .sidebar {
@@ -177,10 +178,12 @@ p {
 	}
 }
 
-// Donate
+
+// Pages
 
 .page-title {
-	background: #05adf0;
+	background: url('top-bar.png') no-repeat;
+	height: 87px;
 	h1 {
 		color: #fff;
 		padding: 10px;
@@ -188,10 +191,87 @@ p {
 	}
 }
 
+.page-content {
+	padding: 20px;
+}
+
+.main-text {
+	width: 570px;
+	float: left;
+}
+
+.donate-sidebar {
+	width: 170px;
+	float: right;
+	img.donate-now {
+		margin-bottom: 25px;
+	}
+}
+
+
+// Donors
+
+.donors-list {
+	ul {
+		list-style-type: none;
+		margin-left: 0;
+	}
+	li {
+		border-bottom: 1px solid #c3d6e4;
+	}
+}
+
+
+// Donate
+
+.donate {
+	h3 {
+		color: #0160a0;
+	}
+}
+
+.donate-online {
+	width: 360px;
+	float: left;
+	padding: 20px
+}
+
+.donate-mail {
+	width: 360px;
+	float: right;
+	padding: 20px;
+}
+
 p.donate-address {
 	font-weight: bold;
 	text-align: center;
 }
+
+// Apply
+
+.apply {
+	h2 {
+		color: #51a351;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	h3 {
+		color: #0160a0;
+	}
+}
+
+.what-it-takes {
+	width: 360px;
+	float: left;
+	padding: 20px
+}
+
+.prepare-early {
+	width: 360px;
+	float: right;
+	padding: 20px;
+}
+
 
 // Quick Links
 

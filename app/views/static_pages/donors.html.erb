@@ -1,0 +1,18 @@
+<div class="page-title">
+	<h1>Our Donors</h1>
+</div>
+<div class="page-content">
+	<div class="main-text">
+		<p>The WCSF is funded through individual and business donations, fundraisers, and grant awards. Since January 2012, we have developed a funding base of approximately 50 different contribution sources, most of which come from generous individuals and businesses. All individual contributions are linked to a specific student in the program, and to recognize the donor's generosity, the student provides semesterly updates on their performance throughout HS.</p>
+		<div class="donors-list">
+			<ul>
+				<% donors.each do |donor| %>  <!-- add donors in static_pages_helper -->
+					<li><%= donor %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	<%= render 'donate_sidebar' %>
+</div>
+
+
