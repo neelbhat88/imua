@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WCSF</title> <!--full_title(yield(:title)) %> -->
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <script type="text/javascript" src="//use.typekit.net/sja0fwm.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body class="<%= controller_name -%> <%= action_name -%>">
+	<div class="pages-container">
+		<div class="wrapper clearfix">
+			<div class="main-content">
+			  <%= yield %>
+			  <%= render 'static_pages/quick_links' %>
+			</div>
+			<div class="sidebar">
+			  <%= render 'static_pages/sidebar' %>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>
+				The Waianae Coast Scholarship Fund (WCSF) is a federally recognized 501c3 non-profit organization.<br>
+				All contributions will be tax-exempt.<br>
+				Copyright 2013 Waianae Coast Scholasrhip Fund
+			</p>
+		</div>
+	</div>
+	<%= render 'static_pages/backstretch' %>
+</body>
+</html>

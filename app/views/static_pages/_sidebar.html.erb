@@ -1,0 +1,35 @@
+
+	<div class="user-actions">
+		<%= link_to 'Login', new_user_session_path, class: 'login-button' %>
+		<%= link_to 'Donate now', 'https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=WOeLgJJ3vGjRLoX0GC1d6R33FaZg5SeMMGnjDC9T6gRwJW6LLOYX4wCWmzK&dispatch=5885d80a13c0db1f8e263663d3faee8d4e181b3aff599f99e8c17bd6c7fe2f56', target: 'blank', class: 'donate-button' %>
+	</div>
+	<div class="logo">
+		<%= link_to root_path do %>
+			<%= image_tag 'wcsf-logo-text.png' %>
+		<% end %>
+	</div>
+	<div class="navigation">
+		<ul>
+			<%= link_to '<li>What is the WSCF?</li>'.html_safe %>
+			<%= link_to '<li>Our Donors</li>'.html_safe, donors_path %>
+			<%= link_to '<li>Our Community Partners</li>'.html_safe %>
+			<%= link_to '<li>Our Students</li>'.html_safe %>
+			<%= link_to '<li>Student Success</li>'.html_safe %>
+			<%= link_to '<li>IMUA Student Portal</li>'.html_safe %>
+			<%= link_to '<li>Donate Now</li>'.html_safe, donate_path %>
+			<%= link_to '<li class="last-nav-link">Apply Now</li>'.html_safe, apply_path %>
+		</ul>
+	</div>
+	<div class="sign-in">
+		<%= form_for("user", :url => user_session_path) do |f| %>
+		  <%= f.label :email %>
+		  <%= f.email_field :email, :autofocus => true %>
+
+		  <%= f.label :password %>
+		  <%= f.password_field :password %>
+
+	    <%= f.check_box :remember_me %> <%= f.label :remember_me, class: 'remember-me' %>
+
+		  <%= f.submit "Sign in", class: 'btn btn-info pull-right' %>
+		<% end %>
+	</div>
