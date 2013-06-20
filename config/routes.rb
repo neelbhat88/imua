@@ -18,6 +18,8 @@ Wcsf::Application.routes.draw do
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
 
+  match '/activities', to: 'activities#index'
+
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'
   
