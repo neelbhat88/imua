@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  school_activity_id: 
+  leadership_held: false
+  leadership_title: MyString
+  description: MyText
+  semester: 
+  user_id: 
+
+two:
+  school_activity_id: 
+  leadership_held: false
+  leadership_title: MyString
+  description: MyText
+  semester: 
+  user_id: 

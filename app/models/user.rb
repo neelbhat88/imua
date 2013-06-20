@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :user_classes
   has_many :user_badges
+  has_many :user_activities
   has_one :user_info, :dependent => :destroy
 
   def is_student?

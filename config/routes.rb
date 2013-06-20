@@ -1,7 +1,5 @@
-Wcsf::Application.routes.draw do  
+Wcsf::Application.routes.draw do    
   resources :school_activities
-
-
   resources :school_classes
   resources :global_badges
 
@@ -10,11 +8,14 @@ Wcsf::Application.routes.draw do
   get "static_pages/home"  
 
   match '/profile', to: 'static_pages#profile'  
-  match '/summary', to: 'static_pages#summary'
   
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
 
+  match '/activities', to: 'activities#index'
+
+  # TODO Remove these
+  match '/summary', to: 'static_pages#summary'
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'
   

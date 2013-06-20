@@ -1,0 +1,14 @@
+<% @jsinit = 'Activities' %>
+
+<h1>Activities</h1>
+
+<div>
+	<span style="font-weight: bold">Name</span>
+	<span style="font-weight: bold" data-bind="visible: leadershipHeld()">Position title</span>
+</div>
+<div>
+	<input style="width:250px"/>
+	<a href="#" data-bind="click: addLeadership, visible: leadershipHeld() == false" style="padding-left: 10px">Add leadership</a>
+	<input style="width: 250px" data-bind="visible:leadershipHeld()" />
+</div>
+<a href="#">Add Activity</a>
