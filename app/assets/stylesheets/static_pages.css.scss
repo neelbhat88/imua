@@ -3,17 +3,32 @@ body.static_pages {
 	margin: 0 10px;
 	color: #434343;
 	background: #fff;
+}
+
+.static_pages {
 	h1 {
 		font-family: "cubano", sans-serif;
 		text-align: left;
 		margin: 0;
+		letter-spacing: 0px;
 	}
 	h2 {
 		text-align: left;
+		font-weight: bold;
+		color: #ff6b6b;
+		margin: 20px 0 10px;
 	}
 	a:hover {
 		text-decoration: none;
 	}
+}
+
+h1, .user-actions a, .navigation li {
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 }
 
 p {
@@ -55,7 +70,7 @@ p {
 		display: inline-block;
 		color: #fff;
 	}
-	a.login-button {
+	a.apply-button {
 		background: url('purple-rectangle-left.png') no-repeat;
 		width: 92px;
 		height: 60px;
@@ -83,6 +98,7 @@ p {
 		margin: 20px 0;
 	}
 	li {
+		font-size: 20px;
 		margin: 0;
 		padding: 10px;
 		border-bottom: 1px solid #06456a;
@@ -271,6 +287,41 @@ p.donate-address {
 	width: 360px;
 	float: right;
 	padding: 20px;
+}
+
+// What is wcsf
+
+
+// Students
+
+
+// Staff
+.staff-member {
+	margin-bottom: 40px;
+	img {
+		width: 172px;
+		float: left;
+		margin-right: 20px;
+	}
+	.staff-member-description {
+		width: 568px;
+		float: left;
+	}
+	h2 {
+
+	}
+	h3 {
+		font-size: 24px;
+		color: #0160a0;
+	}
+	h4 {
+		font-size: 18px;
+		color: #06456a;
+		margin-top: 0;
+	}
+	h5 {
+		font-size: 16px;
+	}
 }
 
 

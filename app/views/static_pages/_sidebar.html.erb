@@ -1,7 +1,7 @@
 
 	<div class="user-actions">
-		<%= link_to 'Login', new_user_session_path, class: 'login-button' %>
-		<%= link_to 'Donate now', 'https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=WOeLgJJ3vGjRLoX0GC1d6R33FaZg5SeMMGnjDC9T6gRwJW6LLOYX4wCWmzK&dispatch=5885d80a13c0db1f8e263663d3faee8d4e181b3aff599f99e8c17bd6c7fe2f56', target: 'blank', class: 'donate-button' %>
+		<%= link_to 'Apply', apply_path, class: 'apply-button' %>
+		<%= link_to 'Donate now', donate_path, class: 'donate-button' %>
 	</div>
 	<div class="logo">
 		<%= link_to root_path do %>
@@ -10,14 +10,14 @@
 	</div>
 	<div class="navigation">
 		<ul>
-			<%= link_to '<li>What is the WSCF?</li>'.html_safe %>
+			<%= link_to '<li>Home</li>'.html_safe, root_path %>
+			<%= link_to '<li>What is the WSCF?</li>'.html_safe, what_is_wcsf_path %>
+			<%= link_to '<li>News & Announcements</li>'.html_safe %>
+			<%= link_to '<li>Our Students</li>'.html_safe, students_path %>
+			<%= link_to '<li>Our Staff</li>'.html_safe, staff_path %>
 			<%= link_to '<li>Our Donors</li>'.html_safe, donors_path %>
-			<%= link_to '<li>Our Community Partners</li>'.html_safe %>
-			<%= link_to '<li>Our Students</li>'.html_safe %>
-			<%= link_to '<li>Student Success</li>'.html_safe %>
-			<%= link_to '<li>IMUA Student Portal</li>'.html_safe %>
-			<%= link_to '<li>Donate Now</li>'.html_safe, donate_path %>
-			<%= link_to '<li class="last-nav-link">Apply Now</li>'.html_safe, apply_path %>
+			<%= link_to '<li>Partnerships</li>'.html_safe %>
+			<%= link_to '<li class="last-nav-link">Contact Us</li>'.html_safe %>
 		</ul>
 	</div>
 	<div class="sign-in">
