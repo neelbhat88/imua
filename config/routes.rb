@@ -3,6 +3,7 @@ Wcsf::Application.routes.draw do
   namespace :admin do
     root to: 'admin#index'
     resources :donors
+    resources :students
   end
 
   resources :school_activities

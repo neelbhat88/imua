@@ -1,0 +1,34 @@
+<%= form_for [:admin, @student] do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this donor from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'input-large' %>
+
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'input-large' %>
+
+    <%= f.label :big_goal %>
+    <%= f.text_field :big_goal, class: 'custom-input' %>
+
+    <%= f.label :why_description %>
+    <%= f.text_area :why_description, rows: '10', class: 'custom-input' %>
+
+    <%= f.label :how_description %>
+    <%= f.text_area :how_description,  rows: '10', class: 'custom-input' %>
+
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url, class: 'custom-input' %>
+
+    <div><%= f.submit class: 'btn btn-primary' %></div>
+
+<% end %>

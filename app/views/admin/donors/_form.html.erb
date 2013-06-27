@@ -11,15 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
     <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
+    <%= f.text_field :first_name, class: 'input-large' %>
+
     <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Add Donor' %>
-  </div>
+    <%= f.text_field :last_name, class: 'input-large' %>
+
+    <div><%= f.submit 'Add Donor', class: 'btn btn-primary' %></div>
+
 <% end %>
