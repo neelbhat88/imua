@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 gem 'pg'
 gem 'thin'
+gem 'mail_form'
 
 group :development do
 	gem 'quiet_assets'

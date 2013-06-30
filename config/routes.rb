@@ -1,5 +1,8 @@
 Wcsf::Application.routes.draw do
 
+  get '/contact', to: 'contacts#index', as: 'contact'
+  resources :contacts, only: [:index, :create]
+
   namespace :admin do
     root to: 'admin#index'
     resources :donors
@@ -21,6 +24,8 @@ Wcsf::Application.routes.draw do
   get '/donors', to: 'static_pages#donors'
   get '/apply', to: 'static_pages#apply'
   get '/donate', to: 'static_pages#donate'
+
+  # resources :contacts, :only [:new, :create]
 
   match '/profile', to: 'static_pages#profile'
   match '/summary', to: 'static_pages#summary'
