@@ -7,7 +7,7 @@
 
 <%= form_for Contact.new do |f| %>
 	<%= f.label :name %>
-	<%= f.text_field :name, class: 'input-large' %>
+	<%= f.text_field :name %>
 
 	<!-- this is to protect against spam -->
 	<div class="hide">
@@ -15,10 +15,10 @@
 	</div>
 
 	<%= f.label :email %>
-	<%= f.text_field :email, class: 'input-large' %>
+	<%= f.text_field :email %>
 
 	<%= f.label :message %>
-	<%= f.text_area :message, rows: '10', class: 'custom-input' %>
+	<%= f.text_area :message, rows: '5' %>
 
 	<div><%= f.submit 'Submit', class: 'btn btn-primary' %></div>
 

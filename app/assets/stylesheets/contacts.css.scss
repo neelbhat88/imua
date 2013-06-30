@@ -22,3 +22,24 @@ body.contacts {
 		text-decoration: none;
 	}
 }
+
+.contact-form {
+	float: left;
+	width: 276px;
+	margin-right: 40px;
+	label {
+		font-size: 18px;
+		font-family: "cubano", sans-serif;
+		color: #0160a0;
+	}
+}
+
+.contact-info {
+	float: left;
+	width: 276px;
+	h3 {
+		font-size: 18px;
+		font-family: "cubano", sans-serif;
+		color: #782b7d;
+	}
+}
