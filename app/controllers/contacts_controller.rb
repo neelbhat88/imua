@@ -1,6 +1,10 @@
 class ContactsController < ApplicationController
 	layout "static_pages"
 
+	def index
+		@title = "Waianae Coast Scholarship Fund | Contact Us"
+	end
+
   def create
 		@contact = Contact.new(params[:contact])
 		@contact.request = request

@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
 
   def students
   	@students = Student.all
+    @title = "Our Students"
   end
 
   def donors
