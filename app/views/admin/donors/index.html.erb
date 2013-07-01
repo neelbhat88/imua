@@ -1,0 +1,24 @@
+<h1>Donors</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @donors.each do |donor| %>
+  <tr>
+    <td><%= donor.first_name %></td>
+    <td><%= donor.last_name %></td>
+    <td><%= link_to 'Delete', admin_donor_path(donor), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<h3>Add a donor</h3>
+<%= render 'form' %>

@@ -1,0 +1,45 @@
+body.contacts {
+	padding-top: 0;
+	margin: 0 10px;
+	color: #434343;
+	background: #fff;
+}
+
+.contacts {
+	h1 {
+		font-family: "cubano", sans-serif;
+		text-align: left;
+		margin: 0;
+		letter-spacing: 0px;
+	}
+	h2 {
+		text-align: left;
+		font-weight: bold;
+		color: #ff6b6b;
+		margin: 20px 0 10px;
+	}
+	a:hover {
+		text-decoration: none;
+	}
+}
+
+.contact-form {
+	float: left;
+	width: 276px;
+	margin-right: 40px;
+	label {
+		font-size: 18px;
+		font-family: "cubano", sans-serif;
+		color: #0160a0;
+	}
+}
+
+.contact-info {
+	float: left;
+	width: 276px;
+	h3 {
+		font-size: 18px;
+		font-family: "cubano", sans-serif;
+		color: #782b7d;
+	}
+}

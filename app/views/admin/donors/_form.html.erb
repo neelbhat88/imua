@@ -1,0 +1,22 @@
+<%= form_for [:admin, @donor] do |f| %>
+  <% if @donor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@donor.errors.count, "error") %> prohibited this donor from being saved:</h2>
+
+      <ul>
+      <% @donor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'input-large' %>
+
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'input-large' %>
+
+    <div><%= f.submit 'Add Donor', class: 'btn btn-primary' %></div>
+
+<% end %>

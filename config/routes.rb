@@ -1,4 +1,11 @@
 Wcsf::Application.routes.draw do
+
+  namespace :admin do
+    root to: 'admin#index'
+    resources :donors
+    resources :students
+  end
+
   resources :school_activities
 
 
@@ -8,13 +15,21 @@ Wcsf::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
 
   root :to => 'static_pages#home'
+  get '/what_is_wcsf', to: 'static_pages#what_is_wcsf'
+  get '/students', to: 'static_pages#students'
+  get '/staff', to: 'static_pages#staff'
   get '/donors', to: 'static_pages#donors'
   get '/apply', to: 'static_pages#apply'
   get '/donate', to: 'static_pages#donate'
+  get '/partnerships', to: 'static_pages#partnerships'
 
-  match '/profile', to: 'static_pages#profile'  
+  get '/contact', to: 'contacts#index', as: 'contact'
+  resources :contacts, only: [:index, :create]
+
+
+  match '/profile', to: 'static_pages#profile'
   match '/summary', to: 'static_pages#summary'
-  
+
   match '/academics', to: 'academics#index'
   match '/saveClasses', to: 'academics#saveClasses'
 
@@ -23,7 +38,7 @@ Wcsf::Application.routes.draw do
 
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

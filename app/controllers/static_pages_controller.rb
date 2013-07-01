@@ -2,6 +2,15 @@ class StaticPagesController < ApplicationController
   def home
   end
 
+  def students
+  	@students = Student.all
+    @title = "Our Students"
+  end
+
+  def donors
+  	@donors = Donor.all
+  end
+
   def profile
   end
 

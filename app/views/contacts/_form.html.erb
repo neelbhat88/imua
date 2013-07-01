@@ -1,0 +1,25 @@
+<% flash.each do |name, msg| %>
+  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+    <a class="close" data-dismiss="alert">&#215;</a>
+    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+  </div>
+<% end %>
+
+<%= form_for Contact.new do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<!-- this is to protect against spam -->
+	<div class="hide">
+		<%= f.text_field :nickname %>
+	</div>
+
+	<%= f.label :email %>
+	<%= f.text_field :email %>
+
+	<%= f.label :message %>
+	<%= f.text_area :message, rows: '5' %>
+
+	<div><%= f.submit 'Submit', class: 'btn btn-primary' %></div>
+
+<% end %>
