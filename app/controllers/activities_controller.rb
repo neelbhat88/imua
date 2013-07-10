@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
   	logger.debug "DEBUG: Activities - #{activitiesJson}"
   	logger.debug "DEBUG: ActivitiesToRemove - #{removeJson}"  
 
-  	# Add or Edit activities
+  	# Add or Edit
   	activitiesJson.each do | c |  		
   		if c["dbid"] == ""  			
 	        logger.debug "DEBUG: New UserActivity school_activity_id = #{c["school_activity_id"]}, description = #{c["description"]} }"
@@ -63,7 +63,7 @@ class ActivitiesController < ApplicationController
 		end
   	end
 
-  	# Remove classes
+  	# Remove
   	removeJson.each do | r |
   		if r["dbid"] != ""
   			logger.debug "DEBUG: Removing activity with id = #{r["dbid"]}"
@@ -71,7 +71,7 @@ class ActivitiesController < ApplicationController
   		end
   	end
 
-  	# Reload all classes
+  	# Reload all
   	allactivities = current_user.user_activities.where('semester = ?', current_user.user_info.current_semester).order("id")
 
     returnactivities = []

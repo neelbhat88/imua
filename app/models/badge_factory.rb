@@ -57,7 +57,7 @@ class BadgeFactory
 			#when 3
 				#badgeList << ActivitiesSpecificBadge.new(b, curr_user)			
 			else
-				badgeList << AcademicsBadge.new(b, curr_user)
+				badgeList << ActivitiesBadge.new(b, curr_user)
 			end
 		end
 

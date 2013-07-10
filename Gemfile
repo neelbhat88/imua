@@ -27,14 +27,12 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '2.2.2'
 
-gem "less-rails"
 gem "therubyracer", :require => 'v8'
-
-#gem 'flatui-rails' #, :git => 'https://github.com/pkurek/flatui-rails.git'
-#gem "flat-ui-rails"
 
 # Used for authentication
 gem 'devise'
+
+gem 'bootstrap-datepicker-rails'
 
 # To use ActiveModel has_secure_password
 #gem 'bcrypt-ruby', '~> 3.0.0'
