@@ -5,14 +5,39 @@
 	<div class="students clearfix">
 		<% @students.each do |student| %>
 			<div class="student">
-				<%= link_to '#' do %>
+				<a href="#" class="studentModal" data-student="<%= student.id %>">
 					<%= image_tag student.image_url %>
 					<h3><%= "#{student.first_name} #{student.last_name}" %></h3>
-				<% end %>
+				</a>
+			</div>
+			<div id="student_<%= student.id %>" class="student-modal modal hide fade">
+			  <div class="student-modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3><%= "#{student.first_name} #{student.last_name}" %></h3>
+			  </div>
+			  <div class="student-modal-body clearfix">
+			  	<div class="student-image">
+				  	<%= image_tag student.image_url %>
+					</div>
+					<div class="student-details">
+				    <h5>Big Goal: <%= student.big_goal %></h5>
+				    <h4>Why did you apply for the WCSF?</h4>
+				    <p><%= student.why_description %></p>
+				    <h4>How will the WCSF help you reach your goals?</h4>
+				    <p><%= student.how_description %></p>
+				  </div>
+			  </div>
 			</div>
 		<% end %>
 	</div>
 </div>
 
-
-
+<script>
+	$(function(){
+		$('.studentModal').click(function(e){
+			var id = $(this).data('student');
+			$('#student_' + id).modal();
+			e.preventDefault();
+		});
+	})
+</script>

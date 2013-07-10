@@ -4,8 +4,8 @@ class CreateStudents < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :big_goal
-      t.string :why_description
-      t.string :how_description
+      t.text :why_description
+      t.text :how_description
       t.string :image_url
 
       t.timestamps
