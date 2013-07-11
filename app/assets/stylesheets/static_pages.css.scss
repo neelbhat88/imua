@@ -326,16 +326,96 @@ p.donate-address {
 	}
 }
 
+.application-intro {
+	margin-bottom: 20px;
+}
+
 .what-it-takes {
 	width: 360px;
 	float: left;
-	padding: 20px
+	padding: 20px;
+	background: #eee;
+	min-height: 329px;
+	h3 {
+		margin-top: 0;
+	}
+	p {
+		min-height: 200px;
+	}
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .prepare-early {
 	width: 360px;
 	float: right;
-	padding: 20px;
+	padding: 10px 20px;
+	background: #eee;
+	min-height: 329px;
+	p {
+		min-height: 200px;
+	}
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.centered-button {
+	text-align: center;
+}
+
+.apply-now {
+	padding: 20px 0;
+}
+
+// Apply modals
+
+
+.apply .modal.fade.in {
+	top: 40%;
+}
+
+.apply-modal {
+	width: 678px;
+	margin-left: -339px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.apply-modal-header {
+	background: url('student-modal-top-bar.png') no-repeat;
+	width: 678px;
+	height: 84px;
+	h3 {
+		margin: 0;
+		padding: 20px 30px;
+		color: #fff;
+		font-family: $alt-font;
+		font-size: 30px;
+	}
+	.close {
+		padding: 10px;
+		font-size: 30px;
+	}
+}
+
+.apply-modal-body {
+	padding: 30px;
+	max-height: 400px;
+	overflow-y: auto;
+	h4 {
+		margin: 0 0 10px;
+		color: #06456a;
+	}
+	h5 {
+		margin: 0 0 20px;
+		color: #0160a0;
+	}
+	p {
+		margin-bottom: 20px;
+	}
 }
 
 // What is wcsf
