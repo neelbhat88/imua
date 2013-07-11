@@ -1,3 +1,11 @@
+// SCSS Variables
+
+$dark-blue: #00446B;
+$alt-font: "cubano", sans-serif;
+
+
+//
+
 body.static_pages {
 	padding-top: 0;
 	margin: 0 10px;
@@ -7,7 +15,7 @@ body.static_pages {
 
 .static_pages {
 	h1 {
-		font-family: "cubano", sans-serif;
+		font-family: $alt-font;
 		text-align: left;
 		margin: 0;
 		letter-spacing: 0px;
@@ -63,7 +71,7 @@ p {
 .user-actions {
 	text-transform: uppercase;
 	margin-bottom: 40px;
-	font-family: "cubano", sans-serif;
+	font-family: $alt-font;
 	font-size: 20px;
 	line-height: 60px;
 	a {
@@ -84,7 +92,6 @@ p {
 	a:hover {
 		color: #ddd;
 	}
-
 }
 
 // Navigation
@@ -92,7 +99,7 @@ p {
 .navigation {
 	background: #c3d5e3;
 	text-transform: uppercase;
-	font-family: "cubano", sans-serif;
+	font-family: $alt-font;
 	ul {
 		list-style-type: none;
 		margin: 20px 0;
@@ -101,18 +108,63 @@ p {
 		font-size: 20px;
 		margin: 0;
 		padding: 10px;
-		border-bottom: 1px solid #06456a;
+		border-bottom: 1px solid $dark-blue;
 		&.last-nav-link {
 			border-bottom: 0 !important;
 		}
 	}
 	a {
-		color: #06456a;
+		color: $dark-blue;
 	}
 	a:hover {
 		color: #0a6faa;
 	}
 }
+
+// Footer
+
+.footer {
+	margin: 40px 0;
+	.col {
+		padding-top: 10px;
+	}
+	ul {
+		list-style-type: none;
+		margin-left: 0;
+	}
+	a {
+		color: #424242;
+		&:hover {
+			color: #666;
+		}
+	}
+	.left-columns {
+		width: 800px;
+		float: left;
+		.col {
+			width: 152px;
+			display: inline-block;
+			margin-right: 45px;
+		}
+		.col-red {border-top: 14px solid #EF1C25;}
+		.col-yellow {border-top: 14px solid #FFC40A;}
+		.col-green {border-top: 14px solid #B3D334;}
+		.col-pink {border-top: 14px solid #F59EE5;}
+	}
+	.right-columns {
+		width: 280px;
+		float: right;
+		.col-blue {border-top: 14px solid #00ABF0;}
+		p {
+			color: #A2A9AE;
+			font-style: italic;
+			font-size: 12px;
+			line-height: 16px;
+			margin-top: 0;
+		}
+	}
+}
+
 
 // Sign in
 
@@ -163,11 +215,12 @@ p {
 	position: relative;
 	top: -15px;
 	h4 {
-		color: #00446a;
+		font-family: $alt-font;
+		color: $dark-blue;
 		width: 250px;
 		font-weight: 300;
 		font-size: 24px;
-		line-height: 30px;
+		line-height: 26px;
 		margin: 35px 40px 10px;
 	}
 	a {
@@ -176,22 +229,17 @@ p {
 	}
 }
 
-.news-announcments {
-	width: 460px;
-	float: left;
-	padding: 0 20px;
-	h2 {
-		color: #ff6b6b;
-		font-family: "cubano", sans-serif;
-	}
-}
-
-.testimonial {
-	width: 260px;
-	float: right;
-	padding: 20px;
+.home-main-content {
+	background: url('home-background.png') no-repeat;
+	width: 800px;
+	height: 344px;
 	p {
-		color: #83a038;
+		width: 660px;
+		margin: 0 auto;
+		font-family: $alt-font;
+		font-size: 20px;
+		line-height: 24px;
+		color: $dark-blue;
 	}
 }
 
@@ -204,7 +252,7 @@ p {
 	h1 {
 		color: #fff;
 		padding: 10px;
-		font-family: "cubano", sans-serif;
+		font-family: $alt-font;
 	}
 }
 
@@ -300,7 +348,7 @@ p.donate-address {
 	float: left;
 	margin: 15px 30px 15px 0;
 	h3 {
-		font-family: "cubano", sans-serif;
+		font-family: $alt-font;
 		font-size: 18px;
 		color: #0160a0;
 	}
@@ -324,7 +372,7 @@ p.donate-address {
 		margin: 0;
 		padding: 20px 30px;
 		color: #fff;
-		font-family: "cubano", sans-serif;
+		font-family: $alt-font;
 		font-size: 30px;
 	}
 	.close {
@@ -393,7 +441,7 @@ p.donate-address {
 // Quick Links
 
 .quick-links {
-	font-family: "cubano", sans-serif;
+	font-family: $alt-font;
 	ul {
 		list-style-type: none;
 		margin: 20px 0;
