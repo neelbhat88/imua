@@ -16,10 +16,11 @@
 //= require jquery.ui.droppable
 //= require jquery.ui.position
 //= require bootstrap-datepicker
+//= require bootstrap-modal
 //= require_tree .
 
 $(function(){
-	var jsobj = $("body").attr("jsinit");
+ 	var jsobj = $("body").attr("jsinit");
 
 	if (jsobj != null && jsobj != "")
 		window[jsobj].init();

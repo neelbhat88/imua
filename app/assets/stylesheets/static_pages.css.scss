@@ -306,6 +306,59 @@ p.donate-address {
 	}
 }
 
+// Student Modal
+
+.student-modal {
+	width: 678px;
+	margin-left: -339px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.student-modal-header {
+	background: url('student-modal-top-bar.png') no-repeat;
+	width: 678px;
+	height: 84px;
+	h3 {
+		margin: 0;
+		padding: 20px 30px;
+		color: #fff;
+		font-family: "cubano", sans-serif;
+		font-size: 30px;
+	}
+	.close {
+		padding: 10px;
+		font-size: 30px;
+	}
+}
+
+.student-modal-body {
+	padding: 30px;
+	h4 {
+		margin: 0 0 10px;
+		color: #06456a;
+	}
+	h5 {
+		margin: 0 0 20px;
+		color: #0160a0;
+	}
+	p {
+		margin-bottom: 20px;
+	}
+}
+
+.student-image {
+	width: 172px;
+	float: left
+}
+
+.student-details {
+	width: 420px;
+	float: right;
+}
+
+
 
 // Staff
 .staff-member {
