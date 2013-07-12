@@ -6,7 +6,8 @@ class ActivitiesLeadershipBadge < ActivitiesBadge
 	end
 
 	def Compare()
-		if (self.curr_user.user_activities.where('leadership_held = true').length >= self.comparevalue.to_i)
+		if (self.curr_user.user_activities.where('current_semester = ? and leadership_held = true', 
+				self.curr_user.user_info.current_semster).length >= self.comparevalue.to_i)
 			return true
 		end
 

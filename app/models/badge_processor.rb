@@ -14,6 +14,10 @@ class BadgeProcessor
 		return CompareBadges(@badgefactory.GetActivitiesBadges(@curr_user.user_info.current_semester))
 	end
 
+	def CheckSemesterServices
+		return CompareBadges(@badgefactory.GetServicesBadges(@curr_user.user_info.current_semester))
+	end
+
 	def CompareBadges(allBadges)
 		newbadgecount = 0
 	  	allBadges.each do |b|

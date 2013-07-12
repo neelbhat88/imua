@@ -63,4 +63,26 @@ class BadgeFactory
 
 		return badgeList
 	end
+
+	def GetServicesBadges(semester=nil)
+		if semester.nil?
+			allBadges = GlobalBadge.where("category = 'Service'")
+		else
+			allBadges = GlobalBadge.where("category = 'Service' and semester = ?", semester)
+		end
+
+		badgeList = []
+
+		allBadges.each do |b|
+			case b.subcategory
+			
+			when 1			
+			when 2		
+			else
+				badgeList << ServicesBadge.new(b, curr_user)
+			end
+		end
+
+		return badgeList
+	end
 end

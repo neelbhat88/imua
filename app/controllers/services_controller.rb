@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
 
   def saveServices
     ##################################################
-	# ---------------- Services ----------------------
+	  # ---------------- Services ----------------------
     ##################################################
   	servicesJson = JSON.parse(params[:services])
   	removeJson = JSON.parse(params[:toRemove])
@@ -41,7 +41,7 @@ class ServicesController < ApplicationController
 	        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date,
 	        								  :hours=>c["hours"]
         									)
-		end
+		  end
   	end
 
   	# Remove
@@ -63,10 +63,11 @@ class ServicesController < ApplicationController
     ##################################################
     # ------------------ BADGES ----------------------
     ##################################################   
+    # Don't need this since this is calculated by the badge itself
     totalHours = params[:totalHours]
 
-    # badgeProcessor = BadgeProcessor.new(current_user)
-    # newBadgeCount = badgeProcessor.CheckSemesterServices()
+    badgeProcessor = BadgeProcessor.new(current_user)
+    newBadgeCount = badgeProcessor.CheckSemesterServices()
   	
   	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
