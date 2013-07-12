@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  semester: 1
+  name: MyString
+  hours: 1
+  date: 2013-07-01 22:46:37
+
+two:
+  user_id: 1
+  semester: 1
+  name: MyString
+  hours: 1
+  date: 2013-07-01 22:46:37

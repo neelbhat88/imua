@@ -1,0 +1,43 @@
+<% @jsinit = 'Services' %>
+
+<h1>Community Service</h1>
+
+<div data-bind="text: 'Total Community Service Hours: ' + totalHours()"></div>
+<div data-bind="template: {name: templateToUse}"></div>
+
+<script type="text/html" id="view">
+	<div style="display:none" data-bind="foreach: services, visible: services().length > 0">
+		<div style="border: 1px solid grey; padding: 10px; width: 600px; border-radius: 3px; margin-bottom: 10px; position: relative;">		
+			<div style="font-size: 20px;">
+				<span data-bind="text: name" style="width:250px"></span>	
+				<span data-bind="text: ' on ' + date()" style="width: 250px;"></span>
+				<span data-bind="text: ' - ' + hours() + ' hours'" style="width: 100px;"></span>
+			</div>			
+		</div>
+	</div>
+	<div data-bind="visible: services().length < 1" style="padding-bottom: 5px; font-style: italic">
+		Click Edit below to add community service events.
+	</div>
+	<div>
+		<button class="" data-bind="click: $root.edit">Edit</button>
+	</div>
+</script>
+
+<script type="text/html" id="edit">
+	<div style="display:none" data-bind="foreach: services, visible: services().length > 0">
+		<div style="border: 1px solid grey; padding: 10px; width: 600px; border-radius: 3px; margin-bottom: 10px; position: relative;">
+			<div data-bind="click: $root.remove" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
+			
+			<input data-bind="value: name" placeholder="Name of Service Event or Activity" style="width: 250px" />			
+			<input data-bind="value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
+			<input data-bind="value: hours" placeholder="Hours" style="width: 100px" />						
+		</div>
+	</div>
+	<a href="#" data-bind="click: $root.add">Add Service Hours</a>
+	<div style="padding-top: 10px">
+		<button class="" data-bind="click: $root.save">Save
+		</button>
+		<button class="" data-bind="click: $root.cancelEdit">Cancel
+		</button>
+	</div>
+</script>

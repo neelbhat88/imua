@@ -1,14 +1,57 @@
 <% @jsinit = 'Activities' %>
 
-<h1>Activities</h1>
+<h1>Extracurriculars</h1>
 
-<div>
-	<span style="font-weight: bold">Name</span>
-	<span style="font-weight: bold" data-bind="visible: leadershipHeld()">Position title</span>
-</div>
-<div>
-	<input style="width:250px"/>
-	<a href="#" data-bind="click: addLeadership, visible: leadershipHeld() == false" style="padding-left: 10px">Add leadership</a>
-	<input style="width: 250px" data-bind="visible:leadershipHeld()" />
-</div>
-<a href="#">Add Activity</a>
+<div data-bind="template: {name: templateToUse}"></div>
+
+<script type="text/html" id="view-activities">
+	<div style="display:none" data-bind="foreach: activities, visible: activities().length > 0">
+		<div style="border: 1px solid grey; padding: 10px; width: 600px; border-radius: 3px; margin-bottom: 10px; position: relative;">		
+			<div style="font-size: 20px;">
+				<span data-bind="text: name" style="width:250px"></span>	
+				<span data-bind="text: ' - ' + leadershipTitle(), visible: leadershipHeld" style="width: 250px;"></span>
+			</div>
+			<div style="font-size: 14px; padding: 5px;">
+				<ul data-bind="foreach: description">
+					<li data-bind="text: text"></li>					
+				</ul>
+			</div>
+			<div data-bind="visible: description().length < 1" style="font-style: italic">Click Edit below to add a description</div>
+		</div>
+	</div>
+	<div data-bind="visible: activities().length < 1" style="padding-bottom: 5px; font-style: italic">
+		Click Edit below to add the extracurricular activities you are involoved in.
+	</div>
+	<div>
+		<button class="" data-bind="click: $root.editActivities">Edit</button>
+	</div>
+</script>
+
+<script type="text/html" id="edit-activities">
+	<div style="display:none" data-bind="foreach: {data: activities, as: 'activity'}, visible: activities().length > 0">
+		<div style="border: 1px solid grey; padding: 10px; width: 600px; border-radius: 3px; margin-bottom: 10px; position: relative;">
+			<div data-bind="click: $root.removeActivity" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
+			
+			<select data-bind="options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:250px; position: relative; top: 5px;"></select>
+			<a href="#" data-bind="click: $root.addLeadership, visible: leadershipHeld() == false" style="padding-left: 10px">Add leadership</a>		
+			<input data-bind="visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 250px" />
+			<a href="#" data-bind="click: $root.removeLeadership, visible: leadershipHeld() == true" style="padding-left: 10px">Remove</a>
+
+			<div style="padding-top: 5px; font-style: italic">Describe what you did in 3 to 4 sentences. Use action works like "Lead my team" or "Organized an event".</div>
+			<div data-bind="foreach: description">
+				<div style="padding-top: 5px;">
+					<input data-bind="value: text" value="" placeholder="Add a sentence about what you did" style="width: 550px" />
+					<a href="#" data-bind="click: function(data, event) { $root.removeSentence(activity, data) }" style="padding-left: 10px">x</a>
+				</div>
+			</div>
+			<a href="#" data-bind="click: $root.addSentence">Add Sentence</a>
+		</div>
+	</div>
+	<a href="#" data-bind="click: $root.addActivity">Add Activity</a>
+	<div style="padding-top: 10px">
+		<button class="" data-bind="click: $root.saveActivities">Save
+		</button>
+		<button class="" data-bind="click: $root.cancelEdit">Cancel
+		</button>
+	</div>
+</script>

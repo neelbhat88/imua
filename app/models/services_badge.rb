@@ -1,4 +1,4 @@
-class AcademicsBadge
+class ServicesBadge
 	attr_accessor :comparevalue, :description, :isminrequirement, :semester,
                    :subcategory, :title, :id, :curr_user
 
@@ -13,6 +13,13 @@ class AcademicsBadge
 	end
 
 	def Compare()
-		return false;
+		userservices = self.curr_user.user_services.where("semester = ?",	self.curr_user.user_info.current_semester)
+
+		totalHours = 0
+		userservices.each do | s |
+			totalHours += s.hours
+		end
+
+		return (totalHours >= self.comparevalue.to_i)
 	end
 end

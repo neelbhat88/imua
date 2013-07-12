@@ -15,13 +15,14 @@
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
 //= require jquery.ui.position
+//= require bootstrap-datepicker
 //= require bootstrap-modal
 //= require bootstrap-carousel
 //= require_tree .
 
-// $(function(){
-// 	var jsobj = $("body").attr("jsinit");
+$(function(){
+ 	var jsobj = $("body").attr("jsinit");
 
-// 	if (jsobj != "")
-// 		window[jsobj].init();
-// });
+	if (jsobj != null && jsobj != "")
+		window[jsobj].init();
+});

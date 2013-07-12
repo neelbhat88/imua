@@ -1,5 +1,9 @@
 Wcsf::Application.routes.draw do
 
+  get "services/index"
+
+  get "services_controller/index"
+
   namespace :admin do
     root to: 'admin#index'
     resources :donors
@@ -34,6 +38,10 @@ Wcsf::Application.routes.draw do
   match '/saveClasses', to: 'academics#saveClasses'
 
   match '/activities', to: 'activities#index'
+  match '/saveActivities', to: 'activities#saveActivities'  
+
+  match '/services', to: 'services#index'
+  match '/saveServices', to: 'services#saveServices'
 
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'

@@ -1,4 +1,4 @@
-class AcademicsBadge
+class ActivitiesBadge
 	attr_accessor :comparevalue, :description, :isminrequirement, :semester,
                    :subcategory, :title, :id, :curr_user
 
@@ -13,6 +13,6 @@ class AcademicsBadge
 	end
 
 	def Compare()
-		return false;
+		return false
 	end
 end

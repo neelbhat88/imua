@@ -7,10 +7,19 @@ class BadgeProcessor
 	end
 
 	def CheckSemesterAcademics
-		allBadges = @badgefactory.GetAcademicsBadges(@curr_user.user_info.current_semester)		
+		return CompareBadges(@badgefactory.GetAcademicsBadges(@curr_user.user_info.current_semester))
+	end
 
-	  	# Call compare and pass in totalGPA
-	  	newbadgecount = 0
+	def CheckSemesterActivities
+		return CompareBadges(@badgefactory.GetActivitiesBadges(@curr_user.user_info.current_semester))
+	end
+
+	def CheckSemesterServices
+		return CompareBadges(@badgefactory.GetServicesBadges(@curr_user.user_info.current_semester))
+	end
+
+	def CompareBadges(allBadges)
+		newbadgecount = 0
 	  	allBadges.each do |b|
 	  		# If badge is not minreq then only compare if all minreqs met
 	  		badgeEarned = false
@@ -44,5 +53,5 @@ class BadgeProcessor
 
 	  	# TODO: Return object here of new and removed badges
 	  	return newbadgecount
-	end	
+	end
 end

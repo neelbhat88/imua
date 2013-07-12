@@ -35,4 +35,54 @@ class BadgeFactory
 
 		return badgeList
 	end
+
+	def GetActivitiesBadges(semester=nil)
+		if semester.nil?
+			allBadges = GlobalBadge.where("category = 'Activity'")
+		else
+			allBadges = GlobalBadge.where("category = 'Activity' and semester = ?", semester)
+		end
+
+		badgeList = []
+
+		allBadges.each do |b|
+			case b.subcategory
+			# Involved in any Activity
+			when 1
+				badgeList << ActivitiesInvolvementBadge.new(b, curr_user)
+			# Leadership role in any Activity
+			when 2
+				badgeList << ActivitiesLeadershipBadge.new(b, curr_user)
+			# Specific Activity involvement?
+			#when 3
+				#badgeList << ActivitiesSpecificBadge.new(b, curr_user)			
+			else
+				badgeList << ActivitiesBadge.new(b, curr_user)
+			end
+		end
+
+		return badgeList
+	end
+
+	def GetServicesBadges(semester=nil)
+		if semester.nil?
+			allBadges = GlobalBadge.where("category = 'Service'")
+		else
+			allBadges = GlobalBadge.where("category = 'Service' and semester = ?", semester)
+		end
+
+		badgeList = []
+
+		allBadges.each do |b|
+			case b.subcategory
+			
+			when 1			
+			when 2		
+			else
+				badgeList << ServicesBadge.new(b, curr_user)
+			end
+		end
+
+		return badgeList
+	end
 end
