@@ -2,24 +2,89 @@
 	<h1>Apply Now</h1>
 </div>
 <div class="page-content">
-	<p>We're glad you are interested in applying for the Waianae Coast Scholarship Fund. This program is different than other college scholarships. WCSF will reward you for taking all the steps necessary on your path to college.</p>
-</div>
-<div class="apply-text clearfix">
-	<div class="what-it-takes">
-		<h3>Do you have what it takes?</h3>
-		<p>Seats in the WCSF program are limited. We need to know that you are committed to staying on track with the programs requirements. The first thing we do is look at your current track record. How are you doing in school now? Are you involved in extracurricular activities? Have you done any volunteer work?</p>
-		<%= link_to 'Application Requirements', '', class: 'btn btn-warning' %>
+	<div class="application-intro">
+		<p>We're glad you are interested in applying for the Waianae Coast Scholarship Fund. This program is different than other college scholarships. WCSF will reward you for taking all the steps necessary on your path to college.</p>
 	</div>
-	<div class="prepare-early">
-		<h3>Start preparing early</h3>
-		<p>If you are in 6th, 7th or 8th grade and are interested in the WCSF program you should start preparing now to increase your chances of making it in. We have put together a guide of suggestions to help you make the cut.</p>
-		<%= link_to 'Suggested Preparation', '', class: 'btn btn-warning' %>
+	<div class="apply-text clearfix">
+		<div class="what-it-takes">
+			<h3>Do you have what it takes?</h3>
+			<p>Seats in the WCSF program are limited. We need to know that you are committed to staying on track with the programs requirements. The first thing we do is look at your current track record. How are you doing in school now? Are you involved in extracurricular activities? Have you done any volunteer work?</p>
+			<div class="centered-button"><%= link_to 'Application Requirements', '', class: 'btn btn-large btn-warning what-it-takes-modal' %></div>
+		</div>
+
+		<div id="what-it-takes-modal" class="apply-modal modal hide fade">
+		  <div class="apply-modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>What it takes</h3>
+		  </div>
+		  <div class="apply-modal-body clearfix">
+		  	<h4>When do I apply?</h4>
+		  	<p>The 2013-2014 application period for Waianae Intermediate 8th grade students is from February 12 to March 12, 2014. Applications received after March 12 will not be considered.</p>
+		  	<h4>What do I need to submit?</h4>
+		  	<ul>
+					<li>Completed Application Form (download below)</li>
+					<li>2 Teacher Recommendations</li>
+					<li>Minimum 3.0 GPA</li>
+					<li>7th and 8th Grade Transcripts</li>
+					<li>2 Essays</li>
+				</ul>
+				<h4>What do we look for?</h4>
+				<p>We look for students who view the WCSF as a great opportunity for preparing for college and display a very strong desire to be admitted. We also look for students who have demonstrated the potential to meet the rigorous program requirements that the WCSF has each semester. The quality of the application in showing these traits is critical for admittance.</p>
+		  	<h4>Who can apply?</h4>
+		  	<p>Any 8th grade student at Waianae Intermediate who has a cumulative GPA of a 3.0 GPA or above and who will have attended Waianae Intermediate for 1 entire school year before 8th grade graduation.</p>
+		  </div>
+		  <div class="modal-footer">
+		    <button class="btn btn-success">Download Application</button>
+		   </div>
+		</div>
+
+
+		<div class="prepare-early">
+			<h3>Start preparing early</h3>
+			<p>If you are in 6th, 7th or 8th grade and are interested in the WCSF program you should start preparing now to increase your chances of making it in. We have put together a guide of suggestions to help you make the cut.</p>
+			<div class="centered-button"><%= link_to 'Suggested Preparation', '', class: 'btn btn-large btn-warning prepare-early-modal' %></div>
+		</div>
+
+		<div id="prepare-early-modal" class="apply-modal modal hide fade">
+		  <div class="apply-modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		    <h3>Prepare Early</h3>
+		  </div>
+		  <div class="apply-modal-body clearfix">
+		  	<p>In order to ensure students will be able to handle the rigor of the WCSF semester requirements, we encourage applicants to learn to balance extracurricular involvement with maintaining good grades in 7th and 8th grade. Showing that you can successfully manage the workload of school and additional activities is a way to prove to that you can handle the semesterly WCSF requirements in high school.  Below is a checklist of tasks to complete during 7th and 8th grade that will best prepare you for admission:</p>
+		  	<ul>
+					<li>Maintain a competitive GPA of a 3.5 or above</li>
+					<li>Become involved in a sport, club, or other student activity</li>
+					<li>Identify 2 teachers that would be able to write positive letters of recommendation about you</li>
+					<li>Have nearly perfect attendance to school</li>
+					<li>Have no record of disciplinary issues</li>
+					<li>Develop strong essay writing skills</li>
+					<li>Participate in community service events</li>
+			  </ul>
+		  </div>
+		  <div class="modal-footer">
+		    <button class="btn btn-success">Download Application</button>
+		   </div>
+		</div>
+
 	</div>
-</div>
-<div class="page-content apply-now">
-	<h2>Ready to Apply?</h2>
-	<p>So, you have read over the program requirements and are ready to dive in? Right now we are only accepting paper applications. You will need to download the WCSF Application PDF, complete the printed form and mail it in for review. Good luck!</p>
-	<%= link_to 'Download Application', '', class: 'btn btn-success' %>
+	<div class="apply-now">
+		<h2>Ready to Apply?</h2>
+		<p>So, you have read over the program requirements and are ready to dive in? Right now we are only accepting paper applications. You will need to download the WCSF Application PDF, complete the printed form and submit it directly to the school. Good luck!</p>
+		<%= link_to 'Download Application', '', class: 'btn btn-large btn-success' %>
+	</div>
 </div>
 
 
+<script>
+	$(function(){
+		$('.what-it-takes-modal').click(function(e){
+			$('#what-it-takes-modal').modal();
+			e.preventDefault();
+		});
+		$('.prepare-early-modal').click(function(e){
+			$('#prepare-early-modal').modal();
+			e.preventDefault();
+		});
+	})
+</script>
