@@ -1,5 +1,121 @@
 <div class="donate-sidebar">
-<%= link_to image_tag('donate-now.png', class: 'donate-now'), donate_path %>
-<%= link_to image_tag('ten-reasons-donate.png'), '' %>
-
+	<%= link_to image_tag('donate-now.png', class: 'donate-now'), donate_path %>
+	<%= link_to image_tag('ten-reasons-donate.png'), '', class: 'ten-reasons-modal-link' %>
 </div>
+
+<div class="ten-reasons-modal modal hide fade slide1" data-current-slide="1">
+  <div class="ten-reasons-modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="reasons_headings">What it takes</h3>
+  </div>
+  <div class="ten-reasons-modal-body clearfix">
+  	<div id="myCarousel" class="carousel slide">
+  	  <!-- Carousel items -->
+  	  <div class="carousel-inner">
+  	    <div class="active item item-1" data-slide-number="1">
+  	    	<div class="reason">
+	  	    	<h4>Our Students Stay at the Top</h4>
+	  	    	<p>Our students must minimally maintain a 3.5 GPA in order to be eligible for scholarship awards. The staff works to support students in meeting this performance requirement.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="2">
+  	    	<div class="reason">
+  	    	<h4>Our Students learn for their futures</h4>
+  	    	<p>Our staff provides professional development courses throughout the semester to teach students how to use computer software programs, speak in public, budget for college, as well as other relevant life skills.</p>
+	  	    </div>
+	  	  </div>
+  	    <div class="item" data-slide-number="3">
+  	    	<div class="reason">
+	  	    	<h4>Our Students will be ready</h4>
+	  	    	<p>Our staff provides instruction and support for students as they prepare for college admittance exams.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="4">
+  	    	<div class="reason">
+	  	    	<h4>Our Students are Moving forward</h4>
+	  	    	<p>I’mua in Hawaiian means “forward”, which is exactly where we are trying to move our students. Our program uses a proprietary software system called I`MUA, which is a student-oriented college preparation tool that prepares students for college in an innovative, motivating, and student-friendly way.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="5">
+  	    	<div class="reason">
+	  	    	<h4>Our Students Lend a helping hand</h4>
+	  	    	<p>A critical part of the WCSF program is community service. All of our students are encouraged to volunteer in the local community. By donating to WCSF you are not only helping the students, you are helping their community by motivating our students to volunteer.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="6">
+  	    	<div class="reason">
+	  	    	<h4>Our Students are supported by you</h4>
+	  	    	<p>In 2012, more than 98% of the funds donated went directly to student scholarship awards. Financial burdens are one of the most significant barriers to entry for college seekers in low income communities.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="7">
+  	    	<div class="reason">
+	  	    	<h4>our students are future leaders</h4>
+	  	    	<p>Our program aims to develop leaders in the community by investing in high performing students, thus planting seeds of impact to further improve the communities we serve. </p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="8">
+  	    	<div class="reason">
+	  	    	<h4>Our students receive extra support</h4>
+	  	    	<p>Students are guided to work on a specific set of performance requirements each semester that align with what they should be doing to best prepare them for college. Our staff meets with students on a weekly basis to ensure all students meet program requirements.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="9">
+  	    	<div class="reason">
+	  	    	<h4>Our students are well rounded</h4>
+	  	    	<p>All of our students are required to become involved in activities outside of school to diversify their skill sets and promote their development as future leaders.</p>
+	  	    </div>
+  	    </div>
+  	    <div class="item" data-slide-number="10">
+  	    	<div class="reason">
+	  	    	<h4>Our Students Lend a helping hand</h4>
+	  	    	<p>Scholarship funds are only earned if sustained excellent performance is demonstrated from the student. All funds go directly to the university that the student enrolls in.</p>
+	  	    </div>
+	  	  </div>
+  	  </div>
+  	  <!-- Carousel nav -->
+  	  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  	  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  	</div>
+  </div>
+</div>
+
+<script>
+	$(function(){
+
+		var prev_slide_id = 1;
+		var reasons_headings = [
+			"#1: Academic Achievement",
+			"#2: Professional Development",
+			"#3: SAT Preparation",
+			"#4: I`mua",
+			"#5: The Community",
+			"#6: Scholarships",
+			"#7: Leadership",
+			"#8: Mentorship",
+			"#9: Extracurricular Activity",
+			"#10: They Earn It"
+		];
+
+		$('.ten-reasons-modal-link').click(function(e){
+			$('.ten-reasons-modal').modal();
+			$('.carousel').carousel({
+				interval: false
+			});
+			e.preventDefault();
+		});
+
+		$('.carousel').on('slid', function(){
+
+			var item = $('#myCarousel .carousel-inner .item.active');
+			var slide_id = item.data('slide-number');
+			var modal = $(this).parents('.modal');
+			var num_slides = $('.carousel-indicators').children().length;
+
+			modal.removeClass('slide' + prev_slide_id);
+			modal.addClass('slide' + slide_id);
+			$('#reasons_headings').text(reasons_headings[slide_id - 1]);
+			prev_slide_id = slide_id;
+		})
+	});
+</script>

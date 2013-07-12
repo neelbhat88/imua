@@ -16,6 +16,7 @@
 //= require jquery.ui.droppable
 //= require jquery.ui.position
 //= require bootstrap-modal
+//= require bootstrap-carousel
 //= require_tree .
 
 // $(function(){
