@@ -152,6 +152,7 @@ p {
 		color: #424242;
 		&:hover {
 			color: #666;
+			text-decoration: underline;
 		}
 	}
 	.left-columns {
@@ -159,8 +160,8 @@ p {
 		float: left;
 		.col {
 			width: 152px;
-			display: inline-block;
 			margin-right: 45px;
+			float: left;
 		}
 		.col-red {border-top: 14px solid #EF1C25;}
 		.col-yellow {border-top: 14px solid #FFC40A;}
@@ -323,15 +324,6 @@ p {
 	}
 }
 
-// .carousel-indicators {
-// 	position: absolute;
-// 	top: 15px;
-// 	right: 15px;
-// 	z-index: 5;
-// 	margin: 0;
-// 	list-style: none;
-// }
-
 .carousel-control {
 	position: absolute;
 	top: 50%;
@@ -339,12 +331,7 @@ p {
 	width: 49px;
 	height: 72px;
 	margin-top: -20px;
-	// font-size: 0;
-	// font-weight: 100;
 	line-height: 0;
-	// color: white;
-	// text-align: center;
-	// background: #222222;
 	border: none;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -361,7 +348,6 @@ p {
 	right: -60px;
 	background: url('arrow-right.png') no-repeat;
 }
-
 
 .reason {
 	width: 260px;
@@ -517,11 +503,18 @@ p.donate-address {
 	img {
 		width: 250px;
 		float: left;
+		padding-top: 6px;
+		border-top: 14px solid;
 	}
+	.green-line { border-color: #B3D334; }
+	.red-line { border-color: #ef1c25; }
+	.purple-line { border-color: #87318c; }
 	.qa-text {
 		width: 466px;
 		float: right;
 		h2 {
+			font-family: $alt-font;
+			font-size: 24px;
 			color: #0160A0;
 			margin: 0 0 20px;
 		}
@@ -671,12 +664,4 @@ p.donate-address {
 			background: #f5a0e6;
 		}
 	}
-}
-
-// Footer
-
-.copyright {
-	text-align: center;
-	font-size: 12px;
-	margin: 40px 20px;
 }
