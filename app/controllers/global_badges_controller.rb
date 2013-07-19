@@ -3,6 +3,9 @@ class GlobalBadgesController < ApplicationController
 
 	def index		
 		semester = params[:semester]
+		if semester.nil?
+			semester = current_user.user_info.current_semester
+		end
 
 		allbadges = GlobalBadge.all
 
@@ -21,8 +24,12 @@ class GlobalBadgesController < ApplicationController
 			badgesviewmodel << BadgeViewModel.new(ab, hasEarned)
 		end
 
+		# ToDo - If user hasn't earned all min reqs do we return all badges?
+		badgesearned = current_user.user_badges.length
+
 		respond_to do |format|
-			format.json { render :json => badgesviewmodel }
+			format.json { render :json => {:badges => badgesviewmodel, 
+										   :badgesearned => badgesearned } }
 			format.html # index.html.erb
 		end
 	end

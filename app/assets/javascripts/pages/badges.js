@@ -10,11 +10,11 @@ var Badges = new function() {
 	self.init = function() {	
 		$(document).ready(function() {			
 			$.ajax({
-				url: '/global_badges',
-				data: {semester: 1},
+				url: '/global_badges',				
 				success: function(data) {
 					var json = data;
-					self.viewModel.badges = ko.mapping.fromJS(json);
+					self.viewModel.badges = ko.mapping.fromJS(json.badges);
+					self.viewModel.badgesEarned = json.badgesearned;
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial badge load");}

@@ -73,6 +73,21 @@ select {
   padding: 10px;
 }
 
+.pageContainer
+{
+  position: relative; 
+  overflow: hidden; 
+  width: 100%;
+}
+
+.leftPane
+{
+  background-color: $clouds;
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+
 /* Bootstrap Header overrides */
 header
 {
