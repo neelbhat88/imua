@@ -14,7 +14,7 @@ var Badges = new function() {
 				success: function(data) {
 					var json = data;
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
-					self.viewModel.badgesEarned = json.badgesearned;
+					self.viewModel.badgesEarned = ko.observable(json.badgesearned);
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial badge load");}
