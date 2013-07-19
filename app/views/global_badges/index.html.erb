@@ -15,7 +15,7 @@
 			</div>
 			<div class="badgePanelBadges" style="border: 1px solid #2c3e50; text-align: center;" data-bind="foreach: { data: badges, as: 'badge' }">
 				<!-- The following is used by KO -->
-				<!-- ko if: badge.isminrequirement() == true -->	
+				<!-- asdfko if: badge.isminrequirement() == true -->	
 				<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}" style="">
 					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 28px"></span>				
 					<div data-bind="text: badge.description()" style="font-size: 15px;"></div>
@@ -30,7 +30,7 @@
 			</div>
 			<div class="badgePanelBadges" style="border: 1px solid #7f8c8d; text-align: center;" data-bind="foreach: { data: badges, as: 'badge' }">
 				<!-- The following is used by KO -->
-				<!-- ko if: badge.isminrequirement() == false -->	
+				<!-- asdfko if: badge.isminrequirement() == false -->	
 				<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}" style="">
 					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 28px"></span>				
 					<div data-bind="text: badge.description()" style="font-size: 15px;"></div>
