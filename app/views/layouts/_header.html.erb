@@ -1,15 +1,17 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header id="mynav" class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
-    <div class="" style="padding: 0 10px">
+    <div class="" style="padding: 0 10px; height: 100%;">
 
-      <%= link_to "Wai`anae Coast Scholarship Fund", 'https://wcsf.heroku.com', id: "logo" %>
+      <div style="position: absolute;">
+      <%= link_to image_tag("wcsf-logo.png", :alt=>"Wai`anae Coast Scholarship Fund", :id=> "wcsflogo"), "https://wcsf.heroku.com" %>
+      </div>
       <div class="container">
         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
         <div class="nav-collapse collapse" id="nav-collapse-01">
           <ul class="nav pull-right">
             <% if user_signed_in? %>
               <% if current_user.is_student? %>
-                <li class="active"><%= link_to "All Badges", global_badges_path %></li>
+                <li class="selected"><%= link_to "All Badges", global_badges_path %></li>
                 <li class=""><%= link_to "Academics", academics_path %></li>
                 <li class=""><%= link_to "Activities", activities_path %></li>
                 <li class=""><%= link_to "Services", services_path %></li>

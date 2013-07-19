@@ -1,5 +1,26 @@
 /* mixins, variables, etc. */
 
+$turquoise:     #1abc9c;
+$green-sea:     #16a085;
+$emerland:      #2ecc71;
+$nephritis:     #27ae60;
+$peter-river:   #3498db;
+$belize-hole:   #2980b9;
+$amethyst:      #9b59b6;
+$wisteria:      #8e44ad;
+$wet-asphalt:   #34495e;
+$midnight-blue: #2c3e50;
+$sun-flower:    #f1c40f;
+$orange:        #f39c12;
+$carrot:        #e67e22;
+$pumpkin:       #d35400;
+$alizarin:      #e74c3c;
+$pomegranate:   #c0392b;
+$clouds:        #ecf0f1;
+$silver:        #bdc3c7;
+$concrete:      #95a5a6;
+$asbestos:      #7f8c8d;
+
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
@@ -19,7 +40,7 @@ html {
 }
 
 body {
-  background: url("wavegrid.png") repeat scroll 0 0 transparent;
+  /*background: url("wavegrid.png") repeat scroll 0 0 transparent;*/
   color: #333;
   font-size: 13px;
   line-height: 18px;
@@ -44,6 +65,51 @@ textarea {
 
 select {
   height: 40px;
+}
+
+#wcsflogo
+{
+  height: 100px;
+  padding: 10px;
+}
+
+/* Bootstrap Header overrides */
+header
+{
+  font-size: 15px;  
+}
+
+#mynav .navbar-inner
+{
+  background-color: #34495e;
+  background-image: none;
+  color: white;
+
+  height: 65px;
+}
+
+#mynav .navbar-inner .container
+{
+  position: absolute;
+  bottom: 0px; 
+  right: 0px; 
+
+  padding-right: 5px;
+}
+
+#mynav .nav > li > a
+{
+  color: white;  
+}
+
+#mynav .nav > li > a:hover
+{
+  color: $sun-flower;  
+}
+
+#mynav .nav > li.selected > a
+{
+  color: $sun-flower;
 }
 
 /* typography */
