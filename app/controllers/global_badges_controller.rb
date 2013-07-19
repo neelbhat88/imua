@@ -3,15 +3,11 @@ class GlobalBadgesController < ApplicationController
 
 	def index		
 		semester = params[:semester]
-		if semester.nil?
+		if semester.nil? || !semester.to_s.empty?
 			semester = current_user.user_info.current_semester
 		end
 
-		allbadges = GlobalBadge.all
-
-		if !semester.nil? || !semester.to_s.empty?
-			allbadges = GlobalBadge.where('semester = ?', semester)
-		end
+		allbadges = GlobalBadge.where('semester = ?', semester)		
 
 		badgesviewmodel = []
 		allbadges.each do | ab |

@@ -10,7 +10,8 @@ var Badges = new function() {
 	self.init = function() {	
 		$(document).ready(function() {			
 			$.ajax({
-				url: '/global_badges',				
+				url: '/global_badges',
+				data: null,
 				success: function(data) {
 					var json = data;
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
