@@ -17,6 +17,7 @@
 //= require jquery.ui.position
 //= require bootstrap-datepicker
 //= require bootstrap-modal
+//= require bootstrap-carousel
 //= require_tree .
 
 $(function(){

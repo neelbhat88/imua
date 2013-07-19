@@ -3,7 +3,6 @@
 $dark-blue: #00446B;
 $alt-font: "cubano", sans-serif;
 
-
 //
 
 body.static_pages {
@@ -121,6 +120,23 @@ p {
 	}
 }
 
+
+// Sign in
+
+.sign-in {
+	background: #c3d5e3;
+	text-align: left;
+	form {
+		padding: 20px;
+	}
+}
+
+.remember-me {
+	display: inline;
+	position: relative;
+	top: 4px;
+}
+
 // Footer
 
 .footer {
@@ -136,6 +152,7 @@ p {
 		color: #424242;
 		&:hover {
 			color: #666;
+			text-decoration: underline;
 		}
 	}
 	.left-columns {
@@ -143,8 +160,8 @@ p {
 		float: left;
 		.col {
 			width: 152px;
-			display: inline-block;
 			margin-right: 45px;
+			float: left;
 		}
 		.col-red {border-top: 14px solid #EF1C25;}
 		.col-yellow {border-top: 14px solid #FFC40A;}
@@ -165,22 +182,6 @@ p {
 	}
 }
 
-
-// Sign in
-
-.sign-in {
-	background: #c3d5e3;
-	text-align: left;
-	form {
-		padding: 20px;
-	}
-}
-
-.remember-me {
-	display: inline;
-	position: relative;
-	top: 4px;
-}
 
 // Home
 
@@ -286,6 +287,83 @@ p {
 		width: 275px;
 	}
 }
+
+// Ten Reasons
+
+.ten-reasons-modal {
+	width: 678px;
+	height: 396px;
+	margin-left: -339px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.ten-reasons-modal-header {
+	background: url('student-modal-top-bar.png') no-repeat;
+	width: 678px;
+	height: 84px;
+	h3 {
+		margin: 0;
+		padding: 20px 30px;
+		color: #fff;
+		font-family: $alt-font;
+		font-size: 30px;
+	}
+	.close {
+		padding: 10px;
+		font-size: 30px;
+	}
+}
+
+.ten-reasons-modal-body {
+	h4 {
+		color: #0160a0;
+		font-size: 24px;
+		font-family: $alt-font;
+	}
+}
+
+.carousel-control {
+	position: absolute;
+	top: 50%;
+	left: 15px;
+	width: 49px;
+	height: 72px;
+	margin-top: -20px;
+	line-height: 0;
+	border: none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+
+.carousel-control.left {
+	left: -60px;
+	background: url('arrow-left.png') no-repeat;
+}
+.carousel-control.right {
+	right: -60px;
+	background: url('arrow-right.png') no-repeat;
+}
+
+.reason {
+	width: 260px;
+	margin-left: 376px;
+}
+
+.slide1 {background: #fff url('ten-reasons/reason-1.png') no-repeat;}
+.slide2 {background: #fff url('ten-reasons/reason-2.png') no-repeat;}
+.slide3 {background: #fff url('ten-reasons/reason-3.png') no-repeat;}
+.slide4 {background: #fff url('ten-reasons/reason-4.png') no-repeat;}
+.slide5 {background: #fff url('ten-reasons/reason-5.png') no-repeat;}
+.slide6 {background: #fff url('ten-reasons/reason-6.png') no-repeat;}
+.slide7 {background: #fff url('ten-reasons/reason-7.png') no-repeat;}
+.slide8 {background: #fff url('ten-reasons/reason-8.png') no-repeat;}
+.slide9 {background: #fff url('ten-reasons/reason-9.png') no-repeat;}
+.slide10 {background: #fff url('ten-reasons/reason-10.png') no-repeat;}
 
 
 // Donate
@@ -425,11 +503,18 @@ p.donate-address {
 	img {
 		width: 250px;
 		float: left;
+		padding-top: 6px;
+		border-top: 14px solid;
 	}
+	.green-line { border-color: #B3D334; }
+	.red-line { border-color: #ef1c25; }
+	.purple-line { border-color: #87318c; }
 	.qa-text {
 		width: 466px;
 		float: right;
 		h2 {
+			font-family: $alt-font;
+			font-size: 24px;
 			color: #0160A0;
 			margin: 0 0 20px;
 		}
@@ -579,12 +664,4 @@ p.donate-address {
 			background: #f5a0e6;
 		}
 	}
-}
-
-// Footer
-
-.copyright {
-	text-align: center;
-	font-size: 12px;
-	margin: 40px 20px;
 }
