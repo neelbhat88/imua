@@ -32,11 +32,7 @@ $grayMediumLight: #eaeaea;
 /* universal */
 
 html {
-  /* overflow-y: scroll; */
-
-  /* background: image-url("subtle_grunge.png") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover; background-size: cover; */
-
-  /* background: image-url("bg.png") repeat-x */
+  min-width: 800px;
 }
 
 body {
@@ -45,6 +41,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   padding-top: 60px;
+  width: 100%;
 }
 
 section {
@@ -90,7 +87,14 @@ select {
 /* Bootstrap Header overrides */
 header
 {
-  font-size: 15px;  
+  font-size: 15px; 
+  width: 100%;
+  min-width: 800px;
+}
+
+.navbar-fixed-top 
+{ 
+  position: absolute !important;
 }
 
 #mynav .navbar-inner

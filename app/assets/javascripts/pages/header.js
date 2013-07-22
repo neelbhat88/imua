@@ -10,7 +10,7 @@ var Header = new function() {
 		$(document).ready(function() {
 			// Adjust leftpanel size			
 			$(window).resize(function() {
-				setPageContainerHeight();
+				self.setPageContainerHeight();
 			});
 		});		
 	};	
