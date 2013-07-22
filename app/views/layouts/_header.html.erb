@@ -11,10 +11,10 @@
           <ul class="nav pull-right">
             <% if user_signed_in? %>
               <% if current_user.is_student? %>
-                <li class="selected"><%= link_to "All Badges", global_badges_path %></li>
-                <li class=""><%= link_to "Academics", academics_path %></li>
-                <li class=""><%= link_to "Activities", activities_path %></li>
-                <li class=""><%= link_to "Services", services_path %></li>
+                <li page="Badges"><%= link_to "All Badges", global_badges_path %></li>
+                <li page="Academics"><%= link_to "Academics", academics_path %></li>
+                <li page="Activities"><%= link_to "Activities", activities_path %></li>
+                <li page="Services"><%= link_to "Services", services_path %></li>
                 <!-- <li>
                   <%= link_to current_user.email, global_badges_path %>
                   <ul>

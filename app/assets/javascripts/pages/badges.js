@@ -7,7 +7,7 @@ var Badges = new function() {
 	};
 
 	// Initializes ViewModel
-	self.init = function() {	
+	self.init = function() {
 		$(document).ready(function() {			
 			$.ajax({
 				url: '/global_badges',
@@ -17,6 +17,8 @@ var Badges = new function() {
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
 					self.viewModel.badgesEarned = ko.observable(json.badgesearned);
 					ko.applyBindings(self.viewModel);
+
+					Header.setPageContainerHeight();
 				},
 				error: function() { alert("Failed initial badge load");}
 			});			

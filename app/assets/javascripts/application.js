@@ -23,6 +23,10 @@
 $(function(){
  	var jsobj = $("body").attr("jsinit");
 
+ 	// Initialize common js
+ 	Header.init(jsobj);
+
+ 	// Initialize per page js
 	if (jsobj != null && jsobj != "")
 		window[jsobj].init();
 });
