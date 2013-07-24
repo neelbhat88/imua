@@ -3,11 +3,12 @@ class GlobalBadgesController < ApplicationController
 
 	def index		
 		semester = params[:semester]
-		if semester.nil? || !semester.to_s.empty?
+		if semester.nil? || semester.to_s.empty?
 			semester = current_user.user_info.current_semester
 		end
 
-		allbadges = GlobalBadge.where('semester = ?', semester)		
+		allbadges = GlobalBadge.where('semester = ?', semester)
+		logger.debug("Debug: Loading badges for semester #{semester}")
 
 		badgesviewmodel = []
 		allbadges.each do | ab |
@@ -25,7 +26,8 @@ class GlobalBadgesController < ApplicationController
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel, 
-										   :badgesearned => badgesearned } }
+										   :badgesearned => badgesearned ,
+										   :semester => current_user.user_info.current_semester} }
 			format.html # index.html.erb
 		end
 	end

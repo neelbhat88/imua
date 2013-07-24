@@ -3,8 +3,17 @@ var Badges = new function() {
 
 	self.viewModel = {
 		semester: ko.observable(1),
-		semesters: [1, 2, 3, 4, 5, 6, 7, 8]
-	};
+		semesters: [
+			{id: 1, text: 'Semester 1'},
+			{id: 2, text: 'Semester 2'},
+			{id: 3, text: 'Semester 3'},
+			{id: 4, text: 'Semester 4'},
+			{id: 5, text: 'Semester 5'},
+			{id: 6, text: 'Semester 6'},
+			{id: 7, text: 'Semester 7'},
+			{id: 8, text: 'Semester 8'}
+		]
+	};	
 
 	// Initializes ViewModel
 	self.init = function() {
@@ -16,6 +25,7 @@ var Badges = new function() {
 					var json = data;
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
 					self.viewModel.badgesEarned = ko.observable(json.badgesearned);
+					self.viewModel.semester(json.semester);
 					ko.applyBindings(self.viewModel);
 
 					Header.setPageContainerHeight();
@@ -32,7 +42,7 @@ var Badges = new function() {
 			data: {semester: newValue},
 			success: function(data) {
 				var json = data;
-				ko.mapping.fromJS(json, self.viewModel.badges);
+				ko.mapping.fromJS(json.badges, self.viewModel.badges);
 			},
 			error: function() { alert("Failed initial badge load");}
 		});
