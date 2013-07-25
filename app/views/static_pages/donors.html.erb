@@ -12,7 +12,11 @@
 			</ul>
 		</div>
 	</div>
-	<%= render 'donate_sidebar' %>
+	<div class="donate-sidebar">
+		<%= link_to image_tag('donate-now.png', class: 'donate-now'), donate_path %>
+		<%= link_to image_tag('ten-reasons-donate.png'), '', class: 'ten-reasons-modal-link' %>
+	</div>
+	<%= render 'donate_modal' %>
 </div>
 
 

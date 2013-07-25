@@ -131,6 +131,14 @@ p {
 	}
 }
 
+.sign-out-text {
+	padding: 10px 10px 0px 10px;
+}
+
+.sign-out {
+	margin: 10px;
+}
+
 .remember-me {
 	display: inline;
 	position: relative;
@@ -188,6 +196,7 @@ p {
 #slideshow {
 	width: 800px;
 	height: 295px;
+	margin-top: 35px;
 }
 
 .main-quote {
@@ -255,6 +264,7 @@ p {
 		padding: 10px;
 		font-family: $alt-font;
 	}
+	margin-left: 20px;
 }
 
 .page-content {
@@ -375,6 +385,7 @@ p {
 }
 
 .donate-online {
+	clear: both;
 	width: 360px;
 	float: left;
 	padding: 20px
@@ -389,6 +400,82 @@ p {
 p.donate-address {
 	font-weight: bold;
 	text-align: center;
+}
+
+.donate-picture {
+	width: 340px;
+	margin-right: 20px;
+}
+
+.reasons-to-donate {
+	width: 340px;
+	float: left;
+	padding: 20px;
+	margin-right: 20px;
+	background: #eee;
+	height: 230px;
+	h3 {
+		margin-top: 0;
+	}
+	p {
+		padding-top: 10px;
+		min-height: 70px;
+	}
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.donate-wrapper {
+	padding-top: 110px;
+}
+
+// Donate Modal
+
+.donate .modal.fade.in {
+	top: 40%;
+}
+
+.donate-modal {
+	width: 678px;
+	margin-left: -339px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.donate-modal-header {
+	background: url('student-modal-top-bar.png') no-repeat;
+	width: 678px;
+	height: 84px;
+	h3 {
+		margin: 0;
+		padding: 20px 30px;
+		color: #fff;
+		font-family: $alt-font;
+		font-size: 30px;
+	}
+	.close {
+		padding: 10px;
+		font-size: 30px;
+	}
+}
+
+.donate-modal-body {
+	padding: 30px;
+	max-height: 400px;
+	overflow-y: auto;
+	h4 {
+		margin: 0 0 10px;
+		color: #06456a;
+	}
+	h5 {
+		margin: 0 0 20px;
+		color: #0160a0;
+	}
+	p {
+		margin-bottom: 20px;
+	}
 }
 
 // Apply
@@ -413,7 +500,7 @@ p.donate-address {
 	float: left;
 	padding: 20px;
 	background: #eee;
-	min-height: 329px;
+	height: 329px;
 	h3 {
 		margin-top: 0;
 	}
@@ -430,7 +517,7 @@ p.donate-address {
 	float: right;
 	padding: 10px 20px;
 	background: #eee;
-	min-height: 329px;
+	height: 329px;
 	p {
 		min-height: 200px;
 	}
