@@ -12,7 +12,7 @@
 		<ul>
 			<%= link_to '<li>Home</li>'.html_safe, root_path %>
 			<%= link_to '<li>What is the WCSF?</li>'.html_safe, what_is_wcsf_path %>
-			<%= link_to '<li>News & Announcements</li>'.html_safe, tumblr_path  %>
+			<%= link_to '<li>News & Announcements</li>'.html_safe, "http://news.wcsfscholars.org"  %>
 			<%= link_to '<li>Our Students</li>'.html_safe, students_path %>
 			<%= link_to '<li>Our Staff</li>'.html_safe, staff_path %>
 			<%= link_to '<li>Our Donors</li>'.html_safe, donors_path %>
@@ -23,7 +23,7 @@
 	</div>
 	<% if current_user %>
 		<div class="sign-in">
-			<p class="sign-out-text">Logged in as <%= current_user.email %></p>
+			<p class="sign-out-text">Logged in as <%= link_to current_user.email, global_badges_path %></p>
 			<%= link_to 'Sign out', destroy_user_session_path, :class => 'btn btn-info sign-out', :method => 'delete' %>
 		</div>
 	<% else %>

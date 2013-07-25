@@ -26,7 +26,6 @@ Wcsf::Application.routes.draw do
   get '/apply', to: 'static_pages#apply'
   get '/donate', to: 'static_pages#donate'
   get '/partnerships', to: 'static_pages#partnerships'
-  get '/tumblr', to: 'static_pages#tumblr'
   get '/calendar', to: 'static_pages#calendar'
 
   get '/contact', to: 'contacts#index', as: 'contact'
