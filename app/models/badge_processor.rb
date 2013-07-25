@@ -20,6 +20,8 @@ class BadgeProcessor
 
 	def CompareBadges(allBadges)
 		newbadgecount = 0
+		badgesearned = []
+		badgeslost = []
 	  	allBadges.each do |b|
 	  		# If badge is not minreq then only compare if all minreqs met
 	  		badgeEarned = false
@@ -38,12 +40,14 @@ class BadgeProcessor
 	  		# If badge earned and user does not have badge
 	  		if badgeEarned == true && userHasBadge == false
 	  			newbadgecount += 1
+	  			badgesearned << b
 
 	  			# Save earned badge to db
 	  			@curr_user.user_badges.create(:global_badge_id => b.id)
 	  		# If badge not earned and user has badge
 	  		elsif badgeEarned == false && userHasBadge == true
 	  			removedBadge = @curr_user.user_badges.find_by_global_badge_id(b.id)
+	  			badgeslost << b
 
 	  			# Remove earned badge
 	  			@curr_user.user_badges.find_by_global_badge_id(b.id).destroy()
@@ -53,5 +57,6 @@ class BadgeProcessor
 
 	  	# TODO: Return object here of new and removed badges
 	  	return newbadgecount
+	  	#return {:badgesEarned => badgesearned, :badgeslost => badgeslost }
 	end
 end
