@@ -407,12 +407,14 @@ p.donate-address {
 }
 
 .reasons-to-donate {
-	width: 340px;
+	width: 250px;
+	height: 230px;
 	float: left;
 	padding: 20px;
+	// border-top: 14px solid #ef1c25;
 	margin-right: 20px;
 	background: #eee;
-	height: 230px;
+	margin-bottom: 50px;
 	h3 {
 		margin-top: 0;
 	}
@@ -424,10 +426,16 @@ p.donate-address {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
-.donate-wrapper {
-	padding-top: 110px;
-}
+	.donate-text {
+		width: 466px;
+		float: right;
+		h2 {
+			font-family: $alt-font;
+			font-size: 24px;
+			color: #0160A0;
+			margin: 0 0 20px;
+		}
+	}
 
 
 // Apply
