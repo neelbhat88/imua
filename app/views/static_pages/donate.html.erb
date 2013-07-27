@@ -2,13 +2,35 @@
 	<h1>Donate Now</h1>
 </div>
 <div class="page-content">
-	<p>You understand that education is important and that every child deserves a quality education. You also know that this is not the case for all students. Waiaane students are 5.5 times less likely to attend the University of Hawaii than students from the affleunt windward communities. This is not a reflection of the quality of our students, but an indicator of a lack of opportunity. The WCSF is a unique opportunity for our students to improve their college admittance and graduation rates. Your funds make it possible for our kids to have this type of support network to prepare them.</p>
-	<p>All donors will receive a thank-you letter to verify that their contribution has been received along with semesterly letters from the student that their donation is supporting. We want all of our donors to see the student success that their funds are helping the WCSF generate.</p>
+	<div class="qa-row clearfix">
+		<%= image_tag('donate_page_picture.jpg', :class => 'green-line', :align => 'left') %>
+		<div class="qa-text">
+			<p>
+			You understand that education is important and that every child deserves a quality education. You also know that this is not the case for all students. Waiaane students are 5.5 times less likely to attend the University of Hawaii than students from the affleunt windward communities. This is not a reflection of the quality of our students, but an indicator of a lack of opportunity. The WCSF is a unique opportunity for our students to improve their college admittance and graduation rates. Your funds make it possible for our kids to have this type of support network to prepare them.</p>
+		</div>
+	</div>
+
+	<div class="reasons-to-donate clearfix">
+		<h3>How will your donations help?</h3>
+		<p>Click below to learn how your donation will support our students.</p>
+		<div class="centered-button"><%= link_to '10 Reasons to Donate', '', class: 'btn btn-medium btn-warning ten-reasons-modal-link' %></div>
+		<%= render 'donate_modal' %>
+	</div>
+	<div class="donate-text">
+		<p>All donors will receive a thank-you letter to verify that their contribution has been received along with semesterly letters from the student that their donation is supporting. We want all of our donors to see the student success that their funds are helping the WCSF generate.</p>
+	</div>
 </div>
+
 <div class="donate-wrapper clearfix">
 	<div class="donate-online">
 		<h3>Donate Online</h3>
 		<p>To donate online, please click the secure PayPal Donate button below. The WCSF is a pending 501 (c) non-profit public charity, and your donations will be tax deductible. Please enter your full address when donating.</p>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="KN4DCFQ9BR7B6">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="" width="1" height="1">
+		</form>
 	</div>
 	<div class="donate-mail">
 		<h3>Donate by Mail</h3>

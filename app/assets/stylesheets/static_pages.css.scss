@@ -131,6 +131,14 @@ p {
 	}
 }
 
+.sign-out-text {
+	padding: 10px 10px 0px 10px;
+}
+
+.sign-out {
+	margin: 10px;
+}
+
 .remember-me {
 	display: inline;
 	position: relative;
@@ -188,6 +196,7 @@ p {
 #slideshow {
 	width: 800px;
 	height: 295px;
+	margin-top: 35px;
 }
 
 .main-quote {
@@ -252,7 +261,7 @@ p {
 	height: 87px;
 	h1 {
 		color: #fff;
-		padding: 10px;
+		padding: 10px 10px 10px 30px;
 		font-family: $alt-font;
 	}
 }
@@ -375,6 +384,7 @@ p {
 }
 
 .donate-online {
+	clear: both;
 	width: 360px;
 	float: left;
 	padding: 20px
@@ -390,6 +400,43 @@ p.donate-address {
 	font-weight: bold;
 	text-align: center;
 }
+
+.donate-picture {
+	width: 340px;
+	margin-right: 20px;
+}
+
+.reasons-to-donate {
+	width: 250px;
+	height: 230px;
+	float: left;
+	padding: 20px;
+	// border-top: 14px solid #ef1c25;
+	margin-right: 20px;
+	background: #eee;
+	margin-bottom: 50px;
+	h3 {
+		margin-top: 0;
+	}
+	p {
+		padding-top: 10px;
+		min-height: 70px;
+	}
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+	.donate-text {
+		width: 466px;
+		float: right;
+		h2 {
+			font-family: $alt-font;
+			font-size: 24px;
+			color: #0160A0;
+			margin: 0 0 20px;
+		}
+	}
+
 
 // Apply
 
@@ -413,7 +460,7 @@ p.donate-address {
 	float: left;
 	padding: 20px;
 	background: #eee;
-	min-height: 329px;
+	height: 329px;
 	h3 {
 		margin-top: 0;
 	}
@@ -430,7 +477,7 @@ p.donate-address {
 	float: right;
 	padding: 10px 20px;
 	background: #eee;
-	min-height: 329px;
+	height: 329px;
 	p {
 		min-height: 200px;
 	}
@@ -540,6 +587,23 @@ p.donate-address {
 		color: #0160A0;
 		margin: 0 0 20px;
 	}
+}
+
+.lets-partner {
+	width: 770px;
+	float: left;
+	padding: 20px;
+	background: #eee;
+	height: 220px;
+	h3 {
+		margin-top: 0;
+	}
+	p {
+		min-height: 40px;
+	}
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 // Students
