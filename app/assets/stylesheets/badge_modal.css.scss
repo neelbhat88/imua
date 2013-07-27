@@ -1,0 +1,45 @@
+.badge-modal {
+	width: 678px;
+	margin-left: -339px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.badge-modal-header {
+	background: url('student-modal-top-bar.png') no-repeat;
+	width: 678px;
+	height: 84px;
+	h3 {
+		margin: 0;
+		padding: 20px 30px;
+		color: #fff;
+		font-family: $alt-font;
+		font-size: 30px;
+	}
+	.close {
+		padding: 10px;
+		font-size: 30px;
+	}
+}
+
+.badge-modal-body {
+	height: 300px;
+	overflow: auto;
+	padding: 30px;
+	h4 {
+		margin: 0 0 10px;
+		color: #06456a;
+	}
+	h5 {
+		margin: 0 0 20px;
+		color: #0160a0;
+	}
+	p {
+		margin-bottom: 20px;
+	}
+}
+
+.badge-details {
+	
+}

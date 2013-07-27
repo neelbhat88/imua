@@ -75,11 +75,12 @@ class AcademicsController < ApplicationController
     badgeProcessor = BadgeProcessor.new(current_user)
     badgeObject = badgeProcessor.CheckSemesterAcademics()
   	
-  	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
+  	logger.debug "DEBUG: Badges earned and lost #{badgeObject} new badges."
+    logger.debug "DEBUG: Badges earned #{badgeObject[:badgesEarned].length}, Badges lost #{badgeObject[:badgesLost].length}"
 
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newclasses => returnclasses, :newbadgecount => badgeObject} }
+  		format.json { render :json => { :newclasses => returnclasses, :newBadges => badgeObject} }
     end
   end
 end
