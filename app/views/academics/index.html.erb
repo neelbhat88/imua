@@ -12,22 +12,28 @@
 	<div id="badgeModal" class="badge-modal modal hide fade">
 		<div class="badge-modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3>New Badges!</h3>
+			<h3>Badges</h3>
 		</div>
 		<div class="badge-modal-body clearfix">
-	  		<h4>Badges You Just Earned:</h4>		  	
-		  	<div class="badge-details" data-bind="foreach: { data: badgesEarned, as: 'badgeEarned' }">	
-				<div class="globalBadge" style="">
-					<span data-bind="text: badgeEarned.title()" style="font-size: 28px"></span>				
-					<div data-bind="text: badgeEarned.description()" style="font-size: 15px;"></div>
-				</div>		
+	  		<div data-bind="visible: badgesEarned().length > 0">
+	  			<h4 class="center">Badges Earned</h4>
+	  			<div style="font-style: italic; color: gray; font-size: 14px; text-align: center;">Congrats! You earned some new badges, keep up the good work!</div>	  	
+			  	<div class="pbl badge-details" data-bind="foreach: { data: badgesEarned, as: 'badgeEarned' }">	
+					<div class="globalBadge" style="">
+						<span data-bind="text: badgeEarned.title()" style="font-size: 28px"></span>				
+						<div data-bind="text: badgeEarned.description()" style="font-size: 15px;"></div>
+					</div>		
+				</div>
 			</div>
-		    <h4>Badges You Just Lost:</h4>		  	
-		  	<div class="badge-details" data-bind="foreach: { data: badgesLost, as: 'badgeLost' }">	
-				<div class="globalBadge" style="">
-					<span data-bind="text: badgeLost.title()" style="font-size: 28px"></span>				
-					<div data-bind="text: badgeLost.description()" style="font-size: 15px;"></div>
-				</div>		
+			<div data-bind="visible: badgesLost().length > 0">
+			    <h4 class="center">Badges Lost</h4>
+			    <div style="font-style: italic; color: gray; font-size: 14px; text-align: center;">Don't worry, keep your head up and keep working towards your goals to earn more badges!</div>
+			  	<div class="pbl badge-details" data-bind="foreach: { data: badgesLost, as: 'badgeLost' }">	
+					<div class="globalBadge" style="">
+						<span data-bind="text: badgeLost.title()" style="font-size: 28px"></span>				
+						<div data-bind="text: badgeLost.description()" style="font-size: 15px;"></div>
+					</div>		
+				</div>
 			</div>
 	  	</div>
 	</div>
