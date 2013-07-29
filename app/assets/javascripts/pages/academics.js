@@ -1,17 +1,21 @@
 var Academics = new function() {
 	var self = this;
 
-	self.viewModel = {};
+	self.viewModel = {
+		
+	};
 
 	self.init = function() {
-		$(document).ready(function() {
-			//ko.applyBindings(new ClassesViewModel());
+		$(document).ready(function() {			
 			$.ajax({
 				url: '/academics',
 				success: function(data) {					
 					self.viewModel.subjects = ko.mapping.fromJS(data.userclasses);
 					self.viewModel.originalSubjects = data.userclasses;
 					self.viewModel.globalsubjects = ko.mapping.fromJS(data.globalclasses);
+
+					self.viewModel.badgesEarned = ko.observableArray([]);
+					self.viewModel.badgesLost = ko.observableArray([]);
 
 					ViewModelPropertiesInit(self.viewModel);			
 
@@ -21,18 +25,6 @@ var Academics = new function() {
 			});
 		});
 	};
-
-	// self.initKOMapping = function () {
-	// 	$.ajax({
-	// 		url: '/academics',
-	// 		success: function(data) {					
-	// 			 var newData = ko.mapping.fromJS(data);
-	// 			 self.viewModel.subjects(newData());
-	// 			//ViewModelPropertiesInit(self.viewModel);			
-	// 		},
-	// 		error: function() { alert("Failed initial badge load");}
-	// 	});
-	// };
 };
 
 // This class has to match the ClassViewModel.rb definition
@@ -45,6 +37,14 @@ function Class(name, classLevel, grade)
 	self.grade = ko.observable(grade);
 	self.school_class_id = ko.observable()
 	self.dbid = ko.observable("");
+}
+
+function Badge(title, desc)
+{
+	var self = this;
+
+	self.description = ko.observable(desc);
+	self.title = ko.observable(title);
 }
 
 function ViewModelPropertiesInit(viewModel) 
@@ -67,7 +67,6 @@ function ViewModelPropertiesInit(viewModel)
 	};
 
 	viewModel.calculateTotalGpa = function() {
-	//ko.computed(function(){
 		var numClasses = viewModel.subjects().length;
 		var nonNullClasses = 0;
 		var fullGPA = 0;
@@ -112,15 +111,37 @@ function ViewModelPropertiesInit(viewModel)
 				classesToRemove: ko.toJSON(viewModel.rowsToRemove)
 			},
 			success: function(data) 
-			{
-				alert('You earned ' + data.newbadgecount + ' new badges!');
+			{				
 				viewModel.subjects = ko.mapping.fromJS(data.newclasses);
 
 				viewModel.originalSubjects = data.newclasses;
 				viewModel.totalGPA(newGpa);
 
-				viewModel.rowsToRemove = [];
+				viewModel.rowsToRemove = [];				
 				viewModel.editing(false);
+
+				// Show modal based on badges earned or lost
+				viewModel.badgesEarned.removeAll();
+				viewModel.badgesLost.removeAll();
+				var showModal = false;
+				if (data.newBadges.badgesEarned.length > 0)
+				{					
+					$.each(data.newBadges.badgesEarned, function(){
+						viewModel.badgesEarned.push(new Badge(this.title, this.description));
+					});
+					showModal = true;
+				}
+
+				if (data.newBadges.badgesLost.length > 0)
+				{
+					$.each(data.newBadges.badgesLost, function(){
+						viewModel.badgesLost.push(new Badge(this.title, this.description));
+					});
+					showModal = true;
+				}
+
+				if (showModal)
+					$("#badgeModal").modal();
 			},
 			error: function() {alert('SaveClasses fail!');}
 		});		

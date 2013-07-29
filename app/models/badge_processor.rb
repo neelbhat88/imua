@@ -54,9 +54,8 @@ class BadgeProcessor
 	  			Rails.logger.debug("DEBUG: BadgeEarned = false and UserHasBadge = true. UserBadge with GlobalBadgeId: #{b.id} removed.")
 	  		end
 	  	end
-
-	  	# TODO: Return object here of new and removed badges
-	  	return newbadgecount
-	  	#return {:badgesEarned => badgesearned, :badgeslost => badgeslost }
+	  	
+	  	#return newbadgecount
+	  	return :badgesEarned => badgesearned, :badgesLost => badgeslost
 	end
 end
