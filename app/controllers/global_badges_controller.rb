@@ -35,4 +35,8 @@ class GlobalBadgesController < ApplicationController
 	def new
 		@badge = GlobalBadge.new
 	end
+
+	def progress
+		
+	end
 end
