@@ -41,6 +41,10 @@ before_filter :authenticate_user!
 		@user = User.find(params[:id])
 	end
 
+	def edit
+		@user = User.find(params[:id])
+	end
+
 	protected
 		def after_update_path_for(resource)
 	  	show_user_registration_path(resource)
