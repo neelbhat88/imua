@@ -8,11 +8,13 @@ var Academics = new function() {
 	self.init = function() {
 		$(document).ready(function() {			
 			$.ajax({
+				type: "POST",
 				url: '/academics',
-				success: function(data) {					
-					self.viewModel.subjects = ko.mapping.fromJS(data.userclasses);
-					self.viewModel.originalSubjects = data.userclasses;
-					self.viewModel.globalsubjects = ko.mapping.fromJS(data.globalclasses);
+				success: function(data) {
+					var obj = data;
+					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses);
+					self.viewModel.originalSubjects = obj.userclasses;
+					self.viewModel.globalsubjects = ko.mapping.fromJS(obj.globalclasses);
 
 					self.viewModel.badgesEarned = ko.observableArray([]);
 					self.viewModel.badgesLost = ko.observableArray([]);
