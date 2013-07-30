@@ -230,7 +230,26 @@ input {
 .ml {margin: 15px}
 .mm {margin: 10px}
 .ms {margin: 5px}
-.mtm {margin-top: 30px}
+
 
 .pal {padding: 15px}
 .pbl {padding-bottom: 15px}
+
+/* Profile CSS */
+.mtm {margin-top: 30px}
+.picture-box {
+  padding: 5px;
+  border: 8px solid #00ABF0;
+}
+
+.left-column {
+width: 340px
+}
+
+.right-column {
+  width: 580px
+}
+
+.pull-left {
+  float: left;
+}

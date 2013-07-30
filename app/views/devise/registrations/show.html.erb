@@ -1,22 +1,25 @@
 <div class="container mtm">
-  <h1>Welcome, <%= "#{@user.first_name} #{@user.last_name}!" %> </h1>
-  <% if @user.avatar_file_name.blank? %>
-    <h3 style="text-align:left">Add your Profile Picture</h3>
-      <%= form_for @user, :url => user_path, :html => { :multipart => true } do |form| %>
-        <%= form.file_field :avatar %><br />
-        <p>
-          <%= form.submit "Update Picture", :class => 'btn btn-primary mm' %>
-        </p>
-      <% end %>
-  <% else %>
-    <%= image_tag @user.avatar.url(:original) %>
-  <% end %>
-  <h2 class="mtm" style="text-align:left"><%= link_to 'Edit Profile', edit_user_registration_path(@user) %></h2>
-  <h2 style="text-align:left">Email: <%= @user.email %></h2>
-  <h2 style="text-align:left">School: <%= @user.user_info.try(:school).try(:name) %></h2>
-  <h2 style="text-align:left">Big Goal: <%= @user.big_goal %></h2>
-  <h2 style="text-align:left">Why: <%= @user.why_description %></h2>
-  <h2 style="text-align:left">How: <%= @user.how_description %></h2>
-
+    <h1>Welcome, <%= "#{@user.first_name} #{@user.last_name}!" %> </h1>
+  <div class="left-column pull-left">
+    <%= image_tag @user.avatar.url(:original), :class => 'picture-box ml' %>
+    <% if current_user.avatar_file_name == nil || current_user.avatar_file_name.length < 1 %>
+      <h3 style="text-align:left">Add your Profile Picture</h3>
+    <% end %>
+    <%= form_for @user, :url => user_path, :html => { :multipart => true } do |form| %>
+      <%= form.file_field :avatar %><br />
+      <p>
+        <%= form.submit "Update Picture", :class => 'btn btn-default mm' %>
+      </p>
+    <% end %>
+  </div>
+  <!-- END LEFT COLUMN -->
+  <div class="right-column pull-left">
+    <h2 class="mtm" style="text-align:left"><%= link_to 'Edit Profile', edit_user_registration_path(@user) %></h2>
+    <h2 style="text-align:left">Email: <%= @user.email %></h2>
+    <h2 style="text-align:left">School: <%= @user.user_info.try(:school).try(:name) %></h2>
+    <h2 style="text-align:left">Big Goal: <%= @user.big_goal %></h2>
+    <h2 style="text-align:left">Why: <%= @user.why_description %></h2>
+    <h2 style="text-align:left">How: <%= @user.how_description %></h2>
+  </div>
 </div>
 
