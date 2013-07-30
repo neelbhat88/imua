@@ -31,15 +31,10 @@ before_filter :authenticate_user!
 	end
 
 	def update
-		@user = current_user
-		@user.update_attributes(params[:user])
-		@user.role = params[:user][:role] == nil ? 0 : params[:user][:role]
-		# @school_id = params[:school][:id]
-		if @user.save
-			redirect_to show_user_registration_path(current_user), :notice => "Your information was updated successfully!"
-		else
-			redirect_to :back, :notice => "Something went wrong and your information was not updated successfully."
-		end
+		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
+		@school_id = params[:school][:id]
+
+		super
 	end
 
 	def show

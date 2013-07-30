@@ -10,7 +10,7 @@
   # Setup accessible (or protected) attributes for your model
   # role: 0-student, 1-teacher, 2-admin
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-  					:role, :first_name, :last_name, :avatar
+  					:role, :first_name, :last_name, :avatar, :big_goal, :why_description, :how_description
 
   # attr_accessible :title, :body
 

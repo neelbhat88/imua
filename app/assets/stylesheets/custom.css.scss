@@ -72,7 +72,7 @@ select {
 
 .pageContainer
 {
-  position: relative;   
+  position: relative;
   width: 100%;
 }
 
@@ -87,13 +87,13 @@ select {
 /* Bootstrap Header overrides */
 header
 {
-  font-size: 15px; 
+  font-size: 15px;
   width: 100%;
   min-width: 800px;
 }
 
-.navbar-fixed-top 
-{ 
+.navbar-fixed-top
+{
   position: absolute !important;
 }
 
@@ -109,20 +109,20 @@ header
 #mynav .navbar-inner .container
 {
   position: absolute;
-  bottom: 0px; 
-  right: 0px; 
+  bottom: 0px;
+  right: 0px;
 
   padding-right: 5px;
 }
 
 #mynav .nav > li > a
 {
-  color: white;  
+  color: white;
 }
 
 #mynav .nav > li > a:hover
 {
-  color: $sun-flower;  
+  color: $sun-flower;
 }
 
 #mynav .nav > li.selected > a
@@ -230,6 +230,7 @@ input {
 .ml {margin: 15px}
 .mm {margin: 10px}
 .ms {margin: 5px}
+.mtm {margin-top: 30px}
 
 .pal {padding: 15px}
 .pbl {padding-bottom: 15px}
