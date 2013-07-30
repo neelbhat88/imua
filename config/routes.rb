@@ -16,7 +16,12 @@ Wcsf::Application.routes.draw do
   resources :school_classes
   resources :global_badges
 
+  # get '/users/show/:id', to: 'registrations#show', as: 'show_user_registration'
   devise_for :users, :controllers => {:registrations => "registrations"}
+  as :user do
+    get '/user_profile/:id' => 'registrations#show', as: 'show_user_registration'
+    put '/users/:id' => 'registrations#update', as: 'user'
+  end
 
   root :to => 'static_pages#home'
   get '/what_is_wcsf', to: 'static_pages#what_is_wcsf'
@@ -32,7 +37,7 @@ Wcsf::Application.routes.draw do
   resources :contacts, only: [:index, :create]
 
 
-  match '/profile', to: 'static_pages#profile'
+  match '/profile', to: 'users#profile'
   match '/summary', to: 'static_pages#summary'
 
   match '/academics', to: 'academics#index'

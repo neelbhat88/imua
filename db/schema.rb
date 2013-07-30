@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710043714) do
+ActiveRecord::Schema.define(:version => 20130730145107) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -128,6 +128,12 @@ ActiveRecord::Schema.define(:version => 20130710043714) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "role",                   :default => 0
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

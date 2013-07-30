@@ -1,12 +1,16 @@
 class RegistrationsController < Devise::RegistrationsController
+before_filter :authenticate_user!
+
 	def new
 		@role = params[:role] == nil ? 0 : params[:role]
 
-		super		
+		super
 	end
 
 	def create
 		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
+		@first_name = params[:user][:first_name]
+		@last_name = params[:user][:last_name]
 		@email = params[:user][:email]
 		@school_id = params[:school][:id]
 
@@ -27,9 +31,19 @@ class RegistrationsController < Devise::RegistrationsController
 	end
 
 	def update
-		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
-		@school_id = params[:school][:id]
-
-		super
+		@user = current_user
+		@user.update_attributes(params[:user])
+		@user.role = params[:user][:role] == nil ? 0 : params[:user][:role]
+		# @school_id = params[:school][:id]
+		if @user.save
+			redirect_to show_user_registration_path(current_user), :notice => "Your information was updated successfully!"
+		else
+			redirect_to :back, :notice => "Something went wrong and your information was not updated successfully."
+		end
 	end
+
+	def show
+		@user = User.find(params[:id])
+	end
+
 end

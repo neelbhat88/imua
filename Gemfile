@@ -4,6 +4,8 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'thin'
 gem 'mail_form'
+gem 'figaro'
+gem 'aws-sdk'
 
 group :development do
 	gem 'quiet_assets'
