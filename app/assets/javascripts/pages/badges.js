@@ -18,10 +18,8 @@ var Badges = new function() {
 	// Initializes ViewModel
 	self.init = function() {
 		$(document).ready(function() {			
-			$.ajax({
-				type: "POST",
-				url: '/global_badges',
-				data: null,
+			$.ajax({				
+				url: '/global_badges',				
 				success: function(data) {
 					var json = data;
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
@@ -40,13 +38,13 @@ var Badges = new function() {
 	self.viewModel.semester.subscribe(function(newValue) {
 		$.ajax({
 			type: "POST",
-			url: '/global_badges',
+			url: '/global_badges/semester',
 			data: {semester: newValue},
 			success: function(data) {
 				var json = data;
 				ko.mapping.fromJS(json.badges, self.viewModel.badges);
 			},
-			error: function() { alert("Failed initial badge load");}
+			error: function() { alert("Failed drop down subscribe ajax post");}
 		});
 	});
 };

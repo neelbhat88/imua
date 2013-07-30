@@ -16,6 +16,7 @@ Wcsf::Application.routes.draw do
   resources :school_classes
   resources :global_badges
   match '/progress', to: 'global_badges#progress'
+  match '/global_badges/semester', to: 'global_badges#SemesterBadges'
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 
