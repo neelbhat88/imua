@@ -25,6 +25,7 @@ var Services = new function() {
 			var totalHours = self.viewModel.calculateTotalHours();
 
 			$.ajax({
+				type: "POST",
 				url: '/saveServices',
 				data: {
 					services: ko.toJSON(self.viewModel.services()), 
@@ -87,6 +88,7 @@ var Services = new function() {
 	self.init = function() {
 		$(document).ready(function() {
 			$.ajax({
+				type: "POST",
 				url: '/services',
 				success: function(data) {					
 					self.viewModel.services = ko.mapping.fromJS(data.userservices);

@@ -19,6 +19,7 @@ var Badges = new function() {
 	self.init = function() {
 		$(document).ready(function() {			
 			$.ajax({
+				type: "POST",
 				url: '/global_badges',
 				data: null,
 				success: function(data) {
@@ -38,6 +39,7 @@ var Badges = new function() {
 	// Subscribe to drop down change and update the UI accordingly
 	self.viewModel.semester.subscribe(function(newValue) {
 		$.ajax({
+			type: "POST",
 			url: '/global_badges',
 			data: {semester: newValue},
 			success: function(data) {

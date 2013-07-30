@@ -106,6 +106,7 @@ function ViewModelPropertiesInit(viewModel)
 		var newGpa = viewModel.calculateTotalGpa();
 
 		$.ajax({
+			type: "POST",
 			url: '/saveClasses',
 			data: {
 				totalGPA: newGpa, 

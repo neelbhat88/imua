@@ -38,6 +38,7 @@ var Activities = new function() {
 		saveActivities: function()
 		{		
 			$.ajax({
+				type: "POST",
 				url: '/saveActivities',
 				data: {
 					activities: ko.toJSON(self.viewModel.activities()), 
@@ -81,6 +82,7 @@ var Activities = new function() {
 	self.init = function() {
 		$(document).ready(function() {
 			$.ajax({
+				type: "POST",
 				url: '/activities',
 				success: function(data) {					
 					self.viewModel.activities = ko.mapping.fromJS(data.useractivities);
