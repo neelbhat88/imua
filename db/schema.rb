@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730215553) do
+ActiveRecord::Schema.define(:version => 20130731160626) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -97,11 +97,19 @@ ActiveRecord::Schema.define(:version => 20130730215553) do
   end
 
   create_table "user_infos", :force => true do |t|
-    t.integer  "current_semester", :default => 1
+    t.integer  "current_semester",            :default => 1
     t.integer  "school_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.integer  "user_id"
+    t.text     "big_goal"
+    t.text     "why_description"
+    t.text     "how_description"
+    t.string   "college"
+    t.string   "college_avatar_file_name"
+    t.string   "college_avatar_content_type"
+    t.integer  "college_avatar_file_size"
+    t.datetime "college_avatar_updated_at"
   end
 
   create_table "user_services", :force => true do |t|
@@ -134,9 +142,6 @@ ActiveRecord::Schema.define(:version => 20130730215553) do
     t.datetime "avatar_updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.text     "big_goal"
-    t.text     "how_description"
-    t.text     "why_description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

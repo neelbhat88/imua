@@ -239,14 +239,23 @@ input {
 .mtm {margin-top: 30px}
 
 .picture-box {
-  padding: 5px;
+  padding: 8px;
   border: 8px solid #00ABF0;
 }
   img {
     max-width: 250px;
   }
 
+.picture-box-red {
+  padding: 5px;
+  border: 8px solid #EF1C25;
+}
+  img {
+    max-width: 400px;
+  }
+
 .mlm { margin-left: 15px;}
+.mbl { margin-bottom: 50px;}
 
 .left-column {
 width: 320px
@@ -254,7 +263,6 @@ width: 320px
 
 .right-column {
   width: 600px;
-  margin-top: 10px;
 }
 
 .pull-left {

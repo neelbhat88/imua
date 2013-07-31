@@ -23,6 +23,9 @@ Wcsf::Application.routes.draw do
     put '/users/:id' => 'registrations#update', as: 'user'
   end
 
+  get '/user_info/edit/:id' => 'user_infos#edit', as: 'edit_user_info'
+  put '/user_info/:id' => 'user_infos#update', as: 'user_info'
+
   root :to => 'static_pages#home'
   get '/what_is_wcsf', to: 'static_pages#what_is_wcsf'
   get '/students', to: 'static_pages#students'
