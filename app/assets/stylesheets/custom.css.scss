@@ -236,35 +236,55 @@ input {
 .pbl {padding-bottom: 15px}
 
 /* Profile CSS */
-.mtm {margin-top: 30px}
+img.picture-box {
+  max-width: 230px;
+  padding: 5px;
+  margin: 15px 15px 15px 0;
+}
 
-.picture-box {
-  padding: 8px;
+img.picture-box.avatar {
   border: 8px solid #00ABF0;
 }
-  img {
-    max-width: 250px;
-  }
 
-.picture-box-red {
-  padding: 5px;
+img.picture-box.college {
   border: 8px solid #EF1C25;
 }
-  img {
-    max-width: 400px;
+
+.profile-header {
+  text-align: left;
+}
+
+.edit-user {
+  h1 {
+    padding-top: 20px;
   }
-
-.mlm { margin-left: 15px;}
-.mbl { margin-bottom: 50px;}
-
-.left-column {
-width: 320px
+  .add-picture {
+    margin: 15px;
+  }
 }
 
-.right-column {
-  width: 600px;
+.edit-profile {
+  h1 {
+    padding-top: 20px;
+  }
+  .add-picture {
+    margin: 15px;
+  }
+  textarea {
+    rows: 5;
+  }
 }
 
-.pull-left {
-  float: left;
+.profile-page {
+  margin-top: 20px;
+  h2 {
+    text-align: left;
+    margin: 20px 0px;
+  }
+  h1 {
+    text-align: left;
+  }
+  .add-picture {
+    margin: 5px 10px 15px 10px;
+  }
 }

@@ -5,7 +5,7 @@
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, :default_url => "/images/default-avatar.png"
+  has_attached_file :avatar, :default_url => "default-avatar.png"
 
   # Setup accessible (or protected) attributes for your model
   # role: 0-student, 1-teacher, 2-admin
