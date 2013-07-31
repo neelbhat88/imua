@@ -22,7 +22,7 @@ Wcsf::Application.configure do
 
   # Done for Devise
   config.action_mailer.default_url_options = { :host => 'http://www.wscf.heroku.com' }
-
+  config.action_mailer.perform_deliveries = true
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
@@ -72,9 +72,20 @@ Wcsf::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               '<domain url>',
-    user_name:            '<username>',
-    password:             '<password>',
+    domain:               'gmail.com',
+    user_name:            ENV['GMAIL_USERNAME'],
+    password:             ENV['GMAIL_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true  }
+
+
+config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['AWS_BUCKET'],
+    :access_key_id => ENV['AWS_ACCESS_KEY'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  }
+}
+
 end

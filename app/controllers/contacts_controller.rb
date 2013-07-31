@@ -7,9 +7,9 @@ class ContactsController < ApplicationController
 
   def create
 		@contact = Contact.new(params[:contact])
-		@contact.request = request
-		if @contact.deliver
-			flash[:notice] = "Thank you for your message!"
+		if ContactForm.contact_email(@contact).deliver
+      flash[:notice] = "Thank you for your message!"
+		# @contact.request = request
 		else
 			flash[:error] = "Your message could not be delivered."
 		end

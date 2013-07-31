@@ -22,6 +22,7 @@
                     <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
                   </ul>
                 </li>-->
+              <li page=""><%= link_to "My Profile", show_user_registration_path(current_user) %></li>
               <% elsif current_user.is_admin? || current_user.is_teacher? %>
                 <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
                 %></li>
@@ -34,7 +35,6 @@
                   </ul>
                 </li> -->
               <% end %>
-              <li page=""><%= link_to "My Profile", global_badges_path %></li>
               <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
             <% else %>
               <li><%= link_to "Login", new_user_session_path %></li>

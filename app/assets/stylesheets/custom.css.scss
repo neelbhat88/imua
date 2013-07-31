@@ -72,7 +72,7 @@ select {
 
 .pageContainer
 {
-  position: relative;   
+  position: relative;
   width: 100%;
 }
 
@@ -87,13 +87,13 @@ select {
 /* Bootstrap Header overrides */
 header
 {
-  font-size: 15px; 
+  font-size: 15px;
   width: 100%;
   min-width: 800px;
 }
 
-.navbar-fixed-top 
-{ 
+.navbar-fixed-top
+{
   position: absolute !important;
 }
 
@@ -109,20 +109,20 @@ header
 #mynav .navbar-inner .container
 {
   position: absolute;
-  bottom: 0px; 
-  right: 0px; 
+  bottom: 0px;
+  right: 0px;
 
   padding-right: 5px;
 }
 
 #mynav .nav > li > a
 {
-  color: white;  
+  color: white;
 }
 
 #mynav .nav > li > a:hover
 {
-  color: $sun-flower;  
+  color: $sun-flower;
 }
 
 #mynav .nav > li.selected > a
@@ -231,5 +231,60 @@ input {
 .mm {margin: 10px}
 .ms {margin: 5px}
 
+
 .pal {padding: 15px}
 .pbl {padding-bottom: 15px}
+
+/* Profile CSS */
+img.picture-box {
+  max-width: 230px;
+  padding: 5px;
+  margin: 15px 15px 15px 0;
+}
+
+img.picture-box.avatar {
+  border: 8px solid #00ABF0;
+}
+
+img.picture-box.college {
+  border: 8px solid #EF1C25;
+}
+
+.profile-header {
+  text-align: left;
+}
+
+.edit-user {
+  h1 {
+    padding-top: 20px;
+  }
+  .add-picture {
+    margin: 15px;
+  }
+}
+
+.edit-profile {
+  h1 {
+    padding-top: 20px;
+  }
+  .add-picture {
+    margin: 15px;
+  }
+  textarea {
+    rows: 5;
+  }
+}
+
+.profile-page {
+  margin-top: 20px;
+  h2 {
+    text-align: left;
+    margin: 20px 0px;
+  }
+  h1 {
+    text-align: left;
+  }
+  .add-picture {
+    margin: 5px 10px 15px 10px;
+  }
+}
