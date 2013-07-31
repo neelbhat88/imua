@@ -12,7 +12,7 @@ class ActivitiesController < ApplicationController
 
   	respond_to do |format|
   		format.json { render :json => {:useractivities => activities, :globalactivities => globalactivities} }
-  		format.html # index.html.erb
+  		format.html { render :layout => false } # index.html.erb
   	end
   end
 

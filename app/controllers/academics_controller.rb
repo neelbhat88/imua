@@ -15,8 +15,8 @@ class AcademicsController < ApplicationController
     #customers = Customer.find(:all,  rder => 'first_name').map{|x| [x.full_name] + [x.id]}
 
   	respond_to do |format|
-  		format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses} }
-  		format.html # index.html.erb
+      format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses} }
+      format.html { render :layout=>false } # index.html.erb	
   	end
   end
 
