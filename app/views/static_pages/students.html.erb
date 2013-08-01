@@ -6,7 +6,7 @@
 		<% @students.each do |student| %>
 			<div class="student">
 				<a href="#" class="studentModal" data-student="<%= student.id %>">
-					<%= image_tag student.image_url %>
+					<%= image_tag student.user_info.avatar.url(:original) %>
 					<h3><%= "#{student.first_name} #{student.last_name}" %></h3>
 				</a>
 			</div>
@@ -18,14 +18,14 @@
 			  </div>
 			  <div class="student-modal-body clearfix">
 			  	<div class="student-image">
-				  	<%= image_tag student.image_url %>
+				  	<%= image_tag student.user_info.avatar.url(:original) %>
 					</div>
 					<div class="student-details">
-				    <h4>Big Goal: <%= student.big_goal %></h4>
+				    <h4>Big Goal: <%= student.user_info.big_goal %></h4>
 				    <h4>Why did you apply for the WCSF?</h4>
-				    <p><%= student.why_description %></p>
+				    <p><%= student.user_info.why_description %></p>
 				    <h4>How will the WCSF help you reach your goals?</h4>
-				    <p><%= student.how_description %></p>
+				    <p><%= student.user_info.how_description %></p>
 				  </div>
 			  </div>
 			</div>

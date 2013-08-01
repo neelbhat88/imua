@@ -4,7 +4,7 @@ class UserInfo < ActiveRecord::Base
   belongs_to :user
   belongs_to :school
 
-  has_attached_file :avatar, :default_url => "default-avatar.png"
+  has_attached_file :avatar
   has_attached_file :college_avatar
 
   def GetTotalGpa

@@ -54,6 +54,6 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
 
-    redirect_to admin_students_url
+    redirect_to admin_users_path
   end
 end

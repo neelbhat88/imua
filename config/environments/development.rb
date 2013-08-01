@@ -29,6 +29,7 @@ Wcsf::Application.configure do
     enable_starttls_auto: true  }
 
 config.paperclip_defaults = {
+  :default_url => "default-avatar.png",
   :storage => :s3,
   :s3_credentials => {
     :bucket => ENV['AWS_BUCKET'],
