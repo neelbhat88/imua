@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      <div class="edit-profile">
+        <h1>Edit your profile</h1>
+          <%= form_for(@user_info, :url => user_info_path(@user_info), :html => { :method => :put }) do |f| %>
+
+            <div>
+              <%= f.label :big_goal, "Big Goal (What is your big goal?)" %>
+              <%= f.text_field :big_goal %>
+            </div>
+
+            <div>
+              <%= f.label :why_description, "Why did you apply to the WCSF?" %>
+              <%= f.text_area :why_description, :rows => '5' %>
+            </div>
+
+            <div>
+              <%= f.label :how_description, "How will the WCSF help you reach your goals?" %>
+              <%= f.text_area :how_description, :rows => '5' %>
+            </div>
+
+            <div>
+              <%= f.label :college, "What college do you want to go to?" %>
+              <%= f.text_field :college %>
+            </div>
+
+            <div>
+              <%= f.label :college_avatar, "Add a picture or logo of your college!" %>
+              <div>
+                <%= f.file_field :college_avatar, :class => 'add-picture' %><br />
+              </div>
+            </div>
+            <br>
+            <br>
+
+            <div>
+              <%= f.submit "Update", :class => 'btn btn-primary btn-large' %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

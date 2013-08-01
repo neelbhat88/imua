@@ -1,12 +1,16 @@
 class RegistrationsController < Devise::RegistrationsController
+before_filter :authenticate_user!
+
 	def new
 		@role = params[:role] == nil ? 0 : params[:role]
 
-		super		
+		super
 	end
 
 	def create
 		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
+		@first_name = params[:user][:first_name]
+		@last_name = params[:user][:last_name]
 		@email = params[:user][:email]
 		@school_id = params[:school][:id]
 
@@ -32,4 +36,18 @@ class RegistrationsController < Devise::RegistrationsController
 
 		super
 	end
+
+	def show
+		@user = User.find(params[:id])
+	end
+
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	protected
+		def after_update_path_for(resource)
+	  	show_user_registration_path(resource)
+		end
+
 end

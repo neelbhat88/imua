@@ -1,17 +1,19 @@
 class UserInfo < ActiveRecord::Base
-  attr_accessible :current_semester, :school_id, :user_id
+  attr_accessible :current_semester, :school_id, :user_id, :big_goal, :why_description, :how_description, :college_avatar, :college
 
   belongs_to :user
   belongs_to :school
 
+  has_attached_file :college_avatar
+
   def GetTotalGpa
     semester_classes = self.user.user_classes.where('semester = ?', self.current_semester)
-  	numclasses = semester_classes.length    
+  	numclasses = semester_classes.length
   	classeswithgrade = 0
-  	totalGpa = 0.0    
+  	totalGpa = 0.0
 
   	semester_classes.each do |c|
-  		unless c.grade.nil?        
+  		unless c.grade.nil?
         totalGpa += c.gpa
         classeswithgrade += 1
       end
