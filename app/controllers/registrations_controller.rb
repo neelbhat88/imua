@@ -39,10 +39,12 @@ before_filter :authenticate_user!
 
 	def show
 		@user = User.find(params[:id])
+		@user_info = @user.user_info
 	end
 
 	def edit
 		@user = User.find(params[:id])
+		@user_info = @user.user_info
 	end
 
 	protected
