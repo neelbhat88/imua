@@ -8,6 +8,8 @@ Wcsf::Application.routes.draw do
     root to: 'admin#index'
     resources :donors
     resources :students
+    resources :users
+    put '/user_info/:id' => 'users#update_info', :as => 'user_info'
   end
 
   resources :school_activities

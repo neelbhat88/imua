@@ -2,17 +2,6 @@
   <div class="row">
     <div class="span6">
       <h1>Edit your information</h1>
-
-      <hr>
-      <h4>Update Profile Picture</h4>
-        <%= form_for @user_info, :url => user_info_path(@user_info), :html => { :multipart => true } do |form| %>
-          <%= form.file_field :avatar, class: 'add-picture' %><br />
-          <p>
-            <%= form.submit "Update Picture", :class => 'btn btn-primary' %>
-          </p>
-        <% end %>
-      <hr>
-
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
         <%= devise_error_messages! %>
 

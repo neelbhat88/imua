@@ -7,6 +7,7 @@ before_filter :authenticate_user!
 		super
 	end
 
+
 	def create
 		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
 		@first_name = params[:user][:first_name]
