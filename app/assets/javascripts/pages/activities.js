@@ -4,7 +4,7 @@ var Activities = new function() {
 	self.viewModel = {		
 		activities: ko.observableArray(),
 		editing: ko.observable(false),
-		rowsToRemove: [],
+		rowsToRemove: [],		
 
 		addLeadership: function(activity, event){
 			activity.leadershipHeld(true);
@@ -45,14 +45,13 @@ var Activities = new function() {
 					activitiesToRemove: ko.toJSON(self.viewModel.rowsToRemove)
 				},
 				success: function(data) 
-				{
-					//alert('You earned ' + data.newbadgecount + ' new badges!');
+				{					
 					self.viewModel.activities = ko.mapping.fromJS(data.newactivities);
 
 					self.viewModel.originalActivities = data.newactivities;
 
 					self.viewModel.rowsToRemove = [];
-					self.viewModel.editing(false);
+					self.viewModel.editing(false);					
 				},
 				error: function() {alert('SaveClasses fail!');}
 			});		
@@ -87,7 +86,7 @@ var Activities = new function() {
 				success: function(data) {					
 					self.viewModel.activities = ko.mapping.fromJS(data.useractivities);
 					self.viewModel.originalActivities = data.useractivities;
-					self.viewModel.globalactivities = ko.mapping.fromJS(data.globalactivities);
+					self.viewModel.globalactivities = ko.mapping.fromJS(data.globalactivities);					
 
 					ko.applyBindings(self.viewModel);
 				},
@@ -95,9 +94,6 @@ var Activities = new function() {
 			});			
 
 			ko.applyBindings(self.viewModel);
-
-			// self.viewModel.activities.push(new Activity("Football", false, "", []));
-			// self.viewModel.activities.push(new Activity("National Honors Society", true, "Treasurer", [new Sentence("This is cool"), new Sentence("Awesome this works")]));
 		});
 	};
 
@@ -120,3 +116,4 @@ var Activities = new function() {
 		self.text = ko.observable(text);
 	}
 };
+
