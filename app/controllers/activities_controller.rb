@@ -12,7 +12,7 @@ class ActivitiesController < ApplicationController
 
   	respond_to do |format|
   		format.json { render :json => {:useractivities => activities, :globalactivities => globalactivities} }
-  		format.html # index.html.erb
+  		format.html { render :layout => false } # index.html.erb
   	end
   end
 
@@ -84,13 +84,13 @@ class ActivitiesController < ApplicationController
     ##################################################   
 
     badgeProcessor = BadgeProcessor.new(current_user)
-    newBadgeCount = badgeProcessor.CheckSemesterActivities()
+    badgeObject = badgeProcessor.CheckSemesterActivities()
   	
   	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newactivities => returnactivities} }
+  		format.json { render :json => { :newactivities => returnactivities, :newBadges => badgeObject} }
     end
   end
 end

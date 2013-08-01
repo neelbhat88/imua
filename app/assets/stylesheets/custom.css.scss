@@ -235,6 +235,7 @@ input {
 .pal {padding: 15px}
 .pbl {padding-bottom: 15px}
 
+
 /* Profile CSS */
 img.picture-box {
   max-width: 230px;
@@ -288,3 +289,9 @@ img.picture-box.college {
     margin: 5px 10px 15px 10px;
   }
 }
+
+/* Category colors */
+.academics_text { color: $pumpkin; }
+.extracur_text { color: $belize_hole; }
+.pdu_text { color: $pomegranate; }
+.service_text { color: $green_sea; }

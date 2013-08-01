@@ -9,7 +9,7 @@ class ServicesController < ApplicationController
 
   	respond_to do |format|
   		format.json { render :json => {:userservices => services} }
-  		format.html # index.html.erb
+  		format.html { render :layout => false } # index.html.erb
   	end
   end
 

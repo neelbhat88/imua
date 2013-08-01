@@ -11,29 +11,13 @@
           <ul class="nav pull-right">
             <% if user_signed_in? %>
               <% if current_user.is_student? %>
-                <li page="Badges"><%= link_to "All Badges", global_badges_path %></li>
-                <li page="Academics"><%= link_to "Academics", academics_path %></li>
-                <li page="Activities"><%= link_to "Activities", activities_path %></li>
-                <li page="Services"><%= link_to "Services", services_path %></li>
-                <!-- <li>
-                  <%= link_to current_user.email, global_badges_path %>
-                  <ul>
-                    <li><%= link_to "My Profile", global_badges_path %></li>
-                    <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-                  </ul>
-                </li>-->
-              <li page=""><%= link_to "My Profile", show_user_registration_path(current_user) %></li>
+                <li page="Progress"><%= link_to "Progress", progress_path %></li>
+                <li page="Badges"><%= link_to "Badges", global_badges_path %></li>
+                <li page=""><%= link_to "My Profile", show_user_registration_path(current_user) %></li>
               <% elsif current_user.is_admin? || current_user.is_teacher? %>
                 <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
                 %></li>
                 <li page="SchoolActivities"><%= link_to "All Activities", school_activities_path %></li>
-                <!-- <li class="active">
-                  <%= link_to current_user.email, global_badges_path %>
-                  <ul>
-                    <li><%= link_to "My Profile", global_badges_path %></li>
-                    <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-                  </ul>
-                </li> -->
               <% end %>
               <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
             <% else %>
