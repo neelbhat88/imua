@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(:version => 20130731160626) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "big_goal"
-    t.text     "why_description"
-    t.text     "how_description"
+    t.string   "why_description"
+    t.string   "how_description"
     t.string   "image_url"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
