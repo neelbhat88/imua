@@ -23,7 +23,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem "paperclip", "~> 3.0"
+gem "paperclip", "~> 3.4.2"
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
