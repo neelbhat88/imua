@@ -5,12 +5,11 @@
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, :default_url => "default-avatar.png"
 
   # Setup accessible (or protected) attributes for your model
   # role: 0-student, 1-teacher, 2-admin
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-  					:role, :first_name, :last_name, :avatar, :big_goal, :why_description, :how_description
+  					:role, :first_name, :last_name
 
   # attr_accessible :title, :body
 

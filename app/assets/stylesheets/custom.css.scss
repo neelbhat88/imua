@@ -290,6 +290,13 @@ img.picture-box.college {
   }
 }
 
+.student-index {
+  margin: 50px;
+  h1, h2 {
+    text-align: left;
+  }
+}
+
 /* Category colors */
 .academics_text { color: $pumpkin; }
 .extracur_text { color: $belize_hole; }

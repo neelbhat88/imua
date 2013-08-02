@@ -1,0 +1,34 @@
+<% @role = 0 %>
+
+  <%= form_for [:admin, @user] do |f| %>
+
+    <div><%= f.label :first_name %><br />
+    <%= f.text_field :first_name, :autofocus => true %></div>
+
+    <div><%= f.label :last_name %><br />
+    <%= f.text_field :last_name %></div>
+
+    <div><%= f.label :email %><br />
+    <%= f.email_field :email %></div>
+
+    <div><%= f.label :password %><br />
+    <%= f.password_field :password %></div>
+
+    <div><%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %></div>
+
+
+    <div>
+      <%= f.label "School" %><br />
+      <%= select :school, :id, School.all.map{|x| [x.name, x.id]}, { :prompt => "Select your school" } %>
+      <%= f.hidden_field :role, :value => @role %>
+    </div>
+
+    <% if editing == true %>
+      <h4>Authorize Changes</h4>
+      <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password %></div>
+    <% end %>
+
+    <div><%= f.submit %></div>
+  <% end %>

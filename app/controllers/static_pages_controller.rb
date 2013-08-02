@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
   end
 
   def students
-  	@students = Student.all
+  	@students = User.where(:role => 0)
     @title = "Our Students"
   end
 

@@ -28,6 +28,16 @@ Wcsf::Application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  }
 
+config.paperclip_defaults = {
+  :default_url => "default-avatar.png",
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['AWS_BUCKET'],
+    :access_key_id => ENV['AWS_ACCESS_KEY'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  }
+}
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 

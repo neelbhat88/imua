@@ -2,7 +2,6 @@
   <div class="row">
     <div class="span6">
       <h1>Edit your information</h1>
-
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
         <%= devise_error_messages! %>
 
@@ -31,10 +30,6 @@
           <%= select :school, :id, School.all.map{|x| [x.name, x.id]}, { :prompt => "Select your school" } %>
         </div>
 
-        <h4>Update Profile Picture</h4>
-        <div class="row add-picture">
-          <div><%= f.file_field :avatar %><br /></div>
-        </div>
 
         <h4>Update Password</h4>
         <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i>

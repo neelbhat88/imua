@@ -1,9 +1,10 @@
 class UserInfo < ActiveRecord::Base
-  attr_accessible :current_semester, :school_id, :user_id, :big_goal, :why_description, :how_description, :college_avatar, :college
+  attr_accessible :current_semester, :school_id, :user_id, :big_goal, :why_description, :how_description, :college_avatar, :avatar
 
   belongs_to :user
   belongs_to :school
 
+  has_attached_file :avatar
   has_attached_file :college_avatar
 
   def GetTotalGpa

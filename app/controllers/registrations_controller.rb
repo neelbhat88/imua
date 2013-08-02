@@ -7,6 +7,7 @@ before_filter :authenticate_user!
 		super
 	end
 
+
 	def create
 		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
 		@first_name = params[:user][:first_name]
@@ -39,10 +40,12 @@ before_filter :authenticate_user!
 
 	def show
 		@user = User.find(params[:id])
+		@user_info = @user.user_info
 	end
 
 	def edit
 		@user = User.find(params[:id])
+		@user_info = @user.user_info
 	end
 
 	protected
