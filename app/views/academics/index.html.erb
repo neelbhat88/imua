@@ -1,33 +1,29 @@
 <% @jsinit = 'Academics' %>
 
-<h1> Academics </h1>
+<div style="padding: 50px; margin-top: 25px;" class="academics_text">
+	<div data-bind="text: totalGPA().toFixed(2)" style="display:inline-block; font-size: 110px"></div>
+	<div style="display:inline-block; font-size:50px; padding-left: 10px;">Semester GPA</div>
+</div>
 
-<div class="" style="max-width: 600px; margin: auto;">
-	<div style="border-radius: 5px 5px 0px 0px; position: relative; text-align: center; height: 60px; color: rgb(39, 174, 96); border: 1px solid rgb(44, 62, 80); cursor: pointer;">
+<div class="" style="max-width: 600px; padding-left: 50px;">
+	<div style="border-radius: 5px 5px 0px 0px; position: relative; text-align: center; height: 60px; color: white; border: 3px solid #e67e22; background-color: #d35400;">
 		<span style="position: relative; left: 15px; font-size: 2.5em; top: 20px;">My Classes</span>
 	</div>
-	<div style="padding: 20px; border-radius: 0px 0px 5px 5px; color: white; font-size: 1.4em; background-color: rgb(44, 62, 80);">
+	<div class="academics_text" style="padding: 35px; border-radius: 0px 0px 5px 5px; border: 3px solid #e67e22; border-top: none; font-size: 1.4em;">
 		<div data-bind="template: {name: templateToUse}"></div>	
 	</div>
 	
 	<%= render 'partials/badge_modal' %>
 </div>
 
-<script type="text/html" id="edit-classes">
-	<table>
-		<thead>
-			<tr><th>Class Name</th><th>Grade</th></tr>
-			<tbody data-bind="foreach: subjects">
-				<tr>
-					<!--<td><input data-bind="value: name" /></td>-->
-					<td><select data-bind="options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select></td>
-					<!--<td><select data-bind="options: $root.classLevels, value: level, optionsCaption: 'Choose...', optionsText:'levelname', optionsValue:'levelid'"></select></td>-->
-					<td><select data-bind="options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select></td>
-					<td><a href="#" data-bind="click: $root.removeClass">Remove</a></td>
-				</tr>
-			</tbody>
-		</thead>		
-	</table>
+<script type="text/html" id="edit-classes">		
+	<div data-bind="foreach: subjects">
+		<div style="border-bottom: 1px dashed; margin-bottom: 15px;">	
+			<select style="width: 250px; margin-right: 10px;" data-bind="options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select>
+			<select style="width: 100px; margin-right: 10px;" data-bind="options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select>
+			<a href="#" data-bind="click: $root.removeClass">Remove</a>
+		</div>
+	</div>		
 	<div>
 		<a href="#" data-bind="click: $root.addClass, enable: $root.subjects().length < 7">Add Class</a>
 	</div>
@@ -39,27 +35,17 @@
 	</div>
 </script>
 
-<script type="text/html" id="view-classes">	
-	<table>
-		<thead>
-			<tr><th>Class Name</th><th>Grade</th></tr>
-			<tbody data-bind="foreach: subjects">
-				<tr>
-					<td><span data-bind="text: name"></span></td>
-					<!-- <td><span data-bind="text: $root.classLevels[level()].levelname"></span></td> -->
-					<td><span data-bind="text: grade"></span></td>					
-				</tr>
-			</tbody>
-		</thead>		
-	</table>
+<script type="text/html" id="view-classes">			
+	<div data-bind="foreach: subjects">
+		<div style="padding-bottom: 30px;">
+			<div style="display: inline-block; width: 500px; border-bottom: 1px dashed;" data-bind="text: name"></div>			
+			<div style="display: inline-block; color: #2c3e50;" data-bind="text: grade"></div>
+		</div>
+	</div>
 	<div>
 		<button class="" data-bind="click: $root.editClasses">Edit</button>
 	</div>
 </script>
-
-
-<h3>Semester GPA</h3>
-<div data-bind="visible: totalGPA() > 0, text: totalGPA().toFixed(2)"></div>
 
 <!-- <hr />
 <h2>KO Debug</h2>
