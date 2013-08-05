@@ -19,3 +19,4 @@ database.yml
 /config/application.yml
 
 # Ignore public/system
+/public/system/*

@@ -20,7 +20,6 @@
 	border-radius: 5px;
 
 	height: 600px; 
-	min-width: 815px; 	
 	position: relative;
 	top: 80px;
 
@@ -125,8 +124,8 @@
 	right: 0;
 }
 
-.academics { background-color: $nephritis; }
-.service { background-color: $belize-hole; }
-.pdu { background-color: $wisteria; }
-.extracurricular { background-color: $orange; }
+.academics { background-color: $academics; }
+.service { background-color: $service; }
+.pdu { background-color: $pdu; }
+.extracurricular { background-color: $extracur; }
 

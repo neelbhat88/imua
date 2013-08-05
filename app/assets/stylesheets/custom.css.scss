@@ -21,6 +21,20 @@ $silver:        #bdc3c7;
 $concrete:      #95a5a6;
 $asbestos:      #7f8c8d;
 
+$ink:           #374347;
+
+$academics: $pumpkin;
+$academics_invert: $carrot;
+
+$extracur: $belize-hole;
+$extracur_invert: $peter-river;
+
+$pdu: $pomegranate;
+$pdu_invert: $alizarin;
+
+$service: $green-sea;
+$service_invert: $turquoise;
+
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
@@ -32,7 +46,7 @@ $grayMediumLight: #eaeaea;
 /* universal */
 
 html {
-  min-width: 800px;
+  
 }
 
 body {
@@ -42,6 +56,10 @@ body {
   line-height: 18px;
   padding-top: 60px;
   width: 100%;
+
+  min-width: 950px;
+
+  & ul, ol { margin: 0; }
 }
 
 section {
@@ -73,7 +91,7 @@ select {
 .pageContainer
 {
   position: relative;
-  width: 100%;
+  width: 100%;  
 }
 
 .leftPane
@@ -87,9 +105,8 @@ select {
 /* Bootstrap Header overrides */
 header
 {
-  font-size: 15px;
+  font-size: 17px;
   width: 100%;
-  min-width: 800px;
 }
 
 .navbar-fixed-top
@@ -99,7 +116,7 @@ header
 
 #mynav .navbar-inner
 {
-  background-color: #34495e;
+  background-color: $wet-asphalt;
   background-image: none;
   color: white;
 
@@ -115,19 +132,23 @@ header
   padding-right: 5px;
 }
 
-#mynav .nav > li > a
+#mynav
 {
-  color: white;
+  & .nav > li { padding-right: 5px; }
+  & .nav > li > a { color: white; }  
 }
 
 #mynav .nav > li > a:hover
 {
-  color: $sun-flower;
+  #color: $sun-flower;
+  background-color: white;
+  color: $wet-asphalt;
 }
 
 #mynav .nav > li.selected > a
 {
-  color: $sun-flower;
+  background-color: white;
+  color: $wet-asphalt;
 }
 
 /* typography */
@@ -226,14 +247,21 @@ input {
   font-size: 12px;
 }
 
+.textCenter {
+  text-align: center;
+}
+
 /* Erin's CSS */
-.ml {margin: 15px}
-.mm {margin: 10px}
-.ms {margin: 5px}
+.mal {margin: 15px}
+.mam {margin: 10px}
+.mas {margin: 5px}
 
 
 .pal {padding: 15px}
+
 .pbl {padding-bottom: 15px}
+.pbm {padding-bottom: 10px}
+.pbs {padding-bottom: 5px}
 
 
 /* Profile CSS */
@@ -297,8 +325,47 @@ img.picture-box.college {
   }
 }
 
+/* Form stuff */
+.buttonGroup > *
+{
+  display: inline-block;
+}
+
+.submitButton
+{
+  padding: 5px 10px; 
+  border-radius: 5px; 
+  color: white;  
+  text-align: center; 
+  cursor: pointer;
+
+  &.academics_bg:hover {background-color: $academics_invert}
+  &.extracur_bg:hover {background-color: $extracur_invert}
+  &.pdu_bg:hover {background-color: $pdu_invert}
+  &.service_bg:hover {background-color: $service_invert}
+}
+
+.cancelButton
+{
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid $asbestos;
+  color: $ink;
+  text-align: center; 
+  cursor: pointer;
+  background-color: $clouds;
+
+  &:hover {background-color: $silver}
+}
+
 /* Category colors */
-.academics_text { color: $pumpkin; }
-.extracur_text { color: $belize_hole; }
-.pdu_text { color: $pomegranate; }
-.service_text { color: $green_sea; }
+.academics_text { color: $academics; }
+.academics_bg { background-color: $academics; }
+
+.extracur_text { color: $extracur; }
+.extracur_bg { background-color: $extracur; }
+
+.pdu_text { color: $pdu; }
+
+.service_text { color: $service; }
+
