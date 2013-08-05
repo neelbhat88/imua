@@ -71,16 +71,17 @@ Wcsf::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
+    address:              'smtp.mandrillapp.com',
     port:                 587,
     domain:               'wcsfscholars.org',
-    user_name:            ENV['GMAIL_USERNAME'],
-    password:             ENV['GMAIL_PASSWORD'],
+    user_name:            ENV['MANDRILL_USERNAME'],
+    password:             ENV['MANDRILL_API_KEY'],
     authentication:       'plain',
     enable_starttls_auto: true  }
 
 
 config.paperclip_defaults = {
+  :default_url => "default-avatar.png",
   :storage => :s3,
   :s3_credentials => {
     :bucket => ENV['AWS_BUCKET'],
