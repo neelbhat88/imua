@@ -1,10 +1,10 @@
 class ContactForm < ActionMailer::Base
-  default from: "info@wcsfscholars.org"
+  default from: "wcsf.directors@gmail.com"
 
   def contact_email(contact)
     @name = contact.name
     @email  = contact.email
     @message = contact.message
-    mail(:to => "ryan@launchpadlab.com", :subject => "Contact Form: #{contact.name}")
+    mail(:to => "wcsf.directors@gmail.com", :subject => "Contact Form: #{contact.name}")
   end
 end
