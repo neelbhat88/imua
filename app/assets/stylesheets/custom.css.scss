@@ -107,11 +107,12 @@ header
 {
   font-size: 17px;
   width: 100%;
+  box-shadow: 0 0 10px $ink;
 }
 
 .navbar-fixed-top
 {
-  position: absolute !important;
+  /* position: absolute !important; */ /* This keeps the header from moving down with the page */
 }
 
 #mynav .navbar-inner
@@ -120,7 +121,7 @@ header
   background-image: none;
   color: white;
 
-  height: 65px;
+  height: 80px;
 }
 
 #mynav .navbar-inner .container
@@ -135,7 +136,14 @@ header
 #mynav
 {
   & .nav > li { padding-right: 5px; }
-  & .nav > li > a { color: white; }  
+  & .nav > li > a { 
+    color: white; 
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;    
+    transition:.5s;
+  }
 }
 
 #mynav .nav > li > a:hover
