@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row student-index">
+    <div class="span6">
+      <p><%= link_to "Back to All Students", admin_users_path %></p>
+      <h1><%= "#{@user.first_name} #{@user.last_name} Services" %></h1>
+      <% if @user.user_info.school.present? %>
+        <h2><%= link_to "Add a Service for #{@user.first_name} #{@user.last_name}", new_admin_user_service_path(:user_id => @user.id) %></h2>
+        <h2>Current Semester: <%= link_to @user.user_info.current_semester, "#{edit_admin_user_path(@user)}#current_semester_dropdown" %></h2>
+        <h2># Services: <%= @user.user_services.where(:semester => @user.user_info.current_semester).count %></h2>
+      <% else %>
+        <p>You must first assign this student a school before you can assign services. You can do that here: <%= link_to 'Edit User Information', edit_admin_user_path(@user) %></p>
+      <% end %>
+      <% if @user_services.present? %>
+        <ul class="student-classes">
+          <% @user_services.each do |user_service| %>
+            <li>
+              <h4>
+                <%= link_to "#{user_service.name}", edit_admin_user_service_path(user_service, :user_id => @user.id) %>
+              </h4>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

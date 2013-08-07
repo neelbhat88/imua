@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users = User.where(:role => 0)
+    @users = User.where(:role => 0).order("last_name ASC")
   end
 
   def show

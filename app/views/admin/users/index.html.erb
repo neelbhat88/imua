@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row student-index">
-    <div class="span6">
+    <div class="span10">
       <h1>Students</h1>
       <h2><%= link_to "Add a Student", new_admin_user_path %></h2>
       <hr>
@@ -8,10 +8,11 @@
         <% @users.each do |user| %>
           <li>
             <%= "#{user.first_name} #{user.last_name} (#{user.email})" %>
-            <%= link_to 'Edit', edit_admin_user_path(user) %> |
+            <%= link_to 'Edit User', edit_admin_user_path(user) %> |
             <%= link_to 'Profile', admin_user_path(user) %> |
             <%= link_to 'Classes', admin_user_classes_path(:user_id => user.id) %> |
-
+            <%= link_to 'Activities', admin_user_activities_path(:user_id => user.id) %> |
+            <%= link_to 'Services', admin_user_services_path(:user_id => user.id) %>
           </li>
         <% end %>
       </ul>

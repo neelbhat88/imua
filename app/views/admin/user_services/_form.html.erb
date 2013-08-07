@@ -1,0 +1,35 @@
+<script>
+  $(function() {
+    $("#service_date").datepicker();
+  });
+</script>
+
+<% @user_service.user_id = @user.id %>
+<% @user_service.semester = @user.user_info.current_semester %>
+
+<%= form_for [:admin, @user_service] do |f| %>
+
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :semester %>
+
+
+  <div>
+    <%= f.label :name, "Name of Service Event or Activity" %>
+    <%= f.text_field :name %>
+  </div>
+
+
+  <div>
+    <%= f.label :hours %>
+    <%= f.text_field :hours %>
+  </div>
+
+  <div>
+    <%= f.label :date %>
+    <%= f.text_field :datef, :id => "service_date", :value => @user_service.date.strftime("%m/%d/%Y") %>
+  </div>
+
+  <div>
+    <center><%= f.submit "Update", :class => 'btn btn-primary btn-large' %></center>
+  </div>
+<% end %>

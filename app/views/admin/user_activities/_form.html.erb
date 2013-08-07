@@ -1,0 +1,28 @@
+<% @user_activity.user_id = @user.id %>
+<% @user_activity.semester = @user.user_info.current_semester %>
+
+<%= form_for [:admin, @user_activity] do |f| %>
+
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :semester %>
+
+  <div>
+    <%= f.label :school_activity_id %>
+    <%= f.collection_select :school_activity_id, @user.user_info.school.school_activities, :id, :name %>
+  </div>
+
+  <div>
+    <%= f.label :leadership_title, "Leadership Title (if applicable)" %>
+    <%= f.text_field :leadership_title %>
+  </div>
+
+  <div>
+    <%= f.label :description %> <i>Separate each description with a pipe character: |</i>
+    <%= f.text_area :description, :rows => 10 %>
+  </div>
+
+
+  <div>
+    <%= f.submit "Update", :class => 'btn btn-primary btn-large' %>
+  </div>
+<% end %>
