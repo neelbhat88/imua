@@ -6,6 +6,9 @@
 
 <% @user_service.user_id = @user.id %>
 <% @user_service.semester = @user.user_info.current_semester %>
+<% if @user_service.date.blank? %>
+  <% @user_service.date = Date.today.strftime("%d/%m/%Y") %>
+<% end %>
 
 <%= form_for [:admin, @user_service] do |f| %>
 
