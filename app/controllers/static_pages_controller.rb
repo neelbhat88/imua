@@ -3,7 +3,9 @@ class StaticPagesController < ApplicationController
   end
 
   def students
-  	@students = User.where(:role => 0)
+    # ToDo: Putting this in to quickly solve our test users from showing up on Students page.
+    #  If needed remove this for a better solution (a Test flag maybe?)
+  	@students = User.where("role = 0 and email not like ? and email not like ?", "%neelbhat88%", "%mcassid3%")
     @title = "Our Students"
   end
 

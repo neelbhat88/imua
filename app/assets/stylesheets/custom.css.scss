@@ -91,7 +91,8 @@ select {
 .pageContainer
 {
   position: relative;
-  width: 100%;  
+  width: 100%;
+  padding-top:20px; 
 }
 
 .leftPane
@@ -151,12 +152,14 @@ header
   #color: $sun-flower;
   background-color: white;
   color: $wet-asphalt;
+  border-radius: 5px 5px 0 0;
 }
 
 #mynav .nav > li.selected > a
 {
   background-color: white;
   color: $wet-asphalt;
+  border-radius: 5px 5px 0 0;
 }
 
 /* typography */
