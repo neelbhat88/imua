@@ -3,6 +3,8 @@
 	width: 235px; 
 	padding-top: 45px; 
 	border-right: 1px solid $asbestos;
+	position: fixed;
+	z-index: 1;
 }
 
 .progressNav
@@ -38,8 +40,7 @@
 .progressHeadingContainer
 {
 	padding: 50px 15px 15px 15px;
-	margin: 30px auto;
-	width: 600px;
+	margin: 30px auto;	
 
 	& > * { display: inline-block; }
 	& .value { font-size: 9em; height: 40px; vertical-align: bottom; }
@@ -48,14 +49,16 @@
 
 .categoryDataContainer
 {
-	padding-top: 20px;
-	width: 600px; 
+	padding-top: 20px;	
 	position: relative;
-	left: 50%;
-	margin-left: -300px;
+	margin: auto;
 
 	& > .academics_bg, > .academics_text { 
 		border: 3px solid $academics; 
+	}
+
+	& > .extracur_bg, > .extracur_text { 
+		border: 3px solid $extracur; 
 	}
 
 	& .header {
