@@ -1,0 +1,22 @@
+.academicsEdit
+{
+	& .editRow {
+		border-bottom: 1px dashed; 
+		margin-bottom: 15px;
+	}
+
+	& .classDD { width: 250px; margin-right: 10px; }
+	& .gradeDD { width: 100px; margin-right: 10px; }
+}
+
+.academicsView
+{
+	& .viewRow { 
+		padding-bottom: 30px; 
+
+		& > * { display: inline-block; }
+
+		& .className { width: 495px; border-bottom: 1px dashed; }
+		& .classGrade { color: $midnight-blue; }
+	}
+}
