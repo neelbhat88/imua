@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row student-index">
+    <div class="span6">
+      <p><%= link_to "Back to All Students", admin_users_path %></p>
+      <h1><%= "#{@user.first_name} #{@user.last_name} Classes" %></h1>
+      <% if @user.user_info.school.present? %>
+        <h2><%= link_to "Add a Class for #{@user.first_name} #{@user.last_name}", new_admin_user_class_path(:user_id => @user.id) %></h2>
+        <h2>Current Semester: <%= link_to @user.user_info.current_semester, "#{edit_admin_user_path(@user)}#current_semester_dropdown" %></h2>
+        <h2>GPA: <%= @user.user_classes.where(:semester => @user.user_info.current_semester).average(:gpa) %></h2>
+      <% else %>
+        <p>You must first assign this student a school before you can assign classes. You can do that here: <%= link_to 'Edit User Information', edit_admin_user_path(@user) %></p>
+      <% end %>
+      <% if @user_classes.present? %>
+        <ul class="student-classes">
+          <% @user_classes.each do |user_class| %>
+            <li>
+              <h4>
+              <%= link_to "#{user_class.name} (#{user_class.grade})", edit_admin_user_class_path(user_class, :user_id => @user.id) %>
+              </h4>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

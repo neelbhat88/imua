@@ -1,22 +1,22 @@
-<%= form_for([:admin, user_info], :url => admin_user_info_path(user_info), :html => { :method => :put }) do |f| %>
+<%= form_for[:admin, @user_class] do |f| %>
 
   <div>
-    <%= f.label :big_goal, "Big Goal (What is your big goal?)" %>
-    <%= f.text_field :big_goal %>
+    <%= f.label :gpa, "Big Goal (What is your big goal?)" %>
+    <%= f.text_field :gpa %>
   </div>
 
   <div>
-    <%= f.label :why_description, "Why did you apply to the WCSF?" %>
-    <%= f.text_area :why_description, :rows => '5' %>
+    <%= f.label :grade, "Why did you apply to the WCSF?" %>
+    <%= f.text_field :grade %>
   </div>
 
   <div>
-    <%= f.label :how_description, "How will the WCSF help you reach your goals?" %>
-    <%= f.text_area :how_description, :rows => '5' %>
+    <%= f.label :level, "How will the WCSF help you reach your goals?" %>
+    <%= f.text_area :level, :rows => '5' %>
   </div>
 
   <div>
-    <%= f.label :current_semester, :id => 'current_semester_dropdown' %>
+    <%= f.label :current_semester %>
     <%= f.select :current_semester, semesters %>
   </div>
 
@@ -43,7 +43,3 @@
     <%= f.submit "Update", :class => 'btn btn-primary btn-large' %>
   </div>
 <% end %>
-<br>
-<hr>
-<%= link_to 'Delete student', admin_user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-

@@ -3,34 +3,44 @@
 </div>
 <div class="page-content">
 	<div class="students clearfix">
-		<% @students.each do |student| %>
-			<div class="student">
-				<a href="#" class="studentModal" data-student="<%= student.id %>">
-					<%= image_tag student.user_info.avatar.url(:original) %>
-					<h3><%= "#{student.first_name} #{student.last_name}" %></h3>
-				</a>
-			</div>
-
-			<div id="student_<%= student.id %>" class="student-modal modal hide fade">
-			  <div class="student-modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			    <h3><%= "#{student.first_name} #{student.last_name}" %></h3>
-			  </div>
-			  <div class="student-modal-body clearfix">
-			  	<div class="student-image">
-				  	<%= image_tag student.user_info.avatar.url(:original) %>
+		<% i = 0 %>
+			<% @students.each do |student| %>
+				<% if i % 3 == 0 && i != 0 %>
 					</div>
-					<div class="student-details">
-				    <h4>Big Goal: <%= student.user_info.big_goal %></h4>
-				    <h4>Why did you apply for the WCSF?</h4>
-				    <p><%= student.user_info.why_description %></p>
-				    <h4>How will the WCSF help you reach your goals?</h4>
-				    <p><%= student.user_info.how_description %></p>
-				  </div>
-			  </div>
-			</div>
+					<div class="row">
+				<% elsif i == 0 %>
+					<div class="row">
+				<% end %>
 
-		<% end %>
+				<div class="student">
+					<a href="#" class="studentModal" data-student="<%= student.id %>">
+						<%= image_tag student.user_info.avatar.url(:original) %>
+						<h3><%= "#{student.first_name} #{student.last_name}" %></h3>
+					</a>
+				</div>
+
+				<div id="student_<%= student.id %>" class="student-modal modal hide fade">
+				  <div class="student-modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    <h3><%= "#{student.first_name} #{student.last_name}" %></h3>
+				  </div>
+				  <div class="student-modal-body clearfix">
+				  	<div class="student-image">
+					  	<%= image_tag student.user_info.avatar.url(:original) %>
+						</div>
+						<div class="student-details">
+					    <h4>Big Goal: <%= student.user_info.big_goal %></h4>
+					    <h4>Why did you apply for the WCSF?</h4>
+					    <p><%= student.user_info.why_description %></p>
+					    <h4>How will the WCSF help you reach your goals?</h4>
+					    <p><%= student.user_info.how_description %></p>
+					  </div>
+				  </div>
+				</div>
+
+				<% i += 1 %>
+			<% end %>
+		</div>
 	</div>
 </div>
 

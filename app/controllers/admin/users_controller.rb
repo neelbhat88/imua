@@ -27,15 +27,21 @@ class Admin::UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @user_info = @user.user_info
+    @semesters = (1..8).to_a
+
   end
 
   def update
     @user = User.find(params[:id])
+    @user_info = @user.user_info
+    @semesters = (1..8).to_a
+    @user_info.school_id = params[:school][:id]
 
     if @user.update_with_password(params[:user])
+      @user_info.save
       redirect_to admin_users_path, notice: 'Student was successfully updated.'
     else
-      redirect_to admin_users_path
+      render 'edit'
     end
   end
 
@@ -49,6 +55,18 @@ class Admin::UsersController < ApplicationController
     end
 
   end
+
+  def update_class
+    @user_class = UserClass.find(params[:id])
+
+    if @user_class.update_attributes(params[:user_info])
+      redirect_to admin_users_path, notice: 'Student was successfully updated.'
+    else
+      render :edit
+    end
+
+  end
+
 
   def destroy
     @user = User.find(params[:id])
