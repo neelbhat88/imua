@@ -61,6 +61,14 @@
 		border: 3px solid $extracur; 
 	}
 
+	& > .service_bg, > .service_text { 
+		border: 3px solid $service; 
+	}
+
+	& > .pdu_bg, > .pdu_text { 
+		border: 3px solid $pdu; 
+	}
+
 	& .header {
 		border-radius: 5px 5px 0px 0px; 
 		position: relative; 
