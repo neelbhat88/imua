@@ -36,7 +36,28 @@ var Activities = new function() {
 		},
 
 		saveActivities: function()
-		{		
+		{
+			var hasErrors = false;
+			$.each(self.viewModel.activities(), function() {
+				if (this.school_activity_id() == null || (this.leadershipHeld() && this.leadershipTitle() == ""))
+				{
+					hasErrors = true;
+					return false; // Break out of the loop			
+				}
+			})
+
+			if (hasErrors == true)
+			{
+				$('.validationError').fadeIn();
+				$('.activitiesEdit select, .activitiesEdit input').each(function(){
+					if (this.value == "")
+						$(this).addClass('error');
+					else
+						$(this).removeClass('error');
+				});
+				return;
+			}
+
 			$.ajax({
 				type: "POST",
 				url: '/saveActivities',
@@ -79,6 +100,8 @@ var Activities = new function() {
 	};
 
 	self.init = function() {
+		self.viewModel.editing = ko.observable(false);
+
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",

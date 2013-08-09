@@ -16,7 +16,7 @@
 	<%= render 'partials/badge_modal' %>
 </div>
 
-<script type="text/html" id="edit-classes">		
+<script type="text/html" id="edit-classes">			
 	<div class="academicsEdit" data-bind="foreach: subjects, visible: $root.subjects().length > 0" style="display:none;">
 		<div class="editRow">
 			<div data-bind="click: $root.removeClass" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>	
@@ -29,7 +29,8 @@
 	</div>
 	<div class="buttonGroup">
 		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
-		<div class="submitButton academics_bg" data-bind="click: $root.saveClasses">Save</div>		
+		<div class="submitButton academics_bg" data-bind="click: $root.saveClasses">Save</div>
+		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
 	</div>	
 </script>
 
