@@ -17,6 +17,7 @@ class Admin::UserServicesController < ApplicationController
 
   def create
     @user_service = UserService.new(params[:user_service])
+    @user_service.date = Date.strptime(params[:user_service][:date],'%m/%d/%Y')
 
     if @user_service.save
       redirect_to admin_users_path, notice: 'Student classes were successfully updated.'
@@ -32,8 +33,10 @@ class Admin::UserServicesController < ApplicationController
 
   def update
     @user_service = UserService.find(params[:id])
-
-    if @user_service.update_attributes(params[:user_service])
+    @user_service.date = Date.strptime(params[:user_service][:date],'%m/%d/%Y')
+    @user_service.name = params[:user_service][:name]
+    @user_service.hours = params[:user_service][:hours]
+    if @user_service.save
       redirect_to admin_users_path, notice: 'Student was successfully updated.'
     else
       redirect_to admin_users_path

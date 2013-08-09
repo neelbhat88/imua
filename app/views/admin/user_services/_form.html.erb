@@ -1,5 +1,15 @@
+<script>
+  $(function() {
+    $("#service_date").datepicker(
+      {autoclose: true});
+  });
+</script>
+
 <% @user_service.user_id = @user.id %>
 <% @user_service.semester = @user.user_info.current_semester %>
+<% if @user_service.date.blank? %>
+  <% @user_service.date = Date.today %>
+<% end %>
 
 <%= form_for [:admin, @user_service] do |f| %>
 
@@ -20,7 +30,7 @@
 
   <div>
     <%= f.label :date %>
-    <%= f.date_select :date %>
+    <%= f.text_field :date, :id => "service_date", :value => @user_service.date.strftime("%m/%d/%Y") %>
   </div>
 
   <div>
