@@ -1,8 +1,13 @@
 .academicsEdit
 {
-	& .editRow {
-		border-bottom: 1px dashed; 
-		margin-bottom: 15px;
+	& .editRow 
+	{		
+		border: 1px solid lightgray; 
+		padding: 10px 0 0 10px; 
+		border-radius: 3px; 
+		margin: auto auto 20px auto; 
+		position: relative;
+		width: 390px;
 	}
 
 	& .classDD { width: 250px; margin-right: 10px; }
