@@ -1,27 +1,29 @@
 <% @jsinit = 'SchoolActivities' %>
 
-<h1>Add Activities to <%= current_user.user_info.school.name %></h1>
+<div style="padding:20px">
+  <h1>Add Activities to <%= current_user.user_info.school.name %></h1>
 
-<table>
-  <tr>
-    <!-- <th>School</th> -->
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <!-- <th>School</th> -->
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @school_activities.each do |school_activity| %>
-  <tr>
-    <!-- <td><%= school_activity.school_id %></td> -->
-    <td><%= school_activity.name %></td> 
-    <!-- <td><%= link_to 'Show', school_activity %></td> -->
-    <td> | <%= link_to 'Edit', edit_school_activity_path(school_activity) %></td>
-    <td><%= link_to 'Delete', school_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <% @school_activities.each do |school_activity| %>
+    <tr>
+      <!-- <td><%= school_activity.school_id %></td> -->
+      <td><%= school_activity.name %></td> 
+      <!-- <td><%= link_to 'Show', school_activity %></td> -->
+      <td> | <%= link_to 'Edit', edit_school_activity_path(school_activity) %></td>
+      <td><%= link_to 'Delete', school_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Extracurricular Activity', new_school_activity_path %>
+  <%= link_to 'New Extracurricular Activity', new_school_activity_path %>
+</div>

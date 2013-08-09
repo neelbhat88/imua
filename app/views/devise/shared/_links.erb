@@ -4,10 +4,10 @@
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <div>
-  	<div><span>Are you a student?</span> <%= link_to "Sign up", new_registration_path(resource_name) %>
+  	<!-- <div><span>Are you a student?</span> <%= link_to "Sign up", new_registration_path(resource_name) %>
   	</div>
   	<div><span>Are you a teacher?</span> <%= link_to "Sign up", new_registration_path(resource_name, :role => 1) %>
-  	</div>
+  	</div> -->
   </div>
 <% end -%>
 

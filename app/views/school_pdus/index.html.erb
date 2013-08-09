@@ -1,0 +1,25 @@
+<% @jsinit = 'SchoolPdus' %>
+
+<div style="padding:20px">
+  <h1>Add PDUs to <%= current_user.user_info.school.name %> </h1>
+
+  <table>
+    <tr>
+      <th>Name</th>          
+      <th></th>
+      <th></th>      
+    </tr>
+
+  <% @school_pdus.each do |school_pdu| %>
+    <tr>
+      <td><%= school_pdu.name %></td>
+      <td><%= link_to 'Edit', edit_school_pdu_path(school_pdu) %></td>
+      <td><%= link_to 'Destroy', school_pdu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'New PDU', new_school_pdu_path %>
+</div>

@@ -1,5 +1,8 @@
 Wcsf::Application.routes.draw do
 
+  resources :school_pdus
+
+
   get "services/index"
 
   get "services_controller/index"
