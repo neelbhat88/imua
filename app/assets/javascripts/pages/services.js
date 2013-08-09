@@ -22,6 +22,27 @@ var Services = new function() {
 
 		save: function()
 		{		
+			var hasErrors = false;
+			$.each(self.viewModel.services(), function() {
+				if (this.name() == null || this.date() == null || this.hours() == null)
+				{
+					hasErrors = true;
+					return false; // Break out of the loop			
+				}
+			})
+
+			if (hasErrors == true)
+			{
+				$('.validationError').fadeIn();
+				$('.servicesEdit select, .servicesEdit input').each(function(){
+					if (this.value == "")
+						$(this).addClass('error');
+					else
+						$(this).removeClass('error');
+				});
+				return;
+			}
+
 			var totalHours = self.viewModel.calculateTotalHours();
 
 			$.ajax({
@@ -86,6 +107,8 @@ var Services = new function() {
 	};
 
 	self.init = function() {
+		self.viewModel.editing = ko.observable(false);
+
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",

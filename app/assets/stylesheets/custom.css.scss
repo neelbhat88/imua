@@ -338,6 +338,8 @@ img.picture-box.college {
 
 
 /* Form stuff */
+.error { border: 1px solid red; }
+
 .buttonGroup > *
 {
   display: inline-block;
@@ -378,6 +380,8 @@ img.picture-box.college {
 .extracur_bg { background-color: $extracur; }
 
 .pdu_text { color: $pdu; }
+.pdu_bg { background-color: $pdu; }
 
 .service_text { color: $service; }
+.service_bg { background-color: $service; }
 

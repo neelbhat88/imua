@@ -105,6 +105,27 @@ function ViewModelPropertiesInit(viewModel)
 	{
 		var newGpa = viewModel.calculateTotalGpa();
 
+		var hasErrors = false;
+		$.each(viewModel.subjects(), function() {
+			if (this.school_class_id() == null || this.grade() == null)
+			{
+				hasErrors = true;
+				return false; // Break out of the loop			
+			}
+		})
+
+		if (hasErrors == true)
+		{
+			$('.validationError').fadeIn();
+			$('.academicsEdit select, .academicsEdit input').each(function(){
+					if (this.value == "")
+						$(this).addClass('error');
+					else
+						$(this).removeClass('error');
+				});		
+			return;
+		}			
+
 		$.ajax({
 			type: "POST",
 			url: '/saveClasses',
