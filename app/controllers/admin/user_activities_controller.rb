@@ -19,7 +19,7 @@ class Admin::UserActivitiesController < ApplicationController
     @user_activity = UserActivity.new(params[:user_activity])
 
     if @user_activity.save
-      redirect_to admin_users_path, notice: 'Student classes were successfully updated.'
+      redirect_to admin_user_activities_path(:user_id => current_user.id), notice: 'Student classes were successfully updated.'
     else
       render 'admin/user_activities/new', alert: 'Sorry, something went wrong. Try again.'
     end
@@ -34,9 +34,9 @@ class Admin::UserActivitiesController < ApplicationController
     @user_activity = UserActivity.find(params[:id])
 
     if @user_activity.update_attributes(params[:user_activity])
-      redirect_to admin_users_path, notice: 'Student was successfully updated.'
+      redirect_to admin_user_activities_path(:user_id => current_user.id), notice: 'Student was successfully updated.'
     else
-      redirect_to admin_users_path
+      redirect_to admin_user_activities_path(:user_id => current_user.id)
     end
   end
 
@@ -45,6 +45,6 @@ class Admin::UserActivitiesController < ApplicationController
     @user_activity = UserActivity.find(params[:id])
     @user_activity.destroy
 
-    redirect_to admin_users_path
+    redirect_to admin_user_activities_path(:user_id => current_user.id)
   end
 end

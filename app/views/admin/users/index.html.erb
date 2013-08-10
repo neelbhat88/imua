@@ -12,7 +12,8 @@
             <%= link_to 'Profile', admin_user_path(user) %> |
             <%= link_to 'Classes', admin_user_classes_path(:user_id => user.id) %> |
             <%= link_to 'Activities', admin_user_activities_path(:user_id => user.id) %> |
-            <%= link_to 'Services', admin_user_services_path(:user_id => user.id) %>
+            <%= link_to 'Services', admin_user_services_path(:user_id => user.id) %> | 
+            <%= link_to 'PDUs', admin_user_pdus_path(:user_id => user.id) %>
           </li>
         <% end %>
       </ul>

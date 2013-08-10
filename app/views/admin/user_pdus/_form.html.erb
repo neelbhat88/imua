@@ -1,0 +1,38 @@
+<script>
+  $(function() {
+    $("#pdu_date").datepicker(
+      {autoclose: true});
+  });
+</script>
+
+<% if @user_pdu.date.blank? %>
+  <% @user_pdu.date = Date.today %>
+<% end %>
+
+<% @user_pdu.user_id = @user.id %>
+<% @user_pdu.semester = @user.user_info.current_semester %>
+
+<%= form_for [:admin, @user_pdu] do |f| %>
+
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :semester %>
+
+  <div>
+    <%= f.label :school_pdu_id %>
+    <%= f.collection_select :school_pdu_id, @user.user_info.school.school_pdus, :id, :name %>
+  </div>
+
+  <div>
+    <%= f.label :hours %>
+    <%= f.text_field :hours %>
+  </div>
+
+  <div>
+    <%= f.label :date %>
+    <%= f.text_field :date, :id => "pdu_date", :value => @user_pdu.date.strftime("%m/%d/%Y") %>
+  </div>
+
+  <div>
+    <%= f.submit "Update", :class => 'btn btn-primary btn-large' %>
+  </div>
+<% end %>

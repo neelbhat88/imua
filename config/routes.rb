@@ -15,6 +15,7 @@ Wcsf::Application.routes.draw do
     resources :user_classes
     resources :user_activities
     resources :user_services
+    resources :user_pdus
   end
 
   resources :school_activities
