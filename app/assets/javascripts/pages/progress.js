@@ -38,8 +38,8 @@ var Progress = new function() {
 			});
 
 			$('#pduNav').click(function(){
-				$('#progressPages').load("/academics", function() {
-					Academics.init();
+				$('#progressPages').load("/pdus", function() {
+					Pdus.init();
 				});
 
 				$('.progressNav li').removeClass("selected");

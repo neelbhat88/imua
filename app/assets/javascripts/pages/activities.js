@@ -67,7 +67,7 @@ var Activities = new function() {
 				},
 				success: function(data) 
 				{					
-					self.viewModel.activities = ko.mapping.fromJS(data.newactivities);
+					ko.mapping.fromJS(data.newactivities, {}, self.viewModel.activities);
 
 					self.viewModel.originalActivities = data.newactivities;
 
@@ -81,7 +81,7 @@ var Activities = new function() {
 		cancelEdit: function()
 		{
 			// Set back to original activities
-			self.viewModel.activities = ko.mapping.fromJS(self.viewModel.originalActivities);
+			ko.mapping.fromJS(self.viewModel.originalActivities, {}, self.viewModel.activities);
 
 			self.viewModel.rowsToRemove = [];
 			self.viewModel.editing(false);
@@ -109,7 +109,7 @@ var Activities = new function() {
 				success: function(data) {					
 					self.viewModel.activities = ko.mapping.fromJS(data.useractivities);
 					self.viewModel.originalActivities = data.useractivities;
-					self.viewModel.globalactivities = ko.mapping.fromJS(data.globalactivities);					
+					self.viewModel.globalactivities = ko.mapping.fromJS(data.globalactivities);
 
 					ko.applyBindings(self.viewModel);
 				},

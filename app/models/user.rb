@@ -17,6 +17,7 @@
   has_many :user_badges
   has_many :user_activities
   has_many :user_services
+  has_many :user_pdus
   has_one :user_info, :dependent => :destroy
 
   def is_student?

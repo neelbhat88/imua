@@ -1,0 +1,52 @@
+<% @jsinit = 'Pdus' %>
+
+<div class="progressHeadingContainer pdu_text" style="width: 510px; padding-left: 50px;">
+	<div data-bind="text: totalPdus().length" class="value"></div>
+	<div class="text" style="padding-left: 25px">PDU Events</div>
+</div>
+
+<div class="categoryDataContainer" style="width: 650px;">
+	<div class="header pdu_bg">
+		<span class="text">My PDU Events</span>
+	</div>
+	<div class="body pdu_text" style="">
+		<div data-bind="template: {name: templateToUse}"></div>
+	</div>
+</div>
+
+<script type="text/html" id="view">
+	<div class="academicsView" data-bind="foreach: totalPdus, visible: totalPdus().length > 0">
+		<div class="viewRow">
+			<div class="className" data-bind="text: name() + ' on ' + date()"></div>
+			<div class="classGrade" data-bind="text: hours() + ' hours'"></div>
+		</div>
+	</div>
+	
+	<div data-bind="visible: totalPdus().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray">
+		Click Edit below to add PDU events.
+	</div>
+	<div class="buttonGroup">
+		<div class="submitButton pdu_bg" data-bind="click: $root.edit">Edit</div>
+	</div>
+</script>
+
+<script type="text/html" id="edit">
+	<div class="pdusEdit" style="display:none" data-bind="foreach: { data: totalPdus, as: 'pdu'}, visible: totalPdus().length > 0">
+		<div style="border: 1px solid lightgrey; padding: 10px; border-radius: 3px; margin-bottom: 20px; position: relative;">
+			<div data-bind="click: $root.remove" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
+			
+			<select data-bind="options: $root.globalpdus, value: pdu.school_pdu_id, optionsCaption: 'Choose PDU Event...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>
+			<!-- <input data-bind="value: name" placeholder="Name of PDU Event" style="width: 250px" />	-->
+			<input data-bind="value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
+			<input data-bind="value: hours" placeholder="Hours" style="width: 100px" />						
+		</div>
+	</div>		
+	<div class="pbm textCenter">
+		<a href="#" data-bind="click: $root.add">Add PDU Event</a>
+	</div>
+	<div class="buttonGroup">
+		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
+		<div class="submitButton pdu_bg" data-bind="click: $root.save">Save</div>
+		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
+	</div>
+</script>
