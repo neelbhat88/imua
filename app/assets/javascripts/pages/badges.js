@@ -25,9 +25,7 @@ var Badges = new function() {
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
 					self.viewModel.badgesEarned = ko.observable(json.badgesearned);
 					self.viewModel.semester(json.semester);
-					ko.applyBindings(self.viewModel);
-
-					Header.setPageContainerHeight();
+					ko.applyBindings(self.viewModel);					
 				},
 				error: function() { alert("Failed initial badge load");}
 			});			

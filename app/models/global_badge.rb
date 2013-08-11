@@ -3,14 +3,15 @@ class GlobalBadge < ActiveRecord::Base
                    :subcategory, :title
 
   def GetCategories
-  	return ['Academics', 'Activity', 'Service']
+  	return ['Academics', 'Activity', 'Service', 'PDU']
   end
 
   def GetSubCategories(category)
   	subcategories = {
-  		'Academics' => ['RunningGPA', 'GPA', 'LetterGrade', 'APScore', 'ClassCredit'],
+  		'Academics' => ['GPA', 'LetterGrade', 'APScore', 'ClassCredit'],
       'Activity' => ['Involvement', 'Leadership'],
       'Service' => ['Service'],
+      'PDU' => ['PDU']
   	}  	
 
   	return subcategories[category]

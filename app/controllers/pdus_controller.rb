@@ -66,14 +66,14 @@ class PdusController < ApplicationController
 	    ##################################################
 	    # ------------------ BADGES ----------------------
 	    ##################################################   	    
-	    #badgeProcessor = BadgeProcessor.new(current_user)
-	    #newBadgeCount = badgeProcessor.CheckSemesterPdus()
+	    badgeProcessor = BadgeProcessor.new(current_user)
+	    badgeObject = badgeProcessor.CheckSemesterPdus()
 	  	
 	  	#logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
 	  	# Return new badges received
 	  	respond_to do |format|
-	  		format.json { render :json => { :newpdus => returnpdus} }
+	  		format.json { render :json => { :newpdus => returnpdus, :newBadges => badgeObject } }
     end
   end
 end

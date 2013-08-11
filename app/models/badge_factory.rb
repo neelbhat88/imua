@@ -17,16 +17,16 @@ class BadgeFactory
 		allBadges.each do |b|
 			case b.subcategory
 			# GPA
-			when 1
+			when 0
 				badgeList << AcademicsGpaBadge.new(b, curr_user)
 			# Letter Grade
-			when 2
+			when 1
 				badgeList << AcademicsGradeBadge.new(b, curr_user)
 			# AP Score
-			#when 3
+			#when 2
 				#badgeList << AcademicsAPScoreBadge.new(b, curr_user)
 			# Class Credit
-			#when 4
+			#when 3
 			#	badgeList << AcademicsClassCreditBadge.new(b, curr_user)
 			else
 				badgeList << AcademicsBadge.new(b, curr_user)
@@ -48,10 +48,10 @@ class BadgeFactory
 		allBadges.each do |b|
 			case b.subcategory
 			# Involved in any Activity
-			when 1
+			when 0
 				badgeList << ActivitiesInvolvementBadge.new(b, curr_user)
 			# Leadership role in any Activity
-			when 2
+			when 1
 				badgeList << ActivitiesLeadershipBadge.new(b, curr_user)
 			# Specific Activity involvement?
 			#when 3
@@ -76,10 +76,30 @@ class BadgeFactory
 		allBadges.each do |b|
 			case b.subcategory
 			
-			when 1			
-			when 2		
-			else
+			when 0
 				badgeList << ServicesBadge.new(b, curr_user)
+			when 1			
+			end
+		end
+
+		return badgeList
+	end
+
+	def GetPduBadges(semester=nil)
+		if semester.nil?
+			allBadges = GlobalBadge.where("category = 'PDU'")
+		else
+			allBadges = GlobalBadge.where("category = 'PDU' and semester = ?", semester)
+		end
+
+		badgeList = []
+
+		allBadges.each do |b|
+			case b.subcategory
+			
+			when 0
+				badgeList << PduBadge.new(b, curr_user)
+			when 1			
 			end
 		end
 

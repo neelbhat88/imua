@@ -20,6 +20,9 @@ class Admin::UserServicesController < ApplicationController
     @user_service.date = Date.strptime(params[:user_service][:date],'%m/%d/%Y')
 
     if @user_service.save
+      # Trigger badge rules
+      BadgeProcessor.new(current_user).CheckSemesterServices()
+
       redirect_to admin_user_services_path(:user_id => current_user.id), notice: 'Student classes were successfully updated.'
     else
       render 'admin/user_services/new', alert: 'Sorry, something went wrong. Try again.'
@@ -37,6 +40,9 @@ class Admin::UserServicesController < ApplicationController
     @user_service.name = params[:user_service][:name]
     @user_service.hours = params[:user_service][:hours]
     if @user_service.save
+      # Trigger badge rules
+      BadgeProcessor.new(current_user).CheckSemesterServices()
+
       redirect_to admin_user_services_path(:user_id => current_user.id), notice: 'Student was successfully updated.'
     else
       redirect_to admin_user_services_path(:user_id => current_user.id)
@@ -47,6 +53,9 @@ class Admin::UserServicesController < ApplicationController
   def destroy
     @user_service = UserService.find(params[:id])
     @user_service.destroy
+
+    # Trigger badge rules
+    BadgeProcessor.new(current_user).CheckSemesterServices()
 
     redirect_to admin_user_services_path(:user_id => current_user.id)
   end
