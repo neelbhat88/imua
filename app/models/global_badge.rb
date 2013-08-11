@@ -20,14 +20,19 @@ class GlobalBadge < ActiveRecord::Base
   # Static method
   def self.GetBadgesViewModel(allbadges, user)
     badgesviewmodel = []
-    allbadges.each do | ab |
-      hasEarned = false
-      
-      if user.user_badges.find_by_global_badge_id(ab.id) != nil
-        hasEarned = true
-      end
+    allbadges.each do | badge |
+      hasEarned = "No"
 
-      badgesviewmodel << BadgeViewModel.new(ab, hasEarned)
+      # If User has earned badge
+      if user.user_badges.find_by_global_badge_id(badge.id) != nil
+        if !badge.isminrequirement() && !user.user_info.MetAllMinRequirements()
+          hasEarned = "Pending"
+        else
+          hasEarned = "Yes"
+        end
+      end      
+
+      badgesviewmodel << BadgeViewModel.new(badge, hasEarned)
     end
 
     return badgesviewmodel

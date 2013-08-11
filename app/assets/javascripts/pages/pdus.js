@@ -3,6 +3,7 @@ var Pdus = new function() {
 
 	self.viewModel = {				
 		editing: ko.observable(false),
+		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
 
 		add: function() {
@@ -98,6 +99,7 @@ var Pdus = new function() {
 					self.viewModel.originalPdus = data.userpdus;
 					self.viewModel.globalpdus = ko.mapping.fromJS(data.globalpdus);
 
+					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}

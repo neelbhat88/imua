@@ -4,6 +4,7 @@ var Services = new function() {
 	self.viewModel = {				
 		totalHours: ko.observable(0),
 		editing: ko.observable(false),
+		pageLoaded: ko.observable(false),
 		rowsToRemove: [],	
 
 		add: function() {
@@ -122,6 +123,7 @@ var Services = new function() {
 					// Initialize Services specific stuff
 					self.viewModel.totalHours(self.viewModel.calculateTotalHours());
 
+					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}

@@ -1,23 +1,26 @@
 <% @jsinit = 'Academics' %>
 
-<div class="progressHeadingContainer academics_text" style="width: 600px">
-	<div data-bind="text: totalGPA() > 0 ? totalGPA().toFixed(2) : '0.00'" class="value"></div>
-	<div class="text">Semester GPA</div>
-</div>
-
-<div class="categoryDataContainer" style="width: 600px;">
-	<div class="header academics_bg">
-		<span class="text">My Classes</span>
+<div data-bind="visible: pageLoaded" style="display: none">
+	<div class="progressHeadingContainer academics_text" style="width: 600px">
+		<div data-bind="text: totalGPA() > 0 ? totalGPA().toFixed(2) : '0.00'" class="value"></div>
+		<div class="text">Semester GPA</div>
 	</div>
-	<div class="body academics_text" style="">
-		<div data-bind="template: {name: templateToUse}"></div>	
-	</div>	
-</div>
 
-<div class="progressPageBadges academics_text" data-bind="foreach: { data: badges, as: 'badge' }">
-	<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
-		<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>				
-		<div class="description" data-bind="text: badge.description()"></div>
+	<div class="categoryDataContainer" style="width: 600px;">
+		<div class="header academics_bg">
+			<span class="text">My Classes</span>
+		</div>
+		<div class="body academics_text" style="">
+			<div data-bind="template: {name: templateToUse}"></div>	
+		</div>	
+	</div>
+
+	<div class="progressPageBadges academics_text" data-bind="foreach: { data: badges, as: 'badge' }">
+		<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+			<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>				
+			<div class="description" data-bind="text: badge.description()"></div>
+			<div data-bind="visible: badge.isminrequirement()" class="minReqStar"><%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement") %></div>
+		</div>
 	</div>
 </div>
 

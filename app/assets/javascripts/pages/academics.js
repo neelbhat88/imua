@@ -2,7 +2,7 @@ var Academics = new function() {
 	var self = this;
 
 	self.viewModel = {
-		
+		pageLoaded: ko.observable(false)
 	};
 
 	self.init = function() {
@@ -18,6 +18,8 @@ var Academics = new function() {
 					self.viewModel.badges = ko.mapping.fromJS(obj.badges);
 
 					ViewModelPropertiesInit(self.viewModel);			
+
+					self.viewModel.pageLoaded(true);
 
 					ko.applyBindings(self.viewModel);
 				},

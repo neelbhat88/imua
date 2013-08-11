@@ -7,9 +7,8 @@ class GlobalBadgesController < ApplicationController
 		allbadges = GlobalBadge.where('semester = ?', semester)
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
-		badgesviewmodel = GetBadgesViewModel(allbadges)
-
-		# ToDo - If user hasn't earned all min reqs do we return all badges?
+		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user)
+		
 		badgesearned = current_user.user_badges.length
 
 		respond_to do |format|
@@ -36,7 +35,7 @@ class GlobalBadgesController < ApplicationController
 		allbadges = GlobalBadge.where('semester = ?', semester)
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
-		badgesviewmodel = GetBadgesViewModel(allbadges)
+		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user)
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel }}
@@ -44,19 +43,10 @@ class GlobalBadgesController < ApplicationController
 	end
 
 private
-	def GetBadgesViewModel(allbadges)
-		badgesviewmodel = []
-		allbadges.each do | ab |
-			hasEarned = false
-			
-			if current_user.user_badges.find_by_global_badge_id(ab.id) != nil
-				hasEarned = true
-			end
-
-			badgesviewmodel << BadgeViewModel.new(ab, hasEarned)
+	def GetSemesterBadgesEarned(semester)		
+		if (current_user.user_info.MetAllMinRequirements())
+			return current_user.user_badges.where(:semester => semester).length
 		end
-
-		return badgesviewmodel
 	end
 
 end

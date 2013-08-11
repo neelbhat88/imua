@@ -1,23 +1,26 @@
 <% @jsinit = 'Services' %>
 
-<div class="progressHeadingContainer service_text" style="width: 510px; padding-left: 50px;">
-	<div data-bind="text: totalHours" class="value"></div>
-	<div class="text" style="padding-left: 25px">Service Hours</div>
-</div>
-
-<div class="categoryDataContainer" style="width: 650px;">
-	<div class="header service_bg">
-		<span class="text">My Service Events</span>
+<div data-bind="visible: pageLoaded" style="display: none">
+	<div class="progressHeadingContainer service_text" style="width: 510px; padding-left: 50px;">
+		<div data-bind="text: totalHours" class="value"></div>
+		<div class="text" style="padding-left: 25px">Service Hours</div>
 	</div>
-	<div class="body service_text" style="">
-		<div data-bind="template: {name: templateToUse}"></div>
-	</div>
-</div>
 
-<div class="progressPageBadges service_text" data-bind="foreach: { data: badges, as: 'badge' }">
-	<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
-		<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>				
-		<div class="description" data-bind="text: badge.description()"></div>
+	<div class="categoryDataContainer" style="width: 650px;">
+		<div class="header service_bg">
+			<span class="text">My Service Events</span>
+		</div>
+		<div class="body service_text" style="">
+			<div data-bind="template: {name: templateToUse}"></div>
+		</div>
+	</div>
+
+	<div class="progressPageBadges service_text" data-bind="foreach: { data: badges, as: 'badge' }">
+		<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+			<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>				
+			<div class="description" data-bind="text: badge.description()"></div>
+			<div data-bind="visible: badge.isminrequirement()" class="minReqStar"><%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement") %></div>
+		</div>
 	</div>
 </div>
 

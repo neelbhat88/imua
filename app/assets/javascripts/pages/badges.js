@@ -48,9 +48,25 @@ var Badges = new function() {
 };
 
 function getBadgeColor(badge) {
-	if (!badge.hasEarned())
+	if (badge.hasEarned() == "No")
 		return "hasNotEarned";
+	else if (badge.hasEarned() == "Pending")
+	{		
+		switch(badge.category())
+		{
+			case "Academics": 
+				return "academics_text";
+			case "Activity": 
+				return "extracur_text";
+			case "Service": 
+				return "service_text";
+			case "PDU": 
+				return "pdu_text";
+		}
 
+		return "pending";
+	}
+		
 	switch(badge.category())
 	{
 		case "Academics": 

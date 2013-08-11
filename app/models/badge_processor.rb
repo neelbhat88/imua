@@ -29,16 +29,16 @@ class BadgeProcessor
 	  	allBadges.each do |b|
 	  		# If badge is not minreq then only compare if all minreqs met
 	  		badgeEarned = false
-	  		Rails.logger.debug("DEBUG: IsMinReq? #{b.isminrequirement}")
-	  		if b.isminrequirement == false
-	  			if @curr_user.user_info.MetAllMinRequirements()
-	  				badgeEarned = b.Compare()
-	  				Rails.logger.debug("DEBUG: #{b.title} earned? #{badgeEarned}. All minreqs met.")		
-	  			end
-	  		else
+	  		#Rails.logger.debug("DEBUG: IsMinReq? #{b.isminrequirement}")
+	  		# if b.isminrequirement == false
+	  		# 	if @curr_user.user_info.MetAllMinRequirements()
+	  		# 		badgeEarned = b.Compare()
+	  		# 		Rails.logger.debug("DEBUG: #{b.title} earned? #{badgeEarned}. All minreqs met.")		
+	  		# 	end
+	  		# else
 	  			badgeEarned = b.Compare()	  			
 	  			Rails.logger.debug("DEBUG: #{b.title} earned? #{badgeEarned}")
-	  		end	  		
+	  		#end	  		
 
 	  		userHasBadge = (@curr_user.user_badges.find_by_global_badge_id(b.id) != nil)	  		
 	  		# If badge earned and user does not have badge

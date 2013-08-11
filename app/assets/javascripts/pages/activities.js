@@ -3,6 +3,7 @@ var Activities = new function() {
 
 	self.viewModel = {			
 		editing: ko.observable(false),
+		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
 
 		addLeadership: function(activity, event){
@@ -113,6 +114,7 @@ var Activities = new function() {
 
 					self.viewModel.originalActivities = data.useractivities;
 
+					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}
