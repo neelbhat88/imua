@@ -1,8 +1,7 @@
 var Pdus = new function() {
 	var self = this;
 
-	self.viewModel = {		
-		totalPdus: ko.observableArray(),		
+	self.viewModel = {				
 		editing: ko.observable(false),
 		rowsToRemove: [],
 
@@ -52,6 +51,7 @@ var Pdus = new function() {
 				success: function(data) 
 				{					
 					ko.mapping.fromJS(data.newpdus, {}, self.viewModel.totalPdus);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
 
 					self.viewModel.originalPdus = data.newpdus;
 
@@ -93,15 +93,15 @@ var Pdus = new function() {
 				url: '/pdus',
 				success: function(data) {					
 					self.viewModel.totalPdus = ko.mapping.fromJS(data.userpdus);
+					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
+					
 					self.viewModel.originalPdus = data.userpdus;
 					self.viewModel.globalpdus = ko.mapping.fromJS(data.globalpdus);
 
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}
-			});			
-
-			ko.applyBindings(self.viewModel);
+			});
 		});
 	};
 

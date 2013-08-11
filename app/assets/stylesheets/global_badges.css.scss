@@ -79,6 +79,9 @@
 	max-width: 225px;
 	margin: 10px;
 	text-align: left;
+
+	& .title { font-size: 28px; }
+	& .description { font-size: 15px; }
 }
 
 .tabNum

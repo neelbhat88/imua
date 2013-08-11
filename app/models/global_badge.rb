@@ -16,4 +16,20 @@ class GlobalBadge < ActiveRecord::Base
 
   	return subcategories[category]
   end
+
+  # Static method
+  def self.GetBadgesViewModel(allbadges, user)
+    badgesviewmodel = []
+    allbadges.each do | ab |
+      hasEarned = false
+      
+      if user.user_badges.find_by_global_badge_id(ab.id) != nil
+        hasEarned = true
+      end
+
+      badgesviewmodel << BadgeViewModel.new(ab, hasEarned)
+    end
+
+    return badgesviewmodel
+  end
 end

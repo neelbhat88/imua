@@ -7,8 +7,11 @@ class ServicesController < ApplicationController
   		services << ServiceViewModel.new(a)
   	end   
 
+    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Service")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+
   	respond_to do |format|
-  		format.json { render :json => {:userservices => services} }
+  		format.json { render :json => {:userservices => services, :badges => badgesviewmodel} }
   		format.html { render :layout => false } # index.html.erb
   	end
   end
@@ -71,9 +74,13 @@ class ServicesController < ApplicationController
   	
   	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
+    # Reload badges
+    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Service")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newservices => returnservices} }
+  		format.json { render :json => { :newservices => returnservices, :badges => badgesviewmodel} }
     end
   end
 end

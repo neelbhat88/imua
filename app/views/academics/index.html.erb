@@ -11,9 +11,14 @@
 	</div>
 	<div class="body academics_text" style="">
 		<div data-bind="template: {name: templateToUse}"></div>	
+	</div>	
+</div>
+
+<div class="progressPageBadges academics_text" data-bind="foreach: { data: badges, as: 'badge' }">
+	<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}">
+		<span data-bind="text: badge.title(), css: {required: badge.isminrequirement, title: true}"></span>				
+		<div class="description" data-bind="text: badge.description()"></div>
 	</div>
-	
-	<%= render 'partials/badge_modal' %>
 </div>
 
 <script type="text/html" id="edit-classes">			

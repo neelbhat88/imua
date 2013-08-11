@@ -1,10 +1,9 @@
 var Activities = new function() {
 	var self = this;
 
-	self.viewModel = {		
-		activities: ko.observableArray(),
+	self.viewModel = {			
 		editing: ko.observable(false),
-		rowsToRemove: [],		
+		rowsToRemove: [],
 
 		addLeadership: function(activity, event){
 			activity.leadershipHeld(true);
@@ -68,6 +67,7 @@ var Activities = new function() {
 				success: function(data) 
 				{					
 					ko.mapping.fromJS(data.newactivities, {}, self.viewModel.activities);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
 
 					self.viewModel.originalActivities = data.newactivities;
 
@@ -108,15 +108,15 @@ var Activities = new function() {
 				url: '/activities',
 				success: function(data) {					
 					self.viewModel.activities = ko.mapping.fromJS(data.useractivities);
-					self.viewModel.originalActivities = data.useractivities;
+					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
 					self.viewModel.globalactivities = ko.mapping.fromJS(data.globalactivities);
+
+					self.viewModel.originalActivities = data.useractivities;
 
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}
 			});			
-
-			ko.applyBindings(self.viewModel);
 		});
 	};
 

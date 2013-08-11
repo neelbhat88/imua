@@ -12,10 +12,11 @@ class AcademicsController < ApplicationController
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
-    #customers = Customer.find(:all,  rder => 'first_name').map{|x| [x.full_name] + [x.id]}
+    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Academics")    
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
   	respond_to do |format|
-      format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses} }
+      format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses, :badges => badgesviewmodel} }
       format.html { render :layout=>false } # index.html.erb	
   	end
   end
@@ -64,7 +65,7 @@ class AcademicsController < ApplicationController
     returnclasses = []
     allclasses.each do | a |		
     	returnclasses << ClassViewModel.new(a)
-    end
+    end    
 
     ##################################################
     # ------------------ BADGES ----------------------
@@ -73,14 +74,18 @@ class AcademicsController < ApplicationController
     logger.debug "DEBUG: TotalGPA - #{totalGpa}"
 
     badgeProcessor = BadgeProcessor.new(current_user)
-    badgeObject = badgeProcessor.CheckSemesterAcademics()
+    badgeObject = badgeProcessor.CheckSemesterAcademics()    
   	
   	logger.debug "DEBUG: Badges earned and lost #{badgeObject} new badges."
     logger.debug "DEBUG: Badges earned #{badgeObject[:badgesEarned].length}, Badges lost #{badgeObject[:badgesLost].length}"
 
+    # Reload badges
+    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Academics")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newclasses => returnclasses, :newBadges => badgeObject} }
+  		format.json { render :json => { :newclasses => returnclasses, :badges => badgesviewmodel} }
     end
   end
 end
