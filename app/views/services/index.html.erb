@@ -14,9 +14,9 @@
 	</div>
 </div>
 
-<div class="progressPageBadges services_text" data-bind="foreach: { data: badges, as: 'badge' }">
-	<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}">
-		<span data-bind="text: badge.title(), css: {required: badge.isminrequirement, title: true}"></span>				
+<div class="progressPageBadges service_text" data-bind="foreach: { data: badges, as: 'badge' }">
+	<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+		<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>				
 		<div class="description" data-bind="text: badge.description()"></div>
 	</div>
 </div>

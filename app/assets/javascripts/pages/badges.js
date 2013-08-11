@@ -1,4 +1,4 @@
-var Badges = new function() {
+var Badges = new function() {	
 	var self = this;
 
 	self.viewModel = {
@@ -12,7 +12,7 @@ var Badges = new function() {
 			{id: 6, text: 'Semester 6'},
 			{id: 7, text: 'Semester 7'},
 			{id: 8, text: 'Semester 8'}
-		]
+		],	
 	};	
 
 	// Initializes ViewModel
@@ -46,3 +46,20 @@ var Badges = new function() {
 		});
 	});
 };
+
+function getBadgeColor(badge) {
+	if (!badge.hasEarned())
+		return "hasNotEarned";
+
+	switch(badge.category())
+	{
+		case "Academics": 
+			return "academics_bg";
+		case "Activity": 
+			return "extracur_bg";
+		case "Service": 
+			return "service_bg";
+		case "PDU": 
+			return "pdu_bg";
+	}			
+}

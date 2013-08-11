@@ -15,13 +15,13 @@
 </div>
 
 <div class="progressPageBadges academics_text" data-bind="foreach: { data: badges, as: 'badge' }">
-	<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}">
-		<span data-bind="text: badge.title(), css: {required: badge.isminrequirement, title: true}"></span>				
+	<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+		<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>				
 		<div class="description" data-bind="text: badge.description()"></div>
 	</div>
 </div>
 
-<script type="text/html" id="edit-classes">			
+<script type="text/html" id="edit-classes">
 	<div class="academicsEdit" data-bind="foreach: subjects, visible: $root.subjects().length > 0" style="display:none;">
 		<div class="editRow">
 			<div data-bind="click: $root.removeClass" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>	
