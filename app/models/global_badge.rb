@@ -18,13 +18,18 @@ class GlobalBadge < ActiveRecord::Base
   end
 
   # Static method
-  def self.GetBadgesViewModel(allbadges, user)
+  def self.GetBadgesViewModel(allbadges, user, semester=nil)
+    if (semester == nil)
+      semester = user.user_info.current_semester
+    end
+
     badgesviewmodel = []
     allbadges.each do | badge |
       hasEarned = "No"
 
+      logger.debug("DEBUG: GetBadgesViewModel - #{user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length}")
       # If User has earned badge
-      if user.user_badges.find_by_global_badge_id(badge.id) != nil
+      if user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length != 0
         if !badge.isminrequirement() && !user.user_info.MetAllMinRequirements()
           hasEarned = "Pending"
         else

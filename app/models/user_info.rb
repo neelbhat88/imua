@@ -29,7 +29,7 @@ class UserInfo < ActiveRecord::Base
   end
 
   def MetAllMinRequirements
-    minreq_badges = GlobalBadge.where('semester = ? and isminrequirement = true', self.current_semester)
+    minreq_badges = GlobalBadge.where(:semester => [nil, self.current_semester], :isminrequirement => true)
 
     minreq_badges.each do |b|
       if self.user.user_badges.find_by_global_badge_id(b.id) == nil

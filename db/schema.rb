@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130810171653) do
+ActiveRecord::Schema.define(:version => 20130811164659) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -76,8 +76,7 @@ ActiveRecord::Schema.define(:version => 20130810171653) do
     t.integer  "global_badge_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.integer  "gridcellnum"
-    t.integer  "rownum"
+    t.integer  "semester"
   end
 
   create_table "user_classes", :force => true do |t|

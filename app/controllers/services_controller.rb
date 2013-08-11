@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
   		services << ServiceViewModel.new(a)
   	end   
 
-    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Service")
+    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Service")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
   	respond_to do |format|
@@ -75,7 +75,7 @@ class ServicesController < ApplicationController
   	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
     # Reload badges
-    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Service")
+    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Service")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
   	# Return new badges received

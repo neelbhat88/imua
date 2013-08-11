@@ -10,8 +10,8 @@ class PdusController < ApplicationController
 	  	# Get all global pdu to put into dropdown
     	globalpdus = SchoolPdu.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
-    	badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "PDU")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+    	badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "PDU")
+    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
 	  	respond_to do |format|
 	  		format.json { render :json => {:userpdus => pdus, :globalpdus => globalpdus, :badges => badgesviewmodel} }
@@ -73,7 +73,7 @@ class PdusController < ApplicationController
 	    badgeObject = badgeProcessor.CheckSemesterPdus()
 	  		  	
 	  	# Reload badges
-	    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "PDU")
+	    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "PDU")
 	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
 	  	# Return new badges received

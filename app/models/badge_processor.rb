@@ -47,7 +47,8 @@ class BadgeProcessor
 	  			badgesearned << b
 
 	  			# Save earned badge to db
-	  			@curr_user.user_badges.create(:global_badge_id => b.id)
+	  			@curr_user.user_badges.create(:global_badge_id => b.id, :semester => @curr_user.user_info.current_semester)
+	  		
 	  		# If badge not earned and user has badge
 	  		elsif badgeEarned == false && userHasBadge == true
 	  			removedBadge = @curr_user.user_badges.find_by_global_badge_id(b.id)

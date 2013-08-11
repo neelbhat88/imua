@@ -12,7 +12,7 @@ class AcademicsController < ApplicationController
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
-    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Academics")    
+    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Academics")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
   	respond_to do |format|
@@ -80,7 +80,7 @@ class AcademicsController < ApplicationController
     logger.debug "DEBUG: Badges earned #{badgeObject[:badgesEarned].length}, Badges lost #{badgeObject[:badgesLost].length}"
 
     # Reload badges
-    badges = GlobalBadge.where(:semester => current_user.user_info.current_semester, :category => "Academics")
+    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Academics")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
   	# Return new badges received

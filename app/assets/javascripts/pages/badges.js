@@ -41,6 +41,7 @@ var Badges = new function() {
 			success: function(data) {
 				var json = data;
 				ko.mapping.fromJS(json.badges, self.viewModel.badges);
+				self.viewModel.badgesEarned(json.badgesearned);
 			},
 			error: function() { alert("Failed drop down subscribe ajax post");}
 		});

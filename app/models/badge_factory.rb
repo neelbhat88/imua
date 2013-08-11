@@ -7,9 +7,11 @@ class BadgeFactory
 
 	def GetAcademicsBadges(semester=nil)
 		if semester.nil?
-			allBadges = GlobalBadge.where("category = 'Academics'")
+			# ToDo: After changing GlobalBadge to allow null for semester, need to figure out
+			#  how this will work. Not worried about this right now though
+			allBadges = GlobalBadge.where(:category => "Academics")
 		else
-			allBadges = GlobalBadge.where("category = 'Academics' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "Academics", :semester => [nil, semester])
 		end
 
 		badgeList = []
@@ -38,9 +40,9 @@ class BadgeFactory
 
 	def GetActivitiesBadges(semester=nil)
 		if semester.nil?
-			allBadges = GlobalBadge.where("category = 'Activity'")
+			allBadges = GlobalBadge.where(:category => "Activity")
 		else
-			allBadges = GlobalBadge.where("category = 'Activity' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "Activity", :semester => [nil, semester])
 		end
 
 		badgeList = []
@@ -68,7 +70,7 @@ class BadgeFactory
 		if semester.nil?
 			allBadges = GlobalBadge.where("category = 'Service'")
 		else
-			allBadges = GlobalBadge.where("category = 'Service' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "Service", :semester => [nil, semester])
 		end
 
 		badgeList = []
@@ -89,7 +91,7 @@ class BadgeFactory
 		if semester.nil?
 			allBadges = GlobalBadge.where("category = 'PDU'")
 		else
-			allBadges = GlobalBadge.where("category = 'PDU' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "PDU", :semester => [nil, semester])
 		end
 
 		badgeList = []
