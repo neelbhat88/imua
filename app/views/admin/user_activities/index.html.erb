@@ -20,6 +20,7 @@
               <% else %>
                 <%= link_to "#{user_activity.school_activity.name}", edit_admin_user_activity_path(user_activity, :user_id => @user.id) %>
               <% end %>
+              <%= link_to 'Delete', admin_user_activity_path(user_activity), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %>
               </h4>
             </li>
           <% end %>

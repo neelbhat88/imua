@@ -13,6 +13,7 @@
             <%= link_to 'Classes', admin_user_classes_path(:user_id => user.id) %> |
             <%= link_to 'Activities', admin_user_activities_path(:user_id => user.id) %> |
             <%= link_to 'Services', admin_user_services_path(:user_id => user.id) %>
+            <%= link_to 'Delete', admin_user_path(user), :method => :delete, :data => {confirm: "Are you sure?"}, :class => 'btn btn-mini btn-warning' %>
           </li>
         <% end %>
       </ul>
