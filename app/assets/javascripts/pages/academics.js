@@ -2,7 +2,7 @@ var Academics = new function() {
 	var self = this;
 
 	self.viewModel = {
-		
+		pageLoaded: ko.observable(false)
 	};
 
 	self.init = function() {
@@ -15,11 +15,11 @@ var Academics = new function() {
 					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses);
 					self.viewModel.originalSubjects = obj.userclasses;
 					self.viewModel.globalsubjects = ko.mapping.fromJS(obj.globalclasses);
-
-					self.viewModel.badgesEarned = ko.observableArray([]);
-					self.viewModel.badgesLost = ko.observableArray([]);
+					self.viewModel.badges = ko.mapping.fromJS(obj.badges);
 
 					ViewModelPropertiesInit(self.viewModel);			
+
+					self.viewModel.pageLoaded(true);
 
 					ko.applyBindings(self.viewModel);
 				},
@@ -137,35 +137,13 @@ function ViewModelPropertiesInit(viewModel)
 			success: function(data) 
 			{				
 				viewModel.subjects = ko.mapping.fromJS(data.newclasses);
+				ko.mapping.fromJS(data.badges, {}, viewModel.badges);
 
 				viewModel.originalSubjects = data.newclasses;
 				viewModel.totalGPA(newGpa);
 
 				viewModel.rowsToRemove = [];				
 				viewModel.editing(false);
-
-				// Show modal based on badges earned or lost
-				viewModel.badgesEarned.removeAll();
-				viewModel.badgesLost.removeAll();
-				var showModal = false;
-				if (data.newBadges.badgesEarned.length > 0)
-				{					
-					$.each(data.newBadges.badgesEarned, function(){
-						viewModel.badgesEarned.push(new Badge(this.title, this.description));
-					});
-					showModal = true;
-				}
-
-				if (data.newBadges.badgesLost.length > 0)
-				{
-					$.each(data.newBadges.badgesLost, function(){
-						viewModel.badgesLost.push(new Badge(this.title, this.description));
-					});
-					showModal = true;
-				}
-
-				if (showModal)
-					$("#badgeModal").modal();
 			},
 			error: function() {alert('SaveClasses fail!');}
 		});		

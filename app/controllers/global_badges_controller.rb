@@ -4,13 +4,12 @@ class GlobalBadgesController < ApplicationController
 	def index				
 		semester = current_user.user_info.current_semester		
 
-		allbadges = GlobalBadge.where('semester = ?', semester)
+		allbadges = GlobalBadge.where(:semester => [nil, semester])
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
-		badgesviewmodel = GetBadgesViewModel(allbadges)
-
-		# ToDo - If user hasn't earned all min reqs do we return all badges?
-		badgesearned = current_user.user_badges.length
+		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
+		
+		badgesearned = GetSemesterBadgesEarned(semester)
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel, 
@@ -33,30 +32,26 @@ class GlobalBadgesController < ApplicationController
 			semester = current_user.user_info.current_semester
 		end
 
-		allbadges = GlobalBadge.where('semester = ?', semester)
+		allbadges = GlobalBadge.where(:semester => [nil, semester])
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
-		badgesviewmodel = GetBadgesViewModel(allbadges)
+		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
+
+		badgesearned = GetSemesterBadgesEarned(semester)
 
 		respond_to do |format|
-			format.json { render :json => {:badges => badgesviewmodel }}
+			format.json { render :json => {:badges => badgesviewmodel, :badgesearned => badgesearned }}
 		end
 	end
 
 private
-	def GetBadgesViewModel(allbadges)
-		badgesviewmodel = []
-		allbadges.each do | ab |
-			hasEarned = false
-			
-			if current_user.user_badges.find_by_global_badge_id(ab.id) != nil
-				hasEarned = true
-			end
-
-			badgesviewmodel << BadgeViewModel.new(ab, hasEarned)
+	def GetSemesterBadgesEarned(semester)		
+		if (current_user.user_info.MetAllMinRequirements())
+			return current_user.user_badges.where(:semester => semester).length
+		else
+			# If all min reqs not met, total number earned is just the min requirements
+			return current_user.user_badges.joins(:global_badge).where("user_badges.semester = ? and global_badges.isminrequirement = true", semester).length
 		end
-
-		return badgesviewmodel
 	end
 
 end

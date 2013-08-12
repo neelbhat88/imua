@@ -7,9 +7,11 @@ class BadgeFactory
 
 	def GetAcademicsBadges(semester=nil)
 		if semester.nil?
-			allBadges = GlobalBadge.where("category = 'Academics'")
+			# ToDo: After changing GlobalBadge to allow null for semester, need to figure out
+			#  how this will work. Not worried about this right now though
+			allBadges = GlobalBadge.where(:category => "Academics")
 		else
-			allBadges = GlobalBadge.where("category = 'Academics' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "Academics", :semester => [nil, semester])
 		end
 
 		badgeList = []
@@ -17,16 +19,16 @@ class BadgeFactory
 		allBadges.each do |b|
 			case b.subcategory
 			# GPA
-			when 1
+			when 0
 				badgeList << AcademicsGpaBadge.new(b, curr_user)
 			# Letter Grade
-			when 2
+			when 1
 				badgeList << AcademicsGradeBadge.new(b, curr_user)
 			# AP Score
-			#when 3
+			#when 2
 				#badgeList << AcademicsAPScoreBadge.new(b, curr_user)
 			# Class Credit
-			#when 4
+			#when 3
 			#	badgeList << AcademicsClassCreditBadge.new(b, curr_user)
 			else
 				badgeList << AcademicsBadge.new(b, curr_user)
@@ -38,9 +40,9 @@ class BadgeFactory
 
 	def GetActivitiesBadges(semester=nil)
 		if semester.nil?
-			allBadges = GlobalBadge.where("category = 'Activity'")
+			allBadges = GlobalBadge.where(:category => "Activity")
 		else
-			allBadges = GlobalBadge.where("category = 'Activity' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "Activity", :semester => [nil, semester])
 		end
 
 		badgeList = []
@@ -48,10 +50,10 @@ class BadgeFactory
 		allBadges.each do |b|
 			case b.subcategory
 			# Involved in any Activity
-			when 1
+			when 0
 				badgeList << ActivitiesInvolvementBadge.new(b, curr_user)
 			# Leadership role in any Activity
-			when 2
+			when 1
 				badgeList << ActivitiesLeadershipBadge.new(b, curr_user)
 			# Specific Activity involvement?
 			#when 3
@@ -68,7 +70,7 @@ class BadgeFactory
 		if semester.nil?
 			allBadges = GlobalBadge.where("category = 'Service'")
 		else
-			allBadges = GlobalBadge.where("category = 'Service' and semester = ?", semester)
+			allBadges = GlobalBadge.where(:category => "Service", :semester => [nil, semester])
 		end
 
 		badgeList = []
@@ -76,10 +78,30 @@ class BadgeFactory
 		allBadges.each do |b|
 			case b.subcategory
 			
-			when 1			
-			when 2		
-			else
+			when 0
 				badgeList << ServicesBadge.new(b, curr_user)
+			when 1			
+			end
+		end
+
+		return badgeList
+	end
+
+	def GetPduBadges(semester=nil)
+		if semester.nil?
+			allBadges = GlobalBadge.where("category = 'PDU'")
+		else
+			allBadges = GlobalBadge.where(:category => "PDU", :semester => [nil, semester])
+		end
+
+		badgeList = []
+
+		allBadges.each do |b|
+			case b.subcategory
+			
+			when 0
+				badgeList << PduBadge.new(b, curr_user)
+			when 1			
 			end
 		end
 

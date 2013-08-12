@@ -1,10 +1,10 @@
 var Services = new function() {
 	var self = this;
 
-	self.viewModel = {		
-		services: ko.observableArray(),
+	self.viewModel = {				
 		totalHours: ko.observable(0),
 		editing: ko.observable(false),
+		pageLoaded: ko.observable(false),
 		rowsToRemove: [],	
 
 		add: function() {
@@ -57,6 +57,7 @@ var Services = new function() {
 				{
 					//alert('You earned ' + data.newbadgecount + ' new badges!');
 					self.viewModel.services = ko.mapping.fromJS(data.newservices);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
 
 					self.viewModel.originalServices = data.newservices;
 
@@ -115,20 +116,18 @@ var Services = new function() {
 				url: '/services',
 				success: function(data) {					
 					self.viewModel.services = ko.mapping.fromJS(data.userservices);
+					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
+					
 					self.viewModel.originalServices = data.userservices;
 
 					// Initialize Services specific stuff
 					self.viewModel.totalHours(self.viewModel.calculateTotalHours());
 
+					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}
-			});			
-
-			ko.applyBindings(self.viewModel);
-
-			// self.viewModel.services.push(new Service("Future Founders", '2012-02-01', 2));
-			// self.viewModel.services.push(new Service("Habitat for Humanity", '2013-02-03', 5));			
+			});
 		});
 	};
 

@@ -1,4 +1,4 @@
-var Badges = new function() {
+var Badges = new function() {	
 	var self = this;
 
 	self.viewModel = {
@@ -12,7 +12,7 @@ var Badges = new function() {
 			{id: 6, text: 'Semester 6'},
 			{id: 7, text: 'Semester 7'},
 			{id: 8, text: 'Semester 8'}
-		]
+		],	
 	};	
 
 	// Initializes ViewModel
@@ -25,9 +25,7 @@ var Badges = new function() {
 					self.viewModel.badges = ko.mapping.fromJS(json.badges);
 					self.viewModel.badgesEarned = ko.observable(json.badgesearned);
 					self.viewModel.semester(json.semester);
-					ko.applyBindings(self.viewModel);
-
-					Header.setPageContainerHeight();
+					ko.applyBindings(self.viewModel);					
 				},
 				error: function() { alert("Failed initial badge load");}
 			});			
@@ -43,8 +41,42 @@ var Badges = new function() {
 			success: function(data) {
 				var json = data;
 				ko.mapping.fromJS(json.badges, self.viewModel.badges);
+				self.viewModel.badgesEarned(json.badgesearned);
 			},
 			error: function() { alert("Failed drop down subscribe ajax post");}
 		});
 	});
 };
+
+function getBadgeColor(badge) {
+	if (badge.hasEarned() == "No")
+		return "hasNotEarned";
+	else if (badge.hasEarned() == "Pending")
+	{		
+		switch(badge.category())
+		{
+			case "Academics": 
+				return "academics_text";
+			case "Activity": 
+				return "extracur_text";
+			case "Service": 
+				return "service_text";
+			case "PDU": 
+				return "pdu_text";
+		}
+
+		return "pending";
+	}
+		
+	switch(badge.category())
+	{
+		case "Academics": 
+			return "academics_bg";
+		case "Activity": 
+			return "extracur_bg";
+		case "Service": 
+			return "service_bg";
+		case "PDU": 
+			return "pdu_bg";
+	}			
+}

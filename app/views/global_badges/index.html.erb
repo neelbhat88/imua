@@ -11,7 +11,7 @@
 		</div>		
 	</div>
 
-	<div style="position: relative; top: 60px; padding: 10px 30px;">
+	<div data-bind="visible: badges().length > 0" style="display: none; position: relative; top: 60px; padding: 10px 30px;">
 		<div class="requiredBadgesPanel" style="border-radius: 8px; padding-bottom: 40px;">
 			<div class="badgePanelTitle" style="text-align: center; background-color: #2c3e50; border-radius: 3px 3px 0px 0px; color: white; height: 35px; font-size: 32px; padding: 15px 0px 0px;">
 				Required Badges
@@ -19,9 +19,10 @@
 			<div class="badgePanelBadges" style="border: 1px solid #2c3e50; text-align: center;" data-bind="foreach: { data: badges, as: 'badge' }">
 				<!-- The following is used by KO -->
 				<!-- ko if: badge.isminrequirement() == true -->	
-				<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}" style="">
+				<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
 					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 28px"></span>				
 					<div data-bind="text: badge.description()" style="font-size: 15px;"></div>
+					<div class="minReqStar"><%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement") %></div>
 				</div>		
 				<!-- /ko -->
 			</div>
@@ -34,7 +35,7 @@
 			<div class="badgePanelBadges" style="border: 1px solid #7f8c8d; text-align: center;" data-bind="foreach: { data: badges, as: 'badge' }">
 				<!-- The following is used by KO -->
 				<!-- ko if: badge.isminrequirement() == false -->	
-				<div data-bind="css: {hasNotEarned: badge.hasEarned() == false, globalBadge: true}" style="">
+				<div class="globalBadge" data-bind="css: getBadgeColor(badge)" style="">
 					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" style="font-size: 28px"></span>				
 					<div data-bind="text: badge.description()" style="font-size: 15px;"></div>
 				</div>		

@@ -15,6 +15,7 @@ Wcsf::Application.routes.draw do
     resources :user_classes
     resources :user_activities
     resources :user_services
+    resources :user_pdus
   end
 
   resources :school_activities
@@ -60,6 +61,9 @@ Wcsf::Application.routes.draw do
 
   match '/services', to: 'services#index'
   match '/saveServices', to: 'services#saveServices'
+
+  match '/pdus', to: 'pdus#index'
+  match '/savePdus', to: 'pdus#savePdus'
 
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'

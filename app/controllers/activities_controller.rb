@@ -10,15 +10,18 @@ class ActivitiesController < ApplicationController
     # Get all global activities to put into dropdown
     globalactivities = SchoolActivity.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
+    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Activity")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+
   	respond_to do |format|
-  		format.json { render :json => {:useractivities => activities, :globalactivities => globalactivities} }
+  		format.json { render :json => {:useractivities => activities, :globalactivities => globalactivities, :badges => badgesviewmodel} }
   		format.html { render :layout => false } # index.html.erb
   	end
   end
 
   def saveActivities
     ##################################################
-	# ---------------- Activities --------------------
+	  # ---------------- Activities --------------------
     ##################################################
   	activitiesJson = JSON.parse(params[:activities])
   	removeJson = JSON.parse(params[:activitiesToRemove])
@@ -88,9 +91,13 @@ class ActivitiesController < ApplicationController
   	
   	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
 
+    # Reload badges
+    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Activity")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newactivities => returnactivities, :newBadges => badgeObject} }
+  		format.json { render :json => { :newactivities => returnactivities, :badges => badgesviewmodel } }
     end
   end
 end

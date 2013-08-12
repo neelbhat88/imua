@@ -20,7 +20,10 @@ class Admin::UserClassesController < ApplicationController
     @user_class.name = set_class_name
 
     if @user_class.save
-      redirect_to admin_users_path, notice: 'Student classes were successfully updated.'
+      # Trigger badge rules
+      BadgeProcessor.new(current_user).CheckSemesterAcademics()
+
+      redirect_to admin_user_classes_path(:user_id => current_user.id), notice: 'Student classes were successfully updated.'
     else
       render 'admin/user_classes/new', alert: 'Sorry, something went wrong. Try again.'
     end
@@ -37,9 +40,12 @@ class Admin::UserClassesController < ApplicationController
     @user_class.name = set_class_name
 
     if @user_class.update_attributes(params[:user_class])
-      redirect_to admin_users_path, notice: 'Student was successfully updated.'
+      # Trigger badge rules
+      BadgeProcessor.new(current_user).CheckSemesterAcademics()
+
+      redirect_to admin_user_classes_path(:user_id => current_user.id), notice: 'Student was successfully updated.'
     else
-      redirect_to admin_users_path
+      redirect_to admin_user_classes_path(:user_id => current_user.id)
     end
   end
 
@@ -48,7 +54,10 @@ class Admin::UserClassesController < ApplicationController
     @user_class = UserClass.find(params[:id])
     @user_class.destroy
 
-    redirect_to admin_users_path
+    # Trigger badge rules
+    BadgeProcessor.new(current_user).CheckSemesterAcademics()
+
+    redirect_to admin_user_classes_path(:user_id => current_user.id)
   end
 
   private
