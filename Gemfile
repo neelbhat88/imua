@@ -6,6 +6,7 @@ gem 'thin'
 gem 'mail_form'
 gem 'figaro'
 gem 'aws-sdk'
+gem 'newrelic_rpm'
 
 group :development do
 	gem 'quiet_assets'
