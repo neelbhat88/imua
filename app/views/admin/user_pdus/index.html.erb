@@ -16,6 +16,7 @@
             <li>
               <h4>
                 <%= link_to "#{user_pdu.school_pdu.name}", edit_admin_user_pdu_path(user_pdu, :user_id => @user.id) %>
+                <%= link_to 'Delete', admin_user_pdu_path(user_pdu), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-warning' %>
               </h4>
             </li>
           <% end %>
