@@ -6,6 +6,7 @@
   <table>
     <tr>
       <!-- <th>School</th> -->
+      <th>Activity Id </th>
       <th>Name</th>
       <th></th>
       <th></th>
@@ -14,7 +15,7 @@
 
   <% @school_activities.each do |school_activity| %>
     <tr>
-      <!-- <td><%= school_activity.school_id %></td> -->
+      <td><%= school_activity.id %></td>
       <td><%= school_activity.name %></td> 
       <!-- <td><%= link_to 'Show', school_activity %></td> -->
       <td> | <%= link_to 'Edit', edit_school_activity_path(school_activity) %></td>

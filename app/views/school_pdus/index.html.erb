@@ -5,6 +5,7 @@
 
   <table>
     <tr>
+      <th>PDU Id</th>
       <th>Name</th>          
       <th></th>
       <th></th>      
@@ -12,6 +13,7 @@
 
   <% @school_pdus.each do |school_pdu| %>
     <tr>
+      <td><%= school_pdu.id %></td>
       <td><%= school_pdu.name %></td>
       <td><%= link_to 'Edit', edit_school_pdu_path(school_pdu) %></td>
       <td><%= link_to 'Destroy', school_pdu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
