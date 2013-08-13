@@ -23,8 +23,11 @@
 	</div>
 	<% if current_user %>
 		<div class="sign-in">
-			<p class="sign-out-text">Logged in as <%= link_to current_user.email, global_badges_path %></p>
-			<%= link_to 'Sign out', destroy_user_session_path, :class => 'btn btn-info sign-out', :method => 'delete' %>
+			<p class="" style="padding: 10px;">Logged in as: <span class="text-dark-blue"><%= current_user.email %></span></p>
+			<div style="text-align: center">
+				<%= link_to "I'MUA Portal", global_badges_path, :class => 'btn btn-success' %>
+				<%= link_to 'Sign out', destroy_user_session_path, :class => 'btn btn-info sign-out', :method => 'delete' %>
+			</div>
 		</div>
 	<% else %>
 		<div class="sign-in">

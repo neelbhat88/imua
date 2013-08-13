@@ -4,6 +4,10 @@ $dark-blue: #00446B;
 $alt-font: "cubano", sans-serif;
 
 //
+.text-dark-blue
+{
+	color: $dark-blue;
+}
 
 body.static_pages {
 	padding-top: 0;
