@@ -2,6 +2,8 @@ class GlobalBadge < ActiveRecord::Base
   attr_accessible :category, :comparevalue, :description, :isminrequirement, :semester,
                    :subcategory, :title
 
+  default_scope order('id ASC')
+
   def GetCategories
   	return ['Academics', 'Activity', 'Service', 'PDU']
   end

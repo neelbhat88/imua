@@ -78,14 +78,17 @@
 	
 	border-radius: 5px; 
 	display: inline-block; 
-	min-width: 100px;
-	max-width: 225px;
+	
+	width: 225px;
+	height: 60px;
+	
+	vertical-align: top;
 	margin: 10px;
 	text-align: left;
 	position: relative;	
 
 	& .title { font-size: 28px; }
-	& .description { font-size: 15px; }
+	& .description { font-size: 15px; padding-top: 5px; }
 	& .minReqStar { position: absolute; right: 0; bottom: 0; }
 }
 
