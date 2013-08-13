@@ -1,4 +1,6 @@
 class Admin::UserPdusController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :teacher_only
 
   def index
     @user = User.find(params[:user_id])

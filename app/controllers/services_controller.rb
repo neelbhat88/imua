@@ -1,4 +1,6 @@
 class ServicesController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
   	allservices = current_user.user_services.where('semester = ?', current_user.user_info.current_semester).order("date DESC")
 

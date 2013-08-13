@@ -1,4 +1,6 @@
 class ActivitiesController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
   	allactivities = current_user.user_activities.where('semester = ?', current_user.user_info.current_semester).order("id")
 

@@ -1,5 +1,7 @@
 class Admin::UserClassesController < ApplicationController
-
+  before_filter :authenticate_user!
+  before_filter :teacher_only
+  
   def index
     @user = User.find(params[:user_id])
     @user_classes = @user.user_classes.where('semester = ?', @user.user_info.current_semester)

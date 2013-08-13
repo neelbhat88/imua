@@ -1,4 +1,7 @@
 class Admin::DonorsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :teacher_only
+  
   def index
     @donors = Donor.all
     @donor = Donor.new

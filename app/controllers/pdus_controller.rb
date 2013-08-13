@@ -1,4 +1,6 @@
 class PdusController < ApplicationController
+	before_filter :authenticate_user!
+	
 	def index
 		allpdus = current_user.user_pdus.where('semester = ?', current_user.user_info.current_semester).order("date DESC")
 

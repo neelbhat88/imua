@@ -1,4 +1,5 @@
 class UserInfosController < ApplicationController
+  before_filter :authenticate_user!  
 
   def edit
     @user_info = current_user.user_info

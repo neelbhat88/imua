@@ -12,12 +12,11 @@ class ApplicationController < ActionController::Base
 	def after_sign_in_path_for(resource)
 		if current_user.is_student?
 			return global_badges_path
+		elsif current_user.is_teacher?
+			return admin_users_path
 		end
 
 		return school_classes_path
-
-		# Set global AppContext.CurrentUser here so it can be used by non-controllers. Replace
-		# passing in user to all the badges
 	end
 
 end

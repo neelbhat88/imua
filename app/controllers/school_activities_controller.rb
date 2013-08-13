@@ -1,6 +1,6 @@
 class SchoolActivitiesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :teacher_only
+  before_filter :admin_only
   
   # GET /school_activities
   # GET /school_activities.json

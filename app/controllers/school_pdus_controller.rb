@@ -1,6 +1,6 @@
 class SchoolPdusController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :teacher_only
+  before_filter :admin_only
   
   # GET /school_pdus
   # GET /school_pdus.json

@@ -1,4 +1,7 @@
 class Admin::UsersController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :teacher_only
+  
   def index
     @users = User.where(:role => 0).order("last_name ASC")
   end
