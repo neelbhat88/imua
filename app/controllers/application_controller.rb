@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+	after_filter :no_cache
+
 	protect_from_forgery
 
 	def admin_only
@@ -19,4 +21,13 @@ class ApplicationController < ActionController::Base
 		return school_classes_path
 	end
 
+	private
+
+		def no_cache
+			# Don't cache AJAX requests so pressing back button does not show json
+			# http://stackoverflow.com/questions/7734427/rails-3-1-is-returning-raw-javascript-code-when-back-button-is-used			
+			response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+			response.headers["Pragma"] = "no-cache"
+			response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"			
+		end
 end

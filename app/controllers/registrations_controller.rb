@@ -38,9 +38,12 @@ class RegistrationsController < Devise::RegistrationsController
 		super
 	end
 
-	def show
+	def show		           
 		@user = User.find(params[:id])
 		@user_info = @user.user_info
+
+		# Prevent users from accessing profiles other than their own
+		redirect_to root_url unless (current_user.id == @user.id || !current_user.is_student?)
 	end
 
 	def edit
