@@ -20,12 +20,13 @@ class Admin::UserServicesController < ApplicationController
   def create
     @user_service = UserService.new(params[:user_service])
     @user_service.date = Date.strptime(params[:user_service][:date],'%m/%d/%Y')
+    @user = User.find(@user_service.user_id)
 
     if @user_service.save
       # Trigger badge rules
-      BadgeProcessor.new(current_user).CheckSemesterServices()
+      BadgeProcessor.new(@user).CheckSemesterServices()
 
-      redirect_to admin_user_services_path(:user_id => current_user.id), notice: 'Student classes were successfully updated.'
+      redirect_to admin_user_services_path(:user_id => @user.id), notice: 'Student classes were successfully updated.'
     else
       render 'admin/user_services/new', alert: 'Sorry, something went wrong. Try again.'
     end
@@ -41,13 +42,15 @@ class Admin::UserServicesController < ApplicationController
     @user_service.date = Date.strptime(params[:user_service][:date],'%m/%d/%Y')
     @user_service.name = params[:user_service][:name]
     @user_service.hours = params[:user_service][:hours]
+    @user = User.find(@user_service.user_id)
+
     if @user_service.save
       # Trigger badge rules
-      BadgeProcessor.new(current_user).CheckSemesterServices()
+      BadgeProcessor.new(@user).CheckSemesterServices()
 
-      redirect_to admin_user_services_path(:user_id => current_user.id), notice: 'Student was successfully updated.'
+      redirect_to admin_user_services_path(:user_id => @user.id), notice: 'Student was successfully updated.'
     else
-      redirect_to admin_user_services_path(:user_id => current_user.id)
+      redirect_to admin_user_services_path(:user_id => @user.id)
     end
   end
 
@@ -55,10 +58,11 @@ class Admin::UserServicesController < ApplicationController
   def destroy
     @user_service = UserService.find(params[:id])
     @user_service.destroy
+    @user = User.find(@user_service.user_id)
 
     # Trigger badge rules
-    BadgeProcessor.new(current_user).CheckSemesterServices()
+    BadgeProcessor.new(@user).CheckSemesterServices()
 
-    redirect_to admin_user_services_path(:user_id => current_user.id)
+    redirect_to admin_user_services_path(:user_id => @user.id)
   end
 end

@@ -20,12 +20,13 @@ class Admin::UserClassesController < ApplicationController
   def create
     @user_class = UserClass.new(params[:user_class])
     @user_class.name = set_class_name
+    @user = User.find(@user_class.user_id)
 
     if @user_class.save
       # Trigger badge rules
-      BadgeProcessor.new(current_user).CheckSemesterAcademics()
+      BadgeProcessor.new(@user).CheckSemesterAcademics()
 
-      redirect_to admin_user_classes_path(:user_id => current_user.id), notice: 'Student classes were successfully updated.'
+      redirect_to admin_user_classes_path(:user_id => @user.id), notice: 'Student classes were successfully updated.'
     else
       render 'admin/user_classes/new', alert: 'Sorry, something went wrong. Try again.'
     end
@@ -40,14 +41,15 @@ class Admin::UserClassesController < ApplicationController
   def update
     @user_class = UserClass.find(params[:id])
     @user_class.name = set_class_name
+    @user = User.find(@user_class.user_id)
 
     if @user_class.update_attributes(params[:user_class])
       # Trigger badge rules
-      BadgeProcessor.new(current_user).CheckSemesterAcademics()
+      BadgeProcessor.new(@user).CheckSemesterAcademics()
 
-      redirect_to admin_user_classes_path(:user_id => current_user.id), notice: 'Student was successfully updated.'
+      redirect_to admin_user_classes_path(:user_id => @user.id), notice: 'Student was successfully updated.'
     else
-      redirect_to admin_user_classes_path(:user_id => current_user.id)
+      redirect_to admin_user_classes_path(:user_id => @user.id)
     end
   end
 
@@ -55,11 +57,12 @@ class Admin::UserClassesController < ApplicationController
   def destroy
     @user_class = UserClass.find(params[:id])
     @user_class.destroy
+    @user = User.find(@user_class.user_id)
 
     # Trigger badge rules
-    BadgeProcessor.new(current_user).CheckSemesterAcademics()
+    BadgeProcessor.new(@user).CheckSemesterAcademics()
 
-    redirect_to admin_user_classes_path(:user_id => current_user.id)
+    redirect_to admin_user_classes_path(:user_id => @user.id)
   end
 
   private

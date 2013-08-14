@@ -19,12 +19,13 @@ class Admin::UserActivitiesController < ApplicationController
 
   def create
     @user_activity = UserActivity.new(params[:user_activity])
+    @user = User.find(@user_activity.user_id)
 
     if @user_activity.save
       # Trigger badge rules
-      BadgeProcessor.new(current_user).CheckSemesterActivities()
+      BadgeProcessor.new(@user).CheckSemesterActivities()
 
-      redirect_to admin_user_activities_path(:user_id => current_user.id), notice: 'Student classes were successfully updated.'
+      redirect_to admin_user_activities_path(:user_id => @user.id), notice: 'Student classes were successfully updated.'
     else
       render 'admin/user_activities/new', alert: 'Sorry, something went wrong. Try again.'
     end
@@ -37,14 +38,15 @@ class Admin::UserActivitiesController < ApplicationController
 
   def update
     @user_activity = UserActivity.find(params[:id])
+    @user = User.find(@user_activity.user_id)
 
     if @user_activity.update_attributes(params[:user_activity])
       # Trigger badge rules
-      BadgeProcessor.new(current_user).CheckSemesterActivities()
+      BadgeProcessor.new(@user).CheckSemesterActivities()
 
-      redirect_to admin_user_activities_path(:user_id => current_user.id), notice: 'Student was successfully updated.'
+      redirect_to admin_user_activities_path(:user_id => @user.id), notice: 'Student was successfully updated.'
     else
-      redirect_to admin_user_activities_path(:user_id => current_user.id)
+      redirect_to admin_user_activities_path(:user_id => @user.id)
     end
   end
 
@@ -52,10 +54,11 @@ class Admin::UserActivitiesController < ApplicationController
   def destroy
     @user_activity = UserActivity.find(params[:id])
     @user_activity.destroy
+    @user = User.find(@user_activity.user_id)
 
     # Trigger badge rules
-    BadgeProcessor.new(current_user).CheckSemesterActivities()
+    BadgeProcessor.new(@user).CheckSemesterActivities()
 
-    redirect_to admin_user_activities_path(:user_id => current_user.id)
+    redirect_to admin_user_activities_path(:user_id => @user.id)
   end
 end

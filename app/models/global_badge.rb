@@ -29,10 +29,10 @@ class GlobalBadge < ActiveRecord::Base
     allbadges.each do | badge |
       hasEarned = "No"
 
-      logger.debug("DEBUG: GetBadgesViewModel - #{user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length}")
+      logger.debug("DEBUG: GetBadgesViewModel BId: #{badge.id} Sem: #{semester} - #{user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length}")
       # If User has earned badge
       if user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length != 0
-        if !badge.isminrequirement() && !user.user_info.MetAllMinRequirements()
+        if !badge.isminrequirement() && !user.user_info.MetAllMinRequirements(semester)
           hasEarned = "Pending"
         else
           hasEarned = "Yes"

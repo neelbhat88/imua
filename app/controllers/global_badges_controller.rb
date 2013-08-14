@@ -33,7 +33,6 @@ class GlobalBadgesController < ApplicationController
 		end
 
 		allbadges = GlobalBadge.where(:semester => [nil, semester])
-		logger.debug("Debug: Loading badges for semester #{semester}")
 
 		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
 
@@ -45,8 +44,8 @@ class GlobalBadgesController < ApplicationController
 	end
 
 private
-	def GetSemesterBadgesEarned(semester)		
-		if (current_user.user_info.MetAllMinRequirements())
+	def GetSemesterBadgesEarned(semester)	
+		if (current_user.user_info.MetAllMinRequirements(semester))
 			return current_user.user_badges.where(:semester => semester).length
 		else
 			# If all min reqs not met, total number earned is just the min requirements
