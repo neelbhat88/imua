@@ -21,6 +21,12 @@ class Admin::UserActivitiesController < ApplicationController
     @user_activity = UserActivity.new(params[:user_activity])
     @user = User.find(@user_activity.user_id)
 
+    if (params[:user_activity][:leadership_title] == "")
+      @user_activity.leadership_held = false
+    else
+      @user_activity.leadership_held = true
+    end
+
     if @user_activity.save
       # Trigger badge rules
       BadgeProcessor.new(@user).CheckSemesterActivities()
@@ -39,6 +45,12 @@ class Admin::UserActivitiesController < ApplicationController
   def update
     @user_activity = UserActivity.find(params[:id])
     @user = User.find(@user_activity.user_id)
+
+    if (params[:user_activity][:leadership_title] == "")
+      @user_activity.leadership_held = false
+    else
+      @user_activity.leadership_held = true
+    end
 
     if @user_activity.update_attributes(params[:user_activity])
       # Trigger badge rules
