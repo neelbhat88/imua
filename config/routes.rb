@@ -1,5 +1,8 @@
 Wcsf::Application.routes.draw do
 
+  resources :global_exams
+
+
   resources :school_pdus
 
 
