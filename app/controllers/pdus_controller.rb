@@ -72,7 +72,7 @@ class PdusController < ApplicationController
 	    # ------------------ BADGES ----------------------
 	    ##################################################   	    
 	    badgeProcessor = BadgeProcessor.new(current_user)
-	    badgeObject = badgeProcessor.CheckSemesterPdus()
+	    badgeProcessor.CheckSemesterPdus()
 	  		  	
 	  	# Reload badges
 	    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "PDU")
@@ -80,7 +80,7 @@ class PdusController < ApplicationController
 
 	  	# Return new badges received
 	  	respond_to do |format|
-	  		format.json { render :json => { :newpdus => returnpdus, :newBadges => badgeObject, :badges => badgesviewmodel } }
+	  		format.json { render :json => { :newpdus => returnpdus, :badges => badgesviewmodel } }
     end
   end
 end

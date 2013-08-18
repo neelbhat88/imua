@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  global_exam_id: 1
+  user_id: 1
+  semester: 1
+  date: 2013-08-17
+  hours: 1
+
+two:
+  global_exam_id: 1
+  user_id: 1
+  semester: 1
+  date: 2013-08-17
+  hours: 1

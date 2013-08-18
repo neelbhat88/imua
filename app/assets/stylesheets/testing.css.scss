@@ -1,4 +1,4 @@
-.academicsEdit
+.testingEdit
 {
 	& .editRow 
 	{		
@@ -7,7 +7,7 @@
 		border-radius: 3px; 
 		margin: auto auto 20px auto; 
 		position: relative;
-		width: 390px;
+		width: 495px;
 
 		& .close_x {
 			position: absolute; 
@@ -21,16 +21,4 @@
 
 	& .classDD { width: 250px; margin-right: 10px; }
 	& .gradeDD { width: 100px; margin-right: 10px; }
-}
-
-.academicsView
-{
-	& .viewRow { 
-		padding-bottom: 30px; 
-
-		& > * { display: inline-block; }
-
-		& .className { width: 495px; border-bottom: 1px dashed; }
-		& .classGrade { color: $midnight-blue; }
-	}
 }

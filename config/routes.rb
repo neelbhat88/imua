@@ -1,5 +1,9 @@
 Wcsf::Application.routes.draw do
 
+  get "testing/index"
+
+  get "testing_controller/index"
+
   resources :global_exams
 
 
@@ -67,6 +71,9 @@ Wcsf::Application.routes.draw do
 
   match '/pdus', to: 'pdus#index'
   match '/savePdus', to: 'pdus#savePdus'
+
+  match '/testing', to: 'testing#index'
+  match '/saveTesting', to: 'testing#saveTesting'
 
   match '/mybadges', to: 'my_badges#index'
   match '/updateGrid', to: 'my_badges#updateGrid'

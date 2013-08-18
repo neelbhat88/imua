@@ -35,6 +35,9 @@ $pdu_invert: $alizarin;
 $service: $green-sea;
 $service_invert: $turquoise;
 
+$testing: $wisteria;
+$testing_invert: $amethyst;
+
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
@@ -355,6 +358,7 @@ img.picture-box.college {
   &.extracur_bg:hover {background-color: $extracur_invert}
   &.pdu_bg:hover {background-color: $pdu_invert}
   &.service_bg:hover {background-color: $service_invert}
+  &.testing_bg:hover {background-color: $testing_invert}
 }
 
 .cancelButton
@@ -383,3 +387,5 @@ img.picture-box.college {
 .service_text { color: $service; }
 .service_bg { background-color: $service; color: white; }
 
+.testing_text { color: $testing; }
+.testing_bg { background-color: $testing; color: white; }

@@ -45,6 +45,15 @@ var Progress = new function() {
 				$('.progressNav li').removeClass("selected");
 				$(this).addClass("selected");
 			});
+
+			$('#testingNav').click(function(){
+				$('#progressPages').load("/testing", function() {
+					Testing.init();
+				});
+
+				$('.progressNav li').removeClass("selected");
+				$(this).addClass("selected");
+			});
 		});
 	};	
 };

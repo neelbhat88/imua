@@ -1,0 +1,61 @@
+<% @jsinit = 'Testing' %>
+
+<div data-bind="visible: pageLoaded" style="display: none">
+	<div class="progressHeadingContainer testing_text" style="width: 450px; padding-left: 50px;">
+		<div data-bind="text: totalTests().length" class="value"></div>
+		<div class="text" style="padding-left: 25px">Tests Taken</div>
+	</div>
+
+	<div class="categoryDataContainer" style="width: 650px;">
+		<div class="header testing_bg">
+			<span class="text">My Tests</span>
+		</div>
+		<div class="body testing_text" style="">
+			<div data-bind="template: {name: templateToUse}"></div>
+		</div>
+	</div>
+
+	<div class="progressPageBadges testing_text" data-bind="foreach: { data: badges, as: 'badge' }">
+		<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+			<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>
+			<div class="description" data-bind="text: badge.description()"></div>
+			<div data-bind="visible: badge.isminrequirement()" class="minReqStar"><%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement") %></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/html" id="view">
+	<div class="academicsView" data-bind="foreach: totalTests, visible: totalTests().length > 0">
+		<div class="viewRow">
+			<div class="className" data-bind="text: name() + ' on ' + date()"></div>
+			<div class="classGrade" data-bind="text: score()"></div>
+		</div>
+	</div>
+	
+	<div data-bind="visible: totalTests().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray">
+		Click Edit below to add Tests.
+	</div>
+	<div class="buttonGroup">
+		<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
+	</div>
+</script>
+
+<script type="text/html" id="edit">
+	<div class="testingEdit" style="display:none" data-bind="foreach: { data: totalTests, as: 'test'}, visible: totalTests().length > 0">
+		<div class="editRow">
+			<div data-bind="click: $root.remove" class="close_x">x</div>
+			
+			<select class="classDD" data-bind="options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>			
+			<input data-bind="value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
+			<input data-bind="value: score" placeholder="Score" style="width: 100px" />		
+		</div>
+	</div>		
+	<div class="pbm textCenter">
+		<a href="#" data-bind="click: $root.add">Add Test</a>
+	</div>
+	<div class="buttonGroup">
+		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
+		<div class="submitButton testing_bg" data-bind="click: $root.save">Save</div>
+		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
+	</div>
+</script>

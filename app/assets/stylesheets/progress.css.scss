@@ -33,6 +33,7 @@
 		&.extracur_text:hover { color: $extracur_invert; }
 		&.service_text:hover { color: $service_invert; }
 		&.pdu_text:hover { color: $pdu_invert; }
+		&.testing_text:hover { color: $testing_invert; }
 	}
 }
 
@@ -67,6 +68,10 @@
 
 	& > .pdu_bg, > .pdu_text { 
 		border: 3px solid $pdu; 
+	}
+
+	& > .testing_bg, > .testing_text { 
+		border: 3px solid $testing; 
 	}
 
 	& .header {

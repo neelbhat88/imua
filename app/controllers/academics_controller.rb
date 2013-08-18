@@ -74,10 +74,7 @@ class AcademicsController < ApplicationController
     logger.debug "DEBUG: TotalGPA - #{totalGpa}"
 
     badgeProcessor = BadgeProcessor.new(current_user)
-    badgeObject = badgeProcessor.CheckSemesterAcademics()    
-  	
-  	logger.debug "DEBUG: Badges earned and lost #{badgeObject} new badges."
-    logger.debug "DEBUG: Badges earned #{badgeObject[:badgesEarned].length}, Badges lost #{badgeObject[:badgesLost].length}"
+    badgeObject = badgeProcessor.CheckSemesterAcademics()  
 
     # Reload badges
     badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Academics")
