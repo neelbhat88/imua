@@ -64,8 +64,8 @@ class TestingController < ApplicationController
 	    ##################################################
 	    # ------------------ BADGES ----------------------
 	    ##################################################   	    
-	    #badgeProcessor = BadgeProcessor.new(current_user)
-	    #badgeProcessor.CheckSemesterTesting()	    
+	    badgeProcessor = BadgeProcessor.new(current_user)
+	    badgeProcessor.CheckSemesterTesting()	    
 	  		  	
 	  	# Reload badges
 	    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Testing")

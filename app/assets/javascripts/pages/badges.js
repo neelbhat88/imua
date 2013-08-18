@@ -63,6 +63,8 @@ function getBadgeColor(badge) {
 				return "service_text";
 			case "PDU": 
 				return "pdu_text";
+			case "Testing":
+				return "testing_text";
 		}
 
 		return "pending";
@@ -78,5 +80,7 @@ function getBadgeColor(badge) {
 			return "service_bg";
 		case "PDU": 
 			return "pdu_bg";
+		case "Testing": 
+			return "testing_bg";
 	}			
 }

@@ -5,7 +5,7 @@ class GlobalBadge < ActiveRecord::Base
   default_scope order('id ASC')
 
   def GetCategories
-  	return ['Academics', 'Activity', 'Service', 'PDU']
+  	return ['Academics', 'Activity', 'Service', 'PDU', 'Testing']
   end
 
   def GetSubCategories(category)
@@ -13,7 +13,8 @@ class GlobalBadge < ActiveRecord::Base
   		'Academics' => ['GPA', 'LetterGrade', 'APScore', 'ClassCredit'],
       'Activity' => ['Involvement', 'Leadership'],
       'Service' => ['Service'],
-      'PDU' => ['PDU']
+      'PDU' => ['PDU'],
+      'Testing' => ['Exam', 'Score', 'ExamType']
   	}  	
 
   	return subcategories[category]
@@ -25,6 +26,8 @@ class GlobalBadge < ActiveRecord::Base
       semester = user.user_info.current_semester
     end
 
+    minreqsmet = user.user_info.MetAllMinRequirements(semester)
+
     badgesviewmodel = []
     allbadges.each do | badge |
       hasEarned = "No"
@@ -32,7 +35,7 @@ class GlobalBadge < ActiveRecord::Base
       logger.debug("DEBUG: GetBadgesViewModel BId: #{badge.id} Sem: #{semester} - #{user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length}")
       # If User has earned badge
       if user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length != 0
-        if !badge.isminrequirement() && !user.user_info.MetAllMinRequirements(semester)
+        if !badge.isminrequirement() && !minreqsmet
           hasEarned = "Pending"
         else
           hasEarned = "Yes"

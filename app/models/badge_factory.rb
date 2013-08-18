@@ -107,4 +107,28 @@ class BadgeFactory
 
 		return badgeList
 	end
+
+	def GetTestingBadges(semester=nil)
+		if semester.nil?
+			allBadges = GlobalBadge.where(:category => "Testing")
+		else
+			allBadges = GlobalBadge.where(:category => "Testing", :semester => [nil, semester])
+		end
+
+		badgeList = []
+
+		allBadges.each do |b|
+			case b.subcategory
+			
+			when 0
+				badgeList << TestingExamBadge.new(b, curr_user)
+			when 1
+				badgeList << TestingScoreBadge.new(b, curr_user)
+			#when 2
+			#	badgeList << TestingExamTypeBadge.new(b, curr_user)
+			end
+		end
+
+		return badgeList
+	end
 end

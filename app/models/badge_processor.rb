@@ -22,6 +22,10 @@ class BadgeProcessor
 		return CompareBadges(@badgefactory.GetPduBadges(@curr_user.user_info.current_semester))
 	end
 
+	def CheckSemesterTesting
+		return CompareBadges(@badgefactory.GetTestingBadges(@curr_user.user_info.current_semester))
+	end
+
 	def CompareBadges(allBadges)
 		newbadgecount = 0
 		badgesearned = []
