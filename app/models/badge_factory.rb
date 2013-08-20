@@ -124,8 +124,10 @@ class BadgeFactory
 				badgeList << TestingExamBadge.new(b, curr_user)
 			when 1
 				badgeList << TestingScoreBadge.new(b, curr_user)
-			#when 2
-			#	badgeList << TestingExamTypeBadge.new(b, curr_user)
+			when 2
+				badgeList << TestingExamTypeBadge.new(b, curr_user)
+			when 3
+				badgeList << TestingPrepQuizBadge.new(b, curr_user)
 			end
 		end
 

@@ -19,7 +19,7 @@
       </div>
       <div class="field">
         <%= f.label :exam_type %><br />
-        <%= f.select :exam_type, [['Practice', 'Practice'], ['Regular', 'Regular'], ['Subject', 'Subject']] %>
+        <%= f.select :exam_type, GlobalExam.GetTypes() %>
       </div>
       <div class="actions">
         <% if isEdit == false %>

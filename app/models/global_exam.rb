@@ -1,5 +1,13 @@
 class GlobalExam < ActiveRecord::Base
-  attr_accessible :name, :exam_type
+  attr_accessible :name, :exam_type  
 
-  # Types are: Practice, Regular, Subject
+  def self.GetTypes()
+  	return [
+  			['Practice ACT/SAT', 'PracticeACTSAT'],
+  			['ACT/SAT', 'ACTSAT'],
+  			['Regular', 'Regular'],
+  			['Subject', 'Subject'], 
+  			['WCSF Prep Quiz', 'WCSFPrepQuiz']
+  		]
+  end
 end
