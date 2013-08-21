@@ -7,6 +7,18 @@
 	z-index: 1;
 }
 
+@media screen and (max-height:700px) {
+    .progressLeftPane
+	{
+		width: 235px; 
+		padding-top: 45px; 
+		border-right: 1px solid $asbestos;		
+		z-index: 1;
+
+		position: absolute;
+	}
+}
+
 .progressNav
 {
 	padding-top: 20px;
@@ -94,6 +106,7 @@
 		border-radius: 0px 0px 5px 5px; 
 		border-top: none; 
 		font-size: 1.4em;
+		background-color: white;
 	}
 }
 

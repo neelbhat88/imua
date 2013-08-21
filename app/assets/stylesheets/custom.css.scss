@@ -54,6 +54,10 @@ html {
 
 body {
   /*background: url("wavegrid.png") repeat scroll 0 0 transparent;*/
+  background: url('lei_bg.png') no-repeat;
+  background-position: bottom right;
+  background-size: 600px;
+  background-attachment: fixed;
   color: #333;
   font-size: 13px;
   line-height: 18px;
@@ -376,16 +380,16 @@ img.picture-box.college {
 
 /* Category colors */
 .academics_text { color: $academics; }
-.academics_bg { background-color: $academics; color: white; }
+.academics_bg { background-color: $academics !important; color: white; }
 
 .extracur_text { color: $extracur; }
-.extracur_bg { background-color: $extracur; color: white; }
+.extracur_bg { background-color: $extracur !important; color: white; }
 
 .pdu_text { color: $pdu; }
-.pdu_bg { background-color: $pdu; color: white; }
+.pdu_bg { background-color: $pdu !important; color: white; }
 
 .service_text { color: $service; }
-.service_bg { background-color: $service; color: white; }
+.service_bg { background-color: $service !important; color: white; }
 
 .testing_text { color: $testing; }
-.testing_bg { background-color: $testing; color: white; }
+.testing_bg { background-color: $testing !important; color: white; }

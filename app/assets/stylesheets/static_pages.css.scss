@@ -13,7 +13,8 @@ body.static_pages {
 	padding-top: 0;
 	margin: 0 10px;
 	color: #434343;
-	background: #fff;
+	background-position: bottom left;
+	/* background: #fff; */
 }
 
 .static_pages {
@@ -49,9 +50,9 @@ p {
 }
 
 .pages-container {
-	width: 1080px;
+	width: 1110px;
 	margin: 0 auto;
-	background: #fff;
+	/* background: #fff; */
 }
 
 .main-content {
@@ -200,7 +201,7 @@ p {
 #slideshow {
 	width: 800px;
 	height: 360px;
-	margin-top: 35px;
+	margin-top: 35px;	
 }
 
 .main-quote {
@@ -244,16 +245,25 @@ p {
 }
 
 .home-main-content {
-	background: url('home-background.png') no-repeat;
-	width: 800px;
+	/* background: url('home-background.png') no-repeat; */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
+	width: 810px;
 	height: 344px;
+	padding: 25px 0;
+
 	p {
 		width: 660px;
-		margin: 0 auto;
-		font-family: $alt-font;
+		margin: 0 auto;		
 		font-size: 20px;
 		line-height: 24px;
 		color: $dark-blue;
+		font-weight: bold;
 	}
 }
 
