@@ -14,8 +14,8 @@
           <ul class="nav pull-right">
             <% if user_signed_in? %>
               <% if current_user.is_student? %>
-                <li page="Progress"><%= link_to "Progress", progress_path %></li>
                 <li page="Badges"><%= link_to "Badges", global_badges_path %></li>
+                <li page="Progress"><%= link_to "Progress", progress_path %></li>
                 <li page=""><%= link_to "My Profile", show_user_registration_path(current_user) %></li>
               <% elsif current_user.is_admin? %>
                 <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
@@ -25,8 +25,6 @@
                 <li page="GlobalExams"><%= link_to "Global Exams", global_exams_path %></li>
               <% end %>
               <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-            <% else %>
-              <li><%= link_to "Login", new_user_session_path %></li>
             <% end %>
           </ul>
         </div><!--/.nav -->
