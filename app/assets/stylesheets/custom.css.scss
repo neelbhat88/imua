@@ -38,6 +38,9 @@ $service_invert: $turquoise;
 $testing: $wisteria;
 $testing_invert: $amethyst;
 
+$midnight: $midnight-blue;
+$midnight_invert: $wet-asphalt;
+
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
@@ -269,15 +272,41 @@ input {
 }
 
 /* Erin's CSS */
-.mal {margin: 15px}
-.mam {margin: 10px}
-.mas {margin: 5px}
+.mal,.mvl,.mbl {margin-bottom: 15px}
+.mam,.mbm {margin-bottom: 10px}
+.mas,.mbs {margin-bottom: 5px}
 
-.pal {padding: 15px}
+.mal,.mvl,.mtl {margin-top: 15px}
+.mam,.mtm {margin-top: 10px}
+.mas,.mts {margin-top: 5px}
 
-.pbl {padding-bottom: 15px}
-.pbm {padding-bottom: 10px}
-.pbs {padding-bottom: 5px}
+.mal,.mrl {margin-right: 15px}
+.mam,.mrm {margin-right: 10px}
+.mas,.mrs {margin-right: 5px}
+
+.mal,.mll {margin-left: 15px}
+.mam,.mlm {margin-left: 10px}
+.mas,.mls {margin-left: 5px}
+
+.paxl,.pvxl,.pbxl {padding-bottom: 20px}
+.pal,.pvl,.pbl {padding-bottom: 15px}
+.pam,.pbm {padding-bottom: 10px}
+.pas,.pbs {padding-bottom: 5px}
+
+.paxl,.pvxl,.ptxl {padding-top: 20px}
+.pal,.pvl,.ptl {padding-top: 15px}
+.pam,.ptm {padding-top: 10px}
+.pas,.pts {padding-top: 5px}
+
+.paxl,.prxl {padding-right: 20px}
+.pal,.prl {padding-right: 15px}
+.pam,.prm {padding-right: 10px}
+.pas,.prs {padding-right: 5px}
+
+.paxl,.plxl {padding-left: 20px}
+.pal,.pll {padding-left: 15px}
+.pam,.plm {padding-left: 10px}
+.pas,.pls {padding-left: 5px}
 
 
 /* Profile CSS */
@@ -363,6 +392,7 @@ img.picture-box.college {
   &.pdu_bg:hover {background-color: $pdu_invert}
   &.service_bg:hover {background-color: $service_invert}
   &.testing_bg:hover {background-color: $testing_invert}
+  &.midnight_bg:hover {background-color: $midnight_invert}
 }
 
 .cancelButton
@@ -380,16 +410,19 @@ img.picture-box.college {
 
 /* Category colors */
 .academics_text { color: $academics; }
-.academics_bg { background-color: $academics !important; color: white; }
+.academics_bg { background-color: $academics; color: white; }
 
 .extracur_text { color: $extracur; }
-.extracur_bg { background-color: $extracur !important; color: white; }
+.extracur_bg { background-color: $extracur; color: white; }
 
 .pdu_text { color: $pdu; }
-.pdu_bg { background-color: $pdu !important; color: white; }
+.pdu_bg { background-color: $pdu; color: white; }
 
 .service_text { color: $service; }
-.service_bg { background-color: $service !important; color: white; }
+.service_bg { background-color: $service; color: white; }
 
 .testing_text { color: $testing; }
-.testing_bg { background-color: $testing !important; color: white; }
+.testing_bg { background-color: $testing; color: white; }
+
+.midnight_text {color: $midnight }
+.midnight_bg {background-color: $midnight; color: white;}
