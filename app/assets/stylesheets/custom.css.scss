@@ -309,6 +309,8 @@ input {
 .pas,.pls {padding-left: 5px}
 
 
+.displayInlineBlock { display: inline-block;}
+
 /* Profile CSS */
 img.picture-box {
   max-width: 230px;
@@ -317,11 +319,11 @@ img.picture-box {
 }
 
 img.picture-box.avatar {
-  border: 8px solid #00ABF0;
+  border: 8px solid $peter-river;
 }
 
 img.picture-box.college {
-  border: 8px solid #EF1C25;
+  border: 8px solid $alizarin;
 }
 
 .profile-header {
@@ -354,6 +356,13 @@ img.picture-box.college {
   h2 {
     text-align: left;
     margin: 20px 0px;
+    color: $midnight;
+    font-weight: bold;
+
+    p {
+      font-weight: normal;
+      font-size: 18px;
+    }
   }
   h1 {
     text-align: left;
@@ -361,6 +370,8 @@ img.picture-box.college {
   .add-picture {
     margin: 5px 10px 15px 10px;
   }
+
+  .progressHeadingContainer { padding: 0; }
 }
 
 .student-index {
@@ -410,19 +421,19 @@ img.picture-box.college {
 
 /* Category colors */
 .academics_text { color: $academics; }
-.academics_bg { background-color: $academics; color: white; }
+.academics_bg, .globalBadge.academics_bg { background-color: $academics; color: white; }
 
 .extracur_text { color: $extracur; }
-.extracur_bg { background-color: $extracur; color: white; }
+.extracur_bg, .globalBadge.extracur_bg { background-color: $extracur; color: white; }
 
 .pdu_text { color: $pdu; }
-.pdu_bg { background-color: $pdu; color: white; }
+.pdu_bg, .globalBadge.pdu_bg { background-color: $pdu; color: white; }
 
 .service_text { color: $service; }
-.service_bg { background-color: $service; color: white; }
+.service_bg, .globalBadge.service_bg { background-color: $service; color: white; }
 
 .testing_text { color: $testing; }
-.testing_bg { background-color: $testing; color: white; }
+.testing_bg, .globalBadge.testing_bg { background-color: $testing; color: white; }
 
 .midnight_text {color: $midnight }
 .midnight_bg {background-color: $midnight; color: white;}
