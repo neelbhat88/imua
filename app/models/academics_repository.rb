@@ -21,12 +21,11 @@ class AcademicsRepository
 	    end
 
 	    # Must have at least 5 classes with grade to earn GPA badges
-	    if (classeswithgrade < 5)
-	      return 0
-	    end
-
-	    Rails.logger.debug("DEBUG: TotalGpa = #{totalGpa} / CreditHourTotal = #{credithourtotal}")
-	    semester_gpa = (totalGpa / credithourtotal).round(2)
+	    semester_gpa = 0
+	    if (classeswithgrade > 4)
+	      	Rails.logger.debug("DEBUG: TotalGpa = #{totalGpa} / CreditHourTotal = #{credithourtotal}")
+	    	semester_gpa = (totalGpa / credithourtotal).round(2)
+	    end	    
 
 	    # Save Semester gpa
 	    user_semester_gpa = self.user.user_semester_gpas.where(:semester => self.user.user_info.current_semester)

@@ -21,6 +21,10 @@ class Admin::UsersController < ApplicationController
 
     if @user.save
       @user.create_user_info(:school_id => @school_id)
+      
+      # Init Semester GPA
+      AcademicsRepository.new(@user).SaveTotalSemesterGpa(@user.user_info.current_semester)
+
       redirect_to admin_users_path, notice: 'Student was successfully created.'
     else
       render 'admin/users/new', alert: 'Sorry, something went wrong. Try again.'
@@ -42,6 +46,7 @@ class Admin::UsersController < ApplicationController
 
     if @user.update_with_password(params[:user])
       @user_info.save
+            
       redirect_to admin_users_path, notice: 'Student was successfully updated.'
     else
       render 'edit'
@@ -50,8 +55,11 @@ class Admin::UsersController < ApplicationController
 
   def update_info
     @user_info = UserInfo.find(params[:id])
+    user = @user_info.user
 
     if @user_info.update_attributes(params[:user_info])
+      # Init Semester GPA
+      AcademicsRepository.new(user).SaveTotalSemesterGpa(params[:user_info][:current_semester])
       redirect_to admin_users_path, notice: 'Student was successfully updated.'
     else
       render :edit
