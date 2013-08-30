@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span6 offset3">
     <h2>Edit Student User Information</h2>
-    <%= render 'form', :editing => true %>
+    <%= render 'form', :editing => true, :user_info => @user_info %>
     <hr>
     <h2>Edit Student Profile</h2>
     <%= render 'edit_profile', :user_info => @user_info, :semesters => @semesters %>

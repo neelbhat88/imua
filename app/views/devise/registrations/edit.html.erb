@@ -25,10 +25,7 @@
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <div>
-          <%= f.label "School" %>
-          <%= select :school, :id, School.all.map{|x| [x.name, x.id]}, { :prompt => "Select your school" } %>
-        </div>
+        
 
 
         <h4>Update Password</h4>

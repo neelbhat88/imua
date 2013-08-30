@@ -32,8 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
 	end
 
 	def update
-		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
-		@school_id = params[:school][:id]
+		@role = params[:user][:role] == nil ? 0 : params[:user][:role]		
 
 		super
 	end
