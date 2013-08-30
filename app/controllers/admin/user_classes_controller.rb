@@ -23,6 +23,9 @@ class Admin::UserClassesController < ApplicationController
     @user = User.find(@user_class.user_id)
 
     if @user_class.save
+      # Save Semester Gpa
+      AcademicsRepository.new(@user).SaveTotalSemesterGpa(@user.user_info.current_semester)
+      
       # Trigger badge rules
       BadgeProcessor.new(@user).CheckSemesterAcademics()
 
@@ -44,6 +47,9 @@ class Admin::UserClassesController < ApplicationController
     @user = User.find(@user_class.user_id)
 
     if @user_class.update_attributes(params[:user_class])
+      # Save Semester Gpa
+      AcademicsRepository.new(@user).SaveTotalSemesterGpa(@user.user_info.current_semester)
+
       # Trigger badge rules
       BadgeProcessor.new(@user).CheckSemesterAcademics()
 
@@ -58,6 +64,9 @@ class Admin::UserClassesController < ApplicationController
     @user_class = UserClass.find(params[:id])
     @user_class.destroy
     @user = User.find(@user_class.user_id)
+
+    # Save Semester Gpa
+    AcademicsRepository.new(@user).SaveTotalSemesterGpa(@user.user_info.current_semester)
 
     # Trigger badge rules
     BadgeProcessor.new(@user).CheckSemesterAcademics()

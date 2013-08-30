@@ -21,6 +21,10 @@
         <%= f.label :level %><br />
         <%= f.select :level, [['Regular', 0], ['Honors', 1], ['AP', 2]] %>
       </div>
+      <div class="field">
+        <%= f.label :credit_hours %><br />
+        <%= f.text_field :credit_hours %>
+      </div>
       <div class="actions">
         <% if isEdit == false %>
           <%= f.submit "Save and Add Another", class: "btn btn-large btn-primary", :name => "save_add_another" %>

@@ -16,6 +16,7 @@ var Academics = new function() {
 					self.viewModel.originalSubjects = obj.userclasses;
 					self.viewModel.globalsubjects = ko.mapping.fromJS(obj.globalclasses);
 					self.viewModel.badges = ko.mapping.fromJS(obj.badges);
+					self.viewModel.totalGPA = ko.mapping.fromJS(obj.totalsemgpa);
 
 					ViewModelPropertiesInit(self.viewModel);			
 
@@ -66,26 +67,7 @@ function ViewModelPropertiesInit(viewModel)
 		'C+': 2.33, 'C':  2.00, 'C-': 1.67, 
 		'D':  1.33, 
 		'F':  1.0
-	};
-
-	viewModel.calculateTotalGpa = function() {
-		var numClasses = viewModel.subjects().length;
-		var nonNullClasses = 0;
-		var fullGPA = 0;
-
-		for (var i = 0; i < numClasses; i++)
-		{
-			if (viewModel.subjects()[i].grade() != null)
-			{
-				fullGPA += viewModel.gpaHash[viewModel.subjects()[i].grade()];
-				nonNullClasses++;
-			}
-		}
-
-		return fullGPA/nonNullClasses;
-	}	
-
-	viewModel.totalGPA = ko.observable(viewModel.calculateTotalGpa());
+	};	
 
 	viewModel.editing = ko.observable(false);
 	viewModel.rowsToRemove = [];
@@ -103,8 +85,6 @@ function ViewModelPropertiesInit(viewModel)
 
 	viewModel.saveClasses = function()
 	{
-		var newGpa = viewModel.calculateTotalGpa();
-
 		var hasErrors = false;
 		$.each(viewModel.subjects(), function() {
 			if (this.school_class_id() == null || this.grade() == null)
@@ -130,7 +110,6 @@ function ViewModelPropertiesInit(viewModel)
 			type: "POST",
 			url: '/saveClasses',
 			data: {
-				totalGPA: newGpa, 
 				classes: ko.toJSON(viewModel.subjects()), 
 				classesToRemove: ko.toJSON(viewModel.rowsToRemove)
 			},
@@ -138,9 +117,9 @@ function ViewModelPropertiesInit(viewModel)
 			{				
 				viewModel.subjects = ko.mapping.fromJS(data.newclasses);
 				ko.mapping.fromJS(data.badges, {}, viewModel.badges);
+				ko.mapping.fromJS(data.totalsemgpa, {}, viewModel.totalGPA)
 
 				viewModel.originalSubjects = data.newclasses;
-				viewModel.totalGPA(newGpa);
 
 				viewModel.rowsToRemove = [];				
 				viewModel.editing(false);

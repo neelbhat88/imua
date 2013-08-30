@@ -9,7 +9,8 @@ class AcademicsGpaBadge < AcademicsBadge
 	end
 
 	def Compare()
-		if (self.curr_user.user_info.GetTotalGpa() >= self.gpa)
+		Rails.logger.debug("*******************DEBUG: Current gpa = #{self.curr_user.user_semester_gpas.where(:semester => self.curr_user.user_info.current_semester).first.gpa}. Compared to: #{self.gpa}")
+		if (self.curr_user.user_semester_gpas.where(:semester => self.curr_user.user_info.current_semester).first.gpa >= self.gpa)
 			return true
 		end		
 

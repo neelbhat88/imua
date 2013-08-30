@@ -19,6 +19,8 @@
   has_many :user_services
   has_many :user_pdus
   has_many :user_testings
+  has_many :user_semester_gpas
+  
   has_one :user_info, :dependent => :destroy
 
   def is_student?

@@ -1,5 +1,8 @@
 class AcademicsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :init_controller
+
+  attr_accessor :academics_repo
 
   def index
   	allclasses = current_user.user_classes.where('semester = ?', current_user.user_info.current_semester)
@@ -9,6 +12,9 @@ class AcademicsController < ApplicationController
   		classes << ClassViewModel.new(a)
   	end
 
+    # Get total semester gpa
+    totalsemgpa = current_user.user_semester_gpas.where(:semester => current_user.user_info.current_semester).first.gpa
+
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
@@ -16,7 +22,7 @@ class AcademicsController < ApplicationController
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
 
   	respond_to do |format|
-      format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses, :badges => badgesviewmodel} }
+      format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses, :badges => badgesviewmodel, :totalsemgpa => totalsemgpa} }
       format.html { render :layout=>false } # index.html.erb	
   	end
   end
@@ -59,6 +65,9 @@ class AcademicsController < ApplicationController
   		end
   	end
 
+    # Save total semester GPA
+    totalsemgpa = self.academics_repo.SaveTotalSemesterGpa(current_user.user_info.current_semester)    
+
   	# Reload all classes
   	allclasses = UserClass.where('semester = ? and user_id = ?', current_user.user_info.current_semester, current_user.id)
 
@@ -69,10 +78,7 @@ class AcademicsController < ApplicationController
 
     ##################################################
     # ------------------ BADGES ----------------------
-    ##################################################
-    totalGpa = params[:totalGPA]
-    logger.debug "DEBUG: TotalGPA - #{totalGpa}"
-
+    ##################################################    
     badgeProcessor = BadgeProcessor.new(current_user)
     badgeObject = badgeProcessor.CheckSemesterAcademics()  
 
@@ -82,7 +88,12 @@ class AcademicsController < ApplicationController
 
   	# Return new badges received
   	respond_to do |format|
-  		format.json { render :json => { :newclasses => returnclasses, :badges => badgesviewmodel} }
+  		format.json { render :json => { :newclasses => returnclasses, :badges => badgesviewmodel, :totalsemgpa => totalsemgpa} }
     end
   end
+
+  private
+    def init_controller
+      self.academics_repo = AcademicsRepository.new(current_user)
+    end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130817212635) do
+ActiveRecord::Schema.define(:version => 20130830002708) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(:version => 20130817212635) do
     t.integer  "school_id"
     t.string   "name"
     t.integer  "level"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.float    "credit_hours", :default => 1.0
   end
 
   create_table "school_pdus", :force => true do |t|
@@ -125,6 +126,14 @@ ActiveRecord::Schema.define(:version => 20130817212635) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "school_pdu_id"
+  end
+
+  create_table "user_semester_gpas", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "semester"
+    t.float    "gpa"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_services", :force => true do |t|
