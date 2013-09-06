@@ -17,7 +17,12 @@
 
 					<div class="student">
 						<a href="#" class="studentModal" data-student="<%= student.id %>">
-							<%= image_tag student.user_info.avatar.url(:original) %>
+							<!-- ToDo: Remove this if statement later. This is nasty. -->
+							<% if student.user_info.classof == 2016 %>
+							<%= image_tag student.user_info.avatar.url(:original), :style=>"height: 200px; max-width: none;" %>
+							<% else %>
+							<%= image_tag student.user_info.avatar.url(:original), :style=>"height: 145px; max-width: none;" %>
+							<% end %>
 							<h3><%= "#{student.first_name} #{student.last_name}" %></h3>
 						</a>
 					</div>
