@@ -1,5 +1,6 @@
 class UserInfo < ActiveRecord::Base
-  attr_accessible :current_semester, :school_id, :user_id, :big_goal, :why_description, :how_description, :college_avatar, :avatar
+  attr_accessible :current_semester, :school_id, :user_id, :classof,
+                  :big_goal, :why_description, :how_description, :college_avatar, :avatar
 
   belongs_to :user
   belongs_to :school
@@ -21,5 +22,9 @@ class UserInfo < ActiveRecord::Base
     end
 
     return true
+  end
+
+  def self.GetClassYears
+    return [2016, 2017]
   end
 end

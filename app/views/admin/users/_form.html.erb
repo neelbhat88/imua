@@ -28,6 +28,12 @@
     <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %></div>
 
+    <div>
+      <%= f.label "Class of" %><br />
+      <% if editing == false %>        
+        <%= select :user_info, :classof, UserInfo.GetClassYears() %>
+      <% end %>
+    </div>
 
     <div>
       <%= f.label "School" %><br />

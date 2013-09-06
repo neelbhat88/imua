@@ -18,9 +18,10 @@ class Admin::UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.role = 0
     @school_id = params[:school][:id]
+    @classof = params[:user_info][:classof].to_i
 
     if @user.save
-      @user.create_user_info(:school_id => @school_id)
+      @user.create_user_info(:school_id => @school_id, :classof => @classof)
       
       # Init Semester GPA
       AcademicsRepository.new(@user).SaveTotalSemesterGpa(@user.user_info.current_semester)
@@ -42,7 +43,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_info = @user.user_info
     @semesters = (1..8).to_a
-    @user_info.school_id = params[:school][:id]
+    @user_info.school_id = params[:school][:id]  
 
     if @user.update_with_password(params[:user])
       @user_info.save

@@ -20,6 +20,11 @@
     <%= f.select :current_semester, semesters %>
   </div>
 
+  <div>
+      <%= f.label "Class of" %>
+      <%= f.select :classof, UserInfo.GetClassYears(), {:selected => user_info.classof} %>
+  </div>
+
   <%= image_tag user_info.avatar.url(:original), :class => 'picture-box avatar' %>
     <%= f.label :avatar, "Profile Picture" %>
     <div>
