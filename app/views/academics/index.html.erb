@@ -8,7 +8,18 @@
 
 	<div class="categoryDataContainer" style="width: 600px;">
 		<div class="header academics_bg">
-			<span class="text">My Classes</span>
+			<div class="text">My Classes</div>			
+			<select data-bind="options: semesters, 
+							   optionsText: function(item){
+							   		if (item == semesters[semesters.length - 1])
+							   			return 'Current';
+
+							   		return 'Semester ' + item;
+							   	},
+							   value: semester"
+					class="academics_text small_select">
+			</select>
+			
 		</div>
 		<div class="body academics_text" style="">
 			<div data-bind="template: {name: templateToUse}"></div>	
@@ -52,7 +63,7 @@
 	<div data-bind="visible: $root.subjects().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray">
 		Click Edit below to add your classes.
 	</div>
-	<div class="buttonGroup">
+	<div class="buttonGroup" data-bind="visible: editable()">
 		<div class="submitButton academics_bg" data-bind="click: $root.editClasses">Edit</div>		
 	</div>
 </script>

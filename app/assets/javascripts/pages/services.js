@@ -5,7 +5,10 @@ var Services = new function() {
 		totalHours: ko.observable(0),
 		editing: ko.observable(false),
 		pageLoaded: ko.observable(false),
-		rowsToRemove: [],	
+		rowsToRemove: [],
+		semesters: [],
+		semester: ko.observable(1),
+		editable: ko.observable(true),
 
 		add: function() {
 			self.viewModel.services.push(new Service("", null, null));
@@ -123,6 +126,10 @@ var Services = new function() {
 					// Initialize Services specific stuff
 					self.viewModel.totalHours(self.viewModel.calculateTotalHours());
 
+					self.viewModel.semesters = data.semesters;
+					self.viewModel.semester(data.init_semester);
+					self.viewModel.editable(data.editable);
+
 					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
@@ -130,6 +137,22 @@ var Services = new function() {
 			});
 		});
 	};
+
+	// Subscribe to drop down change and update the UI accordingly
+	self.viewModel.semester.subscribe(function(newValue) {
+		$.ajax({
+			type: "POST",
+			url: '/services',
+			data: {semester: newValue},
+			success: function(data) {				
+				ko.mapping.fromJS(data.userservices, {}, self.viewModel.services);
+				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+				self.viewModel.totalHours(self.viewModel.calculateTotalHours());							
+				self.viewModel.editable(data.editable);
+			},
+			error: function() { alert("Failed drop down subscribe ajax post");}
+		});
+	});
 
 	function Service(name, date, hours)
 	{

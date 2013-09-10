@@ -5,6 +5,9 @@ var Testing = new function() {
 		editing: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
+		semesters: [],
+		semester: ko.observable(1),
+		editable: ko.observable(true),
 
 		add: function() {
 			self.viewModel.totalTests.push(new Test(null, null));
@@ -99,6 +102,10 @@ var Testing = new function() {
 					self.viewModel.originalTests = data.usertests;
 					self.viewModel.globalExams = ko.mapping.fromJS(data.globalexams);
 
+					self.viewModel.semesters = data.semesters;
+					self.viewModel.semester(data.init_semester);
+					self.viewModel.editable(data.editable);
+
 					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
@@ -106,6 +113,21 @@ var Testing = new function() {
 			});
 		});
 	};
+
+	// Subscribe to drop down change and update the UI accordingly
+	self.viewModel.semester.subscribe(function(newValue) {
+		$.ajax({
+			type: "POST",
+			url: '/testing',
+			data: {semester: newValue},
+			success: function(data) {				
+				ko.mapping.fromJS(data.usertests, {}, self.viewModel.totalTests);
+				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+				self.viewModel.editable(data.editable);
+			},
+			error: function() { alert("Failed drop down subscribe ajax post");}
+		});
+	});
 
 	function Test(date, score)
 	{

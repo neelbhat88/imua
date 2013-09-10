@@ -8,7 +8,17 @@
 
 	<div class="categoryDataContainer" style="width: 650px;">
 		<div class="header extracur_bg">
-			<span class="text">My Activities</span>
+			<div class="text">My Activities</div>
+			<select data-bind="options: semesters, 
+							   optionsText: function(item){
+							   		if (item == semesters[semesters.length - 1])
+							   			return 'Current';
+
+							   		return 'Semester ' + item;
+							   	},
+							   value: semester"
+					class="extracur_text small_select">
+			</select>
 		</div>
 		<div class="body extracur_text" style="">
 			<div data-bind="template: {name: templateToUse}"></div>
@@ -42,7 +52,7 @@
 	<div data-bind="visible: activities().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray;">
 		Click Edit below to add the extracurricular activities you are involved in.
 	</div>
-	<div class="buttonGroup">
+	<div class="buttonGroup" data-bind="visible: editable()">
 		<div class="submitButton extracur_bg" data-bind="click: $root.editActivities">Edit</div>
 	</div>
 </script>

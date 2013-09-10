@@ -5,6 +5,9 @@ var Activities = new function() {
 		editing: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
+		semesters: [],
+		semester: ko.observable(1),
+		editable: ko.observable(true),
 
 		addLeadership: function(activity, event){
 			activity.leadershipHeld(true);
@@ -114,6 +117,10 @@ var Activities = new function() {
 
 					self.viewModel.originalActivities = data.useractivities;
 
+					self.viewModel.semesters = data.semesters;
+					self.viewModel.semester(data.init_semester);
+					self.viewModel.editable(data.editable);
+
 					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
@@ -121,6 +128,21 @@ var Activities = new function() {
 			});			
 		});
 	};
+
+	// Subscribe to drop down change and update the UI accordingly
+	self.viewModel.semester.subscribe(function(newValue) {
+		$.ajax({
+			type: "POST",
+			url: '/activities',
+			data: {semester: newValue},
+			success: function(data) {				
+				ko.mapping.fromJS(data.useractivities, {}, self.viewModel.activities);
+				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+				self.viewModel.editable(data.editable);
+			},
+			error: function() { alert("Failed drop down subscribe ajax post");}
+		});
+	});
 
 	function Activity(name, leadershipHeld, leadershipTitle, description)
 	{

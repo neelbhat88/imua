@@ -95,10 +95,17 @@
 		color: white; 		
 
 		& .text { 
-			position: relative; 
-			left: 15px; 
-			top: 20px;
-			font-size: 2.5em; 
+			position: relative;			
+			top: 13px;
+			font-size: 2.5em;
+			line-height: 1;
+		}
+
+		& select {
+			width: 115px; 
+			position: absolute; 
+			bottom: 5px; 
+			right: 15px;
 		}
 	}
 

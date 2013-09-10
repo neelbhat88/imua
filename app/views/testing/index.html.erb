@@ -8,7 +8,17 @@
 
 	<div class="categoryDataContainer" style="width: 650px;">
 		<div class="header testing_bg">
-			<span class="text">My Tests</span>
+			<div class="text">My Tests</div>
+			<select data-bind="options: semesters, 
+							   optionsText: function(item){
+							   		if (item == semesters[semesters.length - 1])
+							   			return 'Current';
+
+							   		return 'Semester ' + item;
+							   	},
+							   value: semester"
+					class="testing_text small_select">
+			</select>
 		</div>
 		<div class="body testing_text" style="">
 			<div data-bind="template: {name: templateToUse}"></div>
@@ -35,7 +45,7 @@
 	<div data-bind="visible: totalTests().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray">
 		Click Edit below to add Tests.
 	</div>
-	<div class="buttonGroup">
+	<div class="buttonGroup" data-bind="visible: editable()">
 		<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
 	</div>
 </script>

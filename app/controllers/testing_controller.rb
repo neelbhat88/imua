@@ -2,7 +2,12 @@ class TestingController < ApplicationController
 	before_filter :authenticate_user!
 
 	def index
-		alltesting = current_user.user_testings.where('semester = ?', current_user.user_info.current_semester).order("date DESC")
+		semester = params[:semester].to_i
+	    if semester == 0
+	      semester = current_user.user_info.current_semester
+	    end
+
+		alltesting = current_user.user_testings.where('semester = ?', semester).order("date DESC")
 
 	  	tests = []
 	  	alltesting.each do | a |
@@ -12,11 +17,20 @@ class TestingController < ApplicationController
 	  	# Get all global exam to put into dropdown
     	globalexams = GlobalExam.select([:id, :name]).order("name")
 
-    	badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Testing")
-    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+    	badges = GlobalBadge.where(:semester => [nil, semester], :category => "Testing")
+    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
 
 	  	respond_to do |format|
-	  		format.json { render :json => {:usertests => tests, :globalexams => globalexams, :badges => badgesviewmodel} }
+	  		format.json { render :json => 
+	  								{
+	  									:usertests => tests, 
+	  									:globalexams => globalexams, 
+	  									:badges => badgesviewmodel,
+	  									:editable => (semester == current_user.user_info.current_semester),
+			                            :semesters => (1..current_user.user_info.current_semester).to_a,
+			                        	:init_semester =>current_user.user_info.current_semester
+	  								} 
+	  					}
 	  		format.html { render :layout => false } # index.html.erb
 	  	end
 	end

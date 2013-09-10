@@ -5,6 +5,9 @@ var Pdus = new function() {
 		editing: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
+		semesters: [],
+		semester: ko.observable(1),
+		editable: ko.observable(true),
 
 		add: function() {
 			self.viewModel.totalPdus.push(new Pdu(null, null));
@@ -99,6 +102,10 @@ var Pdus = new function() {
 					self.viewModel.originalPdus = data.userpdus;
 					self.viewModel.globalpdus = ko.mapping.fromJS(data.globalpdus);
 
+					self.viewModel.semesters = data.semesters;
+					self.viewModel.semester(data.init_semester);
+					self.viewModel.editable(data.editable);
+
 					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
 				},
@@ -106,6 +113,21 @@ var Pdus = new function() {
 			});
 		});
 	};
+
+	// Subscribe to drop down change and update the UI accordingly
+	self.viewModel.semester.subscribe(function(newValue) {
+		$.ajax({
+			type: "POST",
+			url: '/pdus',
+			data: {semester: newValue},
+			success: function(data) {				
+				ko.mapping.fromJS(data.userpdus, {}, self.viewModel.totalPdus);
+				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+				self.viewModel.editable(data.editable);
+			},
+			error: function() { alert("Failed drop down subscribe ajax post");}
+		});
+	});
 
 	function Pdu(date, hours)
 	{

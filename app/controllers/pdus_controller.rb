@@ -2,7 +2,12 @@ class PdusController < ApplicationController
 	before_filter :authenticate_user!
 	
 	def index
-		allpdus = current_user.user_pdus.where('semester = ?', current_user.user_info.current_semester).order("date DESC")
+		semester = params[:semester].to_i
+	    if semester == 0
+	      semester = current_user.user_info.current_semester
+	    end
+
+		allpdus = current_user.user_pdus.where('semester = ?', semester).order("date DESC")
 
 	  	pdus = []
 	  	allpdus.each do | a |
@@ -12,11 +17,20 @@ class PdusController < ApplicationController
 	  	# Get all global pdu to put into dropdown
     	globalpdus = SchoolPdu.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
-    	badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "PDU")
-    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+    	badges = GlobalBadge.where(:semester => [nil, semester], :category => "PDU")
+    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
 
 	  	respond_to do |format|
-	  		format.json { render :json => {:userpdus => pdus, :globalpdus => globalpdus, :badges => badgesviewmodel} }
+	  		format.json { render :json => 
+	  								{
+	  									:userpdus => pdus, 
+	  									:globalpdus => globalpdus,
+	  									:badges => badgesviewmodel,
+	  									:editable => (semester == current_user.user_info.current_semester),
+			                            :semesters => (1..current_user.user_info.current_semester).to_a,
+			                        	:init_semester =>current_user.user_info.current_semester
+	  								} 
+	  					}
 	  		format.html { render :layout => false } # index.html.erb
 	  	end
 	end

@@ -8,7 +8,17 @@
 
 	<div class="categoryDataContainer" style="width: 650px;">
 		<div class="header pdu_bg">
-			<span class="text">My PDU Events</span>
+			<div class="text">My PDU Events</div>
+			<select data-bind="options: semesters, 
+							   optionsText: function(item){
+							   		if (item == semesters[semesters.length - 1])
+							   			return 'Current';
+
+							   		return 'Semester ' + item;
+							   	},
+							   value: semester"
+					class="pdu_text small_select">
+			</select>
 		</div>
 		<div class="body pdu_text" style="">
 			<div data-bind="template: {name: templateToUse}"></div>
@@ -35,7 +45,7 @@
 	<div data-bind="visible: totalPdus().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray">
 		Click Edit below to add PDU events.
 	</div>
-	<div class="buttonGroup">
+	<div class="buttonGroup" data-bind="visible: editable()">
 		<div class="submitButton pdu_bg" data-bind="click: $root.edit">Edit</div>
 	</div>
 </script>

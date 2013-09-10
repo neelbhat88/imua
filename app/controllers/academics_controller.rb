@@ -5,7 +5,12 @@ class AcademicsController < ApplicationController
   attr_accessor :academics_repo
 
   def index
-  	allclasses = current_user.user_classes.where('semester = ?', current_user.user_info.current_semester)
+    semester = params[:semester].to_i
+    if semester == 0
+      semester = current_user.user_info.current_semester
+    end
+
+  	allclasses = current_user.user_classes.where('semester = ?', semester)
 
   	classes = []
   	allclasses.each do | a |		
@@ -13,16 +18,26 @@ class AcademicsController < ApplicationController
   	end
 
     # Get total semester gpa
-    totalsemgpa = current_user.user_semester_gpas.where(:semester => current_user.user_info.current_semester).first.gpa
+    totalsemgpa = current_user.user_semester_gpas.where(:semester => semester).first.gpa
 
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
 
-    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Academics")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+    badges = GlobalBadge.where(:semester => [nil, semester], :category => "Academics")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
 
   	respond_to do |format|
-      format.json { render :json => {:userclasses => classes, :globalclasses => globalclasses, :badges => badgesviewmodel, :totalsemgpa => totalsemgpa} }
+      format.json { render :json => 
+                              {
+                              :userclasses => classes, 
+                              :globalclasses => globalclasses, 
+                              :badges => badgesviewmodel, 
+                              :totalsemgpa => totalsemgpa, 
+                              :editable => (semester == current_user.user_info.current_semester),
+                              :semesters => (1..current_user.user_info.current_semester).to_a,
+                              :init_semester =>current_user.user_info.current_semester
+                              } 
+                  }
       format.html { render :layout=>false } # index.html.erb	
   	end
   end

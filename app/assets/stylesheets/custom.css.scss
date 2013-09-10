@@ -172,6 +172,12 @@ header
   border-radius: 5px 5px 0 0;
 }
 
+/* Bootstrap misc overrides */
+select.small_select {
+    padding: 5px;
+    height: 30px;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {

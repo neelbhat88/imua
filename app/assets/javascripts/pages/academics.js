@@ -2,7 +2,10 @@ var Academics = new function() {
 	var self = this;
 
 	self.viewModel = {
-		pageLoaded: ko.observable(false)
+		pageLoaded: ko.observable(false),
+		semesters: [],
+		semester: ko.observable(1),
+		editable: ko.observable(true)
 	};
 
 	self.init = function() {
@@ -13,10 +16,14 @@ var Academics = new function() {
 				success: function(data) {
 					var obj = data;
 					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses);
-					self.viewModel.originalSubjects = obj.userclasses;
-					self.viewModel.globalsubjects = ko.mapping.fromJS(obj.globalclasses);
 					self.viewModel.badges = ko.mapping.fromJS(obj.badges);
 					self.viewModel.totalGPA = ko.mapping.fromJS(obj.totalsemgpa);
+
+					self.viewModel.originalSubjects = obj.userclasses;
+					self.viewModel.globalsubjects = ko.mapping.fromJS(obj.globalclasses);					
+					self.viewModel.semesters = obj.semesters;
+					self.viewModel.semester(obj.init_semester);
+					self.viewModel.editable(obj.editable);
 
 					ViewModelPropertiesInit(self.viewModel);			
 
@@ -28,6 +35,22 @@ var Academics = new function() {
 			});
 		});
 	};
+
+	// Subscribe to drop down change and update the UI accordingly
+	self.viewModel.semester.subscribe(function(newValue) {
+		$.ajax({
+			type: "POST",
+			url: '/academics',
+			data: {semester: newValue},
+			success: function(data) {				
+				ko.mapping.fromJS(data.userclasses, {}, self.viewModel.subjects);
+				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+				ko.mapping.fromJS(data.totalsemgpa, {}, self.viewModel.totalGPA)
+				self.viewModel.editable(data.editable);
+			},
+			error: function() { alert("Failed drop down subscribe ajax post");}
+		});
+	});
 };
 
 // This class has to match the ClassViewModel.rb definition
@@ -115,7 +138,7 @@ function ViewModelPropertiesInit(viewModel)
 			},
 			success: function(data) 
 			{				
-				viewModel.subjects = ko.mapping.fromJS(data.newclasses);
+				ko.mapping.fromJS(data.newclasses, {}, viewModel.subjects);
 				ko.mapping.fromJS(data.badges, {}, viewModel.badges);
 				ko.mapping.fromJS(data.totalsemgpa, {}, viewModel.totalGPA)
 
@@ -131,7 +154,7 @@ function ViewModelPropertiesInit(viewModel)
 	viewModel.cancelEdit = function()
 	{
 		// Set back to original subjects
-		viewModel.subjects = ko.mapping.fromJS(viewModel.originalSubjects);
+		ko.mapping.fromJS(viewModel.originalSubjects, {}, viewModel.subjects);
 
 		viewModel.rowsToRemove = [];
 		viewModel.editing(false);
