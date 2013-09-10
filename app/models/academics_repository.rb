@@ -8,9 +8,9 @@ class AcademicsRepository
 	def SaveTotalSemesterGpa(semester)
 	    semester_classes = self.user.user_classes.where(:semester => semester)
 	    numclasses = semester_classes.length
-	    credithourtotal = 0
+	    credithourtotal = 0.00
 	    classeswithgrade = 0
-	    totalGpa = 0.0
+	    totalGpa = 0.00
 
 	    semester_classes.each do |c|
 	      unless c.grade.nil?
@@ -19,13 +19,10 @@ class AcademicsRepository
 	        classeswithgrade += 1
 	      end
 	    end
-
-	    # Must have at least 5 classes with grade to earn GPA badges
-	    semester_gpa = 0
-	    if (classeswithgrade > 4)
-	      	Rails.logger.debug("DEBUG: TotalGpa = #{totalGpa} / CreditHourTotal = #{credithourtotal}")
-	    	semester_gpa = (totalGpa / credithourtotal).round(2)
-	    end	    
+	    
+	    semester_gpa = 0.00
+	    # '%.2f' % forces 2 decimal places
+		semester_gpa = '%.2f' % ((totalGpa / credithourtotal).round(2))
 
 	    # Save Semester gpa
 	    user_semester_gpa = self.user.user_semester_gpas.where(:semester => self.user.user_info.current_semester)
