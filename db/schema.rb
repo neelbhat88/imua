@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906002050) do
+ActiveRecord::Schema.define(:version => 20130910230033) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(:version => 20130906002050) do
   create_table "user_semester_gpas", :force => true do |t|
     t.integer  "user_id"
     t.integer  "semester"
-    t.float    "gpa"
+    t.decimal  "gpa"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -18,7 +18,7 @@ class AcademicsController < ApplicationController
   	end
 
     # Get total semester gpa
-    totalsemgpa = current_user.user_semester_gpas.where(:semester => semester).first.gpa
+    totalsemgpa = '%.2f' % (current_user.user_semester_gpas.where(:semester => semester).first.gpa)
 
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
@@ -81,7 +81,7 @@ class AcademicsController < ApplicationController
   	end
 
     # Save total semester GPA
-    totalsemgpa = self.academics_repo.SaveTotalSemesterGpa(current_user.user_info.current_semester)    
+    totalsemgpa = '%.2f' % (self.academics_repo.SaveTotalSemesterGpa(current_user.user_info.current_semester))
 
   	# Reload all classes
   	allclasses = UserClass.where('semester = ? and user_id = ?', current_user.user_info.current_semester, current_user.id)

@@ -25,7 +25,7 @@ class AcademicsRepository
 		semester_gpa = '%.2f' % ((totalGpa / credithourtotal).round(2))
 
 	    # Save Semester gpa
-	    user_semester_gpa = self.user.user_semester_gpas.where(:semester => self.user.user_info.current_semester)
+	    user_semester_gpa = self.user.user_semester_gpas.where(:semester => semester)
 	    if (user_semester_gpa.length > 1)
 	    	Rails.logger.error("ERROR: There should not be more than 1 user_semester_gpa. UserId #{self.user.id} Semester #{self.user.user_info.current_semester}")
 	    end
