@@ -11,16 +11,27 @@
           <% @users.each do |user| %>
             <% if user.user_info.classof == year %>
               <li style="padding-bottom: 10px; border-bottom: 1px dashed; margin-bottom: 10px;">
-                <%= "#{user.first_name} #{user.last_name} (#{user.email})" %>
-                <span style="position: absolute; right: 0px;">
-                  <%= link_to 'Edit User', edit_admin_user_path(user), :class => 'btn btn-mini' %> |
-                  <%= link_to 'Profile', admin_user_path(user), :class => 'btn btn-mini' %> |
-                  <%= link_to 'Classes', admin_user_classes_path(:user_id => user.id), :class => 'btn btn-mini academics_text' %> |
-                  <%= link_to 'Activities', admin_user_activities_path(:user_id => user.id), :class => 'btn btn-mini extracur_text' %> |
-                  <%= link_to 'Services', admin_user_services_path(:user_id => user.id), :class => 'btn btn-mini service_text' %> |
-                  <%= link_to 'PDUs', admin_user_pdus_path(:user_id => user.id), :class => 'btn btn-mini pdu_text'%> |
-                  <%= link_to 'Delete', admin_user_path(user), :method => :delete, :data => {confirm: "Are you sure?"}, :class => 'btn btn-mini btn-warning' %>
-                </span>
+                <div> 
+                  <%= "#{user.first_name} #{user.last_name} (#{user.email})" %>
+                  <span style="position: absolute; right: 0px;">
+                    <%= link_to 'Edit User', edit_admin_user_path(user), :class => 'btn btn-mini' %> |
+                    <%= link_to 'Profile', admin_user_path(user), :class => 'btn btn-mini' %> |
+                    <%= link_to 'Classes', admin_user_classes_path(:user_id => user.id), :class => 'btn btn-mini academics_text' %> |
+                    <%= link_to 'Activities', admin_user_activities_path(:user_id => user.id), :class => 'btn btn-mini extracur_text' %> |
+                    <%= link_to 'Services', admin_user_services_path(:user_id => user.id), :class => 'btn btn-mini service_text' %> |
+                    <%= link_to 'PDUs', admin_user_pdus_path(:user_id => user.id), :class => 'btn btn-mini pdu_text'%> |
+                    <%= link_to 'Delete', admin_user_path(user), :method => :delete, :data => {confirm: "Are you sure?"}, :class => 'btn btn-mini btn-warning' %>
+                  </span>
+                </div>
+                <div>
+                  <% if !user.current_sign_in_at.nil? %>
+                  <!-- ToDo: Remove hardcoded Hawaii timezone -->
+                  <span style="font-style:italic;">Last Logged In: </span><%= "#{user.current_sign_in_at.in_time_zone("Hawaii").to_formatted_s(:long)}" %> 
+                  <span style="font-style:italic;">Login Count: </span> <%= "#{user.sign_in_count}" %>
+                  <% else %>
+                  <span style="font-style:italic;">This student has never logged in</span>
+                  <% end %>
+                </div>
               </li>
             <% end %>
           <% end %>
