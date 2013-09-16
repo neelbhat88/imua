@@ -55,9 +55,10 @@
 		<div class="editRow">
 			<div data-bind="click: $root.remove" class="close_x">x</div>
 			
-			<select class="classDD" data-bind="options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>			
-			<input data-bind="value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
-			<input data-bind="value: score" placeholder="Score" style="width: 100px" />		
+			<select class="classDD" data-bind="css: {error: global_exam_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>			
+			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
+			<input data-bind="css: {error: score.hasError}, valueUpdate: 'afterkeydown', value: score" placeholder="Score" style="width: 100px" />
+			<div class="errorText" style="text-align: center" data-bind='visible: score.hasError, text: score.validationMessage'></div>
 		</div>
 	</div>		
 	<div class="pbm textCenter">
@@ -66,6 +67,6 @@
 	<div class="buttonGroup">
 		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
 		<div class="submitButton testing_bg" data-bind="click: $root.save">Save</div>
-		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
+		<div class="validationError errorText" style="display:none; padding-left: 10px;">Please fix any fields marked in red above.</div>
 	</div>
 </script>

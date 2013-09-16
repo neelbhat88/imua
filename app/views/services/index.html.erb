@@ -55,9 +55,10 @@
 		<div style="border: 1px solid lightgrey; padding: 10px; border-radius: 3px; margin-bottom: 20px; position: relative;">
 			<div data-bind="click: $root.remove" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
 			
-			<input data-bind="value: name" placeholder="Name of Service Event or Activity" style="width: 250px" />			
-			<input data-bind="value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
-			<input data-bind="value: hours" placeholder="Hours" style="width: 100px" />						
+			<input data-bind="css: {error: name.hasError}, valueUpdate: 'afterkeydown', value: name" placeholder="Name of Service Event or Activity" style="width: 250px" />			
+			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
+			<input data-bind="css: {error: hours.hasError}, valueUpdate: 'afterkeydown', value: hours" placeholder="Hours" style="width: 100px" />
+			<div class="errorText" style="text-align: center" data-bind='visible: hours.hasError, text: hours.validationMessage'></div>
 		</div>
 	</div>		
 	<div class="pbm textCenter">
@@ -66,6 +67,6 @@
 	<div class="buttonGroup">
 		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
 		<div class="submitButton service_bg" data-bind="click: $root.save">Save</div>
-		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
+		<div class="validationError errorText" style="display:none; padding-left: 10px;">Please fix any fields marked in red above.</div>
 	</div>
 </script>

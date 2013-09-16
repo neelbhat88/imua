@@ -9,13 +9,26 @@ var Academics = new function() {
 	};
 
 	self.init = function() {
+		var validationMapping = {
+			grade: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			},			
+			school_class_id: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			}
+		};
+
 		$(document).ready(function() {			
 			$.ajax({
 				type: "POST",
 				url: '/academics',
 				success: function(data) {
 					var obj = data;
-					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses);
+					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(obj.badges);
 					self.viewModel.totalGPA = ko.mapping.fromJS(obj.totalsemgpa);
 
@@ -60,17 +73,9 @@ function Class(name, classLevel, grade)
 
 	self.name = ko.observable(name);
 	self.level = ko.observable(classLevel);
-	self.grade = ko.observable(grade);
-	self.school_class_id = ko.observable()
+	self.grade = ko.observable(grade).extend({required:""});
+	self.school_class_id = ko.observable().extend({required:""});
 	self.dbid = ko.observable("");
-}
-
-function Badge(title, desc)
-{
-	var self = this;
-
-	self.description = ko.observable(desc);
-	self.title = ko.observable(title);
 }
 
 function ViewModelPropertiesInit(viewModel) 
@@ -108,26 +113,11 @@ function ViewModelPropertiesInit(viewModel)
 
 	viewModel.saveClasses = function()
 	{
-		var hasErrors = false;
-		$.each(viewModel.subjects(), function() {
-			if (this.school_class_id() == null || this.grade() == null)
-			{
-				hasErrors = true;
-				return false; // Break out of the loop			
-			}
-		})
-
-		if (hasErrors == true)
+		if ($('select.error, input.error').length > 0)
 		{
-			$('.validationError').fadeIn();
-			$('.academicsEdit select, .academicsEdit input').each(function(){
-					if (this.value == "")
-						$(this).addClass('error');
-					else
-						$(this).removeClass('error');
-				});		
+			$('.validationError').fadeIn();				
 			return;
-		}			
+		}
 
 		$.ajax({
 			type: "POST",

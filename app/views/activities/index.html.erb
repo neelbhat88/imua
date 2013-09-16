@@ -62,9 +62,9 @@
 		<div style="border: 1px solid lightgray; padding: 10px; border-radius: 3px; margin-bottom: 20px; position: relative;">
 			<div data-bind="click: $root.removeActivity" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
 			
-			<select data-bind="options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>
+			<select data-bind="css: {error: school_activity_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>
 			<a href="#" data-bind="click: $root.addLeadership, visible: leadershipHeld() == false" style="padding-left: 10px">Add leadership</a>		
-			<input data-bind="visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 240px" />
+			<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 240px" />
 			<a href="#" data-bind="click: $root.removeLeadership, visible: leadershipHeld() == true" style="padding-left: 10px">Remove</a>
 
 			<div style="padding-top: 5px; font-style: italic; color: gray; font-size: 14px;">Describe what you did in 3 to 4 sentences. Use action works like "Lead my team" or "Organized an event".</div>
@@ -85,6 +85,6 @@
 	<div class="buttonGroup">
 		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
 		<div class="submitButton extracur_bg" data-bind="click: $root.saveActivities">Save</div>
-		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
+		<div class="validationError errorText" style="display:none; padding-left: 10px;">Please fix any fields marked in red above.</div>
 	</div>
 </script>

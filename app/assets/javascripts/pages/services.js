@@ -25,24 +25,9 @@ var Services = new function() {
 
 		save: function()
 		{		
-			var hasErrors = false;
-			$.each(self.viewModel.services(), function() {
-				if (this.name() == null || this.date() == null || this.hours() == null)
-				{
-					hasErrors = true;
-					return false; // Break out of the loop			
-				}
-			})
-
-			if (hasErrors == true)
+			if ($('select.error, input.error').length > 0)
 			{
-				$('.validationError').fadeIn();
-				$('.servicesEdit select, .servicesEdit input').each(function(){
-					if (this.value == "")
-						$(this).addClass('error');
-					else
-						$(this).removeClass('error');
-				});
+				$('.validationError').fadeIn();				
 				return;
 			}
 
@@ -113,12 +98,30 @@ var Services = new function() {
 	self.init = function() {
 		self.viewModel.editing = ko.observable(false);
 
+		var validationMapping = {
+			hours: {
+				create: function(options) {
+					return ko.observable(options.data).extend({positiveNum:"Hours"});
+				}
+			},
+			date: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			},
+			name: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			}
+		};
+
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: '/services',
 				success: function(data) {					
-					self.viewModel.services = ko.mapping.fromJS(data.userservices);
+					self.viewModel.services = ko.mapping.fromJS(data.userservices, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
 					
 					self.viewModel.originalServices = data.userservices;
@@ -158,9 +161,9 @@ var Services = new function() {
 	{
 		var self = this;
 
-		self.name = ko.observable(name);
-		self.date = ko.observable(date);
-		self.hours = ko.observable(hours);		
+		self.name = ko.observable(name).extend({required: ""});
+		self.date = ko.observable(date).extend({required: ""});
+		self.hours = ko.observable(hours).extend({positiveNum: "Hours"});
 		self.dbid = ko.observable("");
 	}
 };

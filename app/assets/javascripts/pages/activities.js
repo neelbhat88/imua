@@ -11,15 +11,20 @@ var Activities = new function() {
 
 		addLeadership: function(activity, event){
 			activity.leadershipHeld(true);
+			activity.leadershipTitle("");
 		},
 
-		removeLeadership: function(activity, event){
-			activity.leadershipTitle(null);
+		removeLeadership: function(activity, event){			
 			activity.leadershipHeld(false);
+			// Setting leadership title so validation does not fail. Since 
+			// leadershipHeld is false the title does not matter
+			activity.leadershipTitle("Leader");
 		},
 
 		addActivity: function() {
-			self.viewModel.activities.push(new Activity("", false, "", []));
+			// Passing in leadership title so validation does not fail. Since 
+			// leadershipHeld is false the title does not matter
+			self.viewModel.activities.push(new Activity("", false, "Leader", []));
 		},
 
 		removeActivity: function(activityToRemove) {
@@ -40,24 +45,9 @@ var Activities = new function() {
 
 		saveActivities: function()
 		{
-			var hasErrors = false;
-			$.each(self.viewModel.activities(), function() {
-				if (this.school_activity_id() == null || (this.leadershipHeld() && this.leadershipTitle() == ""))
-				{
-					hasErrors = true;
-					return false; // Break out of the loop			
-				}
-			})
-
-			if (hasErrors == true)
+			if ($('select.error, input.error').length > 0)
 			{
-				$('.validationError').fadeIn();
-				$('.activitiesEdit select, .activitiesEdit input').each(function(){
-					if (this.value == "")
-						$(this).addClass('error');
-					else
-						$(this).removeClass('error');
-				});
+				$('.validationError').fadeIn();				
 				return;
 			}
 
@@ -106,12 +96,25 @@ var Activities = new function() {
 	self.init = function() {
 		self.viewModel.editing = ko.observable(false);
 
+		var validationMapping = {
+			leadershipTitle: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			},			
+			school_activity_id: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			}
+		};
+
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: '/activities',
 				success: function(data) {					
-					self.viewModel.activities = ko.mapping.fromJS(data.useractivities);
+					self.viewModel.activities = ko.mapping.fromJS(data.useractivities, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
 					self.viewModel.globalactivities = ko.mapping.fromJS(data.globalactivities);
 
@@ -148,11 +151,10 @@ var Activities = new function() {
 	{
 		var self = this;
 
-		self.name = ko.observable(name);
+		self.leadershipTitle = ko.observable(leadershipTitle).extend({required: ""});
 		self.leadershipHeld = ko.observable(leadershipHeld);
-		self.leadershipTitle = ko.observable(leadershipTitle);
 		self.description = ko.observableArray(description);
-		self.school_activity_id = ko.observable()
+		self.school_activity_id = ko.observable().extend({required: ""});
 		self.dbid = ko.observable("");
 	}
 

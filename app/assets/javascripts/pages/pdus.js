@@ -24,24 +24,9 @@ var Pdus = new function() {
 
 		save: function()
 		{		
-			var hasErrors = false;
-			$.each(self.viewModel.totalPdus(), function() {
-				if (this.school_pdu_id() == null || this.date() == null || this.hours() == null)
-				{
-					hasErrors = true;
-					return false; // Break out of the loop			
-				}
-			})
-
-			if (hasErrors == true)
+			if ($('select.error, input.error').length > 0)
 			{
-				$('.validationError').fadeIn();
-				$('.pdusEdit select, .pdusEdit input').each(function(){
-					if (this.value == "")
-						$(this).addClass('error');
-					else
-						$(this).removeClass('error');
-				});
+				$('.validationError').fadeIn();				
 				return;
 			}
 
@@ -91,12 +76,30 @@ var Pdus = new function() {
 	self.init = function() {
 		self.viewModel.editing = ko.observable(false);
 
+		var validationMapping = {
+			hours: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: "", positiveNum:""});
+				}
+			},
+			date: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			},
+			school_pdu_id: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			}
+		};
+
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: '/pdus',
 				success: function(data) {					
-					self.viewModel.totalPdus = ko.mapping.fromJS(data.userpdus);
+					self.viewModel.totalPdus = ko.mapping.fromJS(data.userpdus, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
 					
 					self.viewModel.originalPdus = data.userpdus;
@@ -107,6 +110,7 @@ var Pdus = new function() {
 					self.viewModel.editable(data.editable);
 
 					self.viewModel.pageLoaded(true);
+
 					ko.applyBindings(self.viewModel);
 				},
 				error: function() { alert("Failed initial activity load");}
@@ -133,10 +137,10 @@ var Pdus = new function() {
 	{
 		var self = this;
 		
-		self.date = ko.observable(date);
-		self.hours = ko.observable(hours);
+		self.date = ko.observable(date).extend({required: ""});
+		self.hours = ko.observable(hours).extend({required: "", positiveNum: ""});
 
-		self.school_pdu_id = ko.observable("");
+		self.school_pdu_id = ko.observable("").extend({required: ""});
 		self.dbid = ko.observable("");
-	}
+	}	
 };

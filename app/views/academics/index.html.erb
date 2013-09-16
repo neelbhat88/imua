@@ -39,8 +39,8 @@
 	<div class="academicsEdit" data-bind="foreach: subjects, visible: $root.subjects().length > 0" style="display:none;">
 		<div class="editRow">
 			<div class="close_x" data-bind="click: $root.removeClass" style="">x</div>	
-			<select class="classDD" data-bind="options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select>
-			<select class="gradeDD" data-bind="options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select>			
+			<select class="classDD" data-bind="css: {error: school_class_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select>
+			<select class="gradeDD" data-bind="css: {error: grade.hasError}, valueUpdate: 'afterkeydown', options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select>			
 		</div>
 	</div>		
 	<div class="pbm textCenter">
@@ -49,7 +49,7 @@
 	<div class="buttonGroup">
 		<div class="cancelButton" data-bind="click: $root.cancelEdit">Cancel</div>
 		<div class="submitButton academics_bg" data-bind="click: $root.saveClasses">Save</div>
-		<div class="validationError" style="color: red; display:none; padding-left: 10px;">Please fill in all fields marked in red.</div>
+		<div class="validationError errorText" style="display:none; padding-left: 10px;">Please fix any fields marked in red above.</div>
 	</div>	
 </script>
 

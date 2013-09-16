@@ -24,24 +24,9 @@ var Testing = new function() {
 
 		save: function()
 		{		
-			var hasErrors = false;
-			$.each(self.viewModel.totalTests(), function() {
-				if (this.global_exam_id() == null || this.date() == null || this.score() == null)
-				{
-					hasErrors = true;
-					return false; // Break out of the loop			
-				}
-			})
-
-			if (hasErrors == true)
+			if ($('select.error, input.error').length > 0)
 			{
-				$('.validationError').fadeIn();
-				$('.testingEdit select, .testingEdit input').each(function(){
-					if (this.value == "")
-						$(this).addClass('error');
-					else
-						$(this).removeClass('error');
-				});
+				$('.validationError').fadeIn();				
 				return;
 			}
 
@@ -91,12 +76,30 @@ var Testing = new function() {
 	self.init = function() {
 		self.viewModel.editing = ko.observable(false);
 
+		var validationMapping = {
+			score: {
+				create: function(options) {
+					return ko.observable(options.data).extend({positiveNum:"Score"});
+				}
+			},
+			date: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			},
+			global_exam_id: {
+				create: function(options) {
+					return ko.observable(options.data).extend({required: ""});
+				}
+			}
+		};
+
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
 				url: '/testing',
 				success: function(data) {					
-					self.viewModel.totalTests = ko.mapping.fromJS(data.usertests);
+					self.viewModel.totalTests = ko.mapping.fromJS(data.usertests, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);
 					
 					self.viewModel.originalTests = data.usertests;
@@ -133,10 +136,10 @@ var Testing = new function() {
 	{
 		var self = this;
 		
-		self.date = ko.observable(date);
-		self.score = ko.observable(score);
+		self.date = ko.observable(date).extend({required: ""});
+		self.score = ko.observable(score).extend({positiveNum: "Score"});
 
-		self.global_exam_id = ko.observable("");
+		self.global_exam_id = ko.observable("").extend({required: ""});
 		self.dbid = ko.observable("");
 	}
 };

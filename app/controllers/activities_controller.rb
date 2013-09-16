@@ -46,9 +46,15 @@ class ActivitiesController < ApplicationController
   	logger.debug "DEBUG: ActivitiesToRemove - #{removeJson}"  
 
   	# Add or Edit
-  	activitiesJson.each do | c |  		
+  	activitiesJson.each do | c |
+      if c["leadershipHeld"]
+        leadershipTitle = c["leadershipTitle"]
+      else
+        leadershipTitle = ""
+      end
+
   		if c["dbid"] == ""  			
-	        logger.debug "DEBUG: New UserActivity school_activity_id = #{c["school_activity_id"]}, description = #{c["description"]} }"
+	        logger.debug "DEBUG: New UserActivity school_activity_id = #{c["school_activity_id"]}, description = #{c["description"]} }"          
 	        
 	        description = []
 	        descriptionArray = c["description"]
@@ -58,7 +64,7 @@ class ActivitiesController < ApplicationController
 	        
 	        current_user.user_activities.create(:school_activity_id =>c["school_activity_id"].to_i, 
 	        									:leadership_held=>c["leadershipHeld"], 
-	        									:leadership_title=>c["leadershipTitle"],
+	        									:leadership_title=>leadershipTitle,
 	        									:semester=>current_user.user_info.current_semester,
 	        									:description=>description.join("|")
 	        									)
@@ -74,8 +80,8 @@ class ActivitiesController < ApplicationController
 	        end
 
         	activityToEdit.update_attributes(:school_activity_id => c["school_activity_id"].to_i,
-        									 :leadership_held=>c["leadershipHeld"], 
-        									 :leadership_title=>c["leadershipTitle"],        									 
+        									 :leadership_held=>c["leadershipHeld"],
+        									 :leadership_title=>leadershipTitle,
         									 :description=>description.join("|")
         									)
         	#logger.debug "DEBUG: New values school_class_id = #{classToEdit.school_class_id}, Grade #{classToEdit.grade}"
