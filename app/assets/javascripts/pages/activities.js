@@ -3,6 +3,7 @@ var Activities = new function() {
 
 	self.viewModel = {			
 		editing: ko.observable(false),
+		submitting: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
 		semesters: [],
@@ -45,31 +46,36 @@ var Activities = new function() {
 
 		saveActivities: function()
 		{
-			if ($('select.error, input.error').length > 0)
-			{
-				$('.validationError').fadeIn();				
-				return;
-			}
+			// if (!self.viewModel.submitting())
+			// {
+				self.viewModel.submitting(true);
+				if ($('select.error, input.error').length > 0)
+				{
+					$('.validationError').fadeIn();				
+					return;
+				}
 
-			$.ajax({
-				type: "POST",
-				url: '/saveActivities',
-				data: {
-					activities: ko.toJSON(self.viewModel.activities()), 
-					activitiesToRemove: ko.toJSON(self.viewModel.rowsToRemove)
-				},
-				success: function(data) 
-				{					
-					ko.mapping.fromJS(data.newactivities, {}, self.viewModel.activities);
-					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+				$.ajax({
+					type: "POST",
+					url: '/saveActivities',
+					data: {
+						activities: ko.toJSON(self.viewModel.activities()), 
+						activitiesToRemove: ko.toJSON(self.viewModel.rowsToRemove)
+					},
+					success: function(data) 
+					{					
+						ko.mapping.fromJS(data.newactivities, {}, self.viewModel.activities);
+						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
 
-					self.viewModel.originalActivities = data.newactivities;
+						self.viewModel.originalActivities = data.newactivities;
 
-					self.viewModel.rowsToRemove = [];
-					self.viewModel.editing(false);					
-				},
-				error: function() {alert('SaveClasses fail!');}
-			});		
+						self.viewModel.rowsToRemove = [];
+						self.viewModel.editing(false);
+						self.viewModel.submitting(false);					
+					},
+					error: function() {alert('SaveClasses fail!');}
+				});
+			// }
 		},
 
 		cancelEdit: function()
@@ -99,7 +105,11 @@ var Activities = new function() {
 		var validationMapping = {
 			leadershipTitle: {
 				create: function(options) {
-					return ko.observable(options.data).extend({required: ""});
+					title = options.data;
+					if (title == "")
+						title = "Leader"
+
+					return ko.observable(title).extend({required: ""});
 				}
 			},			
 			school_activity_id: {
