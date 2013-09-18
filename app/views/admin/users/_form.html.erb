@@ -27,23 +27,22 @@
 
     <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %></div>
-
-    <div>
-      <%= f.label "Class of" %><br />
-      <% if editing == false %>        
+    
+    <% if editing == false %>
+      <div>
+        <%= f.label "Class of" %><br />            
         <%= select :user_info, :classof, UserInfo.GetClassYears() %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>    
+    
+    <% if editing == false %>
+      <div>
+        <%= f.label "School" %><br />      
+        <%= select :school, :id, School.all.map{|x| [x.name, x.id]}%>
+      </div>
+    <% end %>    
 
-    <div>
-      <%= f.label "School" %><br />
-      <% if editing == true %>
-        <%= select :school, :id, School.all.map{|x| [x.name, x.id]}, { :selected=>user_info.school_id, :prompt => "Select your school" } %>
-      <% else %>
-        <%= select :school, :id, School.all.map{|x| [x.name, x.id]}, {:prompt => "Select your school" } %>
-      <% end %>
-      <%= f.hidden_field :role, :value => @role %>
-    </div>
+    <%= f.hidden_field :role, :value => @role %>
 
     <% if editing == true %>
       <h4>Authorize Changes</h4>

@@ -21,8 +21,10 @@ class AcademicsRepository
 	    end
 	    
 	    semester_gpa = 0.00
-	    # '%.2f' % forces 2 decimal places
-		semester_gpa = '%.2f' % ((totalGpa / credithourtotal).round(2))
+	    if semester_classes.length > 0
+		    # '%.2f' % forces 2 decimal places
+			semester_gpa = '%.2f' % ((totalGpa / credithourtotal).round(2))
+		end
 
 	    # Save Semester gpa
 	    user_semester_gpa = self.user.user_semester_gpas.where(:semester => semester)

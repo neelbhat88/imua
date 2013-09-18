@@ -21,6 +21,11 @@
   </div>
 
   <div>
+    <%= f.label :school_id, :id => 'school_id_dropdown' %>    
+    <%= f.select :school_id, School.all.map{|x| [x.name, x.id]}, { :selected=>user_info.school_id } %>
+  </div>
+
+  <div>
       <%= f.label "Class of" %>
       <%= f.select :classof, UserInfo.GetClassYears(), {:selected => user_info.classof} %>
   </div>
