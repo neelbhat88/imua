@@ -2,6 +2,9 @@ var Academics = new function() {
 	var self = this;
 
 	self.viewModel = {
+		editing: ko.observable(false),
+		submitting: ko.observable(false),
+		rowsToRemove: [],
 		pageLoaded: ko.observable(false),
 		semesters: [],
 		semester: ko.observable(1),
@@ -95,10 +98,7 @@ function ViewModelPropertiesInit(viewModel)
 		'C+': 2.33, 'C':  2.00, 'C-': 1.67, 
 		'D':  1.33, 
 		'F':  1.0
-	};	
-
-	viewModel.editing = ko.observable(false);
-	viewModel.rowsToRemove = [];
+	};		
 
 	viewModel.addClass = function() {
 		viewModel.subjects.push(new Class("", null, null));
@@ -113,32 +113,38 @@ function ViewModelPropertiesInit(viewModel)
 
 	viewModel.saveClasses = function()
 	{
-		if ($('select.error, input.error').length > 0)
-		{
-			$('.validationError').fadeIn();				
-			return;
+		if (!viewModel.submitting())
+		{			
+			if ($('select.error, input.error').length > 0)
+			{
+				$('.validationError').fadeIn();				
+				return;
+			}
+
+			viewModel.submitting(true);
+
+			$.ajax({
+				type: "POST",
+				url: '/saveClasses',
+				data: {
+					classes: ko.toJSON(viewModel.subjects()), 
+					classesToRemove: ko.toJSON(viewModel.rowsToRemove)
+				},
+				success: function(data) 
+				{				
+					ko.mapping.fromJS(data.newclasses, {}, viewModel.subjects);
+					ko.mapping.fromJS(data.badges, {}, viewModel.badges);
+					ko.mapping.fromJS(data.totalsemgpa, {}, viewModel.totalGPA)
+
+					viewModel.originalSubjects = data.newclasses;
+
+					viewModel.rowsToRemove = [];				
+					viewModel.editing(false);
+					viewModel.submitting(false);
+				},
+				error: function() {alert('SaveClasses fail!');}
+			});
 		}
-
-		$.ajax({
-			type: "POST",
-			url: '/saveClasses',
-			data: {
-				classes: ko.toJSON(viewModel.subjects()), 
-				classesToRemove: ko.toJSON(viewModel.rowsToRemove)
-			},
-			success: function(data) 
-			{				
-				ko.mapping.fromJS(data.newclasses, {}, viewModel.subjects);
-				ko.mapping.fromJS(data.badges, {}, viewModel.badges);
-				ko.mapping.fromJS(data.totalsemgpa, {}, viewModel.totalGPA)
-
-				viewModel.originalSubjects = data.newclasses;
-
-				viewModel.rowsToRemove = [];				
-				viewModel.editing(false);
-			},
-			error: function() {alert('SaveClasses fail!');}
-		});		
 	}
 
 	viewModel.cancelEdit = function()

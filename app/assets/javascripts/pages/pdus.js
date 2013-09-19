@@ -3,6 +3,7 @@ var Pdus = new function() {
 
 	self.viewModel = {				
 		editing: ko.observable(false),
+		submitting: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
 		semesters: [],
@@ -23,32 +24,38 @@ var Pdus = new function() {
 		},	
 
 		save: function()
-		{		
-			if ($('select.error, input.error').length > 0)
+		{
+			if (!self.viewModel.submitting())
 			{
-				$('.validationError').fadeIn();				
-				return;
-			}
+				if ($('select.error, input.error').length > 0)
+				{
+					$('.validationError').fadeIn();				
+					return;
+				}
 
-			$.ajax({
-				type: "POST",
-				url: '/savePdus',
-				data: {
-					pdus: ko.toJSON(self.viewModel.totalPdus()), 
-					toRemove: ko.toJSON(self.viewModel.rowsToRemove)
-				},
-				success: function(data) 
-				{					
-					ko.mapping.fromJS(data.newpdus, {}, self.viewModel.totalPdus);
-					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
+				self.viewModel.submitting(true);
 
-					self.viewModel.originalPdus = data.newpdus;
+				$.ajax({
+					type: "POST",
+					url: '/savePdus',
+					data: {
+						pdus: ko.toJSON(self.viewModel.totalPdus()), 
+						toRemove: ko.toJSON(self.viewModel.rowsToRemove)
+					},
+					success: function(data) 
+					{					
+						ko.mapping.fromJS(data.newpdus, {}, self.viewModel.totalPdus);
+						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
 
-					self.viewModel.rowsToRemove = [];
-					self.viewModel.editing(false);					
-				},
-				error: function() {alert('SaveClasses fail!');}
-			});		
+						self.viewModel.originalPdus = data.newpdus;
+
+						self.viewModel.rowsToRemove = [];
+						self.viewModel.editing(false);
+						self.viewModel.submitting(false);
+					},
+					error: function() {alert('SaveClasses fail!');}
+				});
+			}	
 		},
 
 		cancelEdit: function()
@@ -79,7 +86,7 @@ var Pdus = new function() {
 		var validationMapping = {
 			hours: {
 				create: function(options) {
-					return ko.observable(options.data).extend({required: "", positiveNum:""});
+					return ko.observable(options.data).extend({required: "", positiveNum:"Hours"});
 				}
 			},
 			date: {
@@ -138,7 +145,7 @@ var Pdus = new function() {
 		var self = this;
 		
 		self.date = ko.observable(date).extend({required: ""});
-		self.hours = ko.observable(hours).extend({required: "", positiveNum: ""});
+		self.hours = ko.observable(hours).extend({required: "", positiveNum: "Hours"});
 
 		self.school_pdu_id = ko.observable("").extend({required: ""});
 		self.dbid = ko.observable("");

@@ -58,7 +58,7 @@
 			<select class="classDD" data-bind="css: {error: global_exam_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>			
 			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
 			<input data-bind="css: {error: score.hasError}, valueUpdate: 'afterkeydown', value: score" placeholder="Score" style="width: 100px" />
-			<div class="errorText" style="text-align: center" data-bind='visible: score.hasError, text: score.validationMessage'></div>
+			<div class="errorText pts pbs" style="text-align: center" data-bind='visible: score.hasError, text: score.validationMessage'></div>
 		</div>
 	</div>		
 	<div class="pbm textCenter">

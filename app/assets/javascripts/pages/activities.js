@@ -46,15 +46,15 @@ var Activities = new function() {
 
 		saveActivities: function()
 		{
-			// if (!self.viewModel.submitting())
-			// {
-				self.viewModel.submitting(true);
+			if (!self.viewModel.submitting())
+			{				
 				if ($('select.error, input.error').length > 0)
 				{
 					$('.validationError').fadeIn();				
 					return;
 				}
 
+				self.viewModel.submitting(true);
 				$.ajax({
 					type: "POST",
 					url: '/saveActivities',
@@ -75,7 +75,7 @@ var Activities = new function() {
 					},
 					error: function() {alert('SaveClasses fail!');}
 				});
-			// }
+			}
 		},
 
 		cancelEdit: function()
@@ -100,7 +100,7 @@ var Activities = new function() {
 	};
 
 	self.init = function() {
-		self.viewModel.editing = ko.observable(false);
+		self.viewModel.editing(false);
 
 		var validationMapping = {
 			leadershipTitle: {

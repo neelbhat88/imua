@@ -3,6 +3,7 @@ var Testing = new function() {
 
 	self.viewModel = {				
 		editing: ko.observable(false),
+		submitting: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
 		semesters: [],
@@ -23,32 +24,38 @@ var Testing = new function() {
 		},	
 
 		save: function()
-		{		
-			if ($('select.error, input.error').length > 0)
+		{
+			if (!self.viewModel.submitting())
 			{
-				$('.validationError').fadeIn();				
-				return;
+				if ($('select.error, input.error').length > 0)
+				{
+					$('.validationError').fadeIn();				
+					return;
+				}
+
+				self.viewModel.submitting(true);
+
+				$.ajax({
+					type: "POST",
+					url: '/saveTesting',
+					data: {
+						tests: ko.toJSON(self.viewModel.totalTests()), 
+						toRemove: ko.toJSON(self.viewModel.rowsToRemove)
+					},
+					success: function(data) 
+					{					
+						ko.mapping.fromJS(data.newtests, {}, self.viewModel.totalTests);
+						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+
+						self.viewModel.originalTests = data.newtests;
+
+						self.viewModel.rowsToRemove = [];
+						self.viewModel.editing(false);
+						self.viewModel.submitting(false);
+					},
+					error: function() {alert('SaveTesting fail!');}
+				});
 			}
-
-			$.ajax({
-				type: "POST",
-				url: '/saveTesting',
-				data: {
-					tests: ko.toJSON(self.viewModel.totalTests()), 
-					toRemove: ko.toJSON(self.viewModel.rowsToRemove)
-				},
-				success: function(data) 
-				{					
-					ko.mapping.fromJS(data.newtests, {}, self.viewModel.totalTests);
-					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-
-					self.viewModel.originalTests = data.newtests;
-
-					self.viewModel.rowsToRemove = [];
-					self.viewModel.editing(false);
-				},
-				error: function() {alert('SaveTesting fail!');}
-			});		
 		},
 
 		cancelEdit: function()

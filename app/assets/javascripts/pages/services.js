@@ -4,6 +4,7 @@ var Services = new function() {
 	self.viewModel = {				
 		totalHours: ko.observable(0),
 		editing: ko.observable(false),
+		submitting: ko.observable(false),
 		pageLoaded: ko.observable(false),
 		rowsToRemove: [],
 		semesters: [],
@@ -24,48 +25,54 @@ var Services = new function() {
 		},	
 
 		save: function()
-		{		
-			if ($('select.error, input.error').length > 0)
+		{
+			if (!self.viewModel.submitting())
 			{
-				$('.validationError').fadeIn();				
-				return;
-			}
-
-			var totalHours = self.viewModel.calculateTotalHours();
-
-			$.ajax({
-				type: "POST",
-				url: '/saveServices',
-				data: {
-					services: ko.toJSON(self.viewModel.services()), 
-					toRemove: ko.toJSON(self.viewModel.rowsToRemove),
-					totalHours: totalHours
-				},
-				success: function(data) 
+				if ($('select.error, input.error').length > 0)
 				{
-					//alert('You earned ' + data.newbadgecount + ' new badges!');
-					self.viewModel.services = ko.mapping.fromJS(data.newservices);
-					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
+					$('.validationError').fadeIn();				
+					return;
+				}
 
-					self.viewModel.originalServices = data.newservices;
+				self.viewModel.submitting(true);				
 
-					self.viewModel.rowsToRemove = [];
-					self.viewModel.editing(false);
+				var totalHours = self.viewModel.calculateTotalHours();
 
-					// Service specific stuff
-					self.viewModel.totalHours(totalHours);
-				},
-				error: function() {alert('SaveClasses fail!');}
-			});		
+				$.ajax({
+					type: "POST",
+					url: '/saveServices',
+					data: {
+						services: ko.toJSON(self.viewModel.services()), 
+						toRemove: ko.toJSON(self.viewModel.rowsToRemove),
+						totalHours: totalHours
+					},
+					success: function(data) 
+					{
+						//alert('You earned ' + data.newbadgecount + ' new badges!');
+						ko.mapping.fromJS(data.newservices, {}, self.viewModel.services);
+						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
+
+						self.viewModel.originalServices = data.newservices;
+
+						self.viewModel.rowsToRemove = [];
+						self.viewModel.editing(false);
+						self.viewModel.submitting(false);
+
+						// Service specific stuff
+						self.viewModel.totalHours(totalHours);
+					},
+					error: function() {alert('SaveClasses fail!');}
+				});
+			}
 		},
 
 		cancelEdit: function()
 		{
-			// Set back to original
-			self.viewModel.services = ko.mapping.fromJS(self.viewModel.originalServices);
+			// Set back to original			
+			ko.mapping.fromJS(self.viewModel.originalServices, {}, self.viewModel.services);
 
 			self.viewModel.rowsToRemove = [];
-			self.viewModel.editing(false);
+			self.viewModel.editing(false);			
 		},
 
 		edit: function()

@@ -58,7 +58,7 @@
 			<select data-bind="css: {error: school_pdu_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalpdus, value: pdu.school_pdu_id, optionsCaption: 'Choose PDU Event...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>
 			<input data-bind="value: date, css: {error: date.hasError}, valueUpdate: 'afterkeydown'" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
 			<input data-bind="value: hours, css: {error: hours.hasError}, valueUpdate: 'afterkeydown'" placeholder="Hours" style="width: 100px" />
-			<div class="errorText" style="text-align: center" data-bind='visible: hours.hasError, text: hours.validationMessage'></div>
+			<div class="errorText pts pbs" style="text-align: center" data-bind='visible: hours.hasError, text: hours.validationMessage'></div>
 		</div>
 	</div>		
 	<div class="pbm textCenter">
