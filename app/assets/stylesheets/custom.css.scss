@@ -38,6 +38,9 @@ $service_invert: $turquoise;
 $testing: $wisteria;
 $testing_invert: $amethyst;
 
+$scholarship: $nephritis;
+$schholarship_invert: $emerland;
+
 $midnight: $midnight-blue;
 $midnight_invert: $wet-asphalt;
 
@@ -109,8 +112,16 @@ select {
 {
   background-color: $clouds;
   height: 100%;
-  position: absolute;
-  left: 0;
+  position: fixed;
+
+  width: 150px; /* This is overridden when necessary */
+}
+
+.contentContainer
+{
+  margin-left: 150px; /* This is overridden when necessary */
+  padding: 20px; 
+  position: relative;
 }
 
 /* Bootstrap Header overrides */
@@ -278,21 +289,25 @@ input {
 }
 
 /* Erin's CSS */
+.maxl,.mvxl,.mbxl {margin-bottom: 20px}
 .mal,.mvl,.mbl {margin-bottom: 15px}
-.mam,.mbm {margin-bottom: 10px}
-.mas,.mbs {margin-bottom: 5px}
+.mam,.mvm,.mbm {margin-bottom: 10px}
+.mas,.mvs,.mbs {margin-bottom: 5px}
 
+.maxl,.mvxl,.mtxl {margin-top: 20px}
 .mal,.mvl,.mtl {margin-top: 15px}
-.mam,.mtm {margin-top: 10px}
-.mas,.mts {margin-top: 5px}
+.mam,.mvm,.mtm {margin-top: 10px}
+.mas,.mvs,.mts {margin-top: 5px}
 
-.mal,.mrl {margin-right: 15px}
-.mam,.mrm {margin-right: 10px}
-.mas,.mrs {margin-right: 5px}
+.maxl,.mhxl,.mrxl {margin-right: 20px}
+.mal,.mhl,.mrl {margin-right: 15px}
+.mam,.mhm,.mrm {margin-right: 10px}
+.mas,.mhs,.mrs {margin-right: 5px}
 
-.mal,.mll {margin-left: 15px}
-.mam,.mlm {margin-left: 10px}
-.mas,.mls {margin-left: 5px}
+.maxl,.mhxl,.mlxl {margin-left: 20px}
+.mal,.mhl,.mll {margin-left: 15px}
+.mam,.mhm,.mlm {margin-left: 10px}
+.mas,.mhs,.mls {margin-left: 5px}
 
 .paxl,.pvxl,.pbxl {padding-bottom: 20px}
 .pal,.pvl,.pbl {padding-bottom: 15px}
@@ -444,4 +459,8 @@ img.picture-box.college {
 .midnight_text {color: $midnight }
 .midnight_bg {background-color: $midnight; color: white;}
 
+.scholarship_text {color: $scholarship }
+.scholarship_bg {background-color: $scholarship; color: white;}
+
 .errorText { color: red; }
+.regularText { color: $ink; }

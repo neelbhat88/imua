@@ -15,8 +15,16 @@ class UserInfo < ActiveRecord::Base
 
     minreq_badges = GlobalBadge.where(:semester => [nil, semester], :isminrequirement => true)
 
+    # ToDo: Remove this if the block below this works
+    # minreq_badges.each do |b|
+    #   if self.user.user_badges.where(:global_badge_id => b.id, :semester => semester).length == 0
+    #     return false
+    #   end
+    # end
+
+    user_badges = self.user.user_badges.where(:semester => semester)
     minreq_badges.each do |b|
-      if self.user.user_badges.where(:global_badge_id => b.id, :semester => semester).length == 0
+      if user_badges.select{|badge| badge.global_badge_id == b.id}.length == 0
         return false
       end
     end

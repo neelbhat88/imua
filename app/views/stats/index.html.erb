@@ -1,0 +1,91 @@
+<% @jsinit = 'Stats' %>
+
+<div class="progressLeftPane leftPane">
+	<ul class="progressNav">
+		<li class="progressNavLi academics_text selected">At a glance</li>
+	</ul>
+</div>
+
+<div class="progressContentContainer contentContainer" data-bind="visible: pageLoaded" style="padding: 40px 60px; display:none;">
+	<div style="min-width: 960px;">
+		<div class="statsDataContainer" style="width: 820px;">
+			<div class="header scholarship_bg">
+				<div class="text">Scholarship Points Total</div>
+			</div>
+
+			<div class="body scholarship_text">
+				<div class="regularText" style="margin: 0px 80px; text-align: right;">
+					<div class="" data-bind="text: totalBadgesValue" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+					<div class="pls" style="display: inline-block; line-height: 1; font-size: 3em;"> Scholarship Points</div>
+				</div>
+
+				<div style="border-bottom: 1px solid #333; margin: 0px 120px; color: red; text-align: right;">
+					<div style="display: inline-block; color: red; font-size: 8em; line-height: 1">- </div>
+					<div class="" data-bind="text: totalDeductions" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+					<div class="pls" style="display: inline-block; line-height: 1; font-size: 3em;"> Points Deducted</div>
+				</div>
+
+				<div class="scolarship_text ptm">
+					<div class="" data-bind="text: finalBadgesValue" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+					<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Scholarship Points Earned </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="statsDataContainer mtxl" style="width: 650px; margin-left: auto;">
+			<div class="header midnight_bg">
+				<div class="text">Badge Total</div>
+			</div>
+
+			<div class="body midnight_text" style="">
+				<div class="" data-bind="text: totalBadgesEarned" style="display: inline-block; line-height: 1; font-size: 8em; height: 100%;"></div>
+				<div class="" data-bind="text: '/ ' + totalBadgesPossible() + ' Badges Earned'" style="display: inline-block; line-height: 1; font-size: 3em; height: 100%; font-weight: 100;"></div>
+			</div>
+		</div>		
+
+		<div class="statsDataContainer mtxl" style="width: 620px;">
+			<div class="header academics_bg">
+				<div class="text">GPA Total</div>
+			</div>
+
+			<div class="body academics_text" style="">
+				<div class="" data-bind="text: cumulativeGpa" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Cumulative GPA </div>
+			</div>
+		</div>
+
+		<div class="statsDataContainer mtxl" style="width: 620px; margin-left: auto;">
+			<div class="header extracur_bg">
+				<div class="text">Extracurricular Total</div>
+			</div>
+
+			<div class="body extracur_text" style="">
+				<div class="" data-bind="text: totalActivities" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Total Extracurriculars </div>
+			</div>
+		</div>
+
+		<div class="statsDataContainer mtxl" style="width: 720px;">
+			<div class="header service_bg">
+				<div class="text">Service Total</div>
+			</div>
+
+			<div class="body service_text" style="">
+				<div class="" data-bind="text: totalService" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Total Service Hours </div>
+			</div>
+		</div>
+
+		<div class="statsDataContainer mtxl" style="width: 620px; margin-left: auto;">
+			<div class="header pdu_bg">
+				<div class="text">PDU Total</div>
+			</div>
+
+			<div class="body pdu_text" style="">
+				<div class="" data-bind="text: totalPdus" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
+				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Total PDUs </div>
+			</div>
+		</div>
+	</div>	
+</div>
+

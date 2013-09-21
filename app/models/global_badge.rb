@@ -1,6 +1,6 @@
 class GlobalBadge < ActiveRecord::Base
   attr_accessible :category, :comparevalue, :description, :isminrequirement, :semester,
-                   :subcategory, :title
+                   :subcategory, :title, :badge_value
 
   default_scope order('id ASC')
 
@@ -40,7 +40,7 @@ class GlobalBadge < ActiveRecord::Base
         else
           hasEarned = "Yes"
         end
-      end      
+      end
 
       badgesviewmodel << BadgeViewModel.new(badge, hasEarned)
     end

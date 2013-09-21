@@ -9,7 +9,12 @@ class GlobalBadgesController < ApplicationController
 
 		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
 		
-		badgesearned = GetSemesterBadgesEarned(semester)
+		badgesearned = 0
+		badgesviewmodel.each do | b |
+			if b.hasEarned == "Yes"
+				badgesearned += 1
+			end
+		end		
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel, 
@@ -36,7 +41,12 @@ class GlobalBadgesController < ApplicationController
 
 		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
 
-		badgesearned = GetSemesterBadgesEarned(semester)
+		badgesearned = 0
+		badgesviewmodel.each do | b |
+			if b.hasEarned == "Yes"
+				badgesearned += 1
+			end
+		end
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel, :badgesearned => badgesearned }}
@@ -44,13 +54,6 @@ class GlobalBadgesController < ApplicationController
 	end
 
 private
-	def GetSemesterBadgesEarned(semester)	
-		if (current_user.user_info.MetAllMinRequirements(semester))
-			return current_user.user_badges.where(:semester => semester).length
-		else
-			# If all min reqs not met, total number earned is just the min requirements
-			return current_user.user_badges.joins(:global_badge).where("user_badges.semester = ? and global_badges.isminrequirement = true", semester).length
-		end
-	end
+	
 
 end

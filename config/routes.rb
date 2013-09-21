@@ -1,18 +1,6 @@
 Wcsf::Application.routes.draw do
-
-  get "testing/index"
-
-  get "testing_controller/index"
-
   resources :global_exams
-
-
   resources :school_pdus
-
-
-  get "services/index"
-
-  get "services_controller/index"
 
   namespace :admin do
     root to: 'admin#index'
@@ -56,7 +44,6 @@ Wcsf::Application.routes.draw do
   get '/contact', to: 'contacts#index', as: 'contact'
   resources :contacts, only: [:index, :create]
 
-
   match '/profile', to: 'users#profile'
   match '/summary', to: 'static_pages#summary'
 
@@ -75,8 +62,7 @@ Wcsf::Application.routes.draw do
   match '/testing', to: 'testing#index'
   match '/saveTesting', to: 'testing#saveTesting'
 
-  match '/mybadges', to: 'my_badges#index'
-  match '/updateGrid', to: 'my_badges#updateGrid'
+  match '/stats', to: 'stats#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
