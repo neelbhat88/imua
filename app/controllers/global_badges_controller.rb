@@ -14,7 +14,7 @@ class GlobalBadgesController < ApplicationController
 			if b.hasEarned == "Yes"
 				badgesearned += 1
 			end
-		end		
+		end
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel, 

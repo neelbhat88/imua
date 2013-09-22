@@ -22,7 +22,10 @@
 				<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
 					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" class="title"></span>				
 					<div data-bind="text: badge.description()" class="description"></div>
-					<div class="minReqStar"><%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement") %></div>
+					<div class="minReqStar">
+						<div class="points" data-bind="text: badge.badgeValue()" title="Scholarship Points"></div>
+						<%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement", :title => "Minimum Requirement") %>
+					</div>
 				</div>		
 				<!-- /ko -->
 			</div>
@@ -38,6 +41,9 @@
 				<div class="globalBadge" data-bind="css: getBadgeColor(badge)" style="">
 					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" class="title"></span>				
 					<div data-bind="text: badge.description()" class="description"></div>
+					<div class="minReqStar">
+						<div class="points pas" data-bind="text: badge.badgeValue()" title="Scholarship Points"></div>
+					</div>
 				</div>		
 				<!-- /ko -->
 			</div>
