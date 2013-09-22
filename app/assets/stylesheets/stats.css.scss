@@ -54,3 +54,16 @@
 		padding: 10px 0;
 	}
 }
+
+.clickable-icon
+{
+	cursor: pointer;
+}
+
+.deductionsTable
+{
+	font-size: 14px; 
+	text-align: center;
+
+	& td:first-child { font-weight: bold; }
+}

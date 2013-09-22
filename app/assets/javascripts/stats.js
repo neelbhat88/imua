@@ -12,12 +12,17 @@ var Stats = new function() {
 		cumulativeGpa: ko.observable(0.00),
 		totalActivities: ko.observable(0),
 		totalService: ko.observable(0),
-		totalPdus: ko.observable(0)
+		totalPdus: ko.observable(0),
+
+		showDeductionsModal: function() {
+			$('#deductionsModal').modal();
+			e.preventDefault();
+		}
 	};
 
 	// Initializes ViewModel
 	self.init = function() {
-		$(document).ready(function() {			
+		$(document).ready(function() {
 			$.ajax({				
 				url: '/stats',				
 				success: function(data) {
