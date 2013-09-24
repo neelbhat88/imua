@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916194626) do
+ActiveRecord::Schema.define(:version => 20130924033358) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "school_activities", ["school_id"], :name => "IDX_SchoolActivity_SchoolId"
+
   create_table "school_classes", :force => true do |t|
     t.integer  "school_id"
     t.string   "name"
@@ -56,12 +58,16 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.float    "credit_hours", :default => 1.0
   end
 
+  add_index "school_classes", ["school_id"], :name => "IDX_SchoolClass_SchoolId"
+
   create_table "school_pdus", :force => true do |t|
     t.string   "name"
     t.integer  "school_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "school_pdus", ["school_id"], :name => "IDX_SchoolPdu_SchoolId"
 
   create_table "schools", :force => true do |t|
     t.string   "name"
@@ -80,6 +86,9 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "updated_at",         :null => false
   end
 
+  add_index "user_activities", ["school_activity_id"], :name => "IDX_UserActivity_SchoolActivityId"
+  add_index "user_activities", ["user_id"], :name => "IDX_UserActivity_UserId"
+
   create_table "user_badges", :force => true do |t|
     t.integer  "user_id"
     t.integer  "global_badge_id"
@@ -87,6 +96,9 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "updated_at",      :null => false
     t.integer  "semester"
   end
+
+  add_index "user_badges", ["global_badge_id"], :name => "IDX_UserBadge_GlobalBadgeId"
+  add_index "user_badges", ["user_id"], :name => "IDX_UserBadge_UserId"
 
   create_table "user_classes", :force => true do |t|
     t.integer  "user_id"
@@ -99,6 +111,9 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "updated_at",                     :null => false
     t.integer  "school_class_id", :default => 3
   end
+
+  add_index "user_classes", ["school_class_id"], :name => "IDX_UserClass_SchoolClassId"
+  add_index "user_classes", ["user_id"], :name => "IDX_UserClass_UserId"
 
   create_table "user_infos", :force => true do |t|
     t.integer  "current_semester",            :default => 1
@@ -120,6 +135,9 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.integer  "classof"
   end
 
+  add_index "user_infos", ["school_id"], :name => "IDX_UserInfo_SchoolId"
+  add_index "user_infos", ["user_id"], :name => "IDX_UserInfo_UserId"
+
   create_table "user_pdus", :force => true do |t|
     t.integer  "user_id"
     t.integer  "semester"
@@ -130,6 +148,9 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.integer  "school_pdu_id"
   end
 
+  add_index "user_pdus", ["school_pdu_id"], :name => "IDX_UserPdu_SchoolPduId"
+  add_index "user_pdus", ["user_id"], :name => "IDX_UserPdu_UserId"
+
   create_table "user_semester_gpas", :force => true do |t|
     t.integer  "user_id"
     t.integer  "semester"
@@ -137,6 +158,8 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "user_semester_gpas", ["user_id"], :name => "IDX_UserSemsterGpa_UserId"
 
   create_table "user_services", :force => true do |t|
     t.integer  "user_id"
@@ -148,6 +171,8 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "user_services", ["user_id"], :name => "IDX_UserService_UserId"
+
   create_table "user_testings", :force => true do |t|
     t.integer  "global_exam_id"
     t.integer  "user_id"
@@ -157,6 +182,9 @@ ActiveRecord::Schema.define(:version => 20130916194626) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "user_testings", ["global_exam_id"], :name => "IDX_UserTesting_GlobalExamId"
+  add_index "user_testings", ["user_id"], :name => "IDX_UserTesting_UserId"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
