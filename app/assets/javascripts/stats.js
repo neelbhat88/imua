@@ -15,8 +15,7 @@ var Stats = new function() {
 		totalPdus: ko.observable(0),
 
 		showDeductionsModal: function() {
-			$('#deductionsModal').modal();
-			e.preventDefault();
+			$('#deductionsModal').modal();			
 		}
 	};
 
