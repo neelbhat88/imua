@@ -6,139 +6,137 @@
 	</ul>
 </div>
 
-<div class="progressContentContainer contentContainer" data-bind="visible: pageLoaded" style="padding: 40px 60px; display:none;">
-	<div style="min-width: 960px;">
-		<div class="statsDataContainer" style="width: 820px;">
-			<div class="header scholarship_bg">
-				<div class="text">Scholarship Points Total</div>
-			</div>
-
-			<div class="body scholarship_text">
-				<div class="regularText" style="margin: 0px 80px; text-align: right;">
-					<div class="" data-bind="text: totalBadgesValue" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-					<div class="pls" style="display: inline-block; line-height: 1; font-size: 3em;"> Scholarship Points</div>
-				</div>
-
-				<div style="border-bottom: 1px solid #333; margin: 0px 115px; color: red; text-align: right;">
-					<div style="display: inline-block; color: red; font-size: 8em; line-height: 1">- </div>
-					<div class="" data-bind="text: totalDeductions" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-					<div class="pls" style="display: inline-block; line-height: 1; font-size: 3em; position: relative;"> Points Deducted
-						<div class="" style="position: absolute; right: -50px; bottom: 0px;">
-							<%= image_tag("question_gray.png", :size => "40x40", :alt => "Deductions", :title => "What are Deductions?", :class=>"clickable-icon", :mouseover => "question_blue.png", :"data-bind" => "click: showDeductionsModal") %>
-						</div>
-					</div>		
-				</div>								
-
-				<div class="scolarship_text ptm">
-					<div class="" data-bind="text: finalBadgesValue" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-					<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Scholarship Points Earned </div>
-				</div>
-			</div>
+<div class="progressContentContainer statsContentContainer" data-bind="visible: pageLoaded" style="display:none">
+	<div class="statsDataContainer" style="width: 820px;">
+		<div class="header scholarship_bg">
+			<div class="text">Scholarship Points Total</div>
 		</div>
 
-		<div class="statsDataContainer mtxl" style="width: 650px; margin-left: auto;">
-			<div class="header midnight_bg">
-				<div class="text">Badge Total</div>
+		<div class="body scholarship_text">
+			<div class="regularText" style="margin: 0px 80px; text-align: right;">
+				<div class="displayInlineBlock font8em" data-bind="text: totalBadgesValue"></div>
+				<div class="pls displayInlineBlock font3em"> Scholarship Points</div>
 			</div>
 
-			<div class="body midnight_text" style="">
-				<div class="" data-bind="text: totalBadgesEarned" style="display: inline-block; line-height: 1; font-size: 8em; height: 100%;"></div>
-				<div class="" data-bind="text: '/ ' + totalBadgesPossible() + ' Badges Earned'" style="display: inline-block; line-height: 1; font-size: 3em; height: 100%; font-weight: 100;"></div>
-			</div>
-		</div>		
+			<div style="border-bottom: 1px solid #333; margin: 0px 115px; color: red; text-align: right;">
+				<div class="displayInlineBlock font8em errorText">- </div>
+				<div class="displayInlineBlock font8em" data-bind="text: totalDeductionValue"></div>
+				<div class="pls displayInlineBlock font3em" style="position: relative;"> Points Deducted
+					<div class="" style="position: absolute; right: -50px; bottom: 0px;">
+						<%= image_tag("question_gray.png", :size => "40x40", :alt => "Deductions", :title => "What are Deductions?", :class=>"clickable-icon", :mouseover => "question_blue.png", :"data-bind" => "click: showDeductionsModal") %>
+					</div>
+				</div>		
+			</div>								
 
-		<div class="statsDataContainer mtxl" style="width: 620px;">
-			<div class="header academics_bg">
-				<div class="text">GPA Total</div>
-			</div>
-
-			<div class="body academics_text" style="">
-				<div class="" data-bind="text: cumulativeGpa" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Cumulative GPA </div>
-			</div>
-		</div>
-
-		<div class="statsDataContainer mtxl" style="width: 620px; margin-left: auto;">
-			<div class="header extracur_bg">
-				<div class="text">Extracurricular Total</div>
-			</div>
-
-			<div class="body extracur_text" style="">
-				<div class="" data-bind="text: totalActivities" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Total Extracurriculars </div>
+			<div class="scolarship_text ptm">
+				<div class="displayInlineBlock font8em" data-bind="text: finalBadgesValue"></div>
+				<div class="plm displayInlineBlock font3em"> Scholarship Points Earned </div>
 			</div>
 		</div>
+	</div>
 
-		<div class="statsDataContainer mtxl" style="width: 720px;">
-			<div class="header service_bg">
-				<div class="text">Service Total</div>
-			</div>
-
-			<div class="body service_text" style="">
-				<div class="" data-bind="text: totalService" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Total Service Hours </div>
-			</div>
+	<div class="statsDataContainer mtxl" style="width: 650px; margin-left: auto;">
+		<div class="header midnight_bg">
+			<div class="text">Badge Total</div>
 		</div>
 
-		<div class="statsDataContainer mtxl" style="width: 620px; margin-left: auto;">
-			<div class="header pdu_bg">
-				<div class="text">PDU Total</div>
-			</div>
+		<div class="body midnight_text" style="">
+			<div class="displayInlineBlock font8em" data-bind="text: totalBadgesEarned"></div>
+			<div class="displayInlineBlock font3em" data-bind="text: '/ ' + totalBadgesPossible() + ' Badges Earned'"></div>
+		</div>
+	</div>		
 
-			<div class="body pdu_text" style="">
-				<div class="" data-bind="text: totalPdus" style="display: inline-block; line-height: 1; font-size: 8em;"></div>
-				<div class="plm" style="display: inline-block; line-height: 1; font-size: 3em;"> Total PDUs </div>
-			</div>
+	<div class="statsDataContainer mtxl" style="width: 620px;">
+		<div class="header academics_bg">
+			<div class="text">GPA Total</div>
 		</div>
 
-		<div id="deductionsModal" class="student-modal modal hide fade">
-		  <div class="student-modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		    <h3><%= "WCSF Deductions" %></h3>
-		  </div>
-		  <div class="student-modal-body clearfix" style="overflow: auto; height: 400px; font-size: 18px">
-		  	<div class="regularText" style="padding-bottom: 40px;">
-		  		<p>Your hard earned Scholarship Points can be deducted by the WCSF staff for the following reasons: </p>
-		  	
-		  		<p><ol style="margin-left: 30px;">
-		  			<li>Not submitting a document on time </li>
-		  			<li>Not attending a mandatory WCSF meeting or event</li> 
-		  			<li>Not responding to WCSF communications.</li> 
-		  		</ol></p>
-		  	
-		  		<p>The table below explains the deductions in detail.</p>
-
-		  		<div class="deductionsTable">
-		  			<table cellpadding="3px">
-		  				<th class="midnight_bg">Student Responsibility</th>
-		  				<th class="midnight_bg">Level 1 <br>(15 points)</th>
-		  				<th class="midnight_bg">Level 2 <br>(25 points)</th>
-		  				<th class="midnight_bg">Level 3 <br>(50 points)</th>
-		  				<tbody>
-		  					<tr>
-		  						<td>Submitting Requested Documents on Time</td>
-		  						<td>Fails to submit a requested WCSF document before the deadline</td>
-		  						<td>Fails to submit a requested WCSF document before the deadline by more than 1 week</td>
-		  						<td>Fails to submit a document, submits a document of poor quality, or submits a document with false verifications</td>		  						
-		  					</tr>
-		  					<tr>
-		  						<td>Attending WCSF Meetings or Events</td>
-		  						<td>Fails to attend more than 2 mandatory meetings or events in a semester</td>
-		  						<td>Fails to attend more than 3 mandatory meetings or events in a semester</td>
-		  						<td>Fails to attend more than 4 mandatory meetings or events in a semester</td>		  						
-		  					</tr>
-		  					<tr>
-		  						<td>Responding to WCSF Communications</td>
-		  						<td>The WCSF makes more than 2 attempts (email, phone call, etc.) to get a requested response</td>
-		  						<td>The WCSF makes more than 3 attempts (email, phone call, etc.) to get a requested response</td>
-		  						<td>The WCSF does not receive the requested response by the deadline</td>
-		  					</tr>
-		  				</tbody>
-		  			</table>
-		  		</div>
-		  	</div>
-		  </div>
+		<div class="body academics_text" style="">
+			<div class="displayInlineBlock font8em" data-bind="text: cumulativeGpa"></div>
+			<div class="plm displayInlineBlock font3em"> Cumulative GPA </div>
 		</div>
+	</div>
+
+	<div class="statsDataContainer mtxl" style="width: 620px; margin-left: auto;">
+		<div class="header extracur_bg">
+			<div class="text">Extracurricular Total</div>
+		</div>
+
+		<div class="body extracur_text" style="">
+			<div class="displayInlineBlock font8em" data-bind="text: totalActivities"></div>
+			<div class="plm displayInlineBlock font3em"> Total Extracurriculars </div>
+		</div>
+	</div>
+
+	<div class="statsDataContainer mtxl" style="width: 720px;">
+		<div class="header service_bg">
+			<div class="text">Service Total</div>
+		</div>
+
+		<div class="body service_text" style="">
+			<div class="displayInlineBlock font8em" data-bind="text: totalService"></div>
+			<div class="plm displayInlineBlock font3em"> Total Service Hours </div>
+		</div>
+	</div>
+
+	<div class="statsDataContainer mtxl" style="width: 620px; margin-left: auto;">
+		<div class="header pdu_bg">
+			<div class="text">PDU Total</div>
+		</div>
+
+		<div class="body pdu_text" style="">
+			<div class="displayInlineBlock font8em" data-bind="text: totalPdus"></div>
+			<div class="plm displayInlineBlock font3em"> Total PDUs </div>
+		</div>
+	</div>
+
+	<div id="deductionsModal" class="student-modal modal hide fade">
+	  <div class="student-modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3><%= "WCSF Deductions" %></h3>
+	  </div>
+	  <div class="student-modal-body clearfix" style="overflow: auto; height: 400px; font-size: 18px">
+	  	<div class="regularText" style="padding-bottom: 40px;">
+	  		<p>Your hard earned Scholarship Points can be deducted by the WCSF staff for the following reasons: </p>
+	  	
+	  		<p><ol style="margin-left: 30px;">
+	  			<li>Not submitting a document on time </li>
+	  			<li>Not attending a mandatory WCSF meeting or event</li> 
+	  			<li>Not responding to WCSF communications.</li> 
+	  		</ol></p>
+	  	
+	  		<p>The table below explains the deductions in detail.</p>
+
+	  		<div class="deductionsTable">
+	  			<table cellpadding="3px">
+	  				<th class="midnight_bg">Student Responsibility</th>
+	  				<th class="midnight_bg">Level 1 <br>(15 points)</th>
+	  				<th class="midnight_bg">Level 2 <br>(25 points)</th>
+	  				<th class="midnight_bg">Level 3 <br>(50 points)</th>
+	  				<tbody>
+	  					<tr>
+	  						<td>Submitting Requested Documents on Time</td>
+	  						<td>Fails to submit a requested WCSF document before the deadline</td>
+	  						<td>Fails to submit a requested WCSF document before the deadline by more than 1 week</td>
+	  						<td>Fails to submit a document, submits a document of poor quality, or submits a document with false verifications</td>		  						
+	  					</tr>
+	  					<tr>
+	  						<td>Attending WCSF Meetings or Events</td>
+	  						<td>Fails to attend more than 2 mandatory meetings or events in a semester</td>
+	  						<td>Fails to attend more than 3 mandatory meetings or events in a semester</td>
+	  						<td>Fails to attend more than 4 mandatory meetings or events in a semester</td>		  						
+	  					</tr>
+	  					<tr>
+	  						<td>Responding to WCSF Communications</td>
+	  						<td>The WCSF makes more than 2 attempts (email, phone call, etc.) to get a requested response</td>
+	  						<td>The WCSF makes more than 3 attempts (email, phone call, etc.) to get a requested response</td>
+	  						<td>The WCSF does not receive the requested response by the deadline</td>
+	  					</tr>
+	  				</tbody>
+	  			</table>
+	  		</div>
+	  	</div>
+	  </div>
 	</div>
 </div>
 

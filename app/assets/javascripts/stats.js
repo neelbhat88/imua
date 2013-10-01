@@ -6,13 +6,14 @@ var Stats = new function() {
 
 		totalBadgesEarned: ko.observable(0),
 		totalBadgesPossible: ko.observable(0),
-		totalBadgesValue: ko.observable(0),
-		totalDeductions: ko.observable(0),
+		totalBadgesValue: ko.observable(0),		
 		finalBadgesValue: ko.observable(0),
 		cumulativeGpa: ko.observable(0.00),
 		totalActivities: ko.observable(0),
 		totalService: ko.observable(0),
 		totalPdus: ko.observable(0),
+		totalDeductionValue: ko.observable(0),
+		totalDeductions: [],
 
 		showDeductionsModal: function() {
 			$('#deductionsModal').modal();			
@@ -33,7 +34,10 @@ var Stats = new function() {
 					self.viewModel.totalService(data.totalservice);
 					self.viewModel.totalPdus(data.totalpdus);
 
-					self.viewModel.finalBadgesValue(self.viewModel.totalBadgesValue() - self.viewModel.totalDeductions());
+					self.viewModel.totalDeductionValue(data.totaldeductionvalue);
+					ko.mapping.fromJS(data.totaldeductionslist, {}, self.viewModel.totalDeductions);
+
+					self.viewModel.finalBadgesValue(self.viewModel.totalBadgesValue() - self.viewModel.totalDeductionValue());
 					
 					self.viewModel.pageLoaded(true);
 					

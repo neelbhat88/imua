@@ -1,57 +1,62 @@
-.statsDataContainer
+.statsContentContainer
 {
-	padding-top: 20px;	
-	position: relative;
-	text-align: center;
+	padding: 40px 60px; 
+	
+	.statsDataContainer
+	{
+		padding-top: 20px;	
+		position: relative;
+		text-align: center;
 
-	& > .academics_bg, > .academics_text { 
-		border: 3px solid $academics; 
-	}
-
-	& > .extracur_bg, > .extracur_text { 
-		border: 3px solid $extracur; 
-	}
-
-	& > .service_bg, > .service_text { 
-		border: 3px solid $service; 
-	}
-
-	& > .pdu_bg, > .pdu_text { 
-		border: 3px solid $pdu; 
-	}
-
-	& > .testing_bg, > .testing_text { 
-		border: 3px solid $testing; 
-	}
-
-	& > .scholarship_bg, > .scholarship_text { 
-		border: 3px solid $scholarship; 
-	}
-
-	& > .midnight_bg, > .midnight_text { 
-		border: 3px solid $midnight; 
-	}
-
-	& .header {
-		border-radius: 5px 5px 0px 0px; 
-		position: relative; 
-		text-align: center; 
-		height: 60px; 
-		color: white; 		
-
-		& .text { 
-			position: relative;			
-			top: 13px;
-			font-size: 2.5em;
-			line-height: 1;
+		& > .academics_bg, > .academics_text { 
+			border: 3px solid $academics; 
 		}
-	}
 
-	& .body { 
-		border-radius: 0px 0px 5px 5px; 
-		border-top: none; 
-		background-color: white;
-		padding: 10px 0;
+		& > .extracur_bg, > .extracur_text { 
+			border: 3px solid $extracur; 
+		}
+
+		& > .service_bg, > .service_text { 
+			border: 3px solid $service; 
+		}
+
+		& > .pdu_bg, > .pdu_text { 
+			border: 3px solid $pdu; 
+		}
+
+		& > .testing_bg, > .testing_text { 
+			border: 3px solid $testing; 
+		}
+
+		& > .scholarship_bg, > .scholarship_text { 
+			border: 3px solid $scholarship; 
+		}
+
+		& > .midnight_bg, > .midnight_text { 
+			border: 3px solid $midnight; 
+		}
+
+		& .header {
+			border-radius: 5px 5px 0px 0px; 
+			position: relative; 
+			text-align: center; 
+			height: 60px; 
+			color: white; 		
+
+			& .text { 
+				position: relative;			
+				top: 13px;
+				font-size: 2.5em;
+				line-height: 1;
+			}
+		}
+
+		& .body { 
+			border-radius: 0px 0px 5px 5px; 
+			border-top: none; 
+			background-color: white;
+			padding: 10px 0;
+		}
 	}
 }
 

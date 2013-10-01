@@ -22,6 +22,15 @@ class StatsController < ApplicationController
 			totalBadgesValue += ub.global_badge.badge_value
 		end
 
+		# Total deduction value and deductions
+		totalDeductionValue = current_user.user_deductions.sum(:deduction_value)
+
+		deductionsViewModel = []
+		current_user.user_deductions.order("deduction_value DESC").each do | d |
+			deductionsViewModel << UserDeductionViewModel.new(d)
+		end
+
+
 		# Get total possible badges
 		allGlobalBadges = GlobalBadge.all
 		totalBadgesPossible = (allGlobalBadges.select{|badge| badge.semester == nil}.length * 8) + (allGlobalBadges.select{|badge| badge.semester != nil}.length)
@@ -48,7 +57,9 @@ class StatsController < ApplicationController
 										   :cumulativegpa => cumulative_gpa,
 										   :totalactivities => totalactivities,
 										   :totalservice => totalservice,
-										   :totalpdus => totalpdus } }
+										   :totalpdus => totalpdus,
+										   :totaldeductionvalue => totalDeductionValue,
+										   :totaldeductionslist => deductionsViewModel } }
 			format.html # index.html.erb
 		end
 	end

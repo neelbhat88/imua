@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130924033358) do
+ActiveRecord::Schema.define(:version => 20130930030635) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -114,6 +114,19 @@ ActiveRecord::Schema.define(:version => 20130924033358) do
 
   add_index "user_classes", ["school_class_id"], :name => "IDX_UserClass_SchoolClassId"
   add_index "user_classes", ["user_id"], :name => "IDX_UserClass_UserId"
+
+  create_table "user_deductions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "deduction_type"
+    t.integer  "deduction_level"
+    t.integer  "deduction_value"
+    t.string   "deduction_details"
+    t.integer  "semester"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "user_deductions", ["user_id"], :name => "IDX_UserDeductions_UserId"
 
   create_table "user_infos", :force => true do |t|
     t.integer  "current_semester",            :default => 1
