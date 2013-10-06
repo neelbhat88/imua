@@ -6,6 +6,9 @@ Wcsf::Application.routes.draw do
     root to: 'admin#index'
     resources :donors
     resources :users
+
+    match 'students', to: 'users#students'
+
     put '/user_info/:id' => 'users#update_info', :as => 'user_info'
     resources :user_classes
     resources :user_activities
