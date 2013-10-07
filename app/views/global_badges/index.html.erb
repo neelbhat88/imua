@@ -3,20 +3,20 @@
 <div class="leftPane"></div>
 
 <div class="contentContainer" style="display:none;" data-bind="visible: badges().length > 0">
-	<div class="badgesEarnedBar" style="border-radius: 8px; background-color: #16a085; color: white; top: 40px; height: 100px; left: -110px; position: relative;">
-		<div class="plxl" style="display: inline-block; line-height: 1; font-size: 100px; height: 100%;" data-bind="text: badgesEarned()"></div>
-		<div class="plxl" style="display: inline-block; line-height: 1; font-size: 60px; height: 100%; font-weight: 100;">Badges Earned</div>
-		<div style="position: absolute; right: 30px; top: 42px; width: 150px;">
-			<select data-bind="options:$root.semesters, optionsText:'text', optionsValue:'id', value: semester" style="font-size: 16px; color: #16a085"></select>
+	<div class="titleBar badgesTitleBar">
+		<div class="plxl displayInlineBlock font_title-bar_large" data-bind="text: badgesEarned()"></div>
+		<div class="plxl displayInlineBlock font_title-bar_small">Badges Earned</div>
+		<div class="semesterSelect">
+			<select class="font_large service_text" data-bind="options:$root.semesters, optionsText:'text', optionsValue:'id', value: semester"></select>
 		</div>		
 	</div>
 
-	<div data-bind="visible: badges().length > 0" style="display: none; position: relative; top: 60px; padding: 10px 30px;">
-		<div class="requiredBadgesPanel" style="border-radius: 8px; padding-bottom: 40px;">
-			<div class="badgePanelTitle" style="text-align: center; background-color: #2c3e50; border-radius: 3px 3px 0px 0px; color: white; height: 35px; font-size: 32px; padding: 15px 0px 0px;">
+	<div class="phm pvxl">
+		<div class="badgesPanel requiredBadges">
+			<div class="title">
 				Required Badges
 			</div>
-			<div class="badgePanelBadges" style="border: 1px solid #2c3e50; text-align: center; background-color: white;" data-bind="foreach: { data: badges, as: 'badge' }">
+			<div class="content" data-bind="foreach: { data: badges, as: 'badge' }">
 				<!-- The following is used by KO -->
 				<!-- ko if: badge.isminrequirement() == true -->	
 				<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
@@ -31,11 +31,11 @@
 			</div>
 		</div>
 
-		<div class="otherBadgesPanel" style="border-radius: 8px; padding-bottom: 40px;">
-			<div class="badgePanelTitle" style="text-align: center; background-color: #7f8c8d; border-radius: 3px 3px 0px 0px; color: white; height: 35px; font-size: 32px; padding: 15px 0px 0px;">
+		<div class="badgesPanel">
+			<div class="title">
 				All Other Badges
 			</div>
-			<div class="badgePanelBadges" style="border: 1px solid #7f8c8d; text-align: center; background-color: white;" data-bind="foreach: { data: badges, as: 'badge' }">
+			<div class="content" data-bind="foreach: { data: badges, as: 'badge' }">
 				<!-- The following is used by KO -->
 				<!-- ko if: badge.isminrequirement() == false -->	
 				<div class="globalBadge" data-bind="css: getBadgeColor(badge)" style="">

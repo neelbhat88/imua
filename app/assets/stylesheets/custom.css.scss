@@ -46,6 +46,31 @@ $midnight_invert: $wet-asphalt;
 
 $grayMediumLight: #eaeaea;
 
+/* Category colors */
+.academics_text { color: $academics; }
+.academics_bg, .globalBadge.academics_bg { background-color: $academics; color: white; }
+
+.extracur_text { color: $extracur; }
+.extracur_bg, .globalBadge.extracur_bg { background-color: $extracur; color: white; }
+
+.pdu_text { color: $pdu; }
+.pdu_bg, .globalBadge.pdu_bg { background-color: $pdu; color: white; }
+
+.service_text { color: $service; }
+.service_bg, .globalBadge.service_bg { background-color: $service; color: white; }
+
+.testing_text { color: $testing; }
+.testing_bg, .globalBadge.testing_bg { background-color: $testing; color: white; }
+
+.midnight_text {color: $midnight }
+.midnight_bg {background-color: $midnight; color: white;}
+
+.scholarship_text {color: $scholarship }
+.scholarship_bg {background-color: $scholarship; color: white;}
+
+.errorText { color: red; }
+.regularText { color: $ink; }
+
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -59,14 +84,12 @@ html {
 }
 
 body {
-  /*background: url("wavegrid.png") repeat scroll 0 0 transparent;*/
   background: url('lei_bg.png') no-repeat;
   background-position: bottom right;
   background-size: 700px 400px;
   background-attachment: fixed;
   color: #333;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 13px;  
   padding-top: 60px;
   width: 100%;
 
@@ -120,14 +143,14 @@ select {
 .contentContainer
 {
   margin-left: 150px; /* This is overridden when necessary */
-  padding: 20px; 
+  padding: 40px 20px;
   position: relative;
 }
 
 /* Bootstrap Header overrides */
 header
 {
-  font-size: 17px;
+  @extend .font_large;
   width: 100%;
   box-shadow: 0 0 10px $ink;
 }
@@ -221,23 +244,6 @@ p {
 
 /* header */
 
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  line-height: 1;
-
-  &:hover{
-  	color: #fff;
-  	text-decoration: none;
-  }
-}
-
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -287,6 +293,19 @@ input {
 .font_small {
   font-size: 12px;
 }
+
+.font_title-bar_small
+{
+  font-size: 60px;
+  line-height: 1;
+}
+
+.font_title-bar_large
+{
+  font-size: 100px;
+  line-height: 1;
+}
+
 .textCenter {
   text-align: center;
 }
@@ -314,23 +333,23 @@ input {
 
 .paxl,.pvxl,.pbxl {padding-bottom: 20px}
 .pal,.pvl,.pbl {padding-bottom: 15px}
-.pam,.pbm {padding-bottom: 10px}
-.pas,.pbs {padding-bottom: 5px}
+.pam,.pvm,.pbm {padding-bottom: 10px}
+.pas,.pvs,pbs {padding-bottom: 5px}
 
 .paxl,.pvxl,.ptxl {padding-top: 20px}
 .pal,.pvl,.ptl {padding-top: 15px}
-.pam,.ptm {padding-top: 10px}
-.pas,.pts {padding-top: 5px}
+.pam,.pvm,.ptm {padding-top: 10px}
+.pas,.pvs,.pts {padding-top: 5px}
 
-.paxl,.prxl {padding-right: 20px}
-.pal,.prl {padding-right: 15px}
-.pam,.prm {padding-right: 10px}
-.pas,.prs {padding-right: 5px}
+.paxl,.phxl,.prxl {padding-right: 20px}
+.pal,.phl,.prl {padding-right: 15px}
+.pam,.phm,.prm {padding-right: 10px}
+.pas,.phs,.prs {padding-right: 5px}
 
-.paxl,.plxl {padding-left: 20px}
-.pal,.pll {padding-left: 15px}
-.pam,.plm {padding-left: 10px}
-.pas,.pls {padding-left: 5px}
+.paxl,.phxl,.plxl {padding-left: 20px}
+.pal,.phl,.pll {padding-left: 15px}
+.pam,.phm,.plm {padding-left: 10px}
+.pas,.phs,.pls {padding-left: 5px}
 
 
 .displayInlineBlock { display: inline-block;}
@@ -442,28 +461,3 @@ img.picture-box.college {
 
   &:hover {background-color: $silver}
 }
-
-/* Category colors */
-.academics_text { color: $academics; }
-.academics_bg, .globalBadge.academics_bg { background-color: $academics; color: white; }
-
-.extracur_text { color: $extracur; }
-.extracur_bg, .globalBadge.extracur_bg { background-color: $extracur; color: white; }
-
-.pdu_text { color: $pdu; }
-.pdu_bg, .globalBadge.pdu_bg { background-color: $pdu; color: white; }
-
-.service_text { color: $service; }
-.service_bg, .globalBadge.service_bg { background-color: $service; color: white; }
-
-.testing_text { color: $testing; }
-.testing_bg, .globalBadge.testing_bg { background-color: $testing; color: white; }
-
-.midnight_text {color: $midnight }
-.midnight_bg {background-color: $midnight; color: white;}
-
-.scholarship_text {color: $scholarship }
-.scholarship_bg {background-color: $scholarship; color: white;}
-
-.errorText { color: red; }
-.regularText { color: $ink; }

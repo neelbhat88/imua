@@ -2,19 +2,45 @@
 
 <div class="leftPane"></div>
 
-<div class="contentContainer" style="padding: 40px 20px;" data-bind="">
-	<div class="badgesEarnedBar" style="border-radius: 8px; background-color: #16a085; color: white; height: 60px; left: -110px; position: relative; margin-bottom: 20px;">
-		<div class="plxl" style="display: inline-block; line-height: 1; font-size: 60px;" data-bind="">Class of 2016</div>			
+<div class="contentContainer" data-bind="">
+	<div class="pvm titleBar">
+		<div class="font_title-bar_small plxl" data-bind="">Class of 2016</div>			
 	</div>
 
-	<div class="studentTile" style="border: 1px solid; width: 200px; text-align: center; border-radius: 5px; background-color: #ecf0f1; position: relative;">
-		<div class="picture" style="">
-			<%= image_tag @student.user_info.avatar.url(:original), :style=>"height: 200px; width: 200px;" %>			
-		</div>	
-		<div class="info" style="padding: 5px;">
-			<div class="ptm" style="font-size: 22px; line-height: 1; color: #1abc9c"><%= @student.first_name + " " + @student.last_name %></div>
-			<div class="ptm" style="text-align: left;">
-				<div>Last logged in: October 12 2013 10:12 pm</div>
+	<div class="studentTile">
+		<div class="picture">
+			<%= image_tag @student.user_info.avatar.url(:original)%>
+		</div>
+		<div class="pas info scholarship_bg">
+			<div class="pvm studentName"><%= @student.first_name + " " + @student.last_name %></div>
+			<div class="pas loginInfo">
+				<div>Last login: 10/10/13 10:12 pm</div>
+				<div>Logged in attemps: 12</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="studentTile">
+		<div class="picture">
+			<%= image_tag @student.user_info.avatar.url(:original)%>
+		</div>
+		<div class="pas info scholarship_bg">
+			<div class="pvm studentName"><%= @student.first_name + " " + @student.last_name %></div>
+			<div class="pas loginInfo">
+				<div>Last login: 10/10/13 10:12 pm</div>
+				<div>Logged in attemps: 12</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="studentTile">
+		<div class="picture">
+			<%= image_tag @student.user_info.avatar.url(:original)%>
+		</div>
+		<div class="pas info scholarship_bg">
+			<div class="pvm studentName"><%= @student.first_name + " " + @student.last_name %></div>
+			<div class="pas loginInfo">
+				<div>Last login: 10/10/13 10:12 pm</div>
 				<div>Logged in attemps: 12</div>
 			</div>
 		</div>

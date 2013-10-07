@@ -1,0 +1,32 @@
+.studentTile {
+	width: 200px; 
+	
+	text-align: center; 
+	box-shadow: 0px 1px 3px 0px; 
+
+	position: relative; 
+	display: inline-block; 
+
+	margin-left: 20px;
+	margin-bottom: 20px;
+
+	cursor: pointer;
+
+	.picture img {
+		height: 200px;
+		width: 200px;
+	}
+
+	.info {
+		.studentName {
+			font-size: 30px; line-height: 1;
+			border-bottom: 1px solid;
+		}
+
+		.loginInfo {
+			text-align: left; font-weight: bold;
+		}
+	}
+
+	&:hover { opacity: .9; }
+}

@@ -1,6 +1,22 @@
-// Place all the styles related to the GlobalBadges controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.titleBar {
+	@extend .service_bg;
+
+	border-radius: 8px;	
+	height: 60px; 
+	left: -110px; 
+	position: relative; 
+	margin-bottom: 20px;
+
+	&.badgesTitleBar { 
+		height: 100px; 
+
+		.semesterSelect {
+			position: absolute; right: 30px; top: 42px; width: 150px;
+		}
+	}
+
+	&.adminStudentTitleBar { height: 60px; }
+}
 
 .hasNotEarned {
 	background-color: $clouds !important;
@@ -11,63 +27,33 @@
 	background-color: white !important;
 }
 
-.headerText 
-{
-	font-size: 3em; 
-	color: $wet-asphalt;
-}
+.badgesPanel {
+	border-radius: 8px; 
+	padding-bottom: 40px;
 
-#badgeContainer
-{
-	background-color: $clouds; 
-	border: 1px solid $silver;
-	border-radius: 5px;
+	> .title {
+		text-align: center; 
+		border-radius: 3px 3px 0px 0px; 
+		height: 35px; 
+		font-size: 32px; 
+		padding: 15px 0px 0px;
+		background-color: $asbestos;
+		color: white;
+	}
 
-	height: 600px; 
-	position: relative;
-	top: 80px;
+	> .content {
+		border: 1px solid $asbestos; 
+		text-align: center;
+		background-color: white;
+	}
 
-	margin:auto;
-	padding: 30px;
+	&.requiredBadges > .title {
+		@extend .midnight_bg;
+	}
 
-	color: white; 
-}
-
-#tabContainer
-{
-	position: absolute; 
-	top: -52px; 
-	left: 0;
-	width: 100%;
-	text-align: center;
-}
-
-.tab
-{
-	height: 50px; 
-	width: 100px; 
-	
-	border: 1px solid $silver; 
-	background-color: $clouds;
-	border-radius: 5px 5px 0 0 ;
-
-	display: inline-block;
-
-	text-align: center;
-	line-height: 5px;
-
-	cursor: pointer;
-	color: $asbestos;
-}
-
-.tab:hover
-{
-	color: $wet-asphalt;
-}
-
-.selectedTab
-{
-	border-bottom-color: $clouds;
+	&.requiredBadges > .content {
+		border-color: $midnight;
+	}
 }
 
 .globalBadge
@@ -98,52 +84,3 @@
 		& .points { display: inline-block; vertical-align: middle; font-size: 18px; }
 	}
 }
-
-.tabNum
-{
-	font-size: 28px;
-	position: relative;
-	top: 22px;
-}
-
-.selectedTab .tabNum
-{
-	color: $wet-asphalt;
-}
-
-.categoryBox
-{
-	height: 20px; 
-	width: 40px; 
-	display: inline-block;
-	cursor: pointer;
-	background-color: white;
-	border-top: 1px solid #666;
-	border-bottom: 1px solid #666;
-	border-right: 1px solid #666;
-}
-
-.categoryBox.leftBox
-{
-	border-radius: 3px 0 0 3px;
-	border-left: 1px solid #666;
-}
-
-.categoryBox.rightBox
-{
-	border-radius: 0 3px 3px 0;
-}
-
-#categoryFilter
-{
-	font-size: 0; 
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-
-.academics { background-color: $academics; }
-.service { background-color: $service; }
-.pdu { background-color: $pdu; }
-.extracurricular { background-color: $extracur; }
-
