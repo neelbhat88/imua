@@ -11,22 +11,80 @@
 	margin-bottom: 20px;
 
 	cursor: pointer;
+	background-color: $clouds;
 
-	.picture img {
-		height: 200px;
-		width: 200px;
-	}
-
-	.info {
-		.studentName {
-			font-size: 30px; line-height: 1;
-			border-bottom: 1px solid;
+	.picture {
+		img {
+			height: 200px;
+			width: 200px;			
 		}
 
-		.loginInfo {
-			text-align: left; font-weight: bold;
+		.edit {
+			background-color: white; 
+			position: absolute; 
+			top: 0; 
+			right: 0; 
+			margin: 5px;
+
+			border-radius: 5px; 
+			padding: 1px 5px; 
+			width: 30px; 
+			display: none;
+
+			&:hover { box-shadow: 0 0 5px;}
 		}
+
+		.name {
+			position: absolute;
+			bottom: 5px;
+			left: 5px;
+			font-size: 28px;
+			line-height: 1;
+			text-align: left;
+			color: $midnight;
+			display: none;
+
+			.loginInfo {
+				text-align: center;
+				font-size: 12px;			
+			}
+		}		
+		
+		&:hover > img { opacity: .1; }
+		&:hover div { display: block; }
 	}
 
-	&:hover { opacity: .9; }
+	.info  {
+		font-size: 0; 
+		text-align: left;
+	}	
+}
+
+.categoryTile
+{
+	height: 97px; 
+	width: 97px;
+	border: 1px solid;
+	@extend .regularText;
+	display: inline-block;
+	margin-top: 1px;	
+
+	&:nth-child(odd) { margin-right: 2px; }
+	&:hover > .letter { color: $midnight; }
+
+	.letter { 
+		line-height: 1; 
+		height: 45px; 
+		width: 45px;
+		margin: -23px auto;
+		top: 50%; 
+		position: relative;
+		font-size: 45px;
+		text-align: center;
+		color: white;
+	}
+
+	&.green { background-color: $nephritis; }
+	&.yellow { background-color: $sun-flower; }
+	&.red { background-color: $pomegranate; }
 }

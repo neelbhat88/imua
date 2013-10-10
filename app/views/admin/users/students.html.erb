@@ -8,42 +8,67 @@
 	</div>
 
 	<div class="studentTile">
-		<div class="picture">
+		<div class="picture" style="position: relative;">
 			<%= image_tag @student.user_info.avatar.url(:original)%>
+			<div class="edit">Edit</div>			
+			<div class="name">
+				<div class="pbl loginInfo">
+					<div>Last login: <%= @student.current_sign_in_at.in_time_zone("Hawaii").to_formatted_s(:long) %></div>
+					<div>Logged in attemps: <%= @student.sign_in_count %></div>
+				</div>
+
+				<%= @student.first_name + " " + @student.last_name %>
+			</div>
 		</div>
-		<div class="pas info scholarship_bg">
-			<div class="pvm studentName"><%= @student.first_name + " " + @student.last_name %></div>
-			<div class="pas loginInfo">
-				<div>Last login: 10/10/13 10:12 pm</div>
-				<div>Logged in attemps: 12</div>
+		<div class="info">
+			<div class="categoryTile green">
+				<div class="letter" title="Academics">A</div>
+			</div>
+			<div class="categoryTile green">
+				<div class="letter" title="Extracurricular">E</div>
+			</div>
+			<div class="categoryTile yellow">
+				<div class="letter" title="Service">S</div>
+			</div>
+			<div class="categoryTile green">
+				<div class="letter" title="PDU">P</div>
+			</div>
+			<div class="categoryTile red">
+				<div class="letter" title="Testing">T</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="studentTile">
-		<div class="picture">
+		<div class="picture" style="position: relative;">
 			<%= image_tag @student.user_info.avatar.url(:original)%>
-		</div>
-		<div class="pas info scholarship_bg">
-			<div class="pvm studentName"><%= @student.first_name + " " + @student.last_name %></div>
-			<div class="pas loginInfo">
-				<div>Last login: 10/10/13 10:12 pm</div>
-				<div>Logged in attemps: 12</div>
-			</div>
-		</div>
-	</div>
+			<div class="edit">Edit</div>			
+			<div class="name">
+				<div class="pbl loginInfo">
+					<div>Last login: <%= @student.current_sign_in_at.in_time_zone("Hawaii").to_formatted_s(:long) %></div>
+					<div>Logged in attemps: <%= @student.sign_in_count %></div>
+				</div>
 
-	<div class="studentTile">
-		<div class="picture">
-			<%= image_tag @student.user_info.avatar.url(:original)%>
-		</div>
-		<div class="pas info scholarship_bg">
-			<div class="pvm studentName"><%= @student.first_name + " " + @student.last_name %></div>
-			<div class="pas loginInfo">
-				<div>Last login: 10/10/13 10:12 pm</div>
-				<div>Logged in attemps: 12</div>
+				<%= @student.first_name + " " + @student.last_name %>
 			</div>
 		</div>
-	</div>
+		<div class="info">
+			<div class="categoryTile red">
+				<div class="letter" title="Academics">A</div>
+			</div>
+			<div class="categoryTile red">
+				<div class="letter" title="Extracurricular">E</div>
+			</div>
+			<div class="categoryTile yellow">
+				<div class="letter" title="Service">S</div>
+			</div>
+			<div class="categoryTile green">
+				<div class="letter" title="PDU">P</div>
+			</div>
+			<div class="categoryTile green">
+				<div class="letter" title="Testing">T</div>
+			</div>
+		</div>
+	</div>	
 </div>
 
