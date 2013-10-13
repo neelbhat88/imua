@@ -1,0 +1,48 @@
+<% @jsinit = 'AdminStudents' %>
+
+<div data-bind="visible: pageLoaded" style="display: none">
+	<div class="leftPane"></div>
+
+	<div class="contentContainer" data-bind="">
+		<div class="pvm titleBar">
+			<div class="font_title-bar_small plxl" data-bind="">Class of 2016</div>			
+		</div>
+
+		<div class="students" data-bind="foreach: { data: students, as: 'student' }">
+			<div class="studentTile">
+				<div class="picture" style="position: relative;">
+					<img data-bind="attr: {src: student.picture_url()}" />
+					<div class="edit">Edit</div>
+					<div class="pas picture-overlay">	
+						<div class="info">
+							<div data-bind="text: 'Last login: ' + student.last_login_date()"></div>
+							<div data-bind="text: 'Login attemps: ' + student.login_count()"></div>
+							<div class="ptm" data-bind="text: student.email()"></div>
+						</div>
+						<div class="name" data-bind="css: {displayNone: !student.is_default_image() }">	
+							<div data-bind="text: student.name()"></div>
+						</div>
+					</div>
+				</div>
+				<div class="info">
+					<div class="categoryTile green">
+						<div class="letter" title="Academics">A</div>
+					</div>
+					<div class="categoryTile green">
+						<div class="letter" title="Extracurricular">E</div>
+					</div>
+					<div class="categoryTile yellow">
+						<div class="letter" title="Service">S</div>
+					</div>
+					<div class="categoryTile green">
+						<div class="letter" title="PDU">P</div>
+					</div>
+					<div class="categoryTile red">
+						<div class="letter" title="Testing">T</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+

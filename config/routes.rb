@@ -7,7 +7,7 @@ Wcsf::Application.routes.draw do
     resources :donors
     resources :users
 
-    match 'students', to: 'users#students'
+    match 'students', to: 'students#index'
 
     put '/user_info/:id' => 'users#update_info', :as => 'user_info'
     resources :user_classes

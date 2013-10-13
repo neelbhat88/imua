@@ -44,4 +44,10 @@
 
     return role_array[role.to_i]
   end
+
+  # TODO: Test things like this - Make this non-static?
+  def self.LoadStudentsBySchoolId(school_id)
+    # Default order is Last name
+    return User.joins(:user_info).where("users.role = 0 and user_infos.school_id = ?", school_id).order("users.last_name ASC")
+  end
 end

@@ -19,8 +19,27 @@
 			width: 200px;			
 		}
 
-		.edit {
-			background-color: white; 
+		.picture-overlay {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+
+			color: $midnight;
+
+			.name {
+				font-size: 28px;
+				line-height: 1;
+				text-align: left;
+			}
+
+			.info {
+				font-size: 12px;
+
+				display:none;
+			}
+		}
+
+		.edit {			
 			position: absolute; 
 			top: 0; 
 			right: 0; 
@@ -29,29 +48,17 @@
 			border-radius: 5px; 
 			padding: 1px 5px; 
 			width: 30px; 
+
+			font-size: 14px;
+
+			@extend .submitButton;
+			@extend .midnight_bg;
+
 			display: none;
-
-			&:hover { box-shadow: 0 0 5px;}
-		}
-
-		.name {
-			position: absolute;
-			bottom: 5px;
-			left: 5px;
-			font-size: 28px;
-			line-height: 1;
-			text-align: left;
-			color: $midnight;
-			display: none;
-
-			.loginInfo {
-				text-align: center;
-				font-size: 12px;			
-			}
 		}		
 		
 		&:hover > img { opacity: .1; }
-		&:hover div { display: block; }
+		&:hover div { display: block !important; }
 	}
 
 	.info  {

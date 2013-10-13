@@ -1,11 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :teacher_only
-  
-  def students
-    @users = User.where(:role => 0).order("last_name ASC")
-    @student = User.find(2)
-  end
 
   def index
     @users = User.where(:role => 0).order("last_name ASC")
