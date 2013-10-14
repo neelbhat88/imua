@@ -126,7 +126,7 @@ var Services = new function() {
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
-				url: '/services',
+				url: '/services/init',
 				success: function(data) {					
 					self.viewModel.services = ko.mapping.fromJS(data.userservices, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
@@ -150,18 +150,20 @@ var Services = new function() {
 
 	// Subscribe to drop down change and update the UI accordingly
 	self.viewModel.semester.subscribe(function(newValue) {
-		$.ajax({
-			type: "POST",
-			url: '/services',
-			data: {semester: newValue},
-			success: function(data) {				
-				ko.mapping.fromJS(data.userservices, {}, self.viewModel.services);
-				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-				self.viewModel.totalHours(self.viewModel.calculateTotalHours());							
-				self.viewModel.editable(data.editable);
-			},
-			error: function() { alert("Failed drop down subscribe ajax post");}
-		});
+		if (self.viewModel.pageLoaded()){
+			$.ajax({
+				type: "POST",
+				url: '/services/init',
+				data: {semester: newValue},
+				success: function(data) {				
+					ko.mapping.fromJS(data.userservices, {}, self.viewModel.services);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+					self.viewModel.totalHours(self.viewModel.calculateTotalHours());							
+					self.viewModel.editable(data.editable);
+				},
+				error: function() { alert("Failed drop down subscribe ajax post");}
+			});
+		}
 	});
 
 	function Service(name, date, hours)
@@ -174,5 +176,3 @@ var Services = new function() {
 		self.dbid = ko.observable("");
 	}
 };
-
-// Add Badges for Service

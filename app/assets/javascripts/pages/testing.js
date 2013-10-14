@@ -104,7 +104,7 @@ var Testing = new function() {
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
-				url: '/testing',
+				url: '/testing/init',
 				success: function(data) {					
 					self.viewModel.totalTests = ko.mapping.fromJS(data.usertests, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);
@@ -126,17 +126,19 @@ var Testing = new function() {
 
 	// Subscribe to drop down change and update the UI accordingly
 	self.viewModel.semester.subscribe(function(newValue) {
-		$.ajax({
-			type: "POST",
-			url: '/testing',
-			data: {semester: newValue},
-			success: function(data) {				
-				ko.mapping.fromJS(data.usertests, {}, self.viewModel.totalTests);
-				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-				self.viewModel.editable(data.editable);
-			},
-			error: function() { alert("Failed drop down subscribe ajax post");}
-		});
+		if (self.viewModel.pageLoaded()) {
+			$.ajax({
+				type: "POST",
+				url: '/testing/init',
+				data: {semester: newValue},
+				success: function(data) {				
+					ko.mapping.fromJS(data.usertests, {}, self.viewModel.totalTests);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+					self.viewModel.editable(data.editable);
+				},
+				error: function() { alert("Failed drop down subscribe ajax post");}
+			});
+		}
 	});
 
 	function Test(date, score)

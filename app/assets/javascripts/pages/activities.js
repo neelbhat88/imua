@@ -122,7 +122,7 @@ var Activities = new function() {
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
-				url: '/activities',
+				url: '/activities/init',
 				success: function(data) {					
 					self.viewModel.activities = ko.mapping.fromJS(data.useractivities, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
@@ -144,17 +144,20 @@ var Activities = new function() {
 
 	// Subscribe to drop down change and update the UI accordingly
 	self.viewModel.semester.subscribe(function(newValue) {
-		$.ajax({
-			type: "POST",
-			url: '/activities',
-			data: {semester: newValue},
-			success: function(data) {				
-				ko.mapping.fromJS(data.useractivities, {}, self.viewModel.activities);
-				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-				self.viewModel.editable(data.editable);
-			},
-			error: function() { alert("Failed drop down subscribe ajax post");}
-		});
+		if (self.viewModel.pageLoaded())
+		{		
+			$.ajax({
+				type: "POST",
+				url: '/activities/init',
+				data: {semester: newValue},
+				success: function(data) {				
+					ko.mapping.fromJS(data.useractivities, {}, self.viewModel.activities);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+					self.viewModel.editable(data.editable);
+				},
+				error: function() { alert("Failed drop down subscribe ajax post");}
+			});
+		}
 	});
 
 	function Activity(name, leadershipHeld, leadershipTitle, description)

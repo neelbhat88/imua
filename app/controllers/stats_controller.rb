@@ -2,6 +2,9 @@ class StatsController < ApplicationController
 	before_filter :authenticate_user!
 	
 	def index
+	end
+
+	def init
 		semester = current_user.user_info.current_semester		
 
 		# Get total badges earned
@@ -60,7 +63,6 @@ class StatsController < ApplicationController
 										   :totalpdus => totalpdus,
 										   :totaldeductionvalue => totalDeductionValue,
 										   :totaldeductionslist => deductionsViewModel } }
-			format.html # index.html.erb
 		end
 	end
 end

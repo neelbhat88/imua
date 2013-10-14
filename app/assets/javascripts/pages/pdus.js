@@ -104,7 +104,7 @@ var Pdus = new function() {
 		$(document).ready(function() {
 			$.ajax({
 				type: "POST",
-				url: '/pdus',
+				url: '/pdus/init',
 				success: function(data) {					
 					self.viewModel.totalPdus = ko.mapping.fromJS(data.userpdus, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
@@ -127,17 +127,19 @@ var Pdus = new function() {
 
 	// Subscribe to drop down change and update the UI accordingly
 	self.viewModel.semester.subscribe(function(newValue) {
-		$.ajax({
-			type: "POST",
-			url: '/pdus',
-			data: {semester: newValue},
-			success: function(data) {				
-				ko.mapping.fromJS(data.userpdus, {}, self.viewModel.totalPdus);
-				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-				self.viewModel.editable(data.editable);
-			},
-			error: function() { alert("Failed drop down subscribe ajax post");}
-		});
+		if (self.viewModel.pageLoaded()) {
+			$.ajax({
+				type: "POST",
+				url: '/pdus/init',
+				data: {semester: newValue},
+				success: function(data) {				
+					ko.mapping.fromJS(data.userpdus, {}, self.viewModel.totalPdus);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+					self.viewModel.editable(data.editable);
+				},
+				error: function() { alert("Failed drop down subscribe ajax post");}
+			});
+		}
 	});
 
 	function Pdu(date, hours)

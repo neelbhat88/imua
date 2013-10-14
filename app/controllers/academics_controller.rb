@@ -5,17 +5,23 @@ class AcademicsController < ApplicationController
   attr_accessor :academics_repo
 
   def index
+  	respond_to do |format|
+      format.html { render :layout=>false } # index.html.erb	
+  	end
+  end
+
+  def init
     semester = params[:semester].to_i
     if semester == 0
       semester = current_user.user_info.current_semester
     end
 
-  	allclasses = current_user.user_classes.where('semester = ?', semester)
+    allclasses = current_user.user_classes.where('semester = ?', semester)
 
-  	classes = []
-  	allclasses.each do | a |		
-  		classes << ClassViewModel.new(a)
-  	end
+    classes = []
+    allclasses.each do | a |    
+      classes << ClassViewModel.new(a)
+    end
 
     # Get total semester gpa
     totalsemgpa = '%.2f' % (current_user.user_semester_gpas.where(:semester => semester).first.gpa)
@@ -26,7 +32,7 @@ class AcademicsController < ApplicationController
     badges = GlobalBadge.where(:semester => [nil, semester], :category => "Academics")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
 
-  	respond_to do |format|
+    respond_to do |format|
       format.json { render :json => 
                               {
                               :userclasses => classes, 
@@ -38,8 +44,8 @@ class AcademicsController < ApplicationController
                               :init_semester =>current_user.user_info.current_semester
                               } 
                   }
-      format.html { render :layout=>false } # index.html.erb	
-  	end
+      format.html { render :layout=>false } # index.html.erb  
+    end
   end
 
   def saveClasses

@@ -28,7 +28,7 @@ var Academics = new function() {
 		$(document).ready(function() {			
 			$.ajax({
 				type: "POST",
-				url: '/academics',
+				url: '/academics/init',
 				success: function(data) {
 					var obj = data;
 					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses, validationMapping);
@@ -54,18 +54,21 @@ var Academics = new function() {
 
 	// Subscribe to drop down change and update the UI accordingly
 	self.viewModel.semester.subscribe(function(newValue) {
-		$.ajax({
-			type: "POST",
-			url: '/academics',
-			data: {semester: newValue},
-			success: function(data) {				
-				ko.mapping.fromJS(data.userclasses, {}, self.viewModel.subjects);
-				ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-				ko.mapping.fromJS(data.totalsemgpa, {}, self.viewModel.totalGPA)
-				self.viewModel.editable(data.editable);
-			},
-			error: function() { alert("Failed drop down subscribe ajax post");}
-		});
+		if (self.viewModel.pageLoaded())
+		{
+			$.ajax({
+				type: "POST",
+				url: '/academics/init',
+				data: {semester: newValue},
+				success: function(data) {				
+					ko.mapping.fromJS(data.userclasses, {}, self.viewModel.subjects);
+					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+					ko.mapping.fromJS(data.totalsemgpa, {}, self.viewModel.totalGPA)
+					self.viewModel.editable(data.editable);
+				},
+				error: function() { alert("Failed drop down subscribe ajax post");}
+			});
+		}		
 	});
 };
 

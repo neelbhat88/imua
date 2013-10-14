@@ -2,23 +2,29 @@ class ServicesController < ApplicationController
   before_filter :authenticate_user!
   
   def index
+  	respond_to do |format|
+  		format.html { render :layout => false } # index.html.erb
+  	end
+  end
+
+  def init
     semester = params[:semester].to_i
     if semester == 0
       semester = current_user.user_info.current_semester
     end
 
-  	allservices = current_user.user_services.where('semester = ?', semester).order("date DESC")
+    allservices = current_user.user_services.where('semester = ?', semester).order("date DESC")
 
-  	services = []
-  	allservices.each do | a |
-  		services << ServiceViewModel.new(a)
-  	end   
+    services = []
+    allservices.each do | a |
+      services << ServiceViewModel.new(a)
+    end   
 
     badges = GlobalBadge.where(:semester => [nil, semester], :category => "Service")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
 
-  	respond_to do |format|
-  		format.json { render :json => 
+    respond_to do |format|
+      format.json { render :json => 
                             {
                               :userservices => services, 
                               :badges => badgesviewmodel,
@@ -27,8 +33,8 @@ class ServicesController < ApplicationController
                               :init_semester =>current_user.user_info.current_semester
                             } 
                   }
-  		format.html { render :layout => false } # index.html.erb
-  	end
+      format.html { render :layout => false } # index.html.erb
+    end
   end
 
   def saveServices

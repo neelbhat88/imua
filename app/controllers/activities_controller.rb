@@ -2,17 +2,23 @@ class ActivitiesController < ApplicationController
   before_filter :authenticate_user!
   
   def index
+  	respond_to do |format|  		
+  		format.html { render :layout => false } # index.html.erb
+  	end
+  end
+
+  def init
     semester = params[:semester].to_i
     if semester == 0
       semester = current_user.user_info.current_semester
     end
 
-  	allactivities = current_user.user_activities.where('semester = ?', semester).order("id")
+    allactivities = current_user.user_activities.where('semester = ?', semester).order("id")
 
-  	activities = []
-  	allactivities.each do | a |
-  		activities << ActivityViewModel.new(a)
-  	end
+    activities = []
+    allactivities.each do | a |
+      activities << ActivityViewModel.new(a)
+    end
 
     # Get all global activities to put into dropdown
     globalactivities = SchoolActivity.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
@@ -20,8 +26,8 @@ class ActivitiesController < ApplicationController
     badges = GlobalBadge.where(:semester => [nil, semester], :category => "Activity")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
 
-  	respond_to do |format|
-  		format.json { render :json => 
+    respond_to do |format|
+      format.json { render :json => 
                               {
                                 :useractivities => activities, 
                                 :globalactivities => globalactivities,
@@ -31,8 +37,8 @@ class ActivitiesController < ApplicationController
                                 :init_semester =>current_user.user_info.current_semester
                               } 
                   }
-  		format.html { render :layout => false } # index.html.erb
-  	end
+      format.html { render :layout => false } # index.html.erb
+    end
   end
 
   def saveActivities

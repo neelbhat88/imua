@@ -24,7 +24,7 @@ var Stats = new function() {
 	self.init = function() {
 		$(document).ready(function() {
 			$.ajax({				
-				url: '/stats',				
+				url: '/stats/init',				
 				success: function(data) {
 					self.viewModel.totalBadgesEarned(data.totalbadgesearned);
 					self.viewModel.totalBadgesPossible(data.totalbadgespossible);

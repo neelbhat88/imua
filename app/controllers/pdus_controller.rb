@@ -1,7 +1,13 @@
 class PdusController < ApplicationController
 	before_filter :authenticate_user!
 	
-	def index
+	def index		
+	  	respond_to do |format|
+	  		format.html { render :layout => false } # index.html.erb
+	  	end
+	end
+
+	def init
 		semester = params[:semester].to_i
 	    if semester == 0
 	      semester = current_user.user_info.current_semester

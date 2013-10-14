@@ -19,10 +19,7 @@ Wcsf::Application.routes.draw do
   resources :school_activities
 
 
-  resources :school_classes
-  resources :global_badges
-  match '/progress', to: 'global_badges#progress'
-  match '/global_badges/semester', to: 'global_badges#SemesterBadges'
+  resources :school_classes  
 
   # get '/users/show/:id', to: 'registrations#show', as: 'show_user_registration'
   devise_for :users, :controllers => {:registrations => "registrations"}
@@ -50,22 +47,33 @@ Wcsf::Application.routes.draw do
   match '/profile', to: 'users#profile'
   match '/summary', to: 'static_pages#summary'
 
-  match '/academics', to: 'academics#index'
+  get '/global_badges', to: 'global_badges#index'
+  match '/global_badges/init', to: 'global_badges#init'
+  match '/global_badges/semester', to: 'global_badges#SemesterBadges'
+  match '/progress', to: 'global_badges#progress'
+
+  get '/academics', to: 'academics#index'
+  match '/academics/init', to: 'academics#init'
   match '/saveClasses', to: 'academics#saveClasses'
 
-  match '/activities', to: 'activities#index'
+  get '/activities', to: 'activities#index'
+  match '/activities/init', to: 'activities#init'
   match '/saveActivities', to: 'activities#saveActivities'
 
-  match '/services', to: 'services#index'
+  get '/services', to: 'services#index'
+  match '/services/init', to: 'services#init'
   match '/saveServices', to: 'services#saveServices'
 
-  match '/pdus', to: 'pdus#index'
+  get '/pdus', to: 'pdus#index'
+  match '/pdus/init', to: 'pdus#init'
   match '/savePdus', to: 'pdus#savePdus'
 
-  match '/testing', to: 'testing#index'
+  get '/testing', to: 'testing#index'
+  match '/testing/init', to: 'testing#init'
   match '/saveTesting', to: 'testing#saveTesting'
 
-  match '/stats', to: 'stats#index'
+  get '/stats', to: 'stats#index'
+  match '/stats/init', to: 'stats#init'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

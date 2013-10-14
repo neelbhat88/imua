@@ -1,7 +1,10 @@
 class GlobalBadgesController < ApplicationController
 	before_filter :authenticate_user!
 
-	def index				
+	def index		
+	end
+
+	def init
 		semester = current_user.user_info.current_semester		
 
 		allbadges = GlobalBadge.where(:semester => [nil, semester])
