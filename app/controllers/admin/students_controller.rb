@@ -2,8 +2,7 @@ class Admin::StudentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :teacher_only
   
-  def index    
-    @student = User.find(23)
+  def index
     allstudents = User.LoadStudentsBySchoolId(current_user.user_info.school_id)
     
     studentsviewmodel = []

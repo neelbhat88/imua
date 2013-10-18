@@ -16,7 +16,11 @@ module Wcsf
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/app/models/*)
+    config.autoload_paths += %W(#{config.root}/app/models/academicsbadges)
+    config.autoload_paths += %W(#{config.root}/app/models/activitiesbadges)
+    config.autoload_paths += %W(#{config.root}/app/models/pdubadges)
+    config.autoload_paths += %W(#{config.root}/app/models/servicebadges)
+    config.autoload_paths += %W(#{config.root}/app/models/testingbadges)
     config.autoload_paths += %W(#{config.root}/app/repositories)
     config.autoload_paths += %W(#{config.root}/app/viewmodels)
     config.autoload_paths += %W(#{config.root}/app/modules)

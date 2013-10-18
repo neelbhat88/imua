@@ -1,7 +1,11 @@
-var Progress = new function() {
-	var self = this;	
-	
-	self.init = function() {
+$(function() {
+	Progress = function() {
+		var self = this;
+
+		new Header().SetSelectedMenuItem('Progress');
+	}
+
+	Progress.prototype.init = function() {
 		$(document).ready(function() {			
 			// Load Academics page as default
 			$('#progressPages').load("/academics", function(){
@@ -55,5 +59,5 @@ var Progress = new function() {
 				$(this).addClass("selected");
 			});
 		});
-	};	
-};
+	}
+});

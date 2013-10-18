@@ -21,12 +21,12 @@
 //= require_tree .
 
 $(function(){
- 	var jsobj = $("body").attr("jsinit");
+ 	var jsinits = $("body").attr("jsinit");
 
- 	// Initialize common js
- 	Header.init(jsobj);
-
- 	// Initialize per page js
-	if (jsobj != null && jsobj != "")
-		window[jsobj].init();
+ 	if (jsinits != null && jsinits != "")
+ 	{ 		
+ 		$.each(jsinits.split(';'), function(index, value){
+	 		eval(value); // Runs value like JS
+	 	});
+ 	}
 });

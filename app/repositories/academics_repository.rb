@@ -5,6 +5,22 @@ class AcademicsRepository
 		self.user = user
 	end
 
+	def GetUserClassesBySemester(semester)
+		return self.user.user_classes.where('semester = ?', semester)	
+	end
+
+	def GetSemesterGpa(semester)
+		gpas = self.user.user_semester_gpas.where(:semester => semester)
+
+		# There should only be one GPA for a user per semester
+		if gpas.length > 1
+			Rails.logger.error("UserId #{self.user.id} has multiple gpas for semester #{semester}")
+		end
+
+		# Just return the first gpa
+		return '%.2f' % (gpas.first.gpa)
+	end
+
 	def SaveTotalSemesterGpa(semester)
 	    semester_classes = self.user.user_classes.where(:semester => semester)
 	    numclasses = semester_classes.length

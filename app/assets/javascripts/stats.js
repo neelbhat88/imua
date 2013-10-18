@@ -1,27 +1,33 @@
-var Stats = new function() {	
-	var self = this;
+$(function(){
+	Stats = function() {
+		var self = this;
 
-	self.viewModel = {
-		pageLoaded: ko.observable(false),
+		new Header().SetSelectedMenuItem('Stats');
 
-		totalBadgesEarned: ko.observable(0),
-		totalBadgesPossible: ko.observable(0),
-		totalBadgesValue: ko.observable(0),		
-		finalBadgesValue: ko.observable(0),
-		cumulativeGpa: ko.observable(0.00),
-		totalActivities: ko.observable(0),
-		totalService: ko.observable(0),
-		totalPdus: ko.observable(0),
-		totalDeductionValue: ko.observable(0),
-		totalDeductions: [],
+		self.viewModel = {
+			pageLoaded: ko.observable(false),
 
-		showDeductionsModal: function() {
-			$('#deductionsModal').modal();			
-		}
-	};
+			totalBadgesEarned: ko.observable(0),
+			totalBadgesPossible: ko.observable(0),
+			totalBadgesValue: ko.observable(0),		
+			finalBadgesValue: ko.observable(0),
+			cumulativeGpa: ko.observable(0.00),
+			totalActivities: ko.observable(0),
+			totalService: ko.observable(0),
+			totalPdus: ko.observable(0),
+			totalDeductionValue: ko.observable(0),
+			totalDeductions: [],
+
+			showDeductionsModal: function() {
+				$('#deductionsModal').modal();			
+			}
+		};		
+	}
 
 	// Initializes ViewModel
-	self.init = function() {
+	Stats.prototype.init = function() {
+		var self = this;
+
 		$(document).ready(function() {
 			$.ajax({				
 				url: '/stats/init',				
@@ -46,5 +52,5 @@ var Stats = new function() {
 				error: function() { alert("Failed initial stats load");}
 			});			
 		});
-	};	
-};
+	}
+});

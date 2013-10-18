@@ -17,7 +17,7 @@
                 <li page="Badges"><%= link_to "Badges", global_badges_path %></li>
                 <li page="Progress"><%= link_to "Progress", progress_path %></li>
                 <li page="Stats"><%= link_to "Stats", stats_path %></li>
-                <li page=""><%= link_to "Profile", show_user_registration_path(current_user) %></li>
+                <li page="Profile"><%= link_to "Profile", show_user_registration_path(current_user) %></li>
               <% elsif current_user.is_admin? %>
                 <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
                 %></li>

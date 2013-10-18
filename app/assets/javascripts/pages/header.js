@@ -1,10 +1,12 @@
-var Header = new function() {
-	var self = this;
+$(function() {
+	Header = function() {
+		var self = this;
+	}
 
-	self.init = function(page) {
+	Header.prototype.SetSelectedMenuItem = function(page) {
 		// Set the selected page in the navigation menu
 		var navItem = ".nav > li[page='" + page + "']";
 		$(".nav > li").removeClass("selected");
 		$(navItem).addClass("selected");		
-	};	
-}
+	};
+});

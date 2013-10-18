@@ -1,2 +1,8 @@
 <%= render 'profile', :user => @user, :user_info => @user_info, :as_admin => false %>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		new Header().SetSelectedMenuItem('Profile');
+	});
+</script>
+
