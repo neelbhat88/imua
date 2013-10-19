@@ -1,22 +1,25 @@
 $(function() {
-	Progress = function() {
+	Progress = function(user_id, category) {
 		var self = this;
+
+		self.UserId = user_id == 0 ? "" : user_id;
+		self.Category = category == 0 ? "" : category;
 
 		new Header().SetSelectedMenuItem('Progress');
 	}
 
 	Progress.prototype.init = function() {
-		$(document).ready(function() {			
+		$(document).ready(function() {
 			// Load Academics page as default
 			$('#progressPages').load("/academics", function(){
-				Academics.init();
+				new Academics(self.UserId, self.Category).init();
 
 				$('#academicsNav').addClass("selected");
-			});			
+			});
 
 			$('#academicsNav').click(function(){
 				$('#progressPages').load("/academics", function(){
-					Academics.init();
+					new Academics(self.UserId, self.Category).init();
 				});
 
 				$('.progressNav li').removeClass("selected");

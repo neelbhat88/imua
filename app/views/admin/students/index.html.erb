@@ -1,4 +1,4 @@
-<% @jsinit = 'AdminStudents' %>
+<% @jsinit = "new AdminStudents('#{admin_students_progress_path}').init();" %>
 
 <div data-bind="visible: pageLoaded" style="display: none">
 	<div class="leftPane"></div>
@@ -25,20 +25,20 @@
 					</div>
 				</div>
 				<div class="info">
-					<div class="categoryTile green">
-						<div class="letter" title="Academics">A</div>
+					<div class="categoryTile green" title="Academics" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">A</div>
 					</div>
-					<div class="categoryTile green">
-						<div class="letter" title="Extracurricular">E</div>
+					<div class="categoryTile green" title="Extracurricular" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">E</div>
 					</div>
-					<div class="categoryTile yellow">
-						<div class="letter" title="Service">S</div>
+					<div class="categoryTile yellow" title="Service" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">S</div>
 					</div>
-					<div class="categoryTile green">
-						<div class="letter" title="PDU">P</div>
+					<div class="categoryTile green" title="PDU" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">P</div>
 					</div>
-					<div class="categoryTile red">
-						<div class="letter" title="Testing">T</div>
+					<div class="categoryTile red" title="Testing" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">T</div>
 					</div>
 				</div>
 			</div>

@@ -23,6 +23,7 @@ class AcademicsController < ApplicationController
     # Get total semester gpa
     totalsemgpa = academicsRepository.GetSemesterGpa(semester)
 
+    # ToDo: Refactor these to not use Model directly
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', user.user_info.school_id).select([:id, :name]).order("name")
 

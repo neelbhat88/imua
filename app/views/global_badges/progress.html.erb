@@ -1,7 +1,4 @@
-<% @jsinit = 'new Progress().init();' %>
-
-<!-- Change this to @jsinit = 'new Progress().init(@user_id)' so that
-we can have an AdminStudentProgress page that passes the user_id which is then passed down in the AJAX calls -->
+<% @jsinit = "new Progress(#{@user_id}, #{@category}).init();" %>
 
 <div class="progressLeftPane leftPane">
 	<ul class="progressNav">

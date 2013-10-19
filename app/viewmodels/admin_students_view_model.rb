@@ -1,6 +1,7 @@
 class AdminStudentsViewModel
 	
-	def initialize(student, urlHelper = UrlHelper.new)		
+	def initialize(student, urlHelper = UrlHelper.new)
+		@id = student.id
 		@email = student.email
 		@name = student.first_name + " " + student.last_name
 		@current_semester = student.user_info.current_semester		
