@@ -32,8 +32,7 @@ class GlobalBadgesController < ApplicationController
 	end
 
 	def progress
-		@category = params[:page] == nil ? 0 : params[:page]
-    	@user_id = params[:id] == nil ? 0 : params[:id]
+		
 	end
 
 	def SemesterBadges

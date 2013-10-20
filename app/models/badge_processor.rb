@@ -1,13 +1,14 @@
 class BadgeProcessor
 	attr_accessor :curr_user
 	
-	def initialize(user)
+	def initialize(user, semester)
 		@badgefactory = BadgeFactory.new(user)
 		@curr_user = user
+		@semester = semester
 	end
 
-	def CheckSemesterAcademics		
-		return CompareBadges(@badgefactory.GetAcademicsBadges(@curr_user.user_info.current_semester))
+	def CheckSemesterAcademics
+		return CompareBadges(@badgefactory.GetAcademicsBadges(@semester))
 	end
 
 	def CheckSemesterActivities		
@@ -37,8 +38,8 @@ class BadgeProcessor
 	  		badgeEarned = b.Compare()	  			
 	  		Rails.logger.debug("DEBUG: #{b.description} earned? #{badgeEarned}")
 
-	  		userHasBadge = (@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @curr_user.user_info.current_semester).length > 0)
-	  		Rails.logger.debug("DEBUG: User has badge Sem: #{@curr_user.user_info.current_semester} Badge: #{b.id} - #{b.description}? #{userHasBadge}")
+	  		userHasBadge = (@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @semester).length > 0)
+	  		Rails.logger.debug("DEBUG: User has badge Sem: #{@semester} Badge: #{b.id} - #{b.description}? #{userHasBadge}")
 
 	  		# If badge earned and user does not have badge
 	  		if badgeEarned == true && userHasBadge == false
@@ -46,7 +47,7 @@ class BadgeProcessor
 	  			badgesearned << b
 
 	  			# Save earned badge to db
-	  			@curr_user.user_badges.create(:global_badge_id => b.id, :semester => @curr_user.user_info.current_semester)
+	  			@curr_user.user_badges.create(:global_badge_id => b.id, :semester => @semester)
 	  		
 	  		# If badge not earned and user has badge
 	  		elsif badgeEarned == false && userHasBadge == true

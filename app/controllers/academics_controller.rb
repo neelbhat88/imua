@@ -7,9 +7,12 @@ class AcademicsController < ApplicationController
   	end
   end
 
+# Maybe want a separate admin/students/progress page afterall so that students cant see other students pages just by entring in id
+
   def init
     user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
     semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
+    isTeacher = params[:isTeacher]
 
     academicsRepository = AcademicsRepository.new(user)
 
@@ -37,10 +40,10 @@ class AcademicsController < ApplicationController
                               :globalclasses => globalclasses, 
                               :badges => badgesviewmodel, 
                               :totalsemgpa => totalsemgpa, 
-                              :editable => (semester == current_user.user_info.current_semester),
-                              # The following two can use current_user
-                              :semesters => (1..current_user.user_info.current_semester).to_a,
-                              :init_semester =>current_user.user_info.current_semester
+                              :editable => isTeacher || (semester == current_user.user_info.current_semester),
+                              
+                              :semesters => (1..user.user_info.current_semester).to_a,
+                              :init_semester =>user.user_info.current_semester
                               } 
                   }
     end
@@ -88,12 +91,12 @@ class AcademicsController < ApplicationController
     ##################################################
     # ------------------ BADGES ----------------------
     ##################################################    
-    badgeProcessor = BadgeProcessor.new(user)
-    badgeObject = badgeProcessor.CheckSemesterAcademics()  
+    badgeProcessor = BadgeProcessor.new(user, semester)
+    badgeObject = badgeProcessor.CheckSemesterAcademics()
 
     # Reload badges
     badges = GlobalBadge.where(:semester => [nil, semester], :category => "Academics")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user)
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
   	# Return new badges received
   	respond_to do |format|

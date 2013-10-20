@@ -1,25 +1,28 @@
 $(function() {
-	Progress = function(user_id, category) {
+	Progress = function(user_id, category, isTeacher) {
 		var self = this;
 
 		self.UserId = user_id == 0 ? "" : user_id;
 		self.Category = category == 0 ? "" : category;
+		self.IsTeacher = isTeacher;
 
 		new Header().SetSelectedMenuItem('Progress');
 	}
 
 	Progress.prototype.init = function() {
+		var self = this;
+		
 		$(document).ready(function() {
 			// Load Academics page as default
 			$('#progressPages').load("/academics", function(){
-				new Academics(self.UserId, self.Category).init();
+				new Academics(self.UserId, self.IsTeacher).init();
 
 				$('#academicsNav').addClass("selected");
 			});
 
 			$('#academicsNav').click(function(){
 				$('#progressPages').load("/academics", function(){
-					new Academics(self.UserId, self.Category).init();
+					new Academics(self.UserId, self.IsTeacher).init();
 				});
 
 				$('.progressNav li').removeClass("selected");

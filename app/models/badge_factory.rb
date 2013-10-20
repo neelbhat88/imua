@@ -20,10 +20,10 @@ class BadgeFactory
 			case b.subcategory
 			# GPA
 			when 0
-				badgeList << AcademicsGpaBadge.new(b, curr_user)
+				badgeList << AcademicsGpaBadge.new(b, curr_user, semester)
 			# Letter Grade
 			when 1
-				badgeList << AcademicsGradeBadge.new(b, curr_user)
+				badgeList << AcademicsGradeBadge.new(b, curr_user, semester)
 			# AP Score
 			#when 2
 				#badgeList << AcademicsAPScoreBadge.new(b, curr_user)
@@ -31,7 +31,7 @@ class BadgeFactory
 			#when 3
 			#	badgeList << AcademicsClassCreditBadge.new(b, curr_user)
 			else
-				badgeList << AcademicsBadge.new(b, curr_user)
+				badgeList << AcademicsBadge.new(b, curr_user, semester)
 			end
 		end
 

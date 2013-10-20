@@ -1,8 +1,9 @@
 $(function(){	
-	Academics = function(user_id) {
+	Academics = function(user_id, isTeacher) {
 		var self = this;
 
 		self.UserId = user_id;
+		self.IsTeacher = isTeacher;
 
 		self.viewModel = {
 			editing: ko.observable(false),
@@ -21,8 +22,8 @@ $(function(){
 				$.ajax({
 					type: "POST",
 					url: '/academics/init',
-					data: {semester: newValue, user_id: self.UserId},
-					success: function(data) {				
+					data: {semester: newValue, user_id: self.UserId, isTeacher: self.IsTeacher},
+					success: function(data) {
 						ko.mapping.fromJS(data.userclasses, {}, self.viewModel.subjects);
 						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
 						ko.mapping.fromJS(data.totalsemgpa, {}, self.viewModel.totalGPA)
@@ -36,7 +37,7 @@ $(function(){
 
 	Academics.prototype.init = function() {
 		var self = this;
-		
+
 		var validationMapping = {
 			grade: {
 				create: function(options) {
@@ -54,7 +55,7 @@ $(function(){
 			$.ajax({
 				type: "POST",
 				url: '/academics/init',
-				data: {user_id: self.UserId},
+				data: {user_id: self.UserId, isTeacher: self.IsTeacher},
 				success: function(data) {
 					var obj = data;
 					self.viewModel.subjects = ko.mapping.fromJS(obj.userclasses, validationMapping);
@@ -67,7 +68,7 @@ $(function(){
 					self.viewModel.semester(obj.init_semester);
 					self.viewModel.editable(obj.editable);
 
-					ViewModelPropertiesInit(self.viewModel);			
+					ViewModelPropertiesInit(self.viewModel, self);			
 
 					self.viewModel.pageLoaded(true);
 
@@ -90,8 +91,10 @@ $(function(){
 		self.dbid = ko.observable("");
 	}
 
-	function ViewModelPropertiesInit(viewModel) 
+	function ViewModelPropertiesInit(viewModel, thisObj)
 	{
+		var self = thisObj;
+		
 		viewModel.name = ko.observable().extend({editable: true});
 		viewModel.classLevels = 
 		[
