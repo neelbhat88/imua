@@ -51,15 +51,15 @@ class BadgeFactory
 			case b.subcategory
 			# Involved in any Activity
 			when 0
-				badgeList << ActivitiesInvolvementBadge.new(b, curr_user)
+				badgeList << ActivitiesInvolvementBadge.new(b, curr_user, semester)
 			# Leadership role in any Activity
 			when 1
-				badgeList << ActivitiesLeadershipBadge.new(b, curr_user)
+				badgeList << ActivitiesLeadershipBadge.new(b, curr_user, semester)
 			# Specific Activity involvement?
 			#when 3
 				#badgeList << ActivitiesSpecificBadge.new(b, curr_user)			
 			else
-				badgeList << ActivitiesBadge.new(b, curr_user)
+				badgeList << ActivitiesBadge.new(b, curr_user, semester)
 			end
 		end
 

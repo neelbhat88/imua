@@ -1,105 +1,133 @@
-var Activities = new function() {
-	var self = this;
+$(function(){
+	Activities = function(user_id, isTeacher) 
+	{
+		var self = this;
 
-	self.viewModel = {			
-		editing: ko.observable(false),
-		submitting: ko.observable(false),
-		pageLoaded: ko.observable(false),
-		rowsToRemove: [],
-		semesters: [],
-		semester: ko.observable(1),
-		editable: ko.observable(true),
+		self.UserId = user_id;
+		self.IsTeacher = isTeacher;
 
-		addLeadership: function(activity, event){
-			activity.leadershipHeld(true);
-			activity.leadershipTitle("");
-		},
+		self.viewModel = {
+			editing: ko.observable(false),
+			submitting: ko.observable(false),
+			pageLoaded: ko.observable(false),
+			rowsToRemove: [],
+			semesters: [],
+			semester: ko.observable(1),
+			editable: ko.observable(true),
 
-		removeLeadership: function(activity, event){			
-			activity.leadershipHeld(false);
-			// Setting leadership title so validation does not fail. Since 
-			// leadershipHeld is false the title does not matter
-			activity.leadershipTitle("Leader");
-		},
+			addLeadership: function(activity, event){
+				activity.leadershipHeld(true);
+				activity.leadershipTitle("");
+			},
 
-		addActivity: function() {
-			// Passing in leadership title so validation does not fail. Since 
-			// leadershipHeld is false the title does not matter
-			self.viewModel.activities.push(new Activity("", false, "Leader", []));
-		},
+			removeLeadership: function(activity, event){			
+				activity.leadershipHeld(false);
+				// Setting leadership title so validation does not fail. Since 
+				// leadershipHeld is false the title does not matter
+				activity.leadershipTitle("Leader");
+			},
 
-		removeActivity: function(activityToRemove) {
-			if (activityToRemove.dbid() != null)
-				self.viewModel.rowsToRemove.push(activityToRemove);
+			addActivity: function() {
+				// Passing in leadership title so validation does not fail. Since 
+				// leadershipHeld is false the title does not matter
+				self.viewModel.activities.push(new Activity("", false, "Leader", []));
+			},
 
-			self.viewModel.activities.remove(activityToRemove);
-		},
+			removeActivity: function(activityToRemove) {
+				if (activityToRemove.dbid() != null)
+					self.viewModel.rowsToRemove.push(activityToRemove);
 
-		addSentence: function(activity, event) {
-			activity.description.push(new Sentence(''));
-		},
+				self.viewModel.activities.remove(activityToRemove);
+			},
 
-		removeSentence: function(activity, sentenceToRemove)
-		{
-			activity.description.remove(sentenceToRemove);
-		},
+			addSentence: function(activity, event) {
+				activity.description.push(new Sentence(''));
+			},
 
-		saveActivities: function()
-		{
-			if (!self.viewModel.submitting())
-			{				
-				if ($('select.error, input.error').length > 0)
-				{
-					$('.validationError').fadeIn();				
-					return;
+			removeSentence: function(activity, sentenceToRemove)
+			{
+				activity.description.remove(sentenceToRemove);
+			},
+
+			saveActivities: function()
+			{
+				if (!self.viewModel.submitting())
+				{				
+					if ($('select.error, input.error').length > 0)
+					{
+						$('.validationError').fadeIn();				
+						return;
+					}
+
+					self.viewModel.submitting(true);
+					$.ajax({
+						type: "POST",
+						url: '/saveActivities',
+						data: {
+							activities: ko.toJSON(self.viewModel.activities()), 
+							activitiesToRemove: ko.toJSON(self.viewModel.rowsToRemove),
+							semester: self.viewModel.semester(),
+							user_id: self.UserId
+						},
+						success: function(data) 
+						{					
+							ko.mapping.fromJS(data.newactivities, {}, self.viewModel.activities);
+							ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+
+							self.viewModel.originalActivities = data.newactivities;
+
+							self.viewModel.rowsToRemove = [];
+							self.viewModel.editing(false);
+							self.viewModel.submitting(false);					
+						},
+						error: function() {alert('SaveClasses fail!');}
+					});
 				}
+			},
 
-				self.viewModel.submitting(true);
-				$.ajax({
-					type: "POST",
-					url: '/saveActivities',
-					data: {
-						activities: ko.toJSON(self.viewModel.activities()), 
-						activitiesToRemove: ko.toJSON(self.viewModel.rowsToRemove)
-					},
-					success: function(data) 
-					{					
-						ko.mapping.fromJS(data.newactivities, {}, self.viewModel.activities);
-						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+			cancelEdit: function()
+			{
+				// Set back to original activities
+				ko.mapping.fromJS(self.viewModel.originalActivities, {}, self.viewModel.activities);
 
-						self.viewModel.originalActivities = data.newactivities;
+				self.viewModel.rowsToRemove = [];
+				self.viewModel.editing(false);
+			},
 
-						self.viewModel.rowsToRemove = [];
-						self.viewModel.editing(false);
-						self.viewModel.submitting(false);					
-					},
-					error: function() {alert('SaveClasses fail!');}
-				});
+			editActivities: function()
+			{		
+				self.viewModel.editing(true);
+			},
+
+			templateToUse: function()
+			{
+				return self.viewModel.editing() ? 'edit-activities' : 'view-activities';
 			}
-		},
 
-		cancelEdit: function()
-		{
-			// Set back to original activities
-			ko.mapping.fromJS(self.viewModel.originalActivities, {}, self.viewModel.activities);
-
-			self.viewModel.rowsToRemove = [];
-			self.viewModel.editing(false);
-		},
-
-		editActivities: function()
-		{		
-			self.viewModel.editing(true);
-		},
-
-		templateToUse: function()
-		{
-			return self.viewModel.editing() ? 'edit-activities' : 'view-activities';
 		}
 
-	};
+		// Subscribe to drop down change and update the UI accordingly
+		self.viewModel.semester.subscribe(function(newValue) {
+			if (self.viewModel.pageLoaded())
+			{		
+				$.ajax({
+					type: "POST",
+					url: '/activities/init',
+					data: {semester: newValue, user_id: self.UserId, isTeacher: self.IsTeacher},
+					success: function(data) {				
+						ko.mapping.fromJS(data.useractivities, {}, self.viewModel.activities);
+						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+						self.viewModel.editable(data.editable);
+					},
+					error: function() { alert("Failed drop down subscribe ajax post");}
+				});
+			}
+		});
+	}
 
-	self.init = function() {
+	Activities.prototype.init = function() {
+		var self = this;
+
 		self.viewModel.editing(false);
 
 		var validationMapping = {
@@ -123,6 +151,7 @@ var Activities = new function() {
 			$.ajax({
 				type: "POST",
 				url: '/activities/init',
+				data: {user_id: self.UserId, isTeacher: self.IsTeacher},
 				success: function(data) {					
 					self.viewModel.activities = ko.mapping.fromJS(data.useractivities, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
@@ -140,25 +169,7 @@ var Activities = new function() {
 				error: function() { alert("Failed initial activity load");}
 			});			
 		});
-	};
-
-	// Subscribe to drop down change and update the UI accordingly
-	self.viewModel.semester.subscribe(function(newValue) {
-		if (self.viewModel.pageLoaded())
-		{		
-			$.ajax({
-				type: "POST",
-				url: '/activities/init',
-				data: {semester: newValue},
-				success: function(data) {				
-					ko.mapping.fromJS(data.useractivities, {}, self.viewModel.activities);
-					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-					self.viewModel.editable(data.editable);
-				},
-				error: function() { alert("Failed drop down subscribe ajax post");}
-			});
-		}
-	});
+	}	
 
 	function Activity(name, leadershipHeld, leadershipTitle, description)
 	{
@@ -177,5 +188,5 @@ var Activities = new function() {
 
 		self.text = ko.observable(text);
 	}
-};
+});
 

@@ -12,14 +12,7 @@ $(function() {
 	Progress.prototype.init = function() {
 		var self = this;
 		
-		$(document).ready(function() {
-			// Load Academics page as default
-			$('#progressPages').load("/academics", function(){
-				new Academics(self.UserId, self.IsTeacher).init();
-
-				$('#academicsNav').addClass("selected");
-			});
-
+		$(document).ready(function() {						
 			$('#academicsNav').click(function(){
 				$('#progressPages').load("/academics", function(){
 					new Academics(self.UserId, self.IsTeacher).init();
@@ -31,7 +24,7 @@ $(function() {
 
 			$('#extracurNav').click(function(){
 				$('#progressPages').load("/activities", function() {
-					Activities.init();
+					new Activities(self.UserId, self.IsTeacher).init();
 				});
 
 				$('.progressNav li').removeClass("selected");
@@ -64,6 +57,29 @@ $(function() {
 				$('.progressNav li').removeClass("selected");
 				$(this).addClass("selected");
 			});
+
+			// Load page that was clidked on
+			switch (self.Category.toLowerCase())
+			{
+				case "academics":
+					$('#academicsNav').trigger('click');
+					break;
+				case "extracurricular":
+					$('#extracurNav').trigger('click');
+					break;
+				case "service":
+					$('#serviceNav').trigger('click');
+					break;
+				case "pdu":
+					$('#pduNav').trigger('click');
+					break;
+				case "testing":
+					$('#testingNav').trigger('click');
+					break;
+				default:
+					$('#academicsNav').trigger('click');
+					break;
+			}
 		});
 	}
 });

@@ -40,7 +40,7 @@ class AcademicsController < ApplicationController
                               :globalclasses => globalclasses, 
                               :badges => badgesviewmodel, 
                               :totalsemgpa => totalsemgpa, 
-                              :editable => isTeacher || (semester == current_user.user_info.current_semester),
+                              :editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),
                               
                               :semesters => (1..user.user_info.current_semester).to_a,
                               :init_semester =>user.user_info.current_semester
