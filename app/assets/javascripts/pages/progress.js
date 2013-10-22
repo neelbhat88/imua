@@ -33,7 +33,7 @@ $(function() {
 
 			$('#serviceNav').click(function(){
 				$('#progressPages').load("/services", function() {
-					Services.init();
+					new Services(self.UserId, self.IsTeacher).init();
 				});
 
 				$('.progressNav li').removeClass("selected");

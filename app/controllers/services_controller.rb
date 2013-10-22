@@ -8,12 +8,11 @@ class ServicesController < ApplicationController
   end
 
   def init
-    semester = params[:semester].to_i
-    if semester == 0
-      semester = current_user.user_info.current_semester
-    end
+    user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+    semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
+    isTeacher = params[:isTeacher]
 
-    allservices = current_user.user_services.where('semester = ?', semester).order("date DESC")
+    allservices = user.user_services.where('semester = ?', semester).order("date DESC")
 
     services = []
     allservices.each do | a |
@@ -21,16 +20,16 @@ class ServicesController < ApplicationController
     end   
 
     badges = GlobalBadge.where(:semester => [nil, semester], :category => "Service")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
     respond_to do |format|
       format.json { render :json => 
                             {
                               :userservices => services, 
                               :badges => badgesviewmodel,
-                              :editable => (semester == current_user.user_info.current_semester),
-                              :semesters => (1..current_user.user_info.current_semester).to_a,
-                              :init_semester =>current_user.user_info.current_semester
+                              :editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),
+                              :semesters => (1..user.user_info.current_semester).to_a,
+                              :init_semester =>user.user_info.current_semester
                             } 
                   }
       format.html { render :layout => false } # index.html.erb
@@ -41,43 +40,38 @@ class ServicesController < ApplicationController
     ##################################################
 	  # ---------------- Services ----------------------
     ##################################################
+    user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+    semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
   	servicesJson = JSON.parse(params[:services])
   	removeJson = JSON.parse(params[:toRemove])
 
-  	logger.debug "DEBUG: Services - #{servicesJson}"
-  	logger.debug "DEBUG: To Remove - #{removeJson}"  
-
   	# Add or Edit
   	servicesJson.each do | c |  		
-  		if c["dbid"] == ""  			
-	        logger.debug "DEBUG: New UserService Name = #{c["name"]}, date = #{c["date"]} hours = #{c["hours"]} }"
-	        
-	        current_user.user_services.create(:name =>c["name"],
+  		if c["dbid"] == ""  				        
+	        user.user_services.create(:name =>c["name"],
 	        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date, 
 	        								  :hours=>c["hours"],
-	        								  :semester=>current_user.user_info.current_semester,
+	        								  :semester=>semester
 	        								 )
   		else
-  			toEdit = current_user.user_services.find(c["dbid"].to_i)
-  			logger.debug "DEBUG: Existing UserService id = #{c["dbid"]} date = #{c["date"]}"
+  			toEdit = user.user_services.find(c["dbid"].to_i)
 
-        	toEdit.update_attributes(:name =>c["name"],
-	        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date,
-	        								  :hours=>c["hours"]
-        									)
+      	toEdit.update_attributes(:name =>c["name"],
+        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date,
+        								  :hours=>c["hours"]
+      									)
 		  end
   	end
 
   	# Remove
   	removeJson.each do | r |
   		if r["dbid"] != ""
-  			logger.debug "DEBUG: Removing service with id = #{r["dbid"]}"
-  			current_user.user_services.find(r["dbid"].to_i).destroy
+  			user.user_services.find(r["dbid"].to_i).destroy
   		end
   	end
 
   	# Reload all
-  	allservices = current_user.user_services.where('semester = ?', current_user.user_info.current_semester).order("date DESC")  	
+  	allservices = user.user_services.where('semester = ?', semester).order("date DESC")
 
     returnservices = []
     allservices.each do | a |		
@@ -90,14 +84,12 @@ class ServicesController < ApplicationController
     # Don't need this since this is calculated by the badge itself
     totalHours = params[:totalHours]
 
-    badgeProcessor = BadgeProcessor.new(current_user)
-    newBadgeCount = badgeProcessor.CheckSemesterServices()
-  	
-  	logger.debug "DEBUG: Earned #{@newbadgecount} new badges."
+    badgeProcessor = BadgeProcessor.new(user, semester)
+    newBadgeCount = badgeProcessor.CheckSemesterServices()  
 
     # Reload badges
-    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Service")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+    badges = GlobalBadge.where(:semester => [nil, semester], :category => "Service")
+    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
   	# Return new badges received
   	respond_to do |format|

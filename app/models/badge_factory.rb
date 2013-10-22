@@ -79,7 +79,7 @@ class BadgeFactory
 			case b.subcategory
 			
 			when 0
-				badgeList << ServicesBadge.new(b, curr_user)
+				badgeList << ServicesBadge.new(b, curr_user, semester)
 			when 1			
 			end
 		end

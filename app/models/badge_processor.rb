@@ -16,7 +16,7 @@ class BadgeProcessor
 	end
 
 	def CheckSemesterServices
-		return CompareBadges(@badgefactory.GetServicesBadges(@curr_user.user_info.current_semester))
+		return CompareBadges(@badgefactory.GetServicesBadges(@semester))
 	end
 
 	def CheckSemesterPdus
