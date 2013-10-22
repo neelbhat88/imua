@@ -1,5 +1,6 @@
 class AdminStudentsViewModel
-	
+	attr_accessor :class_of
+
 	def initialize(student, urlHelper = UrlHelper.new)
 		@id = student.id
 		@email = student.email
@@ -12,4 +13,8 @@ class AdminStudentsViewModel
 		@picture_url = urlHelper.GetFullDefaultAvatarUrl(student.user_info.avatar.url(:original).to_s)
 		@is_default_image = urlHelper.IsDefaultAvatarUrl(student.user_info.avatar.url(:original).to_s)
 	end	
+
+	def class_of
+		return @class_of
+	end
 end

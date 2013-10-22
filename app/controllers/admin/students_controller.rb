@@ -9,15 +9,22 @@ class Admin::StudentsController < ApplicationController
   def init
     allstudents = User.LoadStudentsBySchoolId(current_user.user_info.school_id)
     
-    studentsviewmodel = []
-    allstudents.each do | student |
-      studentsviewmodel << AdminStudentsViewModel.new(student)
+    # ToDo: Do this better!
+    studentsviewmodel2016 = []
+    allstudents.select {|s| s.user_info.classof == 2016}.each do | student |
+      studentsviewmodel2016 << AdminStudentsViewModel.new(student)
+    end
+
+    studentsviewmodel2017 = []
+    allstudents.select {|s| s.user_info.classof == 2017}.each do | student |
+      studentsviewmodel2017 << AdminStudentsViewModel.new(student)
     end
 
     respond_to do |format|
       format.json { render :json => 
                   {
-                    :students => studentsviewmodel
+                    :students2016 => studentsviewmodel2016,
+                    :students2017 => studentsviewmodel2017
                   } 
             }
     end

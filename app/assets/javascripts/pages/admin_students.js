@@ -5,6 +5,8 @@ $(function(){
 		
 		self.ProgressPageUrl = progressPageUrl;
 
+		new Header().SetSelectedMenuItem('AdminStudents');
+
 		self.viewModel = {
 			pageLoaded: ko.observable(false),
 
@@ -25,7 +27,9 @@ $(function(){
 				type: "POST",
 				url: '/admin/students/init',
 				success: function(data) {
-					self.viewModel.students = ko.mapping.fromJS(data.students);
+					// ToDo: Do This better!
+					self.viewModel.students2016 = ko.mapping.fromJS(data.students2016);
+					self.viewModel.students2017 = ko.mapping.fromJS(data.students2017);
 
 					self.viewModel.pageLoaded(true);
 

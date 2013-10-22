@@ -1,5 +1,5 @@
 .studentTile {
-	width: 200px; 
+	width: 199px; 
 	
 	text-align: center; 
 	box-shadow: 0px 1px 3px 0px; 
@@ -69,14 +69,15 @@
 
 .categoryTile
 {
-	height: 97px; 
-	width: 97px;
+	height: 47px; 
+	width: 65px;
 	border: 1px solid;
 	@extend .regularText;
 	display: inline-block;
 	margin-top: 1px;	
 
-	&:nth-child(odd) { margin-right: 2px; }
+	&:nth-child(3n-1) { border-left: 0; }
+	&:nth-child(3n) { border-left: 0; }
 	&:hover > .letter { color: $midnight; }
 
 	.letter { 

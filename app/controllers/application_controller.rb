@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 		if current_user.is_student?
 			return global_badges_path
 		elsif current_user.is_teacher?
-			return admin_users_path
+			return admin_students_path
 		end
 
 		return school_classes_path

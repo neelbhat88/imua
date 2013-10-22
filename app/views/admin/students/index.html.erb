@@ -5,10 +5,10 @@
 
 	<div class="contentContainer" data-bind="">
 		<div class="pvm titleBar">
-			<div class="font_title-bar_small plxl" data-bind="">Class of 2016</div>			
+			<div class="font_title-bar_small plxl" data-bind="">Class of 2016</div>
 		</div>
 
-		<div class="students" data-bind="foreach: { data: students, as: 'student' }">
+		<div class="students" data-bind="foreach: { data: students2016, as: 'student' }">
 			<div class="studentTile">
 				<div class="picture" style="position: relative;">
 					<img data-bind="attr: {src: student.picture_url()}" />
@@ -31,13 +31,54 @@
 					<div class="categoryTile green" title="Extracurricular" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
 						<div class="letter">E</div>
 					</div>
-					<div class="categoryTile yellow" title="Service" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+					<div class="categoryTile green" title="Service" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
 						<div class="letter">S</div>
 					</div>
 					<div class="categoryTile green" title="PDU" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
 						<div class="letter">P</div>
 					</div>
-					<div class="categoryTile red" title="Testing" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+					<div class="categoryTile green" title="Testing" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">T</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ToDo: Do This Better! -->
+		<div class="pvm titleBar">
+			<div class="font_title-bar_small plxl" data-bind="">Class of 2017</div>
+		</div>
+
+		<div class="students" data-bind="foreach: { data: students2017, as: 'student' }">
+			<div class="studentTile">
+				<div class="picture" style="position: relative;">
+					<img data-bind="attr: {src: student.picture_url()}" />
+					<div class="edit">Edit</div>
+					<div class="pas picture-overlay">	
+						<div class="info">
+							<div data-bind="text: 'Last login: ' + student.last_login_date()"></div>
+							<div data-bind="text: 'Login attemps: ' + student.login_count()"></div>
+							<div class="ptm" data-bind="text: student.email()"></div>
+						</div>
+						<div class="name" data-bind="css: {displayNone: !student.is_default_image() }">	
+							<div data-bind="text: student.name()"></div>
+						</div>
+					</div>
+				</div>
+				<div class="info">
+					<div class="categoryTile green" title="Academics" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">A</div>
+					</div>
+					<div class="categoryTile green" title="Extracurricular" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">E</div>
+					</div>
+					<div class="categoryTile green" title="Service" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">S</div>
+					</div>
+					<div class="categoryTile green" title="PDU" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
+						<div class="letter">P</div>
+					</div>
+					<div class="categoryTile green" title="Testing" data-bind="click: function(data, event){$parent.viewCategory(student, event.currentTarget)}">
 						<div class="letter">T</div>
 					</div>
 				</div>
