@@ -1,86 +1,114 @@
-var Pdus = new function() {
-	var self = this;
+$(function(){	
+	Pdus = function(user_id, isTeacher) 
+	{
+		var self = this;
 
-	self.viewModel = {				
-		editing: ko.observable(false),
-		submitting: ko.observable(false),
-		pageLoaded: ko.observable(false),
-		rowsToRemove: [],
-		semesters: [],
-		semester: ko.observable(1),
-		editable: ko.observable(true),
+		self.UserId = user_id;
+		self.IsTeacher = isTeacher;
 
-		add: function() {
-			self.viewModel.totalPdus.push(new Pdu(null, null));
-			
-			$('.datepick').datepicker({autoclose: true});
-		},
+		self.viewModel = {				
+			editing: ko.observable(false),
+			submitting: ko.observable(false),
+			pageLoaded: ko.observable(false),
+			rowsToRemove: [],
+			semesters: [],
+			semester: ko.observable(1),
+			editable: ko.observable(true),
 
-		remove: function(toRemove) {
-			if (toRemove.dbid() != null)
-				self.viewModel.rowsToRemove.push(toRemove);
+			add: function() {
+				self.viewModel.totalPdus.push(new Pdu(null, null));
+				
+				$('.datepick').datepicker({autoclose: true});
+			},
 
-			self.viewModel.totalPdus.remove(toRemove);
-		},	
+			remove: function(toRemove) {
+				if (toRemove.dbid() != null)
+					self.viewModel.rowsToRemove.push(toRemove);
 
-		save: function()
-		{
-			if (!self.viewModel.submitting())
+				self.viewModel.totalPdus.remove(toRemove);
+			},	
+
+			save: function()
 			{
-				if ($('select.error, input.error').length > 0)
+				if (!self.viewModel.submitting())
 				{
-					$('.validationError').fadeIn();				
-					return;
-				}
+					if ($('select.error, input.error').length > 0)
+					{
+						$('.validationError').fadeIn();				
+						return;
+					}
 
-				self.viewModel.submitting(true);
+					self.viewModel.submitting(true);
 
+					$.ajax({
+						type: "POST",
+						url: '/savePdus',
+						data: {
+							pdus: ko.toJSON(self.viewModel.totalPdus()), 
+							toRemove: ko.toJSON(self.viewModel.rowsToRemove),
+							semester: self.viewModel.semester(),
+							user_id: self.UserId
+						},
+						success: function(data) 
+						{					
+							ko.mapping.fromJS(data.newpdus, {}, self.viewModel.totalPdus);
+							ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
+
+							self.viewModel.originalPdus = data.newpdus;
+
+							self.viewModel.rowsToRemove = [];
+							self.viewModel.editing(false);
+							self.viewModel.submitting(false);
+						},
+						error: function() {alert('SaveClasses fail!');}
+					});
+				}	
+			},
+
+			cancelEdit: function()
+			{
+				// Set back to original			
+				ko.mapping.fromJS(self.viewModel.originalPdus, {}, self.viewModel.totalPdus);
+
+				self.viewModel.rowsToRemove = [];
+				self.viewModel.editing(false);
+			},
+
+			edit: function()
+			{		
+				self.viewModel.editing(true);
+
+				$('.datepick').datepicker({autoclose: true});
+			},
+
+			templateToUse: function()
+			{
+				return self.viewModel.editing() ? 'edit' : 'view';
+			},	
+		}
+
+		// Subscribe to drop down change and update the UI accordingly
+		self.viewModel.semester.subscribe(function(newValue) {
+			if (self.viewModel.pageLoaded()) {
 				$.ajax({
 					type: "POST",
-					url: '/savePdus',
-					data: {
-						pdus: ko.toJSON(self.viewModel.totalPdus()), 
-						toRemove: ko.toJSON(self.viewModel.rowsToRemove)
+					url: '/pdus/init',
+					data: {semester: newValue, user_id: self.UserId, isTeacher: self.IsTeacher},					
+					success: function(data) {				
+						ko.mapping.fromJS(data.userpdus, {}, self.viewModel.totalPdus);
+						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+						self.viewModel.editable(data.editable);
 					},
-					success: function(data) 
-					{					
-						ko.mapping.fromJS(data.newpdus, {}, self.viewModel.totalPdus);
-						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);					
-
-						self.viewModel.originalPdus = data.newpdus;
-
-						self.viewModel.rowsToRemove = [];
-						self.viewModel.editing(false);
-						self.viewModel.submitting(false);
-					},
-					error: function() {alert('SaveClasses fail!');}
+					error: function() { alert("Failed drop down subscribe ajax post");}
 				});
-			}	
-		},
+			}
+		});
+	}
 
-		cancelEdit: function()
-		{
-			// Set back to original			
-			ko.mapping.fromJS(self.viewModel.originalPdus, {}, self.viewModel.totalPdus);
+	Pdus.prototype.init = function() 
+	{
+		var self = this;
 
-			self.viewModel.rowsToRemove = [];
-			self.viewModel.editing(false);
-		},
-
-		edit: function()
-		{		
-			self.viewModel.editing(true);
-
-			$('.datepick').datepicker({autoclose: true});
-		},
-
-		templateToUse: function()
-		{
-			return self.viewModel.editing() ? 'edit' : 'view';
-		},	
-	};
-
-	self.init = function() {
 		self.viewModel.editing = ko.observable(false);
 
 		var validationMapping = {
@@ -105,6 +133,7 @@ var Pdus = new function() {
 			$.ajax({
 				type: "POST",
 				url: '/pdus/init',
+				data: {user_id: self.UserId, isTeacher: self.IsTeacher},				
 				success: function(data) {					
 					self.viewModel.totalPdus = ko.mapping.fromJS(data.userpdus, validationMapping);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);					
@@ -120,27 +149,10 @@ var Pdus = new function() {
 
 					ko.applyBindings(self.viewModel);
 				},
-				error: function() { alert("Failed initial activity load");}
+				error: function() { alert("Failed initial pdu load");}
 			});
 		});
-	};
-
-	// Subscribe to drop down change and update the UI accordingly
-	self.viewModel.semester.subscribe(function(newValue) {
-		if (self.viewModel.pageLoaded()) {
-			$.ajax({
-				type: "POST",
-				url: '/pdus/init',
-				data: {semester: newValue},
-				success: function(data) {				
-					ko.mapping.fromJS(data.userpdus, {}, self.viewModel.totalPdus);
-					ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
-					self.viewModel.editable(data.editable);
-				},
-				error: function() { alert("Failed drop down subscribe ajax post");}
-			});
-		}
-	});
+	}		
 
 	function Pdu(date, hours)
 	{
@@ -152,4 +164,4 @@ var Pdus = new function() {
 		self.school_pdu_id = ko.observable("").extend({required: ""});
 		self.dbid = ko.observable("");
 	}	
-};
+});

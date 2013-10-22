@@ -42,7 +42,7 @@ $(function() {
 
 			$('#pduNav').click(function(){
 				$('#progressPages').load("/pdus", function() {
-					Pdus.init();
+					new Pdus(self.UserId, self.IsTeacher).init();
 				});
 
 				$('.progressNav li').removeClass("selected");
@@ -51,7 +51,7 @@ $(function() {
 
 			$('#testingNav').click(function(){
 				$('#progressPages').load("/testing", function() {
-					Testing.init();
+					new Testing(self.UserId, self.IsTeacher).init();
 				});
 
 				$('.progressNav li').removeClass("selected");

@@ -8,12 +8,11 @@ class PdusController < ApplicationController
 	end
 
 	def init
-		semester = params[:semester].to_i
-	    if semester == 0
-	      semester = current_user.user_info.current_semester
-	    end
+		user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+	    semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
+	    isTeacher = params[:isTeacher]
 
-		allpdus = current_user.user_pdus.where('semester = ?', semester).order("date DESC")
+		allpdus = user.user_pdus.where('semester = ?', semester).order("date DESC")
 
 	  	pdus = []
 	  	allpdus.each do | a |
@@ -21,10 +20,10 @@ class PdusController < ApplicationController
 	  	end
 
 	  	# Get all global pdu to put into dropdown
-    	globalpdus = SchoolPdu.where('school_id = ?', current_user.user_info.school_id).select([:id, :name]).order("name")
+    	globalpdus = SchoolPdu.where('school_id = ?', user.user_info.school_id).select([:id, :name]).order("name")
 
     	badges = GlobalBadge.where(:semester => [nil, semester], :category => "PDU")
-    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
+    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	respond_to do |format|
 	  		format.json { render :json => 
@@ -32,12 +31,11 @@ class PdusController < ApplicationController
 	  									:userpdus => pdus, 
 	  									:globalpdus => globalpdus,
 	  									:badges => badgesviewmodel,
-	  									:editable => (semester == current_user.user_info.current_semester),
-			                            :semesters => (1..current_user.user_info.current_semester).to_a,
-			                        	:init_semester =>current_user.user_info.current_semester
+	  									:editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),
+			                            :semesters => (1..user.user_info.current_semester).to_a,
+			                        	:init_semester =>user.user_info.current_semester
 	  								} 
 	  					}
-	  		format.html { render :layout => false } # index.html.erb
 	  	end
 	end
 
@@ -45,26 +43,21 @@ class PdusController < ApplicationController
 	    ##################################################
 		# ---------------- PDUs ----------------------
 	    ##################################################
+	    user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+    	semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
 	  	pdusJson = JSON.parse(params[:pdus])
 	  	removeJson = JSON.parse(params[:toRemove])
-
-	  	logger.debug "DEBUG: Pdus - #{pdusJson}"
-	  	logger.debug "DEBUG: To Remove - #{removeJson}"  
-
+	  	
 	  	# Add or Edit
 	  	pdusJson.each do | c |  		
-	  		if c["dbid"] == ""  			
-		        logger.debug "DEBUG: New UserPdu SchoolPduId = #{c["school_pdu_id"]}, date = #{c["date"]} hours = #{c["hours"]} }"
-		        
-		        current_user.user_pdus.create(:school_pdu_id =>c["school_pdu_id"],
-		        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date, 
-		        								  :hours=>c["hours"],
-		        								  :semester=>current_user.user_info.current_semester,
-		        								 )
+	  		if c["dbid"] == ""
+		        user.user_pdus.create(:school_pdu_id =>c["school_pdu_id"],
+    								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date, 
+    								  :hours=>c["hours"],
+    								  :semester=>semester,
+    								 )
 	  		else
-	  			toEdit = current_user.user_pdus.find(c["dbid"].to_i)
-	  			logger.debug "DEBUG: Existing UserPdu id = #{c["dbid"]} date = #{c["date"]}"
-
+	  			toEdit = user.user_pdus.find(c["dbid"].to_i)
 	        	toEdit.update_attributes(:school_pdu_id =>c["school_pdu_id"],
 		        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date,
 		        								  :hours=>c["hours"]
@@ -75,13 +68,12 @@ class PdusController < ApplicationController
 	  	# Remove
 	  	removeJson.each do | r |
 	  		if r["dbid"] != ""
-	  			logger.debug "DEBUG: Removing pdu with id = #{r["dbid"]}"
-	  			current_user.user_pdus.find(r["dbid"].to_i).destroy
+	  			user.user_pdus.find(r["dbid"].to_i).destroy
 	  		end
 	  	end
 
 	  	# Reload all
-	  	allpdus = current_user.user_pdus.where('semester = ?', current_user.user_info.current_semester).order("date DESC")
+	  	allpdus = user.user_pdus.where('semester = ?', semester).order("date DESC")
 
 	    returnpdus = []
 	    allpdus.each do | a |		
@@ -91,12 +83,12 @@ class PdusController < ApplicationController
 	    ##################################################
 	    # ------------------ BADGES ----------------------
 	    ##################################################   	    
-	    badgeProcessor = BadgeProcessor.new(current_user)
+	    badgeProcessor = BadgeProcessor.new(user, semester)
 	    badgeProcessor.CheckSemesterPdus()
 	  		  	
 	  	# Reload badges
-	    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "PDU")
-	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+	    badges = GlobalBadge.where(:semester => [nil, semester], :category => "PDU")
+	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	# Return new badges received
 	  	respond_to do |format|

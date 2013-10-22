@@ -8,12 +8,11 @@ class TestingController < ApplicationController
 	end
 
 	def init
-		semester = params[:semester].to_i
-	    if semester == 0
-	      semester = current_user.user_info.current_semester
-	    end
+		user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+	    semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
+	    isTeacher = params[:isTeacher]
 
-		alltesting = current_user.user_testings.where('semester = ?', semester).order("date DESC")
+		alltesting = user.user_testings.where('semester = ?', semester).order("date DESC")
 
 	  	tests = []
 	  	alltesting.each do | a |
@@ -24,7 +23,7 @@ class TestingController < ApplicationController
     	globalexams = GlobalExam.select([:id, :name]).order("name")
 
     	badges = GlobalBadge.where(:semester => [nil, semester], :category => "Testing")
-    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user, semester)
+    	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	respond_to do |format|
 	  		format.json { render :json => 
@@ -32,12 +31,11 @@ class TestingController < ApplicationController
 	  									:usertests => tests, 
 	  									:globalexams => globalexams, 
 	  									:badges => badgesviewmodel,
-	  									:editable => (semester == current_user.user_info.current_semester),
-			                            :semesters => (1..current_user.user_info.current_semester).to_a,
-			                        	:init_semester =>current_user.user_info.current_semester
+	  									:editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),
+			                            :semesters => (1..user.user_info.current_semester).to_a,
+			                        	:init_semester =>user.user_info.current_semester
 	  								} 
 	  					}
-	  		format.html { render :layout => false } # index.html.erb
 	  	end
 	end
 
@@ -45,19 +43,21 @@ class TestingController < ApplicationController
 	    ##################################################
 		# ---------------- Tests ----------------------
 	    ##################################################
+	    user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+    	semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
 	  	testsJson = JSON.parse(params[:tests])
 	  	removeJson = JSON.parse(params[:toRemove])	  
 
 	  	# Add or Edit
 	  	testsJson.each do | c |  		
 	  		if c["dbid"] == ""		       
-		        current_user.user_testings.create(:global_exam_id =>c["global_exam_id"],
-		        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date, 
-		        								  :score=>c["score"],
-		        								  :semester=>current_user.user_info.current_semester,
-		        								 )
+		        user.user_testings.create(:global_exam_id =>c["global_exam_id"],
+        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date, 
+        								  :score=>c["score"],
+        								  :semester=>semester,
+        								 )
 	  		else
-	  			toEdit = current_user.user_testings.find(c["dbid"].to_i)
+	  			toEdit = user.user_testings.find(c["dbid"].to_i)
 
 	        	toEdit.update_attributes(:global_exam_id =>c["global_exam_id"],
 		        								  :date=>Date.strptime(c["date"], "%m/%d/%Y").to_date,
@@ -69,12 +69,12 @@ class TestingController < ApplicationController
 	  	# Remove
 	  	removeJson.each do | r |
 	  		if r["dbid"] != ""
-	  			current_user.user_testings.find(r["dbid"].to_i).destroy
+	  			user.user_testings.find(r["dbid"].to_i).destroy
 	  		end
 	  	end
 
 	  	# Reload all
-	  	alltests = current_user.user_testings.where('semester = ?', current_user.user_info.current_semester).order("date DESC")
+	  	alltests = user.user_testings.where('semester = ?', semester).order("date DESC")
 
 	    returntests = []
 	    alltests.each do | a |		
@@ -84,12 +84,12 @@ class TestingController < ApplicationController
 	    ##################################################
 	    # ------------------ BADGES ----------------------
 	    ##################################################   	    
-	    badgeProcessor = BadgeProcessor.new(current_user)
-	    badgeProcessor.CheckSemesterTesting()	    
+	    badgeProcessor = BadgeProcessor.new(user, semester)
+	    badgeProcessor.CheckSemesterTesting()
 	  		  	
 	  	# Reload badges
-	    badges = GlobalBadge.where(:semester => [nil, current_user.user_info.current_semester], :category => "Testing")
-	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, current_user)
+	    badges = GlobalBadge.where(:semester => [nil, semester], :category => "Testing")
+	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	# Return new badges received
 	  	respond_to do |format|

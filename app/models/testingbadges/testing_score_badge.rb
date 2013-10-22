@@ -1,7 +1,7 @@
 class TestingScoreBadge < TestingBadge
 	attr_accessor :globalexamid, :score
 
-	def initialize(globalbadge, user)
+	def initialize(globalbadge, user, semester)
 		# call ActivityBadge contructor
 		super
 
@@ -11,7 +11,7 @@ class TestingScoreBadge < TestingBadge
 
 	def Compare()
 		user_score_badges = self.curr_user.user_testings.where(:global_exam_id=>self.globalexamid,
-											:semester=> self.curr_user.user_info.current_semester)
+											:semester=> self.semester)
 		
 		if (user_score_badges.length > 0)
 			user_score_badges.each do | b |

@@ -20,11 +20,11 @@ class BadgeProcessor
 	end
 
 	def CheckSemesterPdus
-		return CompareBadges(@badgefactory.GetPduBadges(@curr_user.user_info.current_semester))
+		return CompareBadges(@badgefactory.GetPduBadges(@semester))
 	end
 
 	def CheckSemesterTesting
-		return CompareBadges(@badgefactory.GetTestingBadges(@curr_user.user_info.current_semester))
+		return CompareBadges(@badgefactory.GetTestingBadges(@semester))
 	end
 
 	def CompareBadges(allBadges)

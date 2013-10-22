@@ -100,7 +100,7 @@ class BadgeFactory
 			case b.subcategory
 			
 			when 0
-				badgeList << PduBadge.new(b, curr_user)
+				badgeList << PduBadge.new(b, curr_user, semester)
 			when 1			
 			end
 		end
@@ -121,13 +121,13 @@ class BadgeFactory
 			case b.subcategory
 			
 			when 0
-				badgeList << TestingExamBadge.new(b, curr_user)
+				badgeList << TestingExamBadge.new(b, curr_user, semester)
 			when 1
-				badgeList << TestingScoreBadge.new(b, curr_user)
+				badgeList << TestingScoreBadge.new(b, curr_user, semester)
 			when 2
-				badgeList << TestingExamTypeBadge.new(b, curr_user)
+				badgeList << TestingExamTypeBadge.new(b, curr_user, semester)
 			when 3
-				badgeList << TestingPrepQuizBadge.new(b, curr_user)
+				badgeList << TestingPrepQuizBadge.new(b, curr_user, semester)
 			end
 		end
 

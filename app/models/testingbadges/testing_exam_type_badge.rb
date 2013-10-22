@@ -1,7 +1,7 @@
 class TestingExamTypeBadge < TestingBadge
 	attr_accessor :globalexamtype, :count
 
-	def initialize(globalbadge, user)
+	def initialize(globalbadge, user, semester)
 		# call ActivityBadge contructor
 		super
 
@@ -10,7 +10,7 @@ class TestingExamTypeBadge < TestingBadge
 	end
 
 	def Compare()
-		user_type_badges = self.curr_user.user_testings.joins(:global_exam).where("global_exams.exam_type=? and user_testings.semester= ?", self.globalexamtype, self.curr_user.user_info.current_semester)
+		user_type_badges = self.curr_user.user_testings.joins(:global_exam).where("global_exams.exam_type=? and user_testings.semester= ?", self.globalexamtype, self.semester)
 		
 		if (user_type_badges.length >= self.count)
 			return true

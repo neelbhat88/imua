@@ -36,7 +36,6 @@ class ActivitiesController < ApplicationController
                                 :init_semester =>user.user_info.current_semester
                               } 
                   }
-      format.html { render :layout => false } # index.html.erb
     end
   end
 
