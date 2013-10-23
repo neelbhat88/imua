@@ -33,5 +33,7 @@ class Admin::StudentsController < ApplicationController
   def progress
     @category = params[:page].to_s
     @user_id = params[:id]
+    
+    @student = User.find(params[:id])
   end
 end

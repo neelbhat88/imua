@@ -1,3 +1,10 @@
+.studentName {
+	@extend .midnight_text;
+	font-size: 28px;
+
+	text-align: center;
+}
+
 .studentTile {
 	width: 199px; 
 	

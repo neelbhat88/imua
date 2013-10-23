@@ -1,6 +1,7 @@
 <% @jsinit = "new Progress(#{@user_id}, '#{@category}', true).init();" %>
 
 <div class="progressLeftPane leftPane">
+	<div class="studentName"><%=@student.first_name + ' ' + @student.last_name%></div>
 	<ul class="progressNav">
 		<li id="academicsNav" class="progressNavLi academics_text">Academics</li>
 		<li id="extracurNav" class="progressNavLi extracur_text">Extracurricular</li>
