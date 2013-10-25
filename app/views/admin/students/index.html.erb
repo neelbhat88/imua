@@ -18,6 +18,7 @@
 							<div data-bind="text: 'Last login: ' + student.last_login_date()"></div>
 							<div data-bind="text: 'Login attemps: ' + student.login_count()"></div>
 							<div class="ptm" data-bind="text: student.email()"></div>
+							<div data-bind="text: student.phone()"></div>
 						</div>
 						<div class="name" data-bind="css: {displayNone: !student.is_default_image() }">	
 							<div data-bind="text: student.name()"></div>

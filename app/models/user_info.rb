@@ -1,5 +1,5 @@
 class UserInfo < ActiveRecord::Base
-  attr_accessible :current_semester, :school_id, :user_id, :classof,
+  attr_accessible :current_semester, :school_id, :user_id, :classof, :phone,
                   :big_goal, :why_description, :how_description, :college_avatar, :avatar
 
   belongs_to :user

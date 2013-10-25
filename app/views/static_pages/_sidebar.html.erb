@@ -30,7 +30,7 @@
               <% elsif current_user.is_admin? %>
                 <%= link_to "Dashboard", school_classes_path, :class => 'btn btn-success' %>
               <% elsif current_user.is_teacher? %>
-              	<%= link_to "Dashboard", admin_users_path, :class => 'btn btn-success' %>
+              	<%= link_to "Dashboard", admin_students_path, :class => 'btn btn-success' %>
               <% end %>
 				<%= link_to 'Sign out', destroy_user_session_path, :class => 'btn btn-info sign-out', :method => 'delete' %>
 			</div>

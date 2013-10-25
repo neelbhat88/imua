@@ -32,9 +32,12 @@ class RegistrationsController < Devise::RegistrationsController
 	end
 
 	def update
-		@role = params[:user][:role] == nil ? 0 : params[:user][:role]		
+		@role = params[:user][:role] == nil ? 0 : params[:user][:role]
+		@phone = params[:user_info][:phone]		
 
 		super
+
+		User.find_by_email(params[:user][:email]).user_info.update_attributes(:phone=>@phone)
 	end
 
 	def show		           

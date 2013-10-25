@@ -21,6 +21,11 @@
           <%= f.email_field :email %>
         </div>
 
+        <div>
+          <%= f.label :phone, "My Phone Number - (xxx) xxx-xxxx" %>
+          <%= text_field :user_info, :phone %>
+        </div>
+
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
