@@ -15,18 +15,6 @@ $(function(){
 			semester: ko.observable(1),
 			editable: ko.observable(true),
 
-			addLeadership: function(activity, event){
-				activity.leadershipHeld(true);
-				activity.leadershipTitle("");
-			},
-
-			removeLeadership: function(activity, event){			
-				activity.leadershipHeld(false);
-				// Setting leadership title so validation does not fail. Since 
-				// leadershipHeld is false the title does not matter
-				activity.leadershipTitle("Leader");
-			},
-
 			addActivity: function() {
 				// Passing in leadership title so validation does not fail. Since 
 				// leadershipHeld is false the title does not matter
@@ -53,7 +41,7 @@ $(function(){
 			{
 				if (!self.viewModel.submitting())
 				{				
-					if ($('select.error, input.error').length > 0)
+					if ($('select.error:visible, input.error:visible').length > 0)
 					{
 						$('.validationError').fadeIn();				
 						return;
@@ -134,9 +122,6 @@ $(function(){
 			leadershipTitle: {
 				create: function(options) {
 					title = options.data;
-					if (title == "")
-						title = "Leader"
-
 					return ko.observable(title).extend({required: ""});
 				}
 			},			

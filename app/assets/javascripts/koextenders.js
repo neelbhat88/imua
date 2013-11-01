@@ -41,8 +41,32 @@ $(window).ready(function() {
 
 		//define a function to do validation
 		function validate(newValue) {
-		   target.hasError(newValue ? false : true);
-		   target.validationMessage(newValue ? "" : overrideMessage || "");
+			target.hasError(newValue ? false : true);
+	   		target.validationMessage(newValue ? "" : overrideMessage || "");
+		}
+
+		//initial validation
+		validate(target());
+
+		//validate whenever the value changes
+		target.subscribe(validate);
+
+		//return the original observable
+		return target;
+	};
+
+	ko.extenders.requiredOnlyIf = function(target, options) {
+		//add some sub-observables to our observable
+		target.hasError = ko.observable();
+		target.validationMessage = ko.observable();
+
+		//define a function to do validation
+		function validate(newValue) {
+			if (options.onlyIf())
+			{
+				target.hasError(newValue ? false : true);
+		   		target.validationMessage(newValue ? "" : options.overrideMessage || "");
+			}			
 		}
 
 		//initial validation

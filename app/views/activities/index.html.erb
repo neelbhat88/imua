@@ -66,9 +66,17 @@
 			<div data-bind="click: $root.removeActivity" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
 			
 			<select data-bind="css: {error: school_activity_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>
-			<a href="#" data-bind="click: $root.addLeadership, visible: leadershipHeld() == false" style="padding-left: 10px">Add leadership</a>		
-			<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 240px" />
-			<a href="#" data-bind="click: $root.removeLeadership, visible: leadershipHeld() == true" style="padding-left: 10px">Remove</a>
+			<div style="display:inline-block">
+				<div class="plm" style="display: inline-block; vertical-align: text-top;">
+					<input type="checkbox" name="leadershipHeld" data-bind="checked: leadershipHeld">
+				</div>
+				<div class="" style="display:inline-block; vertical-align:middle;">I am a leader</div>
+				<div style="display: inline-block; vertical-align: middle;">
+					<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 185px; display: inline-block; vertical-align: middle;" />
+				</div>
+			</div>
+			
+			
 
 			<div style="padding-top: 5px; font-style: italic; color: gray; font-size: 14px;">Describe what you did in 3 to 4 sentences. Use action works like "Lead my team" or "Organized an event".</div>
 			<div data-bind="foreach: description">
