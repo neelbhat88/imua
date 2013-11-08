@@ -32,7 +32,6 @@ class BadgeProcessor
 		badgesearned = []
 		badgeslost = []
 	  	allBadges.each do |b|
-	  		# If badge is not minreq then only compare if all minreqs met
 	  		badgeEarned = false
 	  		
 	  		badgeEarned = b.Compare()	  			

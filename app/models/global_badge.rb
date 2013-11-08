@@ -26,25 +26,28 @@ class GlobalBadge < ActiveRecord::Base
       semester = user.user_info.current_semester
     end
 
-    minreqsmet = user.user_info.MetAllMinRequirements(semester)
-
     badgesviewmodel = []
+    user_badges = user.user_badges #loads all badges from DB
+
     allbadges.each do | badge |
       hasEarned = "No"
-
-      logger.debug("DEBUG: GetBadgesViewModel BId: #{badge.id} Sem: #{semester} - #{user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length}")
+          
       # If User has earned badge
-      if user.user_badges.where(:semester => semester, :global_badge_id => badge.id).length != 0
-        if !badge.isminrequirement() && !minreqsmet
-          hasEarned = "Pending"
-        else
+      if user_badges.select{|ub| ub.semester == semester && ub.global_badge_id == badge.id}.length != 0                
           hasEarned = "Yes"
-        end
       end
 
       badgesviewmodel << BadgeViewModel.new(badge, hasEarned)
     end
 
     return badgesviewmodel
+  end
+
+  def self.GetNumBadgesEarned(current_user, semester=nil)
+    if (semester == nil)
+      return current_user.user_badges.length
+    end
+
+    return current_user.user_badges.where(:semester => semester).length
   end
 end

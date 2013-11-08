@@ -8,21 +8,18 @@ class StatsController < ApplicationController
 		semester = current_user.user_info.current_semester		
 
 		# Get total badges earned
-		totalBadgesEarned = []
-		(1..semester).each do | s |
-			if (current_user.user_info.MetAllMinRequirements(s))				
-				totalBadgesEarned << current_user.user_badges.where(:semester => s)
-			else
-				# If all min reqs not met, total number earned is just the min requirements
-				totalBadgesEarned << current_user.user_badges.joins(:global_badge).where("user_badges.semester = ? and global_badges.isminrequirement = true", s)
-			end
-		end
-		totalBadgesEarned = totalBadgesEarned.flatten
+		totalBadgesEarned = GlobalBadge.GetNumBadgesEarned(current_user)
 
 		# Get total badge value
 		totalBadgesValue = 0
-		totalBadgesEarned.each do | ub |
-			totalBadgesValue += ub.global_badge.badge_value
+		(0..semester).each do |s|
+			if current_user.user_info.MetAllMinRequirements(s)				
+				# includes loads all the data into memory, so accessing the associated data doesn't make a DB call
+				badges = current_user.user_badges.includes(:global_badge).where('user_badges.semester = ?', s)
+				badges.each do |b|
+					totalBadgesValue += b.global_badge.badge_value
+				end
+			end
 		end
 
 		# Total deduction value and deductions
@@ -54,7 +51,7 @@ class StatsController < ApplicationController
 		totalpdus = current_user.user_pdus.length
 
 		respond_to do |format|
-			format.json { render :json => {:totalbadgesearned => totalBadgesEarned.length,
+			format.json { render :json => {:totalbadgesearned => totalBadgesEarned,
 										   :totalbadgesvalue => totalBadgesValue,
 										   :totalbadgespossible => totalBadgesPossible,
 										   :cumulativegpa => cumulative_gpa,
