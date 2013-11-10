@@ -1,52 +1,40 @@
 <% @jsinit = 'new Badges().init();' %>
 
-<div class="leftPane"></div>
-
-<div class="contentContainer" style="display:none;" data-bind="visible: badges().length > 0">
-	<div class="titleBar badgesTitleBar">
-		<div class="plxl displayInlineBlock font_title-bar_large" data-bind="text: badgesEarned()"></div>
-		<div class="plxl displayInlineBlock font_title-bar_small">Badges Earned</div>
-		<div class="semesterSelect">
-			<select class="font_large service_text" data-bind="options:$root.semesters, optionsText:'text', optionsValue:'id', value: semester"></select>
-		</div>		
+<div class="contentContainer badgesContainer" style="display:none;" data-bind="visible: badges().length > 0">
+	<div class="mbxl">
+		<div class="semesterSelect midnight_text">
+			All Badges For: 
+			<select class="font_large" data-bind="options:$root.semesters, optionsText:'text', optionsValue:'id', value: semester"></select>
+		</div>
 	</div>
 
-	<div class="phm pvxl">
-		<div class="badgesPanel requiredBadges">
-			<div class="title">
-				Required Badges
-			</div>
-			<div class="content" data-bind="foreach: { data: badges, as: 'badge' }">
-				<!-- The following is used by KO -->
-				<!-- ko if: badge.isminrequirement() == true -->	
-				<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
-					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" class="title"></span>				
-					<div data-bind="text: badge.description()" class="description"></div>
-					<div class="minReqStar">
-						<div class="points" data-bind="text: badge.badgeValue()" title="Scholarship Points"></div>
-						<%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement", :title => "Minimum Requirement") %>
-					</div>
-				</div>		
-				<!-- /ko -->
-			</div>
-		</div>
+	<hr class="fadedLine" />
 
-		<div class="badgesPanel">
-			<div class="title">
-				All Other Badges
-			</div>
-			<div class="content" data-bind="foreach: { data: badges, as: 'badge' }">
-				<!-- The following is used by KO -->
-				<!-- ko if: badge.isminrequirement() == false -->	
-				<div class="globalBadge" data-bind="css: getBadgeColor(badge)" style="">
-					<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" class="title"></span>				
-					<div data-bind="text: badge.description()" class="description"></div>
-					<div class="minReqStar">
-						<div class="points pas" data-bind="text: badge.badgeValue()" title="Scholarship Points"></div>
-					</div>
-				</div>		
-				<!-- /ko -->
-			</div>
+	<div class="totalsBar">
+		<div class="scoreboard" style="width: 280px;">
+			<div class="value pas service_bg" data-bind="text: badgesEarned"></div>
+			<div class="text pvm">Badges Earned</div>
 		</div>
+		<div class="font_title-bar_small">+</div>
+		<div class="minreqsmet scoreboard" style="width: 280px;">
+			<div class="value pas pdu_bg" data-bind="text: minReqsMet() ? 'Yes' : 'No', css: {service_bg: totalBadgeValue() > 0, pdu_bg: totalBadgeValue() <= 0 }"></div>
+			<div class="text pvm">Minimum Requirements Met?</div>
+		</div>
+		<div class="font_title-bar_small">=</div>
+		<div class="scoreboard" style="width: 340px;">
+			<div class="value pas" data-bind="text: totalBadgeValue, css: {service_bg: totalBadgeValue() > 0, pdu_bg: totalBadgeValue() <= 0 }"></div>
+			<div class="text pvm">Scholarship Points</div>
+		</div>
+	</div>
+	
+	<div class="badges paxl" data-bind="foreach: { data: badges, as: 'badge' }">
+		<div class="globalBadge" data-bind="css: getBadgeCss(badge)">
+			<span data-bind="text: badge.title(), css: {required: badge.isminrequirement}" class="title"></span>				
+			<div data-bind="text: badge.description()" class="description"></div>
+			<div class="minReqStar">
+				<div class="points" data-bind="text: badge.badgeValue(), css: { pas: !badge.isminrequirement() }" title="Scholarship Points"></div>
+				<%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement", :"data-bind"=>"visible: badge.isminrequirement()", :title => "Minimum Requirement") %>
+			</div>
+		</div>		
 	</div>
 </div>

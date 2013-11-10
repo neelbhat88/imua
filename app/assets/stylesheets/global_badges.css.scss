@@ -1,59 +1,55 @@
-.titleBar {
-	@extend .service_bg;
+.badgesContainer
+{
+	padding: 40px 0 0 0;
 
-	border-radius: 8px;	
-	height: 60px; 
-	left: -110px; 
-	position: relative; 
-	margin-bottom: 20px;
+	.semesterSelect {
+		width: 350px; 
+		margin-left: auto; 
+		font-size: 22px;
 
-	&.badgesTitleBar { 
-		height: 100px; 
-
-		.semesterSelect {
-			position: absolute; right: 30px; top: 42px; width: 150px;
+		select { 
+			width: 150px; 
+			margin: 0;
 		}
 	}
 
-	&.adminStudentTitleBar { height: 60px; }
-}
-
-.hasNotEarned {
-	background-color: $clouds !important;
-	color: $asbestos !important;
-}
-
-.pending {
-	background-color: white !important;
-}
-
-.badgesPanel {
-	border-radius: 8px; 
-	padding-bottom: 40px;
-
-	> .title {
-		text-align: center; 
-		border-radius: 3px 3px 0px 0px; 
-		height: 35px; 
-		font-size: 32px; 
-		padding: 15px 0px 0px;
-		background-color: $asbestos;
-		color: white;
-	}
-
-	> .content {
-		border: 1px solid $asbestos; 
+	.totalsBar
+	{
 		text-align: center;
-		background-color: white;
+		max-width: 1000px;
+		margin:auto;
+
+		& > div {
+			vertical-align: top; 
+			display: inline-block;
+			text-align: center;
+		}
+
+		.minreqsmet { cursor: default; }
+
+		.scoreboard {
+			.value {
+				border-radius: 5px; 
+				text-align: center; 
+				margin: auto; 
+				width: 120px; 
+				font-size: 60px;
+				line-height: 1;
+			}
+
+			.text {
+				font-size: 40px;
+				line-height: 1;
+			}
+		}
 	}
 
-	&.requiredBadges > .title {
-		@extend .midnight_bg;
+	.badges {
+		text-align: center;
+		background-color: $midnight;
 	}
 
-	&.requiredBadges > .content {
-		border-color: $midnight;
-	}
+	.highlight { box-shadow: 0 0 20px white;}	
 }
 
 .globalBadge
@@ -73,14 +69,19 @@
 	text-align: left;
 	position: relative;	
 
-	& .title { font-size: 28px; }
-	& .description { font-size: 15px; padding-top: 5px; }
-	& .minReqStar 
-	{ 
+	.title { font-size: 28px; }
+	.description { font-size: 15px; padding-top: 5px; }
+	.minReqStar 
+	{ 		
 		position: absolute; 
 		right: 0; 
 		bottom: 0; 
 
 		& .points { display: inline-block; vertical-align: middle; font-size: 18px; }
+	}
+
+	&.hasNotEarned {
+		background-color: $clouds !important;
+		color: $asbestos !important;
 	}
 }

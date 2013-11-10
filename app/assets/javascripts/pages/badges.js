@@ -48,17 +48,37 @@ $(function(){
 				success: function(data) {
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);
 					self.viewModel.badgesEarned = ko.observable(data.badgesearned);
-					self.viewModel.semester(data.semester);				
+					self.viewModel.minReqsMet = ko.observable(data.minreqsmet);
+					self.viewModel.totalBadgeValue = ko.observable(data.totalbadgevalue);
+					self.viewModel.semester(data.semester);
 
 					ko.applyBindings(self.viewModel);
 
 					self.viewModel.pageLoaded(true);
 				},
 				error: function() { alert("Failed initial badge load");}
-			});			
+			});
+
+			$('.minreqsmet').hover(
+				function(){
+					$('.globalBadge.required.hasNotEarned').addClass('highlight');
+				},
+				function(){
+					$('.globalBadge.required.hasNotEarned').removeClass('highlight');
+				}
+			);
 		});
 	}
 });
+
+function getBadgeCss(badge) {
+	cssClasses = "";
+
+	if (badge.isminrequirement())
+		cssClasses += "required";
+
+	return cssClasses += " " + getBadgeColor(badge);
+}
 
 function getBadgeColor(badge) {
 	if (badge.hasEarned() == "No")
