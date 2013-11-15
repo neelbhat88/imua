@@ -150,6 +150,12 @@ $(function(){
 				},
 				error: function() { alert("Failed initial testing load");}
 			});
+
+			$('#practiceQuizImg').popover({
+				trigger: 'hover',
+				placement: 'bottom',
+				content: "Click to take your ACT practice quizzes with Varsity Tutors!"
+			});
 		});
 	}	
 

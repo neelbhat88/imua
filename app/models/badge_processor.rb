@@ -28,7 +28,6 @@ class BadgeProcessor
 	end
 
 	def CompareBadges(allBadges)
-		newbadgecount = 0
 		badgesearned = []
 		badgeslost = []
 	  	allBadges.each do |b|
@@ -42,24 +41,21 @@ class BadgeProcessor
 
 	  		# If badge earned and user does not have badge
 	  		if badgeEarned == true && userHasBadge == false
-	  			newbadgecount += 1
 	  			badgesearned << b
 
 	  			# Save earned badge to db
 	  			@curr_user.user_badges.create(:global_badge_id => b.id, :semester => @semester)
 	  		
 	  		# If badge not earned and user has badge
-	  		elsif badgeEarned == false && userHasBadge == true
-	  			removedBadge = @curr_user.user_badges.find_by_global_badge_id(b.id)
+	  		elsif badgeEarned == false && userHasBadge == true	  			
 	  			badgeslost << b
 
 	  			# Remove earned badge
-	  			@curr_user.user_badges.find_by_global_badge_id(b.id).destroy()
+	  			@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @semester).destroy_all()
 	  			Rails.logger.debug("DEBUG: BadgeEarned = false and UserHasBadge = true. UserBadge with GlobalBadgeId: #{b.id} removed.")
 	  		end
 	  	end
 	  	
-	  	#return newbadgecount
 	  	return :badgesEarned => badgesearned, :badgesLost => badgeslost
 	end
 end
