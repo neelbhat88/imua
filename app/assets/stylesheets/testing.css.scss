@@ -22,3 +22,9 @@
 	& .classDD { width: 250px; margin-right: 10px; }
 	& .gradeDD { width: 100px; margin-right: 10px; }
 }
+
+.popover {
+	color: $midnight;
+
+	.popover-title { display: none; }
+}

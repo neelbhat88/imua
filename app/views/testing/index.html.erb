@@ -1,7 +1,16 @@
 <% @jsinit = 'Testing' %>
 
 <div data-bind="visible: pageLoaded" style="display: none">
-	<div class="progressHeadingContainer testing_text">
+	<div class="resources midnight_text ptl">
+		<div>Resources: </div>
+		<div class="plm">
+			<a href="https://www.varsitytutors.com/login" target="_blank">
+				<%= image_tag("varsitytutors.jpg", :width=>"150px", :alt => "Varsity Tutors", :title=>"Practice Quizzes from Varsity Tutors", :id=>"practiceQuizImg")%>
+			</a>
+		</div>
+	</div>
+	<hr class="fadedLine" />
+	<div class="progressHeadingContainer testing_text" style="margin-top: 0;">
 		<div data-bind="text: totalTests().length" class="value"></div>
 		<div class="text" style="padding-left: 25px">Tests Taken</div>
 	</div>
