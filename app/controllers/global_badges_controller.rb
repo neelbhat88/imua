@@ -15,12 +15,12 @@ class GlobalBadgesController < ApplicationController
 		minreqsmet = current_user.user_info.MetAllMinRequirements(semester)
 
 		totalBadgesValue = 0
-		if (minreqsmet)			
+		#if (minreqsmet)			
 			badges = badgesviewmodel.select{|b| b.hasEarned == 'Yes'}
 			badges.each do |b|
 				totalBadgesValue += b.badgeValue
 			end
-		end
+		#end
 
 		respond_to do |format|
 			format.json { render :json => {:badges => badgesviewmodel, 
@@ -53,12 +53,12 @@ class GlobalBadgesController < ApplicationController
 		minreqsmet = current_user.user_info.MetAllMinRequirements(semester)
 
 		totalBadgesValue = 0
-		if (minreqsmet)			
+		#if (minreqsmet)			
 			badges = badgesviewmodel.select{|b| b.hasEarned == 'Yes'}
 			badges.each do |b|
 				totalBadgesValue += b.badgeValue
 			end
-		end
+		#end
 
 		respond_to do |format|
 			format.json { render :json => { :badges => badgesviewmodel, 

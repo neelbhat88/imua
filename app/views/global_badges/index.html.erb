@@ -12,15 +12,13 @@
 
 	<div class="totalsBar pbl">
 		<div class="scoreboard" style="width: 280px;">
-			<div class="value pas service_bg" data-bind="text: badgesEarned"></div>
+			<div class="value pas service_bg" data-bind="text: badgesEarned, css: {service_bg: badgesEarned() > 0, pdu_bg: badgesEarned() <= 0 }"></div>
 			<div class="text pvm">Badges Earned</div>
 		</div>
-		<div class="font_title-bar_small">+</div>
-		<div class="minreqsmet scoreboard" style="width: 280px;">
-			<div class="value pas pdu_bg" data-bind="text: minReqsMet() ? 'Yes' : 'No', css: {service_bg: totalBadgeValue() > 0, pdu_bg: totalBadgeValue() <= 0 }"></div>
+		<div class="minreqsmet scoreboard phl" style="width: 280px;">
+			<div class="value pas pdu_bg" data-bind="text: minReqsMet() ? 'Yes' : 'No', css: {service_bg: minReqsMet(), pdu_bg: !minReqsMet() }"></div>
 			<div class="text pvm">Minimum Requirements Met?</div>
 		</div>
-		<div class="font_title-bar_small">=</div>
 		<div class="scoreboard" style="width: 340px;">
 			<div class="value pas" data-bind="text: totalBadgeValue, css: {service_bg: totalBadgeValue() > 0, pdu_bg: totalBadgeValue() <= 0 }"></div>
 			<div class="text pvm">Scholarship Points</div>
