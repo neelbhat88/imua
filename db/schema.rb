@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025033330) do
+ActiveRecord::Schema.define(:version => 20131118032816) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20131025033330) do
   create_table "user_pdus", :force => true do |t|
     t.integer  "user_id"
     t.integer  "semester"
-    t.integer  "hours"
+    t.decimal  "hours"
     t.datetime "date"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(:version => 20131025033330) do
     t.integer  "user_id"
     t.integer  "semester"
     t.date     "date"
-    t.integer  "score"
+    t.decimal  "score"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

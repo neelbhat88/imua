@@ -98,12 +98,12 @@ $(function(){
 			calculateTotalHours: function()
 			{
 				var numServices = self.viewModel.services().length;
-				var totalHours = 0;
+				var totalHours = 0.0;
 
 				for(var i = 0; i < numServices; i++)
 				{
 					if (self.viewModel.services()[i].hours() != null)
-						totalHours += parseInt(self.viewModel.services()[i].hours());
+						totalHours += parseFloat(self.viewModel.services()[i].hours());
 				}
 
 				return totalHours;
