@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  semester: 1
+  section: MyString
+  subject: MyString
+
+two:
+  name: MyString
+  semester: 1
+  section: MyString
+  subject: MyString

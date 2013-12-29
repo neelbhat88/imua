@@ -1,0 +1,61 @@
+<% @jsinit = 'GlobalExams' %>
+
+<div style="padding:20px">
+  <h1>Add Global Exams (Seen by all schools)</h1>
+
+  <h3>ACT Practice Tests</h3>
+  <table cellpadding="10px">
+    <tr>
+      <th>Exam Id</th>
+      <th>Name</th>
+      <th>Semester</th>
+      <th>Section</th>
+      <th>Subject</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @global_practice_tests.each do |practice_test| %>
+    <tr>
+      <td><%= practice_test.id %></td>
+      <td><%= practice_test.name %></td>
+      <td><%= practice_test.semester %></td>
+      <td><%= practice_test.section %></td>
+      <td><%= practice_test.subject %></td>
+      <td><%= link_to 'Edit', global_exam_editpracticetest_path(practice_test) %></td>
+      <td><%= link_to 'Destroy', global_exam_deletepracticetest_path(practice_test.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'Add Practice Test', global_exam_newpracticetest_path %>
+
+  <h3>Other Exams</h3>
+  <table cellpadding="10px;">
+    <tr>
+      <th>Exam Id</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @global_exams.each do |global_exam| %>
+    <tr>
+      <td><%= global_exam.id %></td>
+      <td><%= global_exam.name %></td>
+      <td><%= global_exam.exam_type %></td>      
+      <td><%= link_to 'Edit', global_exam_editexam_path(global_exam) %></td>
+      <td><%= link_to 'Destroy', global_exam_deleteexam_path(global_exam.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'Add Exam', global_exam_newexam_path %>
+</div>

@@ -1,5 +1,4 @@
-Wcsf::Application.routes.draw do
-  resources :global_exams
+Wcsf::Application.routes.draw do  
   resources :school_pdus
 
   namespace :admin do
@@ -76,6 +75,23 @@ Wcsf::Application.routes.draw do
 
   get '/stats', to: 'stats#index'
   match '/stats/init', to: 'stats#init'
+
+  namespace :global_exam do
+    root to: 'global_exams#index'
+
+    get '/other/new', to: 'global_exams#newexam', as: 'newexam'
+    get '/other/:id/edit', to: 'global_exams#editexam', as: 'editexam'
+    post '/other', to: 'global_exams#createexam', as: 'createexam'
+    put '/other', to: 'global_exams#updateexam', as: 'updateexam'
+    delete '/other/:id', to: 'global_exams#destroyexam', as: 'deleteexam'
+
+    get '/practice/new', to: 'global_exams#newpracticetest', as: 'newpracticetest'
+    get '/practice/:id/edit', to: 'global_exams#editpracticetest', as: 'editpracticetest'
+    post '/practice', to: 'global_exams#createpracticetest', as: 'createpracticetest'
+    put '/practice', to: 'global_exams#updatepracticetest', as: 'updatepracticetest'
+    delete '/practice/:id', to: 'global_exams#destroypracticetest', as: 'deletepracticetest'
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

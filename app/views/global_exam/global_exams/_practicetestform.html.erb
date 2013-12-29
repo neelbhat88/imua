@@ -1,0 +1,55 @@
+<% if @practice_test.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@practice_test.errors.count, "error") %> prohibited this practice_test from being saved:</h2>
+
+    <ul>
+    <% @practice_test.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :semester %><br />
+  <%= f.text_field :semester %>
+</div>
+<div class="field">
+  <%= f.label :section %><br />
+  <%= f.select :section, ['Math', 'English', 'Reading', 'Science'] %>
+</div>
+<div class="field">
+  <%= f.label :subject %><br />
+  <%= f.select :subject, ['Pre-Algebra', 'Elementary Algebra', 'Intermediate Algebra', 'Coordinate Geometry', 'Plane Geometry', 'Trigonometry'] %>
+</div>
+<div class="actions">
+  <% if isEdit == false %>
+    <%= f.submit "Save and Add Another", class: "btn btn-large btn-primary", :name => "save_add_another" %>
+  <% end %>
+  <%= f.submit "Save changes", class: "btn btn-large btn-primary"%>
+</div>
+
+
+<script>
+  sectionArray = {};
+  sectionArray['Math'] = ['Pre-Algebra', 'Elementary Algebra', 'Intermediate Algebra', 'Coordinate Geometry', 'Plane Geometry', 'Trigonometry']
+  sectionArray['English'] = ['Punctuation', 'Grammar and Usage', 'Sentence Structure', 'Strategy', 'Organization', 'Style']
+  sectionArray['Reading'] = ['Social Studies', 'Natural Sciences', 'Prose Fiction', 'Humanities']
+  sectionArray['Science'] = ['Data Representation', 'Research Summaries', 'Conflicting Viewpoints']
+  
+  $(document).ready(function(){
+    $('#global_practice_test_section').change(function(){
+      var subjects = sectionArray[$('#global_practice_test_section').val()];
+
+      var ddSubject = $('#global_practice_test_subject');
+      ddSubject.empty();
+      $.each(subjects, function(index){
+        ddSubject.append($("<option></option>").attr("value", this).text(this));
+      });
+    });
+  });  
+</script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118032816) do
+ActiveRecord::Schema.define(:version => 20131224031959) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(:version => 20131118032816) do
   create_table "global_exams", :force => true do |t|
     t.string   "name"
     t.string   "exam_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "global_practice_tests", :force => true do |t|
+    t.string   "name"
+    t.integer  "semester"
+    t.string   "section"
+    t.string   "subject"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
