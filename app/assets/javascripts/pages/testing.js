@@ -88,6 +88,11 @@ $(function(){
 			},
 
 			showACT: function(show, data)	{
+				if (!show && self.viewModel.editing())
+				{
+					self.viewModel.cancelEdit()
+				}
+				
 				self.viewModel.isShowACT(show);
 			}
 		}
