@@ -1,17 +1,6 @@
 .badgesContainer
 {
-	padding: 40px 0 0 0;
-
-	.semesterSelect {
-		width: 350px; 
-		margin-left: auto; 
-		font-size: 22px;
-
-		select { 
-			width: 150px; 
-			margin: 0;
-		}
-	}
+	padding: 40px 0 0 0;	
 
 	.totalsBar
 	{
@@ -83,5 +72,16 @@
 	&.hasNotEarned {
 		background-color: $clouds !important;
 		color: $asbestos !important;
+	}
+}
+
+.semesterSelect {
+	width: 350px; 
+	margin-left: auto; 
+	font-size: 22px;
+
+	select { 
+		width: 150px; 
+		margin: 0;
 	}
 }

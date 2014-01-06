@@ -25,10 +25,13 @@ class TestingController < ApplicationController
     	badges = GlobalBadge.where(:semester => [nil, semester], :category => "Testing")
     	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
+    	practicetests = GlobalPracticeTest.where(:semester => semester)
+
 	  	respond_to do |format|
 	  		format.json { render :json => 
 	  								{
 	  									:usertests => tests, 
+	  									:practicetests => practicetests,
 	  									:globalexams => globalexams, 
 	  									:badges => badgesviewmodel,
 	  									:editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),

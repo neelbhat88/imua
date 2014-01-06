@@ -1,3 +1,45 @@
+.testTypeContainer
+{
+	text-align: center;
+
+	.testTypeButtonArea {		
+		border-bottom: 1px solid $midnight-blue;
+		display: inline-block;
+		vertical-align: top;
+		height: 100px;
+		width: 350px;		
+
+		&.left { border-right: 1px solid $midnight-blue; }
+
+		.testTypeButton
+		{
+			padding: 15px;
+			margin: 5px 15px;
+			border: 1px solid $midnight-blue;
+			border-radius: 5px;
+
+			font-size: 28px;
+			line-height: 1;
+
+			cursor: pointer;
+
+			background-color: $clouds;
+
+			&.selected {
+				color: $testing;
+				background-color: white;
+				box-shadow: 0 0 10px $testing;
+			}
+
+			&:hover {
+				color: $testing;
+				background-color: white;
+				box-shadow: 0 0 10px $testing;
+			}
+		}
+	}	
+}
+
 .testingEdit
 {
 	& .editRow 

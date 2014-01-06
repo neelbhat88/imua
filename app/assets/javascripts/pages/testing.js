@@ -14,6 +14,7 @@ $(function(){
 			semesters: [],
 			semester: ko.observable(1),
 			editable: ko.observable(true),
+			isShowACT: ko.observable(false),
 
 			add: function() {
 				self.viewModel.totalTests.push(new Test(null, null));
@@ -84,7 +85,11 @@ $(function(){
 			templateToUse: function()
 			{
 				return self.viewModel.editing() ? 'edit' : 'view';
-			},	
+			},
+
+			showACT: function(show, data)	{
+				self.viewModel.isShowACT(show);
+			}
 		}
 
 		// Subscribe to drop down change and update the UI accordingly
@@ -96,6 +101,7 @@ $(function(){
 					data: {semester: newValue, user_id: self.UserId, isTeacher: self.IsTeacher},
 					success: function(data) {				
 						ko.mapping.fromJS(data.usertests, {}, self.viewModel.totalTests);
+						ko.mapping.fromJS(data.practicetests, {}, self.viewModel.practiceTests);
 						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
 						self.viewModel.editable(data.editable);
 					},
@@ -136,6 +142,7 @@ $(function(){
 				data: {user_id: self.UserId, isTeacher: self.IsTeacher},				
 				success: function(data) {					
 					self.viewModel.totalTests = ko.mapping.fromJS(data.usertests, validationMapping);
+					self.viewModel.practiceTests = ko.mapping.fromJS(data.practicetests);
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);
 					
 					self.viewModel.originalTests = data.usertests;
@@ -147,15 +154,27 @@ $(function(){
 
 					self.viewModel.pageLoaded(true);
 					ko.applyBindings(self.viewModel);
+
+					// Need to make this into a data-bind click since we lose this after
+					// the template changes on edit
+					$('.collapsible > .header').click(function(){
+						$(this).siblings('.content').toggle();
+					});
 				},
 				error: function() { alert("Failed initial testing load");}
 			});
+
+			// Set up click handlers on the test type buttons
+			// $('.testTypeButton').click(function(){
+			// 	$('.testTypeButton').removeClass('selected');
+			// 	$(this).addClass('selected');
+			// });
 
 			$('#practiceQuizImg').popover({
 				trigger: 'hover',
 				placement: 'bottom',
 				content: "Click to take your ACT practice quizzes with Varsity Tutors!"
-			});
+			});			
 		});
 	}	
 

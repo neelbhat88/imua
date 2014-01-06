@@ -1,7 +1,7 @@
 <% @jsinit = 'Testing' %>
 
-<div data-bind="visible: pageLoaded" style="display: none">
-	<div class="resources midnight_text ptl">
+<div class="ptxl mtxl" data-bind="visible: pageLoaded" style="display: none">
+	<div class="resources midnight_text ptl" style="display:none">
 		<div>Resources: </div>
 		<div class="plm">
 			<a href="https://www.varsitytutors.com/login" target="_blank">
@@ -9,13 +9,66 @@
 			</a>
 		</div>
 	</div>
-	<hr class="fadedLine" />
-	<div class="progressHeadingContainer testing_text" style="margin-top: 0;">
-		<div data-bind="text: totalTests().length" class="value"></div>
-		<div class="text" style="padding-left: 25px">Tests Taken</div>
+
+	<div class="testTypeContainer pbxl">
+		<div class="testTypeButtonArea left">
+			<div class="testTypeButton" data-bind="css: {selected: isShowACT()}, click: showACT.bind($data, true)">
+				ACT <br /> Practice
+			</div>
+		</div><div class="testTypeButtonArea">
+			<div class="testTypeButton" data-bind="css: {selected: !isShowACT()}, click: showACT.bind($data, false)">
+				Official <br /> Tests
+			</div>
+		</div>
 	</div>
 
-	<div class="categoryDataContainer" style="width: 650px;">
+	<div style="display:none;" data-bind="visible: !isShowACT()">
+		<div class="mvxl mrxl">
+			<div class="semesterSelect midnight_text">
+				Choose semester: 
+				<select data-bind="options: semesters, 
+								   optionsText: function(item){
+								   		if (item == semesters[semesters.length - 1])
+								   			return 'Current';
+
+								   		return 'Semester ' + item;
+								   	},
+								   value: semester"
+						class="testing_text small_select">
+				</select>
+			</div>
+		</div>	
+
+		<hr class="fadedLine" />
+
+		<div class="progressPageBadges testing_text" style="border-top:0 none; border-bottom: 0px solid;" data-bind="foreach: { data: badges, as: 'badge' }">
+			<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+				<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>
+				<div class="description" data-bind="text: badge.description()"></div>
+				<div class="minReqStar">
+					<div class="points" data-bind="text: badge.badgeValue(), css: { pas: !badge.isminrequirement() }" title="Scholarship Points"></div>
+					<%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement", :"data-bind"=>"visible: badge.isminrequirement()", :title=>"Minimum Requirement")%>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+	<div class="maxl paxl" style="display:none" data-bind="visible: isShowACT()">
+		<div style="line-height: 1; font-size: 28px;">ACT Practice Tests</div>
+		<div class="mtl well academicsView testing_text" style="font-size: 18px; overflow: auto; height: 300px;" data-bind="foreach: practiceTests, visible: practiceTests().length > 0">
+			<div class="viewRow">
+				<div class="className" data-bind="text: name()"></div>
+				<div class="classGrade" data-bind="">0</div>
+				<div class="actions buttonGroup">
+					<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
+					<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+					<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="categoryDataContainer" style="width: 650px; display:none" data-bind="visible: !isShowACT()">
 		<div class="header testing_bg">
 			<div class="text">My Tests</div>
 			<select data-bind="options: semesters, 
@@ -32,27 +85,38 @@
 		<div class="body testing_text" style="">
 			<div data-bind="template: {name: templateToUse}"></div>
 		</div>
-	</div>
-
-	<div class="progressPageBadges testing_text" data-bind="foreach: { data: badges, as: 'badge' }">
-		<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
-			<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>
-			<div class="description" data-bind="text: badge.description()"></div>
-			<div class="minReqStar">
-				<div class="points" data-bind="text: badge.badgeValue(), css: { pas: !badge.isminrequirement() }" title="Scholarship Points"></div>
-				<%= image_tag("star.png", :size => "33x33", :alt => "Minimum Requirement", :"data-bind"=>"visible: badge.isminrequirement()", :title=>"Minimum Requirement")%>
-			</div>
-		</div>
-	</div>
+	</div>	
 </div>
 
 <script type="text/html" id="view">
-	<div class="academicsView" data-bind="foreach: totalTests, visible: totalTests().length > 0">
-		<div class="viewRow">
-			<div class="className" data-bind="text: name() + ' on ' + date()"></div>
-			<div class="classGrade" data-bind="text: score()"></div>
+	<div class="collapsible">
+		<div class="header pbm" style="font-size:28px; ">
+			WCSF ACT Practice Tests
+		</div>
+		<div class="content" style="display:none">
+			<div class="academicsView" data-bind="foreach: practiceTests, visible: practiceTests().length > 0">
+				<div class="viewRow">
+					<div class="className" data-bind="text: name()"></div>
+					<div class="classGrade" data-bind="">0</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
+	<div class="collapsible">
+		<div class="header pbm" style="font-size:28px; ">
+			Official Tests
+		</div>
+		<div class="content" style="display:none">
+			<div class="academicsView" data-bind="foreach: totalTests, visible: totalTests().length > 0">
+				<div class="viewRow">
+					<div class="className" data-bind="text: name() + ' on ' + date()"></div>
+					<div class="classGrade" data-bind="text: score()"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	
 	<div data-bind="visible: totalTests().length < 1" style="padding-bottom: 20px; font-style: italic; color: gray">
 		Click Edit below to add Tests.
@@ -63,6 +127,15 @@
 </script>
 
 <script type="text/html" id="edit">
+	<div class="testingEdit" style="display:none" data-bind="foreach: { data: practiceTests, as: 'test'}, visible: practiceTests().length > 0">
+		<div class="editRow">		
+			<div class="className" data-bind="text: name()"></div>						
+			<!--<input data-bind="css: {error: score.hasError}, valueUpdate: 'afterkeydown', value: score" placeholder="Score" style="width: 100px" />-->
+			<input placeholder="Score" style="width: 100px" />
+			<!--<div class="errorText pts pbs" style="text-align: center" data-bind='visible: score.hasError, text: score.validationMessage'></div>-->
+		</div>
+	</div>
+
 	<div class="testingEdit" style="display:none" data-bind="foreach: { data: totalTests, as: 'test'}, visible: totalTests().length > 0">
 		<div class="editRow">
 			<div data-bind="click: $root.remove" class="close_x">x</div>
