@@ -92,7 +92,7 @@ $(function(){
 				{
 					self.viewModel.cancelEdit()
 				}
-				
+
 				self.viewModel.isShowACT(show);
 			}
 		}
@@ -158,22 +158,10 @@ $(function(){
 					self.viewModel.editable(data.editable);
 
 					self.viewModel.pageLoaded(true);
-					ko.applyBindings(self.viewModel);
-
-					// Need to make this into a data-bind click since we lose this after
-					// the template changes on edit
-					$('.collapsible > .header').click(function(){
-						$(this).siblings('.content').toggle();
-					});
+					ko.applyBindings(self.viewModel);					
 				},
 				error: function() { alert("Failed initial testing load");}
 			});
-
-			// Set up click handlers on the test type buttons
-			// $('.testTypeButton').click(function(){
-			// 	$('.testTypeButton').removeClass('selected');
-			// 	$(this).addClass('selected');
-			// });
 
 			$('#practiceQuizImg').popover({
 				trigger: 'hover',

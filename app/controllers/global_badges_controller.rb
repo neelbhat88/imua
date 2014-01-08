@@ -37,7 +37,7 @@ class GlobalBadgesController < ApplicationController
 	end
 
 	def progress
-		
+		@category = params[:page].to_s == "" ? "academics" : params[:page].to_s		
 	end
 
 	def SemesterBadges

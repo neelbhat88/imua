@@ -23,6 +23,8 @@
 	</div>
 
 	<div id="officialTests" style="display:none;" data-bind="visible: !isShowACT()">
+		<a name="badges"></a>
+		
 		<div class="mvxl mrxl">
 			<div class="semesterSelect midnight_text">
 				Choose semester: 
@@ -41,7 +43,7 @@
 
 		<hr class="fadedLine" />
 
-		<div class="progressPageBadges testing_text" style="border-top:0 none; border-bottom: 0px solid;" data-bind="foreach: { data: badges, as: 'badge' }">
+		<div class="progressPageBadges testing_text" style="border-top:0 none; border-bottom: 0px solid;" data-bind="foreach: { data: badges, as: 'badge' }">			
 			<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
 				<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>
 				<div class="description" data-bind="text: badge.description()"></div>
@@ -54,7 +56,7 @@
 
 		<div class="categoryDataContainer" style="width: 650px; display:none" data-bind="visible: !isShowACT()">
 			<div class="header testing_bg">
-				<div class="text">My Tests</div>				
+				<div class="text"></div>				
 			</div>
 			<div class="body testing_text" style="">
 				<div data-bind="template: {name: templateToUse}"></div>
