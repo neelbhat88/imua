@@ -22,7 +22,7 @@ class PdusController < ApplicationController
 	  	# Get all global pdu to put into dropdown
     	globalpdus = SchoolPdu.where('school_id = ?', user.user_info.school_id).select([:id, :name]).order("name")
 
-    	badges = GlobalBadge.where(:semester => [nil, semester], :category => "PDU")
+    	badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"PDU")
     	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	respond_to do |format|
@@ -87,7 +87,7 @@ class PdusController < ApplicationController
 	    badgeProcessor.CheckSemesterPdus()
 	  		  	
 	  	# Reload badges
-	    badges = GlobalBadge.where(:semester => [nil, semester], :category => "PDU")
+	    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"PDU")
 	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	# Return new badges received

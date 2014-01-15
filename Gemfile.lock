@@ -157,7 +157,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   bootstrap-datepicker-rails
-  bootstrap-sass
+  bootstrap-sass (= 2.2.2)
   coffee-rails (~> 3.2.1)
   devise
   figaro

@@ -13,7 +13,7 @@ class UserInfo < ActiveRecord::Base
       semester = self.current_semester
     end
 
-    minreq_badges = GlobalBadge.where(:semester => [nil, semester], :isminrequirement => true)
+    minreq_badges = GlobalBadgeRepository.new().LoadAllMinReqBadges(semester)
 
     # ToDo: Remove this if the block below this works
     # minreq_badges.each do |b|

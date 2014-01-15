@@ -19,7 +19,7 @@ class ServicesController < ApplicationController
       services << ServiceViewModel.new(a)
     end   
 
-    badges = GlobalBadge.where(:semester => [nil, semester], :category => "Service")
+    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Service")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
     respond_to do |format|
@@ -87,7 +87,7 @@ class ServicesController < ApplicationController
     newBadgeCount = badgeProcessor.CheckSemesterServices()  
 
     # Reload badges
-    badges = GlobalBadge.where(:semester => [nil, semester], :category => "Service")
+    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Service")
     badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
   	# Return new badges received

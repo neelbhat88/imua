@@ -62,18 +62,41 @@
 				<div data-bind="template: {name: templateToUse}"></div>
 			</div>
 		</div>	
-	</div>	
+	</div>
 
 	<div id="actPracticeTests" class="maxl paxl" style="display:none" data-bind="visible: isShowACT()">
-		<div style="line-height: 1; font-size: 28px;">ACT Practice Tests</div>
-		<div class="mtl well academicsView testing_text" style="font-size: 18px; overflow: auto; height: 300px;" data-bind="foreach: practiceTests, visible: practiceTests().length > 0">
-			<div class="viewRow">
-				<div class="className" data-bind="text: name()"></div>
-				<div class="classGrade" data-bind="">0</div>
-				<div class="actions buttonGroup">
-					<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
-					<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
-					<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div>
+		<div>
+			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Math') }, click: clickSection.bind($data, 'Math')">MATH</div>
+			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Reading') }, click: clickSection.bind($data, 'Reading')">READING</div>
+		</div>
+		<div class="mtl well academicsView testing_text" style="font-size: 18px; overflow: auto; height: 300px;">
+			<div style="display:none" data-bind="visible: showSection($data, 'Math'), foreach: { data: actMathTests, as: 'subjects' }">
+				<div data-bind="text: subjects[0].subject()"></div>
+				<div data-bind="foreach: { data: subjects, as: 'test' }">
+					<div class="viewRow">
+						<div class="className" data-bind="text: test.name()"></div>
+						<div class="classGrade" data-bind="">0</div>
+						<div class="actions buttonGroup">
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="display:none" data-bind="visible: showSection($data, 'Reading'), foreach: { data: actReadingTests, as: 'subjects' }">
+				<div data-bind="text: subjects[0].subject()"></div>
+				<div data-bind="foreach: { data: subjects, as: 'test' }">
+					<div class="viewRow">
+						<div class="className" data-bind="text: test.name()"></div>
+						<div class="classGrade" data-bind="">0</div>
+						<div class="actions buttonGroup">
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

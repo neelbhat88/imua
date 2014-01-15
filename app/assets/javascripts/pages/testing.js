@@ -14,7 +14,8 @@ $(function(){
 			semesters: [],
 			semester: ko.observable(1),
 			editable: ko.observable(true),
-			isShowACT: ko.observable(false),
+			isShowACT: ko.observable(true),
+			sectionToShow: ko.observable("Reading"),
 
 			add: function() {
 				self.viewModel.totalTests.push(new Test(null, null));
@@ -87,14 +88,27 @@ $(function(){
 				return self.viewModel.editing() ? 'edit' : 'view';
 			},
 
-			showACT: function(show, data)	{
+			showACT: function(show)	{
 				if (!show && self.viewModel.editing())
 				{
 					self.viewModel.cancelEdit()
 				}
 
 				self.viewModel.isShowACT(show);
-			}
+			},
+
+			showSection: function(data, category)
+			{
+				if (category.toLowerCase() == self.viewModel.sectionToShow().toLowerCase())
+					return true;
+
+				return false;
+			},
+
+			clickSection: function(category)
+			{
+				self.viewModel.sectionToShow(category);
+			},
 		}
 
 		// Subscribe to drop down change and update the UI accordingly
@@ -147,13 +161,15 @@ $(function(){
 				data: {user_id: self.UserId, isTeacher: self.IsTeacher},				
 				success: function(data) {					
 					self.viewModel.totalTests = ko.mapping.fromJS(data.usertests, validationMapping);
-					self.viewModel.practiceTests = ko.mapping.fromJS(data.practicetests);
-					self.viewModel.badges = ko.mapping.fromJS(data.badges);
-					
 					self.viewModel.originalTests = data.usertests;
-					self.viewModel.globalExams = ko.mapping.fromJS(data.globalexams);
 
+					self.viewModel.actMathTests = ko.mapping.fromJS(data.actMathTests);
+					self.viewModel.actReadingTests = ko.mapping.fromJS(data.actReadingTests);
+
+					self.viewModel.badges = ko.mapping.fromJS(data.badges);									
+					self.viewModel.globalExams = ko.mapping.fromJS(data.globalexams);
 					self.viewModel.semesters = data.semesters;
+
 					self.viewModel.semester(data.init_semester);
 					self.viewModel.editable(data.editable);
 
@@ -180,5 +196,5 @@ $(function(){
 
 		self.global_exam_id = ko.observable("").extend({required: ""});
 		self.dbid = ko.observable("");
-	}
+	}	
 });

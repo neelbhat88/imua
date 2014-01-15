@@ -7,7 +7,7 @@ class GlobalBadgesController < ApplicationController
 	def init
 		semester = current_user.user_info.current_semester		
 
-		allbadges = GlobalBadge.where(:semester => [nil, semester])
+		allbadges = GlobalBadgeRepository.new().LoadAllBadges(semester)
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
 		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)		
@@ -46,7 +46,7 @@ class GlobalBadgesController < ApplicationController
 			semester = current_user.user_info.current_semester
 		end
 
-		allbadges = GlobalBadge.where(:semester => [nil, semester])
+		allbadges = GlobalBadgeRepository.new().LoadAllBadges(semester)
 
 		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
 		badgesearned = GlobalBadge.GetNumBadgesEarned(current_user, semester)

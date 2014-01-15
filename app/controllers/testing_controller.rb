@@ -20,18 +20,21 @@ class TestingController < ApplicationController
 	  	end
 
 	  	# Get all global exam to put into dropdown
-    	globalexams = GlobalExam.select([:id, :name]).order("name")
+    	globalexams = GlobalExam.select([:id, :name]).order("name")		
 
-    	badges = GlobalBadge.where(:semester => [nil, semester], :category => "Testing")
+    	badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Testing")    	
     	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
-
-    	practicetests = GlobalPracticeTest.where(:semester => semester)
+    	
+		# All tests    	
+    	actMathTests = GlobalPracticeTestRepository.new().LoadTestsAsArray("Math")
+    	actReadingTests = GlobalPracticeTestRepository.new().LoadTestsAsArray("Reading")
 
 	  	respond_to do |format|
 	  		format.json { render :json => 
 	  								{
 	  									:usertests => tests, 
-	  									:practicetests => practicetests,
+	  									:actMathTests => actMathTests,
+	  									:actReadingTests => actReadingTests,
 	  									:globalexams => globalexams, 
 	  									:badges => badgesviewmodel,
 	  									:editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),
@@ -91,7 +94,7 @@ class TestingController < ApplicationController
 	    badgeProcessor.CheckSemesterTesting()
 	  		  	
 	  	# Reload badges
-	    badges = GlobalBadge.where(:semester => [nil, semester], :category => "Testing")
+	    badges = GlobalBadgeRepository.new().LoadAllBadges(semester, "Testing")
 	    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
 
 	  	# Return new badges received
