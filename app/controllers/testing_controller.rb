@@ -12,8 +12,8 @@ class TestingController < ApplicationController
 	    semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
 	    isTeacher = params[:isTeacher]
 
+	    # Load all user tests that correspond witht the GlobalExams
 		alltesting = user.user_testings.where('semester = ?', semester).order("date DESC")
-
 	  	tests = []
 	  	alltesting.each do | a |
 	  		tests << TestingViewModel.new(a)
@@ -25,9 +25,12 @@ class TestingController < ApplicationController
     	badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Testing")    	
     	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
     	
-		# All tests    	
-    	actMathTests = GlobalPracticeTestRepository.new().LoadTestsAsArray("Math")
-    	actReadingTests = GlobalPracticeTestRepository.new().LoadTestsAsArray("Reading")
+		# All Global Practice tests
+    	actMathTests = PracticeTestRepository.new().LoadTestsAsArray("Math")
+    	actReadingTests = PracticeTestRepository.new().LoadTestsAsArray("Reading")
+
+    	# Users Practice tests
+
 
 	  	respond_to do |format|
 	  		format.json { render :json => 
