@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  global_practice_test_id: 1
+  score: 9.99
+  user_id: 1
+
+two:
+  global_practice_test_id: 1
+  score: 9.99
+  user_id: 1

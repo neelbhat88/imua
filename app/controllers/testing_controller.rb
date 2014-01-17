@@ -25,9 +25,9 @@ class TestingController < ApplicationController
     	badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Testing")    	
     	badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
     	
-		# All Global Practice tests
-    	actMathTests = PracticeTestRepository.new().LoadTestsAsArray("Math")
-    	actReadingTests = PracticeTestRepository.new().LoadTestsAsArray("Reading")
+		# Get PracticeTests
+    	actMathTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Math")
+    	actReadingTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Reading")
 
     	# Users Practice tests
 

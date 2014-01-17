@@ -15,7 +15,7 @@ $(function(){
 			semester: ko.observable(1),
 			editable: ko.observable(true),
 			isShowACT: ko.observable(true),
-			sectionToShow: ko.observable("Reading"),
+			sectionToShow: ko.observable("Math"),
 
 			add: function() {
 				self.viewModel.totalTests.push(new Test(null, null));

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131224031959) do
+ActiveRecord::Schema.define(:version => 20140117042152) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -173,6 +173,14 @@ ActiveRecord::Schema.define(:version => 20131224031959) do
 
   add_index "user_pdus", ["school_pdu_id"], :name => "IDX_UserPdu_SchoolPduId"
   add_index "user_pdus", ["user_id"], :name => "IDX_UserPdu_UserId"
+
+  create_table "user_practice_tests", :force => true do |t|
+    t.integer  "global_practice_test_id"
+    t.decimal  "score"
+    t.integer  "user_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
 
   create_table "user_semester_gpas", :force => true do |t|
     t.integer  "user_id"

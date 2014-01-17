@@ -75,7 +75,7 @@
 				<div data-bind="foreach: { data: subjects, as: 'test' }">
 					<div class="viewRow">
 						<div class="className" data-bind="text: test.name()"></div>
-						<div class="classGrade" data-bind="">0</div>
+						<div class="classGrade" data-bind="text: test.score() ?  test.score() :'n/a'"></div>
 						<div class="actions buttonGroup">
 							<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
 							<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
@@ -90,7 +90,7 @@
 				<div data-bind="foreach: { data: subjects, as: 'test' }">
 					<div class="viewRow">
 						<div class="className" data-bind="text: test.name()"></div>
-						<div class="classGrade" data-bind="">0</div>
+						<div class="classGrade" data-bind="text: test.score() ? test.score() : 'n/a'"></div>
 						<div class="actions buttonGroup">
 							<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
 							<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>

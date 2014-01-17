@@ -23,6 +23,7 @@ module Wcsf
     config.autoload_paths += %W(#{config.root}/app/models/testingbadges)
     config.autoload_paths += %W(#{config.root}/app/repositories)
     config.autoload_paths += %W(#{config.root}/app/viewmodels)
+    config.autoload_paths += %W(#{config.root}/app/domainobjects)
     config.autoload_paths += %W(#{config.root}/app/modules)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
