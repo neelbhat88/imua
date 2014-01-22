@@ -1,5 +1,6 @@
 class TestingController < ApplicationController
 	before_filter :authenticate_user!
+	respond_to :html, :json
 
 	def index
 	  	respond_to do |format|
@@ -8,7 +9,7 @@ class TestingController < ApplicationController
 	end
 
 	def init
-		user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+		user = params[:user_id].to_i == 0 ? current_user : UserRepository.new().LoadUser(params[:user_id].to_i)
 	    semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
 	    isTeacher = params[:isTeacher]
 
@@ -28,10 +29,7 @@ class TestingController < ApplicationController
 		# Get PracticeTests
     	actMathTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Math")
     	actReadingTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Reading")
-
-    	# Users Practice tests
-
-
+    
 	  	respond_to do |format|
 	  		format.json { render :json => 
 	  								{
@@ -48,11 +46,37 @@ class TestingController < ApplicationController
 	  	end
 	end
 
+	def saveUserTest
+		user = params[:userId].to_i == 0 ? current_user : UserRepository.new().LoadUser(params[:user_id].to_i)    	    	
+    	testId = params[:testId].to_i
+    	userTestId = params[:userTestId].to_i
+    	score = params[:score].to_i
+    	semester = user.user_info.current_semester # Just use user's current semester since no semester dropdown on practice test page
+
+    	userTest = nil
+    	if userTestId == 0 # User has not taken test
+    		userTest = user.user_practice_tests.create(:global_practice_test_id=>testId, :semester=>semester, :score=>score)
+    	else 
+    		# Update users test
+    		userTest = user.user_practice_tests.find(userTestId)
+
+    		userTest.update_attributes(:score => score, :semester=>semester)
+    	end
+
+    	respond_to do |format|
+	  		format.json { render :json => 
+	  								{
+	  									:userTest => userTest,
+	  								}
+	  					}
+	  	end
+	end
+
 	def saveTesting
 	    ##################################################
 		# ---------------- Tests ----------------------
 	    ##################################################
-	    user = params[:user_id].to_i == 0 ? current_user : User.find(params[:user_id].to_i)
+	    user = params[:user_id].to_i == 0 ? current_user : UserRepository.new().LoadUser(params[:user_id].to_i)
     	semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
 	  	testsJson = JSON.parse(params[:tests])
 	  	removeJson = JSON.parse(params[:toRemove])	  
@@ -103,6 +127,6 @@ class TestingController < ApplicationController
 	  	# Return new badges received
 	  	respond_to do |format|
 	  		format.json { render :json => { :newtests => returntests, :badges => badgesviewmodel } }
-    end
-  end
+    	end
+  	end
 end

@@ -18,8 +18,6 @@ Wcsf::Application.routes.draw do
   end
 
   resources :school_activities
-
-
   resources :school_classes  
 
   # get '/users/show/:id', to: 'registrations#show', as: 'show_user_registration'
@@ -69,9 +67,12 @@ Wcsf::Application.routes.draw do
   match '/pdus/init', to: 'pdus#init'
   match '/savePdus', to: 'pdus#savePdus'
 
+# TODO: Make these more RESTful!
+
   get '/testing', to: 'testing#index'
   match '/testing/init', to: 'testing#init'
-  match '/saveTesting', to: 'testing#saveTesting'
+  match '/testing/saveTesting', to: 'testing#saveTesting'
+  match '/testing/saveUserTest', to: 'testing#saveUserTest'
 
   get '/stats', to: 'stats#index'
   match '/stats/init', to: 'stats#init'

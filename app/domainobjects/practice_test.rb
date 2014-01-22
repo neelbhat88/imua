@@ -1,6 +1,6 @@
 class PracticeTest
 	attr_accessor :id, :name, :semester, :section, :subject, 
-				  :userTestId, :score
+				  :userTestId, :score, :editing
 
 	def initialize(userId, practiceTest)
 		@id = practiceTest.id
@@ -11,6 +11,8 @@ class PracticeTest
 		
 		@userTestId = nil
 		@score = nil
+
+		@editing = false
 
 		userTest = practiceTest.user_practice_tests.where(:user_id => userId)		
 		if (userTest.length > 0)

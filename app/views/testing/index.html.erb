@@ -75,11 +75,17 @@
 				<div data-bind="foreach: { data: subjects, as: 'test' }">
 					<div class="viewRow">
 						<div class="className" data-bind="text: test.name()"></div>
-						<div class="classGrade" data-bind="text: test.score() ?  test.score() :'n/a'"></div>
+						<div class="classGrade" data-bind="visible: !test.editing(), text: test.score() ?  test.score() :'n/a'"></div>
+						<div class="classGrade" data-bind="visible: test.editing()">
+							<input data-bind="value: test.score, valueUpdate: 'afterkeydown', attr: {id: 'test' + test.id() + 'score'}" style="width: 50px;" />
+						</div>
 						<div class="actions buttonGroup">
-							<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
-							<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
-							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div>
+							<div class="submitButton testing_bg" data-bind="visible: !test.editing(), click: $root.editTest">Edit</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.saveTestEdit">Save</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.cancelTestEdit">Cancel</div>
+
+							<!-- <div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div> -->
 						</div>
 					</div>
 				</div>
@@ -90,11 +96,17 @@
 				<div data-bind="foreach: { data: subjects, as: 'test' }">
 					<div class="viewRow">
 						<div class="className" data-bind="text: test.name()"></div>
-						<div class="classGrade" data-bind="text: test.score() ? test.score() : 'n/a'"></div>
+						<div class="classGrade" data-bind="visible: !test.editing(), text: test.score() ?  test.score() :'n/a'"></div>
+						<div class="classGrade" data-bind="visible: test.editing()">
+							<input data-bind="value: test.score, valueUpdate: 'afterkeydown', attr: {id: 'test' + test.id() + 'score'}" style="width: 50px;" />
+						</div>
 						<div class="actions buttonGroup">
-							<div class="submitButton testing_bg" data-bind="click: $root.edit">Edit</div>
-							<div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
-							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div>
+							<div class="submitButton testing_bg" data-bind="visible: !test.editing(), click: $root.editTest">Edit</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.saveTestEdit">Save</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.cancelTestEdit">Cancel</div>
+
+							<!-- <div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div> -->
 						</div>
 					</div>
 				</div>

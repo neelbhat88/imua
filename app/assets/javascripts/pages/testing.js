@@ -44,7 +44,7 @@ $(function(){
 
 					$.ajax({
 						type: "POST",
-						url: '/saveTesting',
+						url: '/testing/saveTesting',
 						data: {
 							tests: ko.toJSON(self.viewModel.totalTests()), 
 							toRemove: ko.toJSON(self.viewModel.rowsToRemove),
@@ -109,6 +109,35 @@ $(function(){
 			{
 				self.viewModel.sectionToShow(category);
 			},
+
+			editTest: function(test)
+			{
+				test.oldscore = test.score();
+				test.editing(true);
+			},
+			cancelTestEdit: function(test)
+			{
+				test.score(test.oldscore);
+				test.editing(false);
+			},
+
+			saveTestEdit: function(test)
+			{
+				$.ajax({
+					type: "POST",
+					url: '/testing/saveUserTest',
+					data: {
+						userId: self.userId, 
+						testId: test.id(),
+						userTestId: test.userTestId(),
+						score: test.score()
+					},
+					success: function(data) {
+						test.score(data.userTest.score);
+						test.editing(false);
+					}
+				});				
+			}
 		}
 
 		// Subscribe to drop down change and update the UI accordingly
