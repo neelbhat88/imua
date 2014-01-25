@@ -29,6 +29,8 @@ class TestingController < ApplicationController
 		# Get PracticeTests
     	actMathTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Math")
     	actReadingTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Reading")
+    	actEnglishTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "English")
+    	actScienceTests = PracticeTestRepository.new().LoadTestsAsArray(user.id, "Science")
     
 	  	respond_to do |format|
 	  		format.json { render :json => 
@@ -36,6 +38,8 @@ class TestingController < ApplicationController
 	  									:usertests => tests, 
 	  									:actMathTests => actMathTests,
 	  									:actReadingTests => actReadingTests,
+	  									:actEnglishTests => actEnglishTests,
+	  									:actScienceTests => actScienceTests,
 	  									:globalexams => globalexams, 
 	  									:badges => badgesviewmodel,
 	  									:editable => isTeacher == 'true' || (semester == current_user.user_info.current_semester),

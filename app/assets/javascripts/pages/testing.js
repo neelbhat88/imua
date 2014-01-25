@@ -194,6 +194,8 @@ $(function(){
 
 					self.viewModel.actMathTests = ko.mapping.fromJS(data.actMathTests);
 					self.viewModel.actReadingTests = ko.mapping.fromJS(data.actReadingTests);
+					self.viewModel.actEnglishTests = ko.mapping.fromJS(data.actEnglishTests);
+					self.viewModel.actScienceTests = ko.mapping.fromJS(data.actScienceTests);
 
 					self.viewModel.badges = ko.mapping.fromJS(data.badges);									
 					self.viewModel.globalExams = ko.mapping.fromJS(data.globalexams);

@@ -68,6 +68,8 @@
 		<div>
 			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Math') }, click: clickSection.bind($data, 'Math')">MATH</div>
 			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Reading') }, click: clickSection.bind($data, 'Reading')">READING</div>
+			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'English') }, click: clickSection.bind($data, 'English')">ENGLISH</div>
+			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Science') }, click: clickSection.bind($data, 'Science')">SCIENCE</div>
 		</div>
 		<div class="mtl well academicsView testing_text" style="font-size: 18px; overflow: auto; height: 300px;">
 			<div style="display:none" data-bind="visible: showSection($data, 'Math'), foreach: { data: actMathTests, as: 'subjects' }">
@@ -92,6 +94,48 @@
 			</div>
 
 			<div style="display:none" data-bind="visible: showSection($data, 'Reading'), foreach: { data: actReadingTests, as: 'subjects' }">
+				<div data-bind="text: subjects[0].subject()"></div>
+				<div data-bind="foreach: { data: subjects, as: 'test' }">
+					<div class="viewRow">
+						<div class="className" data-bind="text: test.name()"></div>
+						<div class="classGrade" data-bind="visible: !test.editing(), text: test.score() ?  test.score() :'n/a'"></div>
+						<div class="classGrade" data-bind="visible: test.editing()">
+							<input data-bind="value: test.score, valueUpdate: 'afterkeydown', attr: {id: 'test' + test.id() + 'score'}" style="width: 50px;" />
+						</div>
+						<div class="actions buttonGroup">
+							<div class="submitButton testing_bg" data-bind="visible: !test.editing(), click: $root.editTest">Edit</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.saveTestEdit">Save</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.cancelTestEdit">Cancel</div>
+
+							<!-- <div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="display:none" data-bind="visible: showSection($data, 'English'), foreach: { data: actEnglishTests, as: 'subjects' }">
+				<div data-bind="text: subjects[0].subject()"></div>
+				<div data-bind="foreach: { data: subjects, as: 'test' }">
+					<div class="viewRow">
+						<div class="className" data-bind="text: test.name()"></div>
+						<div class="classGrade" data-bind="visible: !test.editing(), text: test.score() ?  test.score() :'n/a'"></div>
+						<div class="classGrade" data-bind="visible: test.editing()">
+							<input data-bind="value: test.score, valueUpdate: 'afterkeydown', attr: {id: 'test' + test.id() + 'score'}" style="width: 50px;" />
+						</div>
+						<div class="actions buttonGroup">
+							<div class="submitButton testing_bg" data-bind="visible: !test.editing(), click: $root.editTest">Edit</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.saveTestEdit">Save</div>
+							<div class="submitButton testing_bg" data-bind="visible: test.editing(), click: $root.cancelTestEdit">Cancel</div>
+
+							<!-- <div class="submitButton testing_bg" data-bind="click: $root.edit">Take Test</div>
+							<div class="submitButton testing_bg" data-bind="click: $root.edit">Solutions</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="display:none" data-bind="visible: showSection($data, 'Science'), foreach: { data: actScienceTests, as: 'subjects' }">
 				<div data-bind="text: subjects[0].subject()"></div>
 				<div data-bind="foreach: { data: subjects, as: 'test' }">
 					<div class="viewRow">
