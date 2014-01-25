@@ -1,38 +1,54 @@
 <header id="mynav" class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="" style="padding: 0 10px; height: 100%;">
-
-      <div style="position: absolute;">
-      <%= link_to image_tag("wcsf-logo.png", :alt=>"Wai`anae Coast Scholarship Fund", :id=> "wcsflogo"), "http://www.wcsfscholars.org" %>
-      </div>
-      <% if current_user != nil %>
-        <div style="font-size: 2.3em; position: absolute; top: 25px; left: 140px; line-height: 1;"><%= current_user.first_name %> <%=current_user.last_name %></div>
-      <% end %>
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
-        <div class="nav-collapse collapse" id="nav-collapse-01">
-          <ul class="nav pull-right">
-            <% if user_signed_in? %>
-              <% if current_user.is_student? %>
-                <li page="Badges"><%= link_to "Badges", global_badges_path %></li>
-                <li page="Progress"><%= link_to "Progress", progress_path %></li>
-                <li page="Stats"><%= link_to "Stats", stats_path %></li>
-                <li page="Profile"><%= link_to "Profile", show_user_registration_path(current_user) %></li>
-              <% elsif current_user.is_teacher? %>
-                <li page="AdminStudents"><%= link_to "Students",admin_students_path
-                %></li>                
-              <% elsif current_user.is_admin? %>
-                <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
-                %></li>
-                <li page="SchoolActivities"><%= link_to "All Activities", school_activities_path %></li>
-                <li page="SchoolPdus"><%= link_to "All PDUs", school_pdus_path %></li>
-                <li page="GlobalExams"><%= link_to "Global Exams", global_exam_root_path %></li>
-              <% end %>
-              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
-            <% end %>
-          </ul>
-        </div><!--/.nav -->
+  <div class="container">
+    <div class="navbar-header" style="cursor: default;">
+      <div class="navbar-brand" style="color: white; padding: 10px;">
+        <span style="font-weight: bold; font-size: 28px; line-height: 1;">Imua</span>
+        <span style="font-size: 16px; font-style: italic;">(ee mooh ah) v. Go Forward</span>
       </div>
     </div>
+    <nav class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <% if current_user.is_student? %>
+            <li class="active" page="Badges">
+              <%= link_to global_badges_path do %>
+                <span class="glyphicon glyphicon-th"></span>
+                Badges
+              <% end %>
+            </li>
+            <li page="Progress">
+              <%= link_to progress_path do %>
+                <span class="glyphicon glyphicon-road"></span>
+                Progress
+              <% end %>
+            </li>
+            <li page="Stats">
+              <%= link_to stats_path do %>
+                <span class="glyphicon glyphicon-dashboard"></span>
+                Stats
+              <% end %>
+            </li>
+          <% elsif current_user.is_teacher? %>
+            <li page="AdminStudents"><%= link_to "Students",admin_students_path
+            %></li>                
+          <% elsif current_user.is_admin? %>
+            <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
+            %></li>
+            <li page="SchoolActivities"><%= link_to "All Activities", school_activities_path %></li>
+            <li page="SchoolPdus"><%= link_to "All PDUs", school_pdus_path %></li>
+            <li page="GlobalExams"><%= link_to "Global Exams", global_exam_root_path %></li>            
+          <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %> <%=current_user.last_name %> <span class="glyphicon glyphicon-user phs"></span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li page="Profile"><%= link_to "Profile", show_user_registration_path(current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+            </ul>
+          </li>          
+        <% end %>              
+      </ul>
+    </nav>
   </div>
+  
 </header>

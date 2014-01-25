@@ -86,12 +86,12 @@ html {
 body {
   color: #333;
   font-size: 13px;  
-  padding-top: 60px;
+  padding-top: 30px;
   width: 100%;
 
   min-width: 1030px;
 
-  & ul, ol { margin: 0; }
+  & ul, ol { margin: 0; padding: 0; }
 }
 
 section {
@@ -150,71 +150,6 @@ select {
 {  
   padding: 40px 20px;
   position: relative;
-}
-
-/* Bootstrap Header overrides */
-header
-{
-  @extend .font_large;
-  width: 100%;
-  box-shadow: 0 0 10px $ink;
-}
-
-.navbar-fixed-top
-{
-  /* position: absolute !important; */ /* This keeps the header from moving down with the page */
-}
-
-#mynav .navbar-inner
-{
-  background-color: $wet-asphalt;
-  background-image: none;
-  color: white;
-
-  height: 80px;
-}
-
-#mynav .navbar-inner .container
-{
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-
-  padding-right: 5px;
-}
-
-#mynav
-{
-  & .nav > li { padding-right: 5px; }
-  & .nav > li > a {
-    color: white;
-    -o-transition:.5s;
-    -ms-transition:.5s;
-    -moz-transition:.5s;
-    -webkit-transition:.5s;
-    transition:.5s;
-  }
-}
-
-#mynav .nav > li > a:hover
-{
-  #color: $sun-flower;
-  background-color: white;
-  color: $wet-asphalt;
-  border-radius: 5px 5px 0 0;
-}
-
-#mynav .nav > li.selected > a
-{
-  background-color: white;
-  color: $wet-asphalt;
-  border-radius: 5px 5px 0 0;
-}
-
-/* Bootstrap misc overrides */
-select.small_select {
-    padding: 5px;
-    height: 30px;
 }
 
 /* typography */
