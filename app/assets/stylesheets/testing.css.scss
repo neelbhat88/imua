@@ -40,31 +40,6 @@
 	}	
 }
 
-.testingEdit
-{
-	& .editRow 
-	{		
-		border: 1px solid lightgray; 
-		padding: 10px 0 0 10px; 
-		border-radius: 3px; 
-		margin: auto auto 20px auto; 
-		position: relative;
-		width: 495px;
-
-		& .close_x {
-			position: absolute; 
-			right: -5px; 
-			top: -10px; 
-			font-size: 20px; 
-			color: red; 
-			cursor: pointer;
-		}
-	}
-
-	& .classDD { width: 250px; margin-right: 10px; }
-	& .gradeDD { width: 100px; margin-right: 10px; }
-}
-
 .popover {
 	color: $midnight;
 

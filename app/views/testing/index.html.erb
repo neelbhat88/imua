@@ -36,7 +36,7 @@
 								   		return 'Semester ' + item;
 								   	},
 								   value: semester"
-						class="testing_text small_select">
+						class="testing_text small_select font_normal">
 				</select>
 			</div>
 		</div>	
@@ -176,11 +176,11 @@
 </script>
 
 <script type="text/html" id="edit">	
-	<div class="testingEdit" style="display:none" data-bind="foreach: { data: totalTests, as: 'test'}, visible: totalTests().length > 0">
-		<div class="editRow">
-			<div data-bind="click: $root.remove" class="close_x">x</div>
+	<div class="progressEdit" style="display:none" data-bind="foreach: { data: totalTests, as: 'test'}, visible: totalTests().length > 0">
+		<div class="editRow testing">
+			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.remove" title="Remove Test"></div>
 			
-			<select class="classDD" data-bind="css: {error: global_exam_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>			
+			<select class="classDD" data-bind="css: {error: global_exam_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px;"></select>			
 			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
 			<input data-bind="css: {error: score.hasError}, valueUpdate: 'afterkeydown', value: score" placeholder="Score" style="width: 100px" />
 			<div class="errorText pts pbs" style="text-align: center" data-bind='visible: score.hasError, text: score.validationMessage'></div>

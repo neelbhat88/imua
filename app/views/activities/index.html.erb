@@ -61,28 +61,22 @@
 </script>
 
 <script type="text/html" id="edit-activities">	
-	<div class="activitiesEdit" style="display:none" data-bind="foreach: {data: activities, as: 'activity'}, visible: activities().length > 0">
-		<div style="border: 1px solid lightgray; padding: 10px; border-radius: 3px; margin-bottom: 20px; position: relative;">
-			<div data-bind="click: $root.removeActivity" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
+	<div class="progressEdit" style="display:none" data-bind="foreach: {data: activities, as: 'activity'}, visible: activities().length > 0">
+		<div class="editRow activities">
+			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.removeActivity" title="Remove Activity"></div>
 			
-			<select data-bind="css: {error: school_activity_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px; position: relative; top: 5px;"></select>
-			<div style="display:inline-block">
-				<div class="plm" style="display: inline-block; vertical-align: text-top;">
-					<input type="checkbox" name="leadershipHeld" data-bind="checked: leadershipHeld">
-				</div>
-				<div class="" style="display:inline-block; vertical-align:middle;">I am a leader</div>
-				<div style="display: inline-block; vertical-align: middle;">
-					<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 185px; display: inline-block; vertical-align: middle;" />
-				</div>
-			</div>
-			
-			
+			<div class="activityTitle">
+				<select data-bind="css: {error: school_activity_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px;"></select>
+				<input type="checkbox" name="leadershipHeld" data-bind="checked: leadershipHeld">
+				<span>I am a leader</span>
+				<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 185px;" />
+			</div>					
 
 			<div style="padding-top: 5px; font-style: italic; color: gray; font-size: 14px;">Describe what you did in 3 to 4 sentences. Use action works like "Lead my team" or "Organized an event".</div>
 			<div data-bind="foreach: description">
 				<div style="padding-top: 5px;">
 					<input data-bind="value: text" value="" placeholder="Add a sentence about what you did" style="width: 525px" />
-					<span data-bind="click: function(data, event) { $root.removeSentence(activity, data) }" style="padding-left: 10px; color: red; cursor: pointer;">x</span>
+					<span data-bind="click: function(data, event) { $root.removeSentence(activity, data) }" class="glyphicon glyphicon-trash" style="color: gray; cursor: pointer;" title="Delete Sentence"></span>
 				</div>
 			</div>
 			<div style="padding-top: 10px;">

@@ -1,36 +1,56 @@
-.academicsEdit
+.icon-arrow-right
 {
-	& .editRow 
+	@extend glyphicon;
+	@extend glyphicon-arrow-right;
+}
+
+.progressEdit
+{
+	.editRow
 	{		
 		border: 1px solid lightgray; 
-		padding: 10px 0 0 10px; 
+		padding: 10px; 
 		border-radius: 3px; 
 		margin: auto auto 20px auto; 
-		position: relative;
-		width: 390px;
+		position: relative;		
+		@extend .font_normal;
 
-		& .close_x {
+		&.academics { width: 400px; }
+
+		&.activities { 
+			width: 575px; 
+
+			.activityTitle > * {
+				vertical-align: middle;
+			}
+		}
+
+		&.service { width: 530px; }
+		&.pdu { width: 500px; }
+		&.testing { width: 510px; }
+
+		.close_x {
 			position: absolute; 
-			right: -5px; 
-			top: -10px; 
-			font-size: 20px; 
+			right: -8px; 
+			top: -8px; 
+			font-size: 16px;
 			color: red; 
 			cursor: pointer;
 		}
 	}
 
-	& .classDD { width: 250px; margin-right: 10px; }
-	& .gradeDD { width: 100px; margin-right: 10px; }
+	.classDD { width: 250px; margin-right: 10px; }
+	.gradeDD { width: 100px; margin-right: 10px; }
 }
 
 .academicsView
 {
-	& .viewRow { 
+	.viewRow { 
 		padding-bottom: 30px; 
 
-		& > * { display: inline-block; }
+		> * { display: inline-block; }
 
-		& .className { width: 480px; border-bottom: 1px dashed; }
-		& .classGrade { color: $midnight-blue; }
+		.className { width: 480px; border-bottom: 1px dashed; }
+		.classGrade { color: $midnight-blue; }
 	}
 }

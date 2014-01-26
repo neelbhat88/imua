@@ -54,9 +54,9 @@
 </script>
 
 <script type="text/html" id="edit">
-	<div class="servicesEdit" style="display:none" data-bind="foreach: services, visible: services().length > 0">
-		<div style="border: 1px solid lightgrey; padding: 10px; border-radius: 3px; margin-bottom: 20px; position: relative;">
-			<div data-bind="click: $root.remove" style="position: absolute; right: -5px; top: -10px; font-size: 20px; color: red; cursor: pointer;">x</div>
+	<div class="progressEdit" style="display:none" data-bind="foreach: services, visible: services().length > 0">
+		<div class="editRow service">
+			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.remove" title="Remove Service"></div>
 			
 			<input data-bind="css: {error: name.hasError}, valueUpdate: 'afterkeydown', value: name" placeholder="Name of Service Event or Activity" style="width: 250px" />			
 			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
