@@ -6,19 +6,25 @@
 <% end %>
 
 <%= form_for Contact.new do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name %>
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, :class => "form-control" %>
+	</div>
 
 	<!-- this is to protect against spam -->
 	<div class="hide">
 		<%= f.text_field :nickname %>
 	</div>
 
-	<%= f.label :email %>
-	<%= f.text_field :email %>
+	<div class="form-group">
+		<%= f.label :email %>
+		<%= f.text_field :email, :class => "form-control" %>
+	</div>
 
-	<%= f.label :message %>
-	<%= f.text_area :message, rows: '5' %>
+	<div class="form-group">
+		<%= f.label :message %>
+		<%= f.text_area :message, rows: '5', :class => "form-control" %>
+	</div>
 
 	<div><%= f.submit 'Submit', class: 'btn btn-primary' %></div>
 

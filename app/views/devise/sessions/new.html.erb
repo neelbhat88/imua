@@ -2,18 +2,21 @@
 <div class="row ptl mtl">
   <div class="signin_form">
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-	<div class="pbm">
+	<div class="pbm form-group">
 	  	<%= f.label :email %>
-	  	<%= f.email_field :email, :autofocus => true %>
+	  	<%= f.email_field :email, :autofocus => true, :class=>"form-control" %>
 	</div>
 
-	<div class="pbm">
+	<div class="pbm form-group">
 		<%= f.label :password %>
-	  	<%= f.password_field :password %>
+	  	<%= f.password_field :password, :class=>"form-control" %>
 	</div>
 	  
   <% if devise_mapping.rememberable? -%>
-    <div class="pbm"><%= f.check_box :remember_me %> <span>Remember me</span></div>
+    <div class="pbm">
+    	<%= f.check_box :remember_me, :style=> "vertical-align: middle;" %> 
+    	<span style="vertical-align: middle;">Remember me</span>
+    </div>
   <% end -%>
 
   	<div><%= f.submit "Sign in", :class => "submitButton midnight_bg" %></div>
