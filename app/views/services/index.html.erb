@@ -17,7 +17,7 @@
 							   		return 'Semester ' + item;
 							   	},
 							   value: semester"
-					class="service_text small_select">
+					class="service_text small_select form-control">
 			</select>
 		</div>
 		<div class="body service_text" style="">
@@ -58,9 +58,9 @@
 		<div class="editRow service">
 			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.remove" title="Remove Service"></div>
 			
-			<input data-bind="css: {error: name.hasError}, valueUpdate: 'afterkeydown', value: name" placeholder="Name of Service Event or Activity" style="width: 250px" />			
-			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
-			<input data-bind="css: {error: hours.hasError}, valueUpdate: 'afterkeydown', value: hours" placeholder="Hours" style="width: 100px" />
+			<input data-bind="css: {error: name.hasError}, valueUpdate: 'afterkeydown', value: name" placeholder="Name of Service Event or Activity" style="width: 250px" class="form-control" />			
+			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick form-control" data-date-format="mm/dd/yyyy" />
+			<input data-bind="css: {error: hours.hasError}, valueUpdate: 'afterkeydown', value: hours" placeholder="Hours" style="width: 100px" class="form-control" />
 			<div class="errorText pts pbs" style="text-align: center" data-bind='visible: hours.hasError, text: hours.validationMessage'></div>
 		</div>
 	</div>		

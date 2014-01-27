@@ -4,12 +4,12 @@
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 	<div class="pbm form-group">
 	  	<%= f.label :email %>
-	  	<%= f.email_field :email, :autofocus => true, :class=>"form-control" %>
+	  	<%= f.email_field :email, :autofocus => true, :class=>"form-control full-width" %>
 	</div>
 
 	<div class="pbm form-group">
 		<%= f.label :password %>
-	  	<%= f.password_field :password, :class=>"form-control" %>
+	  	<%= f.password_field :password, :class=>"form-control full-width" %>
 	</div>
 	  
   <% if devise_mapping.rememberable? -%>

@@ -17,7 +17,7 @@
 							   		return 'Semester ' + item;
 							   	},
 							   value: semester"
-					class="extracur_text small_select">
+					class="extracur_text small_select form-control">
 			</select>
 		</div>
 		<div class="body extracur_text" style="">
@@ -66,17 +66,17 @@
 			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.removeActivity" title="Remove Activity"></div>
 			
 			<div class="activityTitle">
-				<select data-bind="css: {error: school_activity_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px;"></select>
-				<input type="checkbox" name="leadershipHeld" data-bind="checked: leadershipHeld">
+				<select data-bind="css: {error: school_activity_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalactivities, value: activity.school_activity_id, optionsCaption: 'Choose Activity...', optionsText:'name', optionsValue:'id'" style="width:220px;" class="form-control"></select>
+				<input type="checkbox" name="leadershipHeld" data-bind="checked: leadershipHeld" class="form-control">
 				<span>I am a leader</span>
-				<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 185px;" />
+				<input data-bind="css: {error: leadershipTitle.hasError}, valueUpdate: 'afterkeydown', visible:leadershipHeld() == true, value: leadershipTitle" placeholder="Leadership Role Title" style="width: 185px;" class="form-control"/>
 			</div>					
 
 			<div style="padding-top: 5px; font-style: italic; color: gray; font-size: 14px;">Describe what you did in 3 to 4 sentences. Use action works like "Lead my team" or "Organized an event".</div>
-			<div data-bind="foreach: description">
+			<div class="activityDescription" data-bind="foreach: description">
 				<div style="padding-top: 5px;">
-					<input data-bind="value: text" value="" placeholder="Add a sentence about what you did" style="width: 525px" />
-					<span data-bind="click: function(data, event) { $root.removeSentence(activity, data) }" class="glyphicon glyphicon-trash" style="color: gray; cursor: pointer;" title="Delete Sentence"></span>
+					<input data-bind="value: text" value="" placeholder="Add a sentence about what you did" style="width: 525px" class="form-control"/>
+					<span data-bind="click: function(data, event) { $root.removeSentence(activity, data) }" class="glyphicon glyphicon-trash deleteSentence" style="cursor: pointer;" title="Delete Sentence"></span>
 				</div>
 			</div>
 			<div style="padding-top: 10px;">

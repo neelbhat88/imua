@@ -22,3 +22,15 @@ select.small_select {
     padding: 5px;
     height: 30px;
 }
+
+/* Forms */
+.form-control
+{
+	display: inline-block;
+	width: auto;
+
+	&.full-width
+	{
+		width: 100%;
+	}
+}

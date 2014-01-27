@@ -36,7 +36,7 @@
 								   		return 'Semester ' + item;
 								   	},
 								   value: semester"
-						class="testing_text small_select font_normal">
+						class="testing_text small_select font_normal form-control">
 				</select>
 			</div>
 		</div>	
@@ -180,9 +180,9 @@
 		<div class="editRow testing">
 			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.remove" title="Remove Test"></div>
 			
-			<select class="classDD" data-bind="css: {error: global_exam_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px;"></select>			
-			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick" data-date-format="mm/dd/yyyy" />
-			<input data-bind="css: {error: score.hasError}, valueUpdate: 'afterkeydown', value: score" placeholder="Score" style="width: 100px" />
+			<select class="classDD form-control" data-bind="css: {error: global_exam_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalExams, value: test.global_exam_id, optionsCaption: 'Choose Test...', optionsText:'name', optionsValue:'id'" style="width:220px;"></select>			
+			<input data-bind="css: {error: date.hasError}, valueUpdate: 'afterkeydown', value: date" placeholder="Date" style="width: 150px" class="datepick form-control" data-date-format="mm/dd/yyyy" />
+			<input data-bind="css: {error: score.hasError}, valueUpdate: 'afterkeydown', value: score" placeholder="Score" style="width: 100px" class="form-control" />
 			<div class="errorText pts pbs" style="text-align: center" data-bind='visible: score.hasError, text: score.validationMessage'></div>
 		</div>
 	</div>		

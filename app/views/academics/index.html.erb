@@ -17,7 +17,7 @@
 							   		return 'Semester ' + item;
 							   	},
 							   value: semester"
-					class="academics_text small_select">
+					class="academics_text small_select form-control">
 			</select>
 			
 		</div>
@@ -43,8 +43,8 @@
 		<div class="editRow academics">
 			<div class="glyphicon glyphicon-remove close_x" data-bind="click: $root.removeClass" title="Remove Class"></div>
 
-			<select class="classDD" data-bind="css: {error: school_class_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select>
-			<select class="gradeDD" data-bind="css: {error: grade.hasError}, valueUpdate: 'afterkeydown', options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select>			
+			<select class="classDD form-control" data-bind="css: {error: school_class_id.hasError}, valueUpdate: 'afterkeydown', options: $root.globalsubjects, value: school_class_id, optionsCaption: 'Choose...', optionsText:'name', optionsValue:'id'"></select>
+			<select class="gradeDD form-control" data-bind="css: {error: grade.hasError}, valueUpdate: 'afterkeydown', options: $root.possibleGrades, value: grade, optionsCaption: 'Choose...'"></select>			
 		</div>
 	</div>		
 	<div class="pbm textCenter">

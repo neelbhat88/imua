@@ -191,6 +191,8 @@ input, textarea, select, .uneditable-input {
   padding: 10px;
   /* margin-bottom: 15px; */
   @include box_sizing;
+  background-color: white;
+  border-radius: 4px;
 }
 
 input {
