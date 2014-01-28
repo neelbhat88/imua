@@ -68,11 +68,11 @@ $(function(){
 					self.viewModel.semester(obj.init_semester);
 					self.viewModel.editable(obj.editable);
 
-					ViewModelPropertiesInit(self.viewModel, self);			
-
-					self.viewModel.pageLoaded(true);
+					ViewModelPropertiesInit(self.viewModel, self);					
 
 					ko.applyBindings(self.viewModel);
+
+					self.viewModel.pageLoaded(true);
 				},
 				error: function() { alert("Failed initial badge load");}
 			});

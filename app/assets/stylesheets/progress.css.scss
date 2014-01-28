@@ -10,7 +10,10 @@
 .progressContentContainer
 {
 	margin-left: 235px;
-	//padding: 0 20px;
+
+	// This is set high so the progress pages don't flash when the
+	// size of the content changes
+	height: 900px;	
 }
 
 @media screen and (max-height:700px) {

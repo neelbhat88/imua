@@ -203,9 +203,9 @@ $(function(){
 
 					self.viewModel.semester(data.init_semester);
 					self.viewModel.editable(data.editable);
-
+					
+					ko.applyBindings(self.viewModel);
 					self.viewModel.pageLoaded(true);
-					ko.applyBindings(self.viewModel);					
 				},
 				error: function() { alert("Failed initial testing load");}
 			});
