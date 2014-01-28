@@ -23,7 +23,7 @@
 				<div class="displayInlineBlock font8em" data-bind="text: totalDeductionValue"></div>
 				<div class="pls displayInlineBlock font3em" style="position: relative;"> Points Deducted
 					<div class="" style="position: absolute; right: -50px; bottom: 0px;">
-						<%= image_tag("question_gray.png", :size => "40x40", :alt => "Deductions", :title => "What are Deductions?", :class=>"clickable-icon", :mouseover => "question_blue.png", :"data-bind" => "click: showDeductionsModal") %>
+						<%= image_tag("question_gray.png", :size => "40x40", :alt => "Deductions", :title => "What are Deductions?", :class=>"clickable-icon", :mouseover => "question_blue.png", :'data-toggle' => "modal", :'data-target' => "#deductionsModal") %>
 					</div>
 				</div>		
 			</div>								
@@ -88,55 +88,59 @@
 			<div class="displayInlineBlock font8em" data-bind="text: totalPdus"></div>
 			<div class="plm displayInlineBlock font3em"> Total PDUs </div>
 		</div>
-	</div>
+	</div>	
 
-	<div id="deductionsModal" class="student-modal modal hide fade">
-	  <div class="student-modal-header">
-	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	    <h3><%= "WCSF Deductions" %></h3>
-	  </div>
-	  <div class="student-modal-body clearfix" style="overflow: auto; height: 400px; font-size: 18px">
-	  	<div class="regularText" style="padding-bottom: 40px;">
-	  		<p>Your hard earned Scholarship Points can be deducted by the WCSF staff for the following reasons: </p>
-	  	
-	  		<p><ol style="margin-left: 30px;">
-	  			<li>Not submitting a document on time </li>
-	  			<li>Not attending a mandatory WCSF meeting or event</li> 
-	  			<li>Not responding to WCSF communications.</li> 
-	  		</ol></p>
-	  	
-	  		<p>The table below explains the deductions in detail.</p>
+	<div id="deductionsModal" class="student-modal modal fade">
+		<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="student-modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3><%= "WCSF Deductions" %></h3>
+			</div>
+			<div class="student-modal-body clearfix" style="overflow: auto; height: 400px; font-size: 18px">
+				<div class="regularText" style="padding-bottom: 40px;">
+					<p>Your hard earned Scholarship Points can be deducted by the WCSF staff for the following reasons: </p>
+				
+					<p><ol style="margin-left: 30px;">
+						<li>Not submitting a document on time </li>
+						<li>Not attending a mandatory WCSF meeting or event</li> 
+						<li>Not responding to WCSF communications.</li> 
+					</ol></p>
+				
+					<p>The table below explains the deductions in detail.</p>
 
-	  		<div class="deductionsTable">
-	  			<table cellpadding="3px">
-	  				<th class="midnight_bg">Student Responsibility</th>
-	  				<th class="midnight_bg">Level 1 <br>(15 points)</th>
-	  				<th class="midnight_bg">Level 2 <br>(25 points)</th>
-	  				<th class="midnight_bg">Level 3 <br>(50 points)</th>
-	  				<tbody>
-	  					<tr>
-	  						<td>Submitting Requested Documents on Time</td>
-	  						<td>Fails to submit a requested WCSF document before the deadline</td>
-	  						<td>Fails to submit a requested WCSF document before the deadline by more than 1 week</td>
-	  						<td>Fails to submit a document, submits a document of poor quality, or submits a document with false verifications</td>		  						
-	  					</tr>
-	  					<tr>
-	  						<td>Attending WCSF Meetings or Events</td>
-	  						<td>Fails to attend more than 2 mandatory meetings or events in a semester</td>
-	  						<td>Fails to attend more than 3 mandatory meetings or events in a semester</td>
-	  						<td>Fails to attend more than 4 mandatory meetings or events in a semester</td>		  						
-	  					</tr>
-	  					<tr>
-	  						<td>Responding to WCSF Communications</td>
-	  						<td>The WCSF makes more than 2 attempts (email, phone call, etc.) to get a requested response</td>
-	  						<td>The WCSF makes more than 3 attempts (email, phone call, etc.) to get a requested response</td>
-	  						<td>The WCSF does not receive the requested response by the deadline</td>
-	  					</tr>
-	  				</tbody>
-	  			</table>
-	  		</div>
-	  	</div>
-	  </div>
+					<div class="deductionsTable">
+						<table cellpadding="3px">
+							<th class="midnight_bg">Student Responsibility</th>
+							<th class="midnight_bg">Level 1 <br>(15 points)</th>
+							<th class="midnight_bg">Level 2 <br>(25 points)</th>
+							<th class="midnight_bg">Level 3 <br>(50 points)</th>
+							<tbody>
+								<tr>
+									<td>Submitting Requested Documents on Time</td>
+									<td>Fails to submit a requested WCSF document before the deadline</td>
+									<td>Fails to submit a requested WCSF document before the deadline by more than 1 week</td>
+									<td>Fails to submit a document, submits a document of poor quality, or submits a document with false verifications</td>		  						
+								</tr>
+								<tr>
+									<td>Attending WCSF Meetings or Events</td>
+									<td>Fails to attend more than 2 mandatory meetings or events in a semester</td>
+									<td>Fails to attend more than 3 mandatory meetings or events in a semester</td>
+									<td>Fails to attend more than 4 mandatory meetings or events in a semester</td>		  						
+								</tr>
+								<tr>
+									<td>Responding to WCSF Communications</td>
+									<td>The WCSF makes more than 2 attempts (email, phone call, etc.) to get a requested response</td>
+									<td>The WCSF makes more than 3 attempts (email, phone call, etc.) to get a requested response</td>
+									<td>The WCSF does not receive the requested response by the deadline</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
 	</div>
 </div>
 

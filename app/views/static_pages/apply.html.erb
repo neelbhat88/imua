@@ -12,30 +12,34 @@
 			<div class="centered-button"><%= link_to 'Application Requirements', '', class: 'btn btn-large btn-warning what-it-takes-modal' %></div>
 		</div>
 
-		<div id="what-it-takes-modal" class="apply-modal modal hide fade">
-		  <div class="apply-modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		    <h3>What it takes</h3>
-		  </div>
-		  <div class="apply-modal-body clearfix">
-		  	<h4>When do I apply?</h4>
-		  	<p>The 2013-2014 application period for Waianae Intermediate 8th grade students is from February 12 to March 12, 2014. Applications received after March 12 will not be considered.</p>
-		  	<h4>What do I need to submit?</h4>
-		  	<ul>
-					<li>Completed Application Form (download below)</li>
-					<li>2 Teacher Recommendations</li>
-					<li>Minimum 3.0 GPA</li>
-					<li>7th and 8th Grade Transcripts</li>
-					<li>2 Essays</li>
-				</ul>
-				<h4>What do we look for?</h4>
-				<p>We look for students who view the WCSF as a great opportunity for preparing for college and display a very strong desire to be admitted. We also look for students who have demonstrated the potential to meet the rigorous program requirements that the WCSF has each semester. The quality of the application in showing these traits is critical for admittance.</p>
-		  	<h4>Who can apply?</h4>
-		  	<p>Any 8th grade student at Waianae Intermediate who has a cumulative GPA of a 3.0 GPA or above and who will have attended Waianae Intermediate for 1 entire school year before 8th grade graduation.</p>
-		  </div>
-		  <div class="modal-footer">
-		    <%= link_to 'Download Application', '/wcsf_application.pdf', class: 'btn btn-success' %>
-		   </div>
+		<div id="what-it-takes-modal" class="student-modal modal fade">
+			<div class="modal-dialog">
+			<div class="modal-content apply-content">
+			  <div class="student-modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>What it takes</h3>
+			  </div>
+			  <div class="student-modal-body clearfix">
+			  	<h4>When do I apply?</h4>
+			  	<p>The 2013-2014 application period for Waianae Intermediate 8th grade students is from February 12 to March 12, 2014. Applications received after March 12 will not be considered.</p>
+			  	<h4>What do I need to submit?</h4>
+			  	<ul>
+						<li>Completed Application Form (download below)</li>
+						<li>2 Teacher Recommendations</li>
+						<li>Minimum 3.0 GPA</li>
+						<li>7th and 8th Grade Transcripts</li>
+						<li>2 Essays</li>
+					</ul>
+					<h4>What do we look for?</h4>
+					<p>We look for students who view the WCSF as a great opportunity for preparing for college and display a very strong desire to be admitted. We also look for students who have demonstrated the potential to meet the rigorous program requirements that the WCSF has each semester. The quality of the application in showing these traits is critical for admittance.</p>
+			  	<h4>Who can apply?</h4>
+			  	<p>Any 8th grade student at Waianae Intermediate who has a cumulative GPA of a 3.0 GPA or above and who will have attended Waianae Intermediate for 1 entire school year before 8th grade graduation.</p>
+			  </div>
+			  <div class="modal-footer">
+			    <%= link_to 'Download Application', '/wcsf_application.pdf', class: 'btn btn-success' %>
+			   </div>
+			 </div>
+			 </div>
 		</div>
 
 
@@ -45,26 +49,30 @@
 			<div class="centered-button"><%= link_to 'Suggested Preparation', '', class: 'btn btn-large btn-warning prepare-early-modal' %></div>
 		</div>
 
-		<div id="prepare-early-modal" class="apply-modal modal hide fade">
-		  <div class="apply-modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		    <h3>Prepare Early</h3>
-		  </div>
-		  <div class="apply-modal-body clearfix">
-		  	<p>In order to ensure students will be able to handle the rigor of the WCSF semester requirements, we encourage applicants to learn to balance extracurricular involvement with maintaining good grades in 7th and 8th grade. Showing that you can successfully manage the workload of school and additional activities is a way to prove to that you can handle the semesterly WCSF requirements in high school.  Below is a checklist of tasks to complete during 7th and 8th grade that will best prepare you for admission:</p>
-		  	<ul>
-					<li>Maintain a competitive GPA of a 3.5 or above</li>
-					<li>Become involved in a sport, club, or other student activity</li>
-					<li>Identify 2 teachers that would be able to write positive letters of recommendation about you</li>
-					<li>Have nearly perfect attendance to school</li>
-					<li>Have no record of disciplinary issues</li>
-					<li>Develop strong essay writing skills</li>
-					<li>Participate in community service events</li>
-			  </ul>
-		  </div>
-		  <div class="modal-footer">
-		  	<%= link_to 'Download Application', '/wcsf_application.pdf', class: 'btn btn-success' %>
-		   </div>
+		<div id="prepare-early-modal" class="student-modal modal fade">
+			<div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="student-modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>Prepare Early</h3>
+			  </div>
+			  <div class="student-modal-body clearfix">
+			  	<p>In order to ensure students will be able to handle the rigor of the WCSF semester requirements, we encourage applicants to learn to balance extracurricular involvement with maintaining good grades in 7th and 8th grade. Showing that you can successfully manage the workload of school and additional activities is a way to prove to that you can handle the semesterly WCSF requirements in high school.  Below is a checklist of tasks to complete during 7th and 8th grade that will best prepare you for admission:</p>
+			  	<ul>
+						<li>Maintain a competitive GPA of a 3.5 or above</li>
+						<li>Become involved in a sport, club, or other student activity</li>
+						<li>Identify 2 teachers that would be able to write positive letters of recommendation about you</li>
+						<li>Have nearly perfect attendance to school</li>
+						<li>Have no record of disciplinary issues</li>
+						<li>Develop strong essay writing skills</li>
+						<li>Participate in community service events</li>
+				  </ul>
+			  </div>
+			  <div class="modal-footer">
+			  	<%= link_to 'Download Application', '/wcsf_application.pdf', class: 'btn btn-success' %>
+			   </div>
+			</div>
+			</div>
 		</div>
 
 	</div>

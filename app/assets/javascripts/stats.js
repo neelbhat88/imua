@@ -17,10 +17,6 @@ $(function(){
 			totalPdus: ko.observable(0),
 			totalDeductionValue: ko.observable(0),
 			totalDeductions: [],
-
-			showDeductionsModal: function() {
-				$('#deductionsModal').modal();			
-			}
 		};		
 	}
 

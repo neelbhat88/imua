@@ -303,40 +303,6 @@ p {
 
 // Ten Reasons
 
-.ten-reasons-modal {
-	width: 678px;
-	height: 396px;
-	margin-left: -339px;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	border-radius: 0;
-}
-
-.ten-reasons-modal-header {
-	background: url('student-modal-top-bar.png') no-repeat;
-	width: 678px;
-	height: 84px;
-	h3 {
-		margin: 0;
-		padding: 20px 30px;
-		color: #fff;
-		font-family: $alt-font;
-		font-size: 30px;
-	}
-	.close {
-		padding: 10px;
-		font-size: 30px;
-	}
-}
-
-.ten-reasons-modal-body {
-	h4 {
-		color: #0160a0;
-		font-size: 24px;
-		font-family: $alt-font;
-	}
-}
-
 .carousel-control {
 	position: absolute;
 	top: 50%;
@@ -367,16 +333,16 @@ p {
 	margin-left: 376px;
 }
 
-.slide1 {background: #fff url('ten-reasons/reason-1.png') no-repeat;}
-.slide2 {background: #fff url('ten-reasons/reason-2.png') no-repeat;}
-.slide3 {background: #fff url('ten-reasons/reason-3.png') no-repeat;}
-.slide4 {background: #fff url('ten-reasons/reason-4.png') no-repeat;}
-.slide5 {background: #fff url('ten-reasons/reason-5.png') no-repeat;}
-.slide6 {background: #fff url('ten-reasons/reason-6.png') no-repeat;}
-.slide7 {background: #fff url('ten-reasons/reason-7.png') no-repeat;}
-.slide8 {background: #fff url('ten-reasons/reason-8.png') no-repeat;}
-.slide9 {background: #fff url('ten-reasons/reason-9.png') no-repeat;}
-.slide10 {background: #fff url('ten-reasons/reason-10.png') no-repeat;}
+.slide1 {background: #fff 0 65px url('ten-reasons/reason-1.png') no-repeat;}
+.slide2 {background: #fff 0 65px url('ten-reasons/reason-2.png') no-repeat;}
+.slide3 {background: #fff 0 65px url('ten-reasons/reason-3.png') no-repeat;}
+.slide4 {background: #fff 0 65px url('ten-reasons/reason-4.png') no-repeat;}
+.slide5 {background: #fff 0 65px url('ten-reasons/reason-5.png') no-repeat;}
+.slide6 {background: #fff 0 65px url('ten-reasons/reason-6.png') no-repeat;}
+.slide7 {background: #fff 0 65px url('ten-reasons/reason-7.png') no-repeat;}
+.slide8 {background: #fff 0 65px url('ten-reasons/reason-8.png') no-repeat;}
+.slide9 {background: #fff 0 65px url('ten-reasons/reason-9.png') no-repeat;}
+.slide10 {background: #fff 0 65px url('ten-reasons/reason-10.png') no-repeat;}
 
 
 // Donate
@@ -498,55 +464,6 @@ p.donate-address {
 	padding: 20px 0;
 }
 
-// Apply modals
-
-
-.apply .modal.fade.in {
-	top: 40%;
-}
-
-.apply-modal {
-	width: 678px;
-	margin-left: -339px;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	border-radius: 0;
-}
-
-.apply-modal-header {
-	background: url('student-modal-top-bar.png') no-repeat;
-	width: 678px;
-	height: 84px;
-	h3 {
-		margin: 0;
-		padding: 20px 30px;
-		color: #fff;
-		font-family: $alt-font;
-		font-size: 30px;
-	}
-	.close {
-		padding: 10px;
-		font-size: 30px;
-	}
-}
-
-.apply-modal-body {
-	padding: 30px;
-	max-height: 400px;
-	overflow-y: auto;
-	h4 {
-		margin: 0 0 10px;
-		color: #06456a;
-	}
-	h5 {
-		margin: 0 0 20px;
-		color: #0160a0;
-	}
-	p {
-		margin-bottom: 20px;
-	}
-}
-
 // What is wcsf
 
 .qa-row {
@@ -625,43 +542,51 @@ p.donate-address {
 
 // Student Modal
 
-.student-modal {
-	width: 678px;
-	margin-left: -339px;
+.student-modal {	
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-}
 
-.student-modal-header {
-	background: url('student-modal-top-bar.png') no-repeat;
-	width: 678px;
-	height: 84px;
-	h3 {
-		margin: 0;
-		padding: 20px 30px;
-		color: #fff;
-		font-family: $alt-font;
-		font-size: 30px;
-	}
-	.close {
-		padding: 10px;
-		font-size: 30px;
-	}
-}
+	.modal-content {
+		border-radius: 0;
+		width: 678px;
 
-.student-modal-body {
-	padding: 30px;
-	h4 {
-		margin: 0 0 10px;
-		color: #06456a;
+		&.donate-content {
+			height: 400px; /* Only this differs from student-modal */
+		}
 	}
-	h5 {
-		margin: 0 0 20px;
-		color: #0160a0;
+
+	.student-modal-header {
+		background: url('student-modal-top-bar.png') no-repeat;
+
+		width: 676px;
+		height: 84px;
+		h3 {
+			margin: 0;
+			padding: 20px 30px;
+			color: #fff;
+			font-family: $alt-font;
+			font-size: 30px;
+		}
+		.close {
+			padding: 20px;
+			font-size: 30px;
+		}
 	}
-	p {
-		margin-bottom: 20px;
+
+	.student-modal-body {
+		padding: 20px;
+		h4 {
+			margin: 0 0 10px;
+			color: #06456a;
+		}
+		h5 {
+			margin: 0 0 20px;
+			color: #0160a0;
+		}
+		p {
+			margin-bottom: 20px;
+		}
 	}
 }
 

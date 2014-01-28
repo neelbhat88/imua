@@ -1,9 +1,11 @@
-<div class="ten-reasons-modal modal hide fade slide1" data-current-slide="1">
-  <div class="ten-reasons-modal-header">
+<div class="student-modal modal fade" data-current-slide="1">
+<div class="modal-dialog">
+<div class="modal-content donate-content slide1">
+  <div class="student-modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3 id="reasons_headings">What it takes</h3>
+    <h3 id="reasons_headings">Reasons to Donate</h3>
   </div>
-  <div class="ten-reasons-modal-body clearfix">
+  <div class="student-modal-body clearfix">
   	<div id="myCarousel" class="carousel slide">
   	  <!-- Carousel items -->
   	  <div class="carousel-inner">
@@ -45,7 +47,7 @@
   	    </div>
   	    <div class="item" data-slide-number="7">
   	    	<div class="reason">
-	  	    	<h4>our students are future leaders</h4>
+	  	    	<h4>Our students are future leaders</h4>
 	  	    	<p>Our program aims to develop leaders in the community by investing in high performing students, thus planting seeds of impact to further improve the communities we serve. </p>
 	  	    </div>
   	    </div>
@@ -74,6 +76,8 @@
   	<a class="carousel-control right" href="#myCarousel" data-slide="next"></a>
   </div>
 </div>
+</div>
+</div>
 
 <script>
 	$(function(){
@@ -93,18 +97,18 @@
 		];
 
 		$('.ten-reasons-modal-link').click(function(e){
-			$('.ten-reasons-modal').modal();
+			$('.student-modal').modal();
 			$('.carousel').carousel({
 				interval: false
 			});
 			e.preventDefault();
 		});
 
-		$('.carousel').on('slid', function(){
+		$('.carousel').on('slide.bs.carousel', function(){
 
 			var item = $('#myCarousel .carousel-inner .item.active');
 			var slide_id = item.data('slide-number');
-			var modal = $(this).parents('.modal');
+			var modal = $(this).parents('.modal-content');
 			var num_slides = $('.carousel-indicators').children().length;
 
 			modal.removeClass('slide' + prev_slide_id);
