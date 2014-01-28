@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for [:global_exam, @global_exam], :url => {:action => :createexam} do |f| %>
+    <%= form_for [:global_exam, @global_exam], :url => {:action => :createexam}, :html => {:class => "basicForm"} do |f| %>
       <%= render 'examform', :isEdit => false, :f => f %>
     <% end %>
   </div>

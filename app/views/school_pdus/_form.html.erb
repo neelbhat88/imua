@@ -1,6 +1,6 @@
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@school_pdu) do |f| %>
+    <%= form_for @school_pdu, :html => {:class => "basicForm"} do |f| %>
       <% if @school_pdu.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@school_pdu.errors.count, "error") %> prohibited this school_pdu from being saved:</h2>

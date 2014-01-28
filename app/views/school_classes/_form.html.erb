@@ -1,6 +1,6 @@
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@school_class) do |f| %>
+    <%= form_for @school_class, :html => {:class => "basicForm"} do |f| %>
       <% if @school_class.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@school_class.errors.count, "error") %> prohibited this school_class from being saved:</h2>
@@ -13,17 +13,17 @@
         </div>
       <% end %>
 
-      <div class="field">
+      <div class="field form-group">
         <%= f.label :name %><br />
-        <%= f.text_field :name %>
+        <%= f.text_field :name, :class=>"form-control" %>
       </div>
-      <div class="field">
+      <div class="field form-group">
         <%= f.label :level %><br />
-        <%= f.select :level, [['Regular', 0], ['Honors', 1], ['AP', 2]] %>
+        <%= f.select :level, [['Regular', 0], ['Honors', 1], ['AP', 2]], :class=>"form-control" %>
       </div>
-      <div class="field">
+      <div class="field form-group">
         <%= f.label :credit_hours %><br />
-        <%= f.text_field :credit_hours %>
+        <%= f.text_field :credit_hours, :class=>"form-control" %>
       </div>
       <div class="actions">
         <% if isEdit == false %>
