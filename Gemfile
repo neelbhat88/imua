@@ -36,7 +36,7 @@ gem "therubyracer", :require => 'v8'
 # Used for authentication
 gem 'devise'
 
-gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-datepicker-rails', "~>1.3.0.1"
 
 # To use ActiveModel has_secure_password
 #gem 'bcrypt-ruby', '~> 3.0.0'
