@@ -1,15 +1,11 @@
-class PduBadge
-	attr_accessor :comparevalue, :description, :isminrequirement, :semester,
-                   :subcategory, :title, :id, :curr_user
+class PduBadge < Badge
+	attr_accessor :category
 
 	def initialize(globalbadge, user, semester)
-		self.curr_user = user
-		self.semester = semester
-		self.id = globalbadge.id
-		self.title = globalbadge.title
-		self.isminrequirement = globalbadge.isminrequirement
-		self.comparevalue = globalbadge.comparevalue
-		self.description = globalbadge.description		
+		# Call parent constructor
+		super
+
+		self.category = globalbadge.category
 	end
 
 	def Compare()

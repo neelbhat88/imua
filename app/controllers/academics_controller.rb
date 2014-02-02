@@ -7,6 +7,7 @@ class AcademicsController < ApplicationController
   	end
   end
 
+# ToDo: Still need to do this?
 # Maybe want a separate admin/students/progress page afterall so that students cant see other students pages just by entring in id
 
   def init
@@ -29,9 +30,9 @@ class AcademicsController < ApplicationController
     # ToDo: Refactor these to not use Model directly
     # Get all global classes to put into dropdown
     globalclasses = SchoolClass.where('school_id = ?', user.user_info.school_id).select([:id, :name]).order("name")
-
-    badges = GlobalBadgeRepository.new().LoadAllBadges(semester, "Academics")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
+    
+    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Academics")
+                                             .map{|b| BadgeViewModel.new(b) }
 
     respond_to do |format|
       format.json { render :json => 
@@ -95,8 +96,8 @@ class AcademicsController < ApplicationController
     badgeObject = badgeProcessor.CheckSemesterAcademics()
 
     # Reload badges
-    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Academics")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
+    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Academics")
+                                             .map{|b| BadgeViewModel.new(b) }
 
   	# Return new badges received
   	respond_to do |format|

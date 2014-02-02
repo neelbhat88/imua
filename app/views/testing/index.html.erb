@@ -22,6 +22,9 @@
 		</div>
 	</div>
 
+	<!-- ====================================================== -->
+	<!-- ================== Official Tests ==================== -->
+	<!-- ====================================================== -->
 	<div id="officialTests" style="display:none;" data-bind="visible: !isShowACT()">
 		<a name="badges"></a>
 		
@@ -43,7 +46,7 @@
 
 		<hr class="fadedLine" />
 
-		<div class="progressPageBadges testing_text" style="border-top:0 none; border-bottom: 0px solid;" data-bind="foreach: { data: badges, as: 'badge' }">			
+		<div class="progressPageBadges testing_text" style="border-top:0 none; border-bottom: 0px solid;" data-bind="foreach: { data: officialtestbadges, as: 'badge' }">
 			<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
 				<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>
 				<div class="description" data-bind="text: badge.description()"></div>
@@ -64,7 +67,29 @@
 		</div>	
 	</div>
 
+	<!-- ====================================================== -->
+	<!-- ====================== ACT Tests ===================== -->
+	<!-- ====================================================== -->
 	<div id="actPracticeTests" class="maxl paxl" style="display:none" data-bind="visible: isShowACT()">
+		<div class="progressPageBadges testing_text" style="border-top:0 none; border-bottom: 0px solid;" data-bind="foreach: { data: actbadges, as: 'badge' }">
+			<div class="globalBadge" data-bind="css: getBadgeColor(badge)">
+				<span class="title" data-bind="text: badge.title(), css: {required: badge.isminrequirement}"></span>
+				<div class="description" data-bind="text: badge.description()"></div>
+				<div class="minReqStar">
+					<div class="points" data-bind="text: badge.badgeValue(), css: { pas: !badge.isminrequirement() }" title="Scholarship Points"></div>
+					<span class="glyphicon glyphicon-star pas star" data-bind="visible: badge.isminrequirement()" title="Minimum Requirement"></span>
+				</div>
+			</div>
+		</div>
+
+		<div>			
+			<span data-bind="text: totalUserTests"></span>
+			<span> out of </span>
+			<span data-bind="text: totalPracticeTests"></span>
+			<span> tests completed. </span>			
+			<span data-bind="text: '(' + percentComplete() + '%)'"></span>
+		</div>
+
 		<div>
 			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Math') }, click: clickSection.bind($data, 'Math')">MATH</div>
 			<div class="mrxl" style="line-height: 1; font-size: 28px; cursor: pointer; display: inline-block;" data-bind="css: { testing_text: showSection($data, 'Reading') }, click: clickSection.bind($data, 'Reading')">READING</div>

@@ -1,10 +1,11 @@
 class TestingScoreBadge < TestingBadge
-	attr_accessor :globalexamid, :score
+	attr_accessor :globalexamid, :score, :subcategory
 
 	def initialize(globalbadge, user, semester)
 		# call ActivityBadge contructor
 		super
 
+		self.subcategory = globalbadge.subcategory
 		self.globalexamid = globalbadge.comparevalue.split("|")[0].to_i # First part is Global Exam id
 		self.score = globalbadge.comparevalue.split("|")[1].to_i # Second part is score
 	end

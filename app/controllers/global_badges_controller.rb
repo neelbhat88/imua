@@ -10,13 +10,13 @@ class GlobalBadgesController < ApplicationController
 		allbadges = GlobalBadgeRepository.new().LoadAllBadges(semester)
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
-		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)		
-		badgesearned = GlobalBadge.GetNumBadgesEarned(current_user, semester)
+		badgesviewmodel = BadgeFactory.new(current_user).GetBadges(semester).map{|b| BadgeViewModel.new(b) }
+		badgesearned = badgesviewmodel.select {|b| b.hasEarned == true}.count
 		minreqsmet = current_user.user_info.MetAllMinRequirements(semester)
 
 		totalBadgesValue = 0
 		#if (minreqsmet)			
-			badges = badgesviewmodel.select{|b| b.hasEarned == 'Yes'}
+			badges = badgesviewmodel.select{|b| b.hasEarned}
 			badges.each do |b|
 				totalBadgesValue += b.badgeValue
 			end
@@ -48,13 +48,13 @@ class GlobalBadgesController < ApplicationController
 
 		allbadges = GlobalBadgeRepository.new().LoadAllBadges(semester)
 
-		badgesviewmodel = GlobalBadge.GetBadgesViewModel(allbadges, current_user, semester)
-		badgesearned = GlobalBadge.GetNumBadgesEarned(current_user, semester)
+		badgesviewmodel = BadgeFactory.new(current_user).GetBadges(semester).map{|b| BadgeViewModel.new(b) }
+		badgesearned = badgesviewmodel.select {|b| b.hasEarned == true}.count
 		minreqsmet = current_user.user_info.MetAllMinRequirements(semester)
 
 		totalBadgesValue = 0
 		#if (minreqsmet)			
-			badges = badgesviewmodel.select{|b| b.hasEarned == 'Yes'}
+			badges = badgesviewmodel.select{|b| b.hasEarned}
 			badges.each do |b|
 				totalBadgesValue += b.badgeValue
 			end

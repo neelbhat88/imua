@@ -1,8 +1,11 @@
 class ActivitiesLeadershipBadge < ActivitiesBadge	
+	attr_accessor :subcategory
 
 	def initialize(globalbadge, user, semester)
 		# call ActivityBadge contructor
 		super
+
+		self.subcategory = globalbadge.subcategory
 	end
 
 	def Compare()

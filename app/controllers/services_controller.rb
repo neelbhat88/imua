@@ -19,8 +19,8 @@ class ServicesController < ApplicationController
       services << ServiceViewModel.new(a)
     end   
 
-    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Service")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
+    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Service")
+                                             .map{|b| BadgeViewModel.new(b) }
 
     respond_to do |format|
       format.json { render :json => 
@@ -87,8 +87,8 @@ class ServicesController < ApplicationController
     newBadgeCount = badgeProcessor.CheckSemesterServices()  
 
     # Reload badges
-    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Service")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
+    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Service")
+                                             .map{|b| BadgeViewModel.new(b) }
 
   	# Return new badges received
   	respond_to do |format|

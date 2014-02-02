@@ -25,6 +25,52 @@ class PracticeTestRepository
 	end
 	
 	def LoadUserTests(userId)
-		return UserPracticeTest.where(:user_id => userId)
+		return UserPracticeTest.where("user_id = ? and score > 0", userId)
+	end
+
+	def GetPercentCompletedInfo(userId)
+		totalPracticeTests = LoadTests(userId)
+    	userPracticeTests = LoadUserTests(userId)
+    
+    	percentComplete = (userPracticeTests.length.to_f / totalPracticeTests.length.to_f).round(2) # or '%.2f' % (number)
+    	
+    	return { :percentComplete_f => percentComplete, 
+    			 :totalPracticeTests => totalPracticeTests.length, 
+    			 :totalUserTests => userPracticeTests.length
+    			}
+	end
+
+	def GetPracticeTests(userId)
+		actMathTests = LoadTestsAsArray(userId, "Math")
+    	actReadingTests = LoadTestsAsArray(userId, "Reading")
+    	actEnglishTests = LoadTestsAsArray(userId, "English")
+    	actScienceTests = LoadTestsAsArray(userId, "Science")
+    	
+    	percentCompleteInfo = GetPercentCompletedInfo(userId)
+
+    	practiceTests = PracticeTests.new
+    	practiceTests.mathTests = actMathTests
+    	practiceTests.readingTests = actReadingTests
+    	practiceTests.englishTests = actEnglishTests
+    	practiceTests.scienceTests = actScienceTests
+    	practiceTests.totalTests = percentCompleteInfo[:totalPracticeTests]
+    	practiceTests.totalUserTests = percentCompleteInfo[:totalUserTests]
+    	practiceTests.percentComplete = percentCompleteInfo[:percentComplete_f] * 100
+
+    	return practiceTests
+	end
+
+	def CreateUserTest(user, testId, semester, score)
+		userTest = user.user_practice_tests.create(:global_practice_test_id=>testId, :semester=>semester, :score=>score)
+
+		return userTest
+	end
+
+	def UpdateUserTest(user, userTestId, semester, score)
+		userTest = user.user_practice_tests.find(userTestId)
+
+    	userTest.update_attributes(:score => score, :semester=>semester)
+
+    	return userTest
 	end
 end

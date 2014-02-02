@@ -8,7 +8,7 @@ class StatsController < ApplicationController
 		semester = current_user.user_info.current_semester		
 
 		# Get total badges earned
-		totalBadgesEarned = GlobalBadge.GetNumBadgesEarned(current_user)
+		totalBadgesEarned = GlobalBadgeRepository.new().GetNumBadgesEarned(current_user)
 
 		# Get total badge value
 		totalBadgesValue = 0

@@ -1,10 +1,11 @@
 class AcademicsGradeBadge < AcademicsBadge
-	attr_accessor :comparegrade, :compareclass
+	attr_accessor :comparegrade, :compareclass, :subcategory
 
 	def initialize(globalbadge, user, semester)
 		# call AcademicsBadge contructor
 		super
 
+		self.subcategory = globalbadge.subcategory
 		self.comparegrade = globalbadge.comparevalue.split("|")[0] # First part is LetterGrade
 		self.compareclass = globalbadge.comparevalue.split("|")[1].to_i # Second part is SchoolClassId
 	end

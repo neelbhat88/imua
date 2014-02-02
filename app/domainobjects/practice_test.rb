@@ -17,7 +17,7 @@ class PracticeTest
 		userTest = practiceTest.user_practice_tests.where(:user_id => userId)		
 		if (userTest.length > 0)
 			if (userTest.length > 1) 
-				Rails.logger.error("UserId #{userId} has more than 1 practice test for global_practice_test_id: #{practiceTest.id}")
+				Rails.logger.error("Error: UserId #{userId} has more than 1 practice test for global_practice_test_id: #{practiceTest.id}")
 			end
 
 			@score = userTest[0].score

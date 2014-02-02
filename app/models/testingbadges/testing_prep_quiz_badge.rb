@@ -1,29 +1,29 @@
 class TestingPrepQuizBadge < TestingBadge
-	attr_accessor :globalexamtype, :count, :score
+	attr_accessor :completionPercent, :count, :score, :subcategory
 
 	def initialize(globalbadge, user, semester)
-		# call ActivityBadge contructor
+		# call parent contructor
 		super
 
-		self.globalexamtype = globalbadge.comparevalue.split("|")[0] # First part is Global Exam Type
-		self.count = globalbadge.comparevalue.split("|")[1].to_i # Second part is the count
-		self.score = globalbadge.comparevalue.split("|")[2].to_f # Second part is the score
+		self.subcategory = globalbadge.subcategory
+		self.completionPercent = globalbadge.comparevalue.to_f
 	end
 
 	def Compare()
-		user_prepquiz_badges = self.curr_user.user_testings.joins(:global_exam).where("global_exams.exam_type=? and user_testings.semester= ?", self.globalexamtype, self.semester)
+		percentCompleteInfo = PracticeTestRepository.new().GetPercentCompletedInfo(self.curr_user.id)    	
 		
 		# Have to earn at least the score on all the count (Earn at least 8/10 on all 8 prep quizzes)
-		if (user_prepquiz_badges.length >= self.count)
-			user_prepquiz_badges.each do |b|
-				if b.score < self.score 
-					return false
-				end
-			end
-
+		if (percentCompleteInfo[:percentComplete_f] >= self.completionPercent)
 			return true
 		end
 
 	    return false
+	end
+
+	def HasEarned()
+		# Don't care about semester since a user can earn the next semesters badge during the current semester	
+		self.user_badge = UserBadgeRepository.new().GetUserBadge(self.curr_user.id, self.id)
+
+		return self.user_badge.length != 0
 	end
 end

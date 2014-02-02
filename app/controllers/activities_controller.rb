@@ -22,8 +22,8 @@ class ActivitiesController < ApplicationController
     # Get all global activities to put into dropdown
     globalactivities = SchoolActivity.where('school_id = ?', user.user_info.school_id).select([:id, :name]).order("name")
 
-    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Activity")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
+    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Activity")
+                                             .map{|b| BadgeViewModel.new(b) }
 
     respond_to do |format|
       format.json { render :json => 
@@ -108,8 +108,8 @@ class ActivitiesController < ApplicationController
     badgeObject = badgeProcessor.CheckSemesterActivities()
 
     # Reload badges
-    badges = GlobalBadgeRepository.new().LoadAllBadges(semester,"Activity")
-    badgesviewmodel = GlobalBadge.GetBadgesViewModel(badges, user, semester)
+    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Activity")
+                                             .map{|b| BadgeViewModel.new(b) }
 
   	# Return new badges received
   	respond_to do |format|

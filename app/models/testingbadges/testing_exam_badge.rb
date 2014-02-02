@@ -1,10 +1,11 @@
 class TestingExamBadge < TestingBadge
-	attr_accessor :globalexamid, :count
+	attr_accessor :globalexamid, :count, :subcategory
 
 	def initialize(globalbadge, user, semester)
 		# call ActivityBadge contructor
 		super
 
+		self.subcategory = globalbadge.subcategory
 		self.globalexamid = globalbadge.comparevalue.split("|")[0].to_i # First part is Global Exam id
 		self.count = globalbadge.comparevalue.split("|")[1].to_i # Second part is count
 	end

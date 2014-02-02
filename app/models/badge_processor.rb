@@ -8,23 +8,27 @@ class BadgeProcessor
 	end
 
 	def CheckSemesterAcademics
-		return CompareBadges(@badgefactory.GetAcademicsBadges(@semester))
+		return CompareBadges(@badgefactory.GetBadges(@semester, "Academics"))
 	end
 
 	def CheckSemesterActivities		
-		return CompareBadges(@badgefactory.GetActivitiesBadges(@semester))
+		return CompareBadges(@badgefactory.GetBadges(@semester, "Activity"))
 	end
 
 	def CheckSemesterServices
-		return CompareBadges(@badgefactory.GetServicesBadges(@semester))
+		return CompareBadges(@badgefactory.GetBadges(@semester, "Service"))
 	end
 
 	def CheckSemesterPdus
-		return CompareBadges(@badgefactory.GetPduBadges(@semester))
+		return CompareBadges(@badgefactory.GetBadges(@semester, "PDU"))
 	end
 
 	def CheckSemesterTesting
-		return CompareBadges(@badgefactory.GetTestingBadges(@semester))
+		return CompareBadges(@badgefactory.GetBadges(@semester, "Testing"))
+	end
+
+	def CheckSemesterTestingPracticeTests
+		return CompareBadges(@badgefactory.GetTestingPracticeTestBadges())
 	end
 
 	def CompareBadges(allBadges)
@@ -36,7 +40,7 @@ class BadgeProcessor
 	  		badgeEarned = b.Compare()	  			
 	  		Rails.logger.debug("DEBUG: #{b.description} earned? #{badgeEarned}")
 
-	  		userHasBadge = (@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @semester).length > 0)
+	  		userHasBadge = b.HasEarned()
 	  		Rails.logger.debug("DEBUG: User has badge Sem: #{@semester} Badge: #{b.id} - #{b.description}? #{userHasBadge}")
 
 	  		# If badge earned and user does not have badge
@@ -51,7 +55,8 @@ class BadgeProcessor
 	  			badgeslost << b
 
 	  			# Remove earned badge
-	  			@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @semester).destroy_all()
+	  			#@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @semester).destroy_all()
+	  			b.user_badge.destroy_all()
 	  			Rails.logger.debug("DEBUG: BadgeEarned = false and UserHasBadge = true. UserBadge with GlobalBadgeId: #{b.id} removed.")
 	  		end
 	  	end

@@ -17,12 +17,14 @@ $(function(){
 			isShowACT: ko.observable(true),
 			sectionToShow: ko.observable("Math"),
 
+			// Add Official Test
 			add: function() {
 				self.viewModel.totalTests.push(new Test(null, null));
 				
 				$('.datepick').datepicker({autoclose: true});
 			},
 
+			// Remove Official Test
 			remove: function(toRemove) {
 				if (toRemove.dbid() != null)
 					self.viewModel.rowsToRemove.push(toRemove);
@@ -30,6 +32,7 @@ $(function(){
 				self.viewModel.totalTests.remove(toRemove);
 			},	
 
+			// Save Official Test
 			save: function()
 			{
 				if (!self.viewModel.submitting())
@@ -54,7 +57,7 @@ $(function(){
 						success: function(data) 
 						{					
 							ko.mapping.fromJS(data.newtests, {}, self.viewModel.totalTests);
-							ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+							ko.mapping.fromJS(data.officialtestbadges, {}, self.viewModel.officialtestbadges);
 
 							self.viewModel.originalTests = data.newtests;
 
@@ -134,6 +137,14 @@ $(function(){
 					},
 					success: function(data) {
 						test.score(data.userTest.score);
+						test.userTestId(data.userTest.id);
+						
+						ko.mapping.fromJS(data.actbadges, {}, self.viewModel.actbadges);
+						
+						self.viewModel.totalPracticeTests(data.practiceTestInfo.totalPracticeTests)
+						self.viewModel.totalUserTests(data.practiceTestInfo.totalUserTests)
+						self.viewModel.percentComplete(data.practiceTestInfo.percentComplete_f * 100)
+
 						test.editing(false);
 					}
 				});				
@@ -149,8 +160,7 @@ $(function(){
 					data: {semester: newValue, user_id: self.UserId, isTeacher: self.IsTeacher},
 					success: function(data) {				
 						ko.mapping.fromJS(data.usertests, {}, self.viewModel.totalTests);
-						ko.mapping.fromJS(data.practicetests, {}, self.viewModel.practiceTests);
-						ko.mapping.fromJS(data.badges, {}, self.viewModel.badges);
+						ko.mapping.fromJS(data.officialtestbadges, {}, self.viewModel.officialtestbadges);
 						self.viewModel.editable(data.editable);
 					},
 					error: function() { alert("Failed drop down subscribe ajax post");}
@@ -192,12 +202,17 @@ $(function(){
 					self.viewModel.totalTests = ko.mapping.fromJS(data.usertests, validationMapping);
 					self.viewModel.originalTests = data.usertests;
 
-					self.viewModel.actMathTests = ko.mapping.fromJS(data.actMathTests);
-					self.viewModel.actReadingTests = ko.mapping.fromJS(data.actReadingTests);
-					self.viewModel.actEnglishTests = ko.mapping.fromJS(data.actEnglishTests);
-					self.viewModel.actScienceTests = ko.mapping.fromJS(data.actScienceTests);
+					self.viewModel.actMathTests = ko.mapping.fromJS(data.practiceTests.mathTests);
+					self.viewModel.actReadingTests = ko.mapping.fromJS(data.practiceTests.readingTests);
+					self.viewModel.actEnglishTests = ko.mapping.fromJS(data.practiceTests.englishTests);
+					self.viewModel.actScienceTests = ko.mapping.fromJS(data.practiceTests.scienceTests);
 
-					self.viewModel.badges = ko.mapping.fromJS(data.badges);									
+					self.viewModel.totalPracticeTests = ko.observable(data.practiceTests.totalTests);
+					self.viewModel.totalUserTests = ko.observable(data.practiceTests.totalUserTests);
+					self.viewModel.percentComplete = ko.observable(data.practiceTests.percentComplete);
+
+					self.viewModel.actbadges = ko.mapping.fromJS(data.actbadges);
+					self.viewModel.officialtestbadges = ko.mapping.fromJS(data.officialtestbadges);
 					self.viewModel.globalExams = ko.mapping.fromJS(data.globalexams);
 					self.viewModel.semesters = data.semesters;
 
