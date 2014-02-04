@@ -55,7 +55,7 @@ class PracticeTestRepository
     	practiceTests.scienceTests = actScienceTests
     	practiceTests.totalTests = percentCompleteInfo[:totalPracticeTests]
     	practiceTests.totalUserTests = percentCompleteInfo[:totalUserTests]
-    	practiceTests.percentComplete = percentCompleteInfo[:percentComplete_f] * 100
+    	practiceTests.percentComplete = (percentCompleteInfo[:percentComplete_f] * 100).to_i
 
     	return practiceTests
 	end
