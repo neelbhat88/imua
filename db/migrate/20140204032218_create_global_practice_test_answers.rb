@@ -4,7 +4,7 @@ class CreateGlobalPracticeTestAnswers < ActiveRecord::Migration
       t.integer :id
       t.integer :global_practice_test_question_id
       t.string :answer_text
-      t.bool :is_correct
+      t.boolean :is_correct
       t.integer :position
 
       t.timestamps
