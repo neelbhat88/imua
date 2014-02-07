@@ -1,4 +1,4 @@
-Wcsf::Application.routes.draw do  
+Wcsf::Application.routes.draw do    
   resources :school_pdus
 
   namespace :admin do
@@ -93,6 +93,7 @@ Wcsf::Application.routes.draw do
     delete '/practice/:id', to: 'global_exams#destroypracticetest', as: 'deletepracticetest'
   end
 
+  get "super_admin/dashboard", to: 'super_admin#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

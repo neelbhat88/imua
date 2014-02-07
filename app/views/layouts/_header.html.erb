@@ -32,6 +32,8 @@
             <li page="AdminStudents"><%= link_to "Students",admin_students_path
             %></li>                
           <% elsif current_user.is_admin? %>
+            <li page="Dashboard"><%= link_to "Dashboard", super_admin_dashboard_path
+            %></li>
             <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path
             %></li>
             <li page="SchoolActivities"><%= link_to "All Activities", school_activities_path %></li>

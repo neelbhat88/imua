@@ -1,0 +1,44 @@
+<% @jsinit = "new SuperAdmin().init(#{@dataModel.to_json});" %>
+
+<div class="contentContainer">
+	<h3> ACT Practice Quizzes </h3>
+
+	<div class="quizSection" style="font-size: 16px;">
+		<ul class="nav nav-tabs">
+			<li class="active">
+		  		<a href="#" data-toggle="tab" data-bind="click: clickSection.bind($data, 'Math')">Math</a>
+			</li>
+			<li>
+				<a href="#" data-toggle="tab" data-bind="click: clickSection.bind($data, 'Reading')">Reading</a>
+			</li>
+			<li>
+				<a href="#" data-toggle="tab" data-bind="click: clickSection.bind($data, 'English')">English</a>
+			</li>
+			<li>
+				<a href="#" data-toggle="tab" data-bind="click: clickSection.bind($data, 'Science')">Science</a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content pam" style="border:1px solid lightgrey; border-top: 0 none;">
+		  	<div class="tab-pane active" id="Math" style="height: 200px; overflow: auto;" data-bind="css: { active: showSection($data, 'Math') }, foreach: { data: actMathTests, as: 'subjects' }">
+				<div data-bind="text: subjects[0].subject()" style="font-size: 14px;"></div>
+				<div data-bind="foreach: { data: subjects, as: 'test' }">
+					<div class="viewRow" style="font-size: 12px;">
+						<div class="" data-bind="text: test.name()"></div>	
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane active" id="Reading" style="height: 200px; overflow: auto;" data-bind="css: { active: showSection($data, 'Reading') }, foreach: { data: actReadingTests, as: 'subjects' }">
+				<div data-bind="text: subjects[0].subject()"></div>
+				<div data-bind="foreach: { data: subjects, as: 'test' }">
+					<div class="viewRow">
+						<div class="" data-bind="text: test.name()"></div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="English">...</div>
+			<div class="tab-pane" id="Math">...</div>
+		</div>
+	</div>
+</div>

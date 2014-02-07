@@ -10,6 +10,7 @@ gem 'newrelic_rpm'
 
 group :development do
 	gem 'quiet_assets'
+	gem 'debugger'
 end
 
 # Gems used only for assets and not required

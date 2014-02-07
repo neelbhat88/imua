@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140121014309) do
+ActiveRecord::Schema.define(:version => 20140204024023) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(:version => 20140121014309) do
     t.string   "exam_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "global_practice_test_questions", :force => true do |t|
+    t.integer  "global_practice_test_id"
+    t.integer  "number"
+    t.text     "question_text"
+    t.string   "solution_url"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   create_table "global_practice_tests", :force => true do |t|

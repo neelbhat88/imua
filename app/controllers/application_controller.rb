@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 			return admin_students_path
 		end
 
-		return school_classes_path
+		return super_admin_dashboard_path
 	end
 
 	private

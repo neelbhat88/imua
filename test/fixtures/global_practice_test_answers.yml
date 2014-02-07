@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  global_practice_test_question_id: 1
+  answer_text: MyString
+  is_correct: 
+  position: 1
+
+two:
+  id: 1
+  global_practice_test_question_id: 1
+  answer_text: MyString
+  is_correct: 
+  position: 1
