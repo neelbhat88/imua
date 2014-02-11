@@ -1,7 +1,9 @@
+<% @jsinit = "new StudentDashboard().init(#{@dataModel.to_json});" %>
+
 <div class="upper-content clear">   
     <div class="wrapper">
         <div class="greeting left">   
-            <h4>Hey there Dresha,</h4>
+            <h4>Hey there <%= current_user.first_name %>,</h4>
             <h1>Welcome Back!</h1>   
             
             <div class="buttons">
@@ -38,7 +40,7 @@
         <div class="left">   
             <div class="status">   
                 <h4>Your GPA</h4>
-                <h1>3.5</h1>
+                <h1><%= @dataModel[:Student].Academics.semester_gpa %></h1>
 
                 <div class="button">
                     Update your grades
@@ -48,11 +50,10 @@
    
         <div class="right">   
             <ul>
-                <li class="badge">Badge Placeholder</li>
-                <li class="badge">Badge Placeholder</li>
-                <li class="badge">Badge Placeholder</li>
-                <li class="badge">Badge Placeholder</li>
-                <li class="badge">Badge Placeholder</li>           
+                <!-- Mabe do this with knockout if its easier -->
+                <% @dataModel[:Student].Academics.badges.each do |b| %>
+                <li class="badge"><%= b.title %> - <%= b.description %></li>
+                <% end %> 
             </ul>
         </div>   
     </div><!-- .ribbon -->
