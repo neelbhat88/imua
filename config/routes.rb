@@ -1,4 +1,4 @@
-Wcsf::Application.routes.draw do    
+Wcsf::Application.routes.draw do      
   resources :school_pdus
 
   namespace :admin do
@@ -94,6 +94,8 @@ Wcsf::Application.routes.draw do
   end
 
   get "super_admin/dashboard", to: 'super_admin#index'
+
+  get "student/dashboard", to: 'student#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
