@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
 		if current_user.is_student?
-			return global_badges_path
+			return student_dashboard_path
 		elsif current_user.is_teacher?
 			return admin_students_path
 		end

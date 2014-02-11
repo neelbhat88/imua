@@ -26,7 +26,7 @@
 			<p class="" style="padding: 10px;">Logged in as: <span class="text-dark-blue"><%= current_user.email %></span></p>
 			<div style="text-align: center">
               <% if current_user.is_student? %>				
-				<%= link_to "Imua Portal", global_badges_path, :class => 'btn btn-success' %>
+				<%= link_to "Imua Portal", student_dashboard_path, :class => 'btn btn-success' %>
               <% elsif current_user.is_admin? %>
                 <%= link_to "Dashboard", school_classes_path, :class => 'btn btn-success' %>
               <% elsif current_user.is_teacher? %>
