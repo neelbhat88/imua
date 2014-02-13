@@ -24,6 +24,10 @@ class TestingPrepQuizBadge < TestingBadge
 		# Don't care about semester since a user can earn the next semesters badge during the current semester	
 		self.user_badge = UserBadgeRepository.new().GetUserBadge(self.curr_user.id, self.id)
 
+		if (self.user_badge.length > 1)
+			Rails.logger.warn("***Warning*** More than 1 testing prep badge id #{self.id} for user #{self.curr_user.id}")
+		end
+
 		return self.user_badge.length != 0
 	end
 end

@@ -15,10 +15,11 @@ class StatsController < ApplicationController
 		(0..semester).each do |s|
 			if current_user.user_info.MetAllMinRequirements(s)				
 				# includes loads all the data into memory, so accessing the associated data doesn't make a DB call
-				badges = current_user.user_badges.includes(:global_badge).where('user_badges.semester = ?', s)
-				badges.each do |b|
-					totalBadgesValue += b.global_badge.badge_value
-				end
+				# badges = current_user.user_badges.includes(:global_badge).where('user_badges.semester = ?', s)
+				# badges.each do |b|
+				# 	totalBadgesValue += b.global_badge.badge_value
+				# end
+				totalBadgesValue = UserBadgeRepository.new.GetScholarshipPointsEarned(current_user)
 			end
 		end
 

@@ -16,8 +16,9 @@ class StudentRepository
 	def LoadStudent(user, semester)
 		student = Student.new
 	  	student.first_name = user.first_name
-	  	student.last_name = user.last_name
-	  	#student.points_earned = student.badges.points_earned
+	  	student.last_name = user.last_name	  
+
+	  	student.points_earned = UserBadgeRepository.new.GetScholarshipPointsEarned(user, semester)
 	  	student.badges = BadgeFactory.new(user).GetBadges(semester).map{|b| BadgeViewModel.new(b) }
 
 	  	student.Academics = Academics.new
