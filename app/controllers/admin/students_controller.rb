@@ -8,7 +8,7 @@ class Admin::StudentsController < ApplicationController
 
   def init
     allstudents = User.LoadStudentsBySchoolId(current_user.user_info.school_id)
-    
+
     # ToDo: Do this better!
     studentsviewmodel2016 = []
     allstudents.select {|s| s.user_info.classof == 2016}.each do | student |

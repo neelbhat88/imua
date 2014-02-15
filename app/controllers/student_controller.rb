@@ -21,7 +21,7 @@ class StudentRepository
 		sd.first_name = user.first_name
 		sd.last_name = user.last_name
 
-		sd.badges = BadgeFactory.new(user).GetBadges(semester).map{|b| BadgeViewModel.new(b) }
+		sd.badges = BadgeFactory.new.GetBadges(:user => user, :semester => semester).map{|b| BadgeViewModel.new(b) }
 	  	sd.semester_gpa = AcademicsRepository.new(user).GetSemesterGpa(semester)	  		  	
 	  	sd.total_activities = user.user_activities.where(:semester => semester).length	  	
 	  	sd.total_hours = user.user_services.where(:semester => semester).sum(:hours)	  			

@@ -46,7 +46,7 @@ class TestingController < ApplicationController
 	end
 
 	def saveUserTest
-		user = params[:userId].to_i == 0 ? current_user : UserRepository.new().LoadUser(params[:user_id].to_i)    	    	
+		user = params[:user_id].to_i == 0 ? current_user : UserRepository.new().LoadUser(params[:user_id].to_i)
     	testId = params[:testId].to_i
     	userTestId = params[:userTestId].to_i
     	score = params[:score].to_i
@@ -135,22 +135,20 @@ class TestingController < ApplicationController
   	private
   	def ProcessAndLoadBadges(user, semester)
   		# ToDo: Call LoadBadges twice, once in processor and once when getting the view model. Maybe change this
-  		badgeProcessor = BadgeProcessor.new(user, semester)
-	    badgeProcessor.CheckSemesterTesting()
+  		BadgeProcessor.new.CheckSemesterTesting(user, semester)
 
 	    return GetTestingBadgesViewModel(user, semester)
   	end
 
   	def ProcessAndLoadPracticeTestBadges(user, semester)
   		# ToDo: Call LoadBadges twice, once in processor and once when getting the view model. Maybe change this
-  		badgeProcessor = BadgeProcessor.new(user, semester)
-	    badgeProcessor.CheckSemesterTestingPracticeTests()
+  		BadgeProcessor.new.CheckSemesterTestingPracticeTests(user, semester)
 
 	    return GetTestingBadgesViewModel(user, semester)
   	end
 
   	def GetTestingBadgesViewModel(user, semester)  		
-    	badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Testing")
+    	badgesviewmodel =  BadgeFactory.new.GetBadges(:user => user, :semester => semester, :category => "Testing")
     						.map{|b| BadgeViewModel.new(b) }
 
     	return {:actbadges => badgesviewmodel.select{|b| b.subcategory == 3},

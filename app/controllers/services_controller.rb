@@ -19,7 +19,7 @@ class ServicesController < ApplicationController
       services << ServiceViewModel.new(a)
     end   
 
-    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Service")
+    badgesviewmodel =  BadgeFactory.new.GetBadges(:user => user, :semester => semester, :category => "Service")
                                              .map{|b| BadgeViewModel.new(b) }
 
     respond_to do |format|
@@ -83,11 +83,10 @@ class ServicesController < ApplicationController
     # Don't need this since this is calculated by the badge itself
     totalHours = params[:totalHours]
 
-    badgeProcessor = BadgeProcessor.new(user, semester)
-    newBadgeCount = badgeProcessor.CheckSemesterServices()  
+    BadgeProcessor.new.CheckSemesterServices(user, semester)
 
     # Reload badges
-    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "Service")
+    badgesviewmodel =  BadgeFactory.new.GetBadges(:user => user, :semester => semester, :category => "Service")
                                              .map{|b| BadgeViewModel.new(b) }
 
   	# Return new badges received

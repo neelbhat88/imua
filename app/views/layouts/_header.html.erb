@@ -9,7 +9,11 @@
         <li>Badges</li>
         <li>Progress</li>
         <li>Testing</li>
-        <li><%= current_user.first_name + " " + current_user.last_name %></li>
+        <li>
+          <% if current_user != nil && current_user.first_name? && current_user.last_name? %>
+          <%= current_user.first_name + " " + current_user.last_name %>
+          <% end %>
+        </li>
       </ul>   
     </nav>   
   </div>      

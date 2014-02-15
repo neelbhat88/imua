@@ -130,7 +130,7 @@ $(function(){
 					type: "POST",
 					url: '/testing/saveUserTest',
 					data: {
-						userId: self.userId, 
+						user_id: self.UserId, 
 						testId: test.id(),
 						userTestId: test.userTestId(),
 						score: test.score()

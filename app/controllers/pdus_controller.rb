@@ -22,7 +22,7 @@ class PdusController < ApplicationController
 	  	# Get all global pdu to put into dropdown
     	globalpdus = SchoolPdu.where('school_id = ?', user.user_info.school_id).select([:id, :name]).order("name")
 
-    	badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "PDU")
+    	badgesviewmodel =  BadgeFactory.new.GetBadges(:user => user, :semester => semester, :category => "PDU")
                                              .map{|b| BadgeViewModel.new(b) }
 
 	  	respond_to do |format|
@@ -83,11 +83,10 @@ class PdusController < ApplicationController
 	    ##################################################
 	    # ------------------ BADGES ----------------------
 	    ##################################################   	    
-	    badgeProcessor = BadgeProcessor.new(user, semester)
-	    badgeProcessor.CheckSemesterPdus()
+	    BadgeProcessor.new.CheckSemesterPdus(user, semester)
 	  		  	
 	  	# Reload badges
-	    badgesviewmodel =  BadgeFactory.new(user).GetBadges(semester, "PDU")
+	    badgesviewmodel =  BadgeFactory.new.GetBadges(:user => user, :semester => semester, :category => "PDU")
                                              .map{|b| BadgeViewModel.new(b) }
 
 	  	# Return new badges received

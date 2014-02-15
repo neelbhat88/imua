@@ -10,7 +10,7 @@ class GlobalBadgesController < ApplicationController
 		allbadges = GlobalBadgeRepository.new().LoadAllBadges(semester)
 		logger.debug("Debug: Loading badges for semester #{semester}")
 
-		badgesviewmodel = BadgeFactory.new(current_user).GetBadges(semester).map{|b| BadgeViewModel.new(b) }
+		badgesviewmodel = BadgeFactory.new.GetBadges(:user => current_user, :semester => semester).map{|b| BadgeViewModel.new(b) }
 		badgesearned = badgesviewmodel.select {|b| b.hasEarned == true}.count
 		minreqsmet = current_user.user_info.MetAllMinRequirements(semester)
 
@@ -48,7 +48,8 @@ class GlobalBadgesController < ApplicationController
 
 		allbadges = GlobalBadgeRepository.new().LoadAllBadges(semester)
 
-		badgesviewmodel = BadgeFactory.new(current_user).GetBadges(semester).map{|b| BadgeViewModel.new(b) }
+		badgesviewmodel = BadgeFactory.new.GetBadges(:user => current_user, :semester => semester)
+										.map{|b| BadgeViewModel.new(b) }
 		badgesearned = badgesviewmodel.select {|b| b.hasEarned == true}.count
 		minreqsmet = current_user.user_info.MetAllMinRequirements(semester)
 

@@ -1,37 +1,36 @@
 class BadgeProcessor
-	attr_accessor :curr_user
+	attr_accessor :badgefactory
 	
-	def initialize(user, semester)
-		@badgefactory = BadgeFactory.new(user)
-		@curr_user = user
-		@semester = semester
+	def initialize(badgefactory=BadgeFactory.new)
+		@badgefactory = badgefactory		
 	end
 
-	def CheckSemesterAcademics
-		return CompareBadges(@badgefactory.GetBadges(@semester, "Academics"))
+	def CheckSemesterAcademics(user, semester)
+		return CompareBadges(user, semester, @badgefactory.GetBadges(:user => user, :semester => semester, :category => "Academics"))
 	end
 
-	def CheckSemesterActivities		
-		return CompareBadges(@badgefactory.GetBadges(@semester, "Activity"))
+	def CheckSemesterActivities(user, semester)
+		return CompareBadges(user, semester, @badgefactory.GetBadges(:user => user, :semester => semester, :category => "Activity"))
 	end
 
-	def CheckSemesterServices
-		return CompareBadges(@badgefactory.GetBadges(@semester, "Service"))
+	def CheckSemesterServices(user, semester)		
+		return CompareBadges(user, semester, @badgefactory.GetBadges(:user => user, :semester => semester, :category => "Service"))
 	end
 
-	def CheckSemesterPdus
-		return CompareBadges(@badgefactory.GetBadges(@semester, "PDU"))
+	def CheckSemesterPdus(user, semester)		
+		return CompareBadges(user, semester, @badgefactory.GetBadges(:user => user, :semester => semester, :category => "PDU"))
 	end
 
-	def CheckSemesterTesting
-		return CompareBadges(@badgefactory.GetBadges(@semester, "Testing"))
+	def CheckSemesterTesting(user, semester)		
+		return CompareBadges(user, semester, @badgefactory.GetBadges(:user => user, :semester => semester, :category => "Testing"))
 	end
 
-	def CheckSemesterTestingPracticeTests
-		return CompareBadges(@badgefactory.GetTestingPracticeTestBadges())
+	def CheckSemesterTestingPracticeTests(user, semester)		
+		return CompareBadges(user, semester, @badgefactory.GetTestingPracticeTestBadges(:user => user, :semester => semester))
 	end
 
-	def CompareBadges(allBadges)
+	private
+	def CompareBadges(user, semester, allBadges)
 		badgesearned = []
 		badgeslost = []
 	  	allBadges.each do |b|
@@ -41,21 +40,21 @@ class BadgeProcessor
 	  		Rails.logger.debug("DEBUG: #{b.description} earned? #{badgeEarned}")
 
 	  		userHasBadge = b.HasEarned()
-	  		Rails.logger.debug("DEBUG: User has badge Sem: #{@semester} Badge: #{b.id} - #{b.description}? #{userHasBadge}")
+	  		Rails.logger.debug("DEBUG: User has badge Sem: #{semester} Badge: #{b.id} - #{b.description}? #{userHasBadge}")
 
 	  		# If badge earned and user does not have badge
 	  		if badgeEarned == true && userHasBadge == false
 	  			badgesearned << b
 
 	  			# Save earned badge to db
-	  			@curr_user.user_badges.create(:global_badge_id => b.id, :semester => @semester)
+	  			user.user_badges.create(:global_badge_id => b.id, :semester => semester)
 	  		
 	  		# If badge not earned and user has badge
 	  		elsif badgeEarned == false && userHasBadge == true	  			
 	  			badgeslost << b
 
 	  			# Remove earned badge
-	  			#@curr_user.user_badges.where(:global_badge_id => b.id, :semester => @semester).destroy_all()
+	  			#user.user_badges.where(:global_badge_id => b.id, :semester => semester).destroy_all()
 	  			b.user_badge.destroy_all()
 	  			Rails.logger.debug("DEBUG: BadgeEarned = false and UserHasBadge = true. UserBadge with GlobalBadgeId: #{b.id} removed.")
 	  		end
