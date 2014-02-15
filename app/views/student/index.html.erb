@@ -16,7 +16,7 @@
             <div class="featured-graph">   
                 <div class="inner">   
                     <h5>You've earned</h5>
-                    <h3><%= @dataModel[:Student].points_earned %></h3>
+                    <h3><%= @dataModel[:StudentDashboard].points_earned %></h3>
                     <h5>Scholarship Points</h5> 
                 </div>
             </div>   
@@ -40,7 +40,7 @@
         <div class="left">   
             <div class="status">   
                 <h4>Your GPA</h4>
-                <h1><%= @dataModel[:Student].Academics.semester_gpa %></h1>
+                <h1><%= @dataModel[:StudentDashboard].semester_gpa %></h1>
 
                 <div class="button">
                     Update your grades
@@ -51,7 +51,7 @@
         <div class="right">   
             <ul>
                 <!-- Mabe do this with knockout if its easier -->
-                <% @dataModel[:Student].badges.select{|b| b.category == "Academics"}.each do |b| %>
+                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Academics"}.each do |b| %>
                 <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
                 <% end %> 
             </ul>
@@ -62,7 +62,7 @@
         <div class="left">   
             <div class="status">
                 <h4>Extracurriculars</h4>
-                <h1><%= @dataModel[:Student].Extracurriculars.total_activities %></h1>
+                <h1><%= @dataModel[:StudentDashboard].total_activities %></h1>
                 <h4>Activity</h4>
                 
                 <div class="button">
@@ -74,7 +74,7 @@
         <div class="right">   
             <ul>   
                 <!-- Mabe do this with knockout if its easier -->
-                <% @dataModel[:Student].badges.select{|b| b.category == "Activity"}.each do |b| %>
+                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Activity"}.each do |b| %>
                 <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
                 <% end %> 
             </ul>   
@@ -85,7 +85,7 @@
         <div class="left">   
             <div class="status">
                 <h4>Service</h4>
-                <h1><%= @dataModel[:Student].Service.total_hours %></h1>
+                <h1><%= @dataModel[:StudentDashboard].total_hours %></h1>
                 <h4>Hours</h4>
 
                 <div class="button">
@@ -97,7 +97,7 @@
         <div class="right">   
             <ul>   
                 <!-- Mabe do this with knockout if its easier -->
-                <% @dataModel[:Student].badges.select{|b| b.category == "Service"}.each do |b| %>
+                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Service"}.each do |b| %>
                 <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
                 <% end %> 
             </ul>   
@@ -108,7 +108,7 @@
         <div class="left">   
             <div class="status">
                 <h4>PDU</h4>
-                <h1><%= @dataModel[:Student].PDU.total_pdus %></h1>
+                <h1><%= @dataModel[:StudentDashboard].total_pdus %></h1>
                 <h4>Events</h4>
 
                 <div class="button">
@@ -119,7 +119,7 @@
    
         <div class="right">   
             <ul>   
-                <% @dataModel[:Student].badges.select{|b| b.category == "PDU"}.each do |b| %>
+                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "PDU"}.each do |b| %>
                 <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
                 <% end %>     
             </ul>   
@@ -131,7 +131,7 @@
             <div class="status">
    
                 <h4>Testing</h4>
-                <h1><%= @dataModel[:Student].Testing.percent_complete %>%</h1>
+                <h1><%= @dataModel[:StudentDashboard].percent_complete %>%</h1>
                 <h4>Completed</h4>
 
                 <div class="button">
@@ -142,7 +142,7 @@
    
         <div class="right">   
             <ul>   
-                <% @dataModel[:Student].badges.select{|b| b.category == "Testing"}.each do |b| %>
+                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Testing"}.each do |b| %>
                 <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
                 <% end %>
             </ul>

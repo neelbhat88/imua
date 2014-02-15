@@ -11,6 +11,8 @@ gem 'newrelic_rpm'
 group :development do
 	gem 'quiet_assets'
 	gem 'debugger'
+	gem 'rspec-rails', '~> 3.0.0.beta'
+	gem "factory_girl_rails", "~> 4.0"
 end
 
 # Gems used only for assets and not required
