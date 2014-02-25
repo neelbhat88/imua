@@ -19,8 +19,8 @@ class Badge
 		return false
 	end
 
-	def HasEarned()
-		self.user_badge = UserBadgeRepository.new().GetUserBadge(self.curr_user.id, self.id, self.semester)
+	def HasEarned(userBadgeRepository=UserBadgeRepository.new)
+		self.user_badge = userBadgeRepository.GetUserBadge(self.curr_user.id, self.id, self.semester)
 
 		if (self.user_badge.length > 1)
 			Rails.logger.warn("***Warning*** More than 1 badge id #{self.id} for user #{self.curr_user.id}")
