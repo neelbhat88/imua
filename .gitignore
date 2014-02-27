@@ -20,3 +20,7 @@ database.yml
 
 # Ignore public/system
 /public/system/*
+
+# Ignore Procfile and other environment stuff
+.env
+Procfile
