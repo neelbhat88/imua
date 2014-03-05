@@ -4,17 +4,19 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery
 
 	def admin_only
-		redirect_to root_url unless current_user.is_admin?
+		redirect_to root_url unless current_user.is_super_admin?
 	end
 
 	def teacher_only
-		redirect_to root_url unless (current_user.is_admin? || current_user.is_teacher?)
+		redirect_to root_url unless (current_user.is_super_admin? || 
+									 current_user.is_school_admin? ||
+									 current_user.is_student_admin?)
 	end
 
 	def after_sign_in_path_for(resource)
 		if current_user.is_student?
 			return student_dashboard_path
-		elsif current_user.is_teacher?
+		elsif current_user.is_student_admin?
 			return admin_students_path
 		end
 

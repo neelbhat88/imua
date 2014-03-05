@@ -7,7 +7,7 @@ class Admin::StudentsController < ApplicationController
   end
 
   def init
-    allstudents = User.LoadStudentsBySchoolId(current_user.user_info.school_id)
+    allstudents = UserRepository.new.LoadStudentsBySchoolId(current_user.user_info.school_id)
 
     # ToDo: Do this better!
     studentsviewmodel2016 = []

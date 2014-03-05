@@ -48,10 +48,10 @@
                 Stats
               <% end %>
             </li>
-          <% elsif current_user.is_teacher? %>
+          <% elsif current_user.is_student_admin? %>
             <li page="AdminStudents"><%= link_to "Students",admin_students_path
             %></li>                
-          <% elsif current_user.is_admin? %>
+          <% elsif current_user.is_super_admin? %>
             <li page="Dashboard"><%= link_to "Dashboard", super_admin_dashboard_path
             %></li>
             <li page="SchoolClasses"><%= link_to "All Classes", school_classes_path

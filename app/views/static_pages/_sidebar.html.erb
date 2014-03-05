@@ -27,9 +27,9 @@
 			<div style="text-align: center">
               <% if current_user.is_student? %>				
 				<%= link_to "Imua Portal", student_dashboard_path, :class => 'btn btn-success' %>
-              <% elsif current_user.is_admin? %>
+              <% elsif current_user.is_super_admin? %>
                 <%= link_to "Dashboard", school_classes_path, :class => 'btn btn-success' %>
-              <% elsif current_user.is_teacher? %>
+              <% elsif current_user.is_student_admin? %>
               	<%= link_to "Dashboard", admin_students_path, :class => 'btn btn-success' %>
               <% end %>
 				<%= link_to 'Sign out', destroy_user_session_path, :class => 'btn btn-info sign-out', :method => 'delete' %>

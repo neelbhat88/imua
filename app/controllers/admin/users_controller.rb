@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.role = 0
+    @user.role = 50
     @school_id = params[:school][:id]
     @classof = params[:user_info][:classof].to_i
 

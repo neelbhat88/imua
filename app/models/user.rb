@@ -23,18 +23,30 @@
   has_many :user_deductions
   has_many :user_practice_tests
   
-  has_one :user_info, :dependent => :destroy
+  has_one :user_info, :dependent => :destroy  
 
   def is_student?
+    return (self.role == 50)
+  end
+
+  def is_parent?
+    return (self.role == 40)
+  end
+
+  def is_mentor?
+    return (self.role == 30)
+  end
+
+  def is_student_admin?
+    return (self.role == 20)
+  end
+
+  def is_school_admin?
+    return (self.role == 10)
+  end
+
+  def is_super_admin?
     return (self.role == 0)
-  end
-
-  def is_teacher?
-    return (self.role == 1)
-  end
-
-  def is_admin?
-    return (self.role == 2)
   end
 
 ##################
@@ -44,11 +56,5 @@
     role_array = ['Student', 'Teacher', 'Admin']
 
     return role_array[role.to_i]
-  end
-
-  # TODO: Test things like this - Make this non-static?
-  def self.LoadStudentsBySchoolId(school_id)
-    # Default order is Last name
-    return User.joins(:user_info).where("users.role = 0 and user_infos.school_id = ?", school_id).order("users.last_name ASC")
-  end
+  end  
 end
