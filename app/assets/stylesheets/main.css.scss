@@ -1,3 +1,5 @@
+@import 'reset';
+
 html {
   font-size: 62.5%;
 }
@@ -97,6 +99,40 @@ body {
 
 }
 
+.buttons {
+
+	a {
+	
+		color: white;
+	
+	}
+
+}
+
+.button {
+
+	width: 220px;
+	height: 50px;
+	border: 1px white(1) solid;
+	text-align: center;
+	@include font-size(1.4);
+	font-weight: $bold;
+	cursor: pointer;
+	
+	.text {
+	
+		margin-top: 15px;
+	
+	}
+	
+}
+
+.double {
+
+	margin-left: -1px;
+
+}
+
 
 /* ===============================================
    Typography
@@ -167,7 +203,14 @@ header {
 	width: 100%;
 	background: $blue;
 	color: white();
-	border-bottom: 1px black(0.1) solid;
+	border-bottom: 1px white(0.25) solid;
+	
+	a {
+	
+		color: white;
+		text-decoration: none;
+			
+	}
 	
 	.wrapper {
 	
@@ -175,7 +218,7 @@ header {
 		
 		.imua-logo {
 		
-			margin: 50px 0;
+			margin: 20px 0;
 		
 		}
 		
@@ -206,7 +249,7 @@ header {
 	width: 100%;
 	background: $blue;
 	color: white();
-	padding: 120px 0px;
+	padding: 80px 0px;
 	
 	.wrapper {
 	
@@ -215,14 +258,29 @@ header {
 		.greeting {
 		
 			width: 70%;
-			
-			h1 { text-align: left; }
+			margin-top: 40px;
+		
 		}
 		
 		.current-points {
 		
 			width: 30%;
 			text-align: center;
+			
+			.featured-graph {
+			
+				width: 365px;
+				height: 365px;
+				margin: 0 auto;
+				background: image-url("chart-placeholder.png") top center no-repeat;
+				
+				.inner {
+				
+					padding-top: 100px;
+				
+				}
+			
+			}
 		
 		}
 	
@@ -265,6 +323,13 @@ header {
 
 	width: 100%;
 	
+	a {
+	
+		color: white();
+		text-decoration: none;
+	
+	}
+	
 	.ribbon {
 	
 		width: 100%;
@@ -280,6 +345,13 @@ header {
 			.status {
 			
 				margin: 100px 0;
+				
+				.button {
+				
+					margin: 0 auto;
+					margin-top: 40px;
+					
+				}
 			
 			}
 		
@@ -288,13 +360,55 @@ header {
 		.right {
 		
 			width: 70%;
-
-			ul {
-							
-				li {
+			height: 515px;
+			overflow: auto;
+						
+			.inner-frame {				
 			
-					float: left;
-					width: 300px;
+				ul {
+							
+					li {
+				
+						float: left;
+						width: 233px;
+						margin: 0 60px;
+						
+						.badge {
+						
+							width: 233px;
+							height: 300px;
+							margin-top: 70px;
+							background: image-url('badge1.png') top center no-repeat;
+							
+							.inner {
+							
+								width: 135px;
+								height: 135px;
+								overflow: hidden;
+								margin: 0 auto;
+								padding-top: 80px;
+								text-align: center;
+								
+								.badge-name {
+								
+									@include font-size(4, 4);
+									font-weight: bold;
+								
+								}
+							
+							}
+												
+						}
+						
+						.points {
+						
+							width: 100%;
+							margin-top: 20px;
+							text-align: center;
+						
+						}
+					
+					}
 				
 				}
 			

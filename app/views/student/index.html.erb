@@ -6,10 +6,12 @@
             <h4>Hey there <%= current_user.first_name %>,</h4>
             <h1>Welcome Back!</h1>   
             
-            <div class="buttons">
-                <div class="button">See your progress</div>
-                <div class="button">Check out your badges</div>
-            </div>   
+            <div class="buttons clear">
+                    
+                <a href="#"><div class="button left"><div class="text">See your progress</div></div></a>
+                <a href="#"><div class="button left double"><div class="text">Check out your badges</div></div></a>
+            
+            </div>
         </div>   
         
         <div class="current-points left">   
@@ -43,18 +45,29 @@
                 <h1><%= @dataModel[:StudentDashboard].semester_gpa %></h1>
 
                 <div class="button">
-                    Update your grades
-                </div>   
+                    <div class="text">Update your grades</div>
+                </div>
             </div>   
         </div>
    
-        <div class="right">   
-            <ul>
-                <!-- Mabe do this with knockout if its easier -->
-                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Academics"}.each do |b| %>
-                <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
-                <% end %> 
-            </ul>
+        <div class="right">              
+            <div class="inner-frame">
+                <ul>
+                    <!-- Mabe do this with knockout if its easier -->
+                    <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Academics"}.each do |b| %>
+                    <li>
+                        <div class="badge">
+                            <div class="inner">
+                                <span class="badge-name"></span>
+                            </div>
+                        </div>
+                        <div class="points">
+                            <%= b.title %> - <%= b.description %> <%= b.badgeValue %>
+                        </div>                        
+                    </li>
+                    <% end %> 
+                </ul>
+            </div>
         </div>   
     </div><!-- .ribbon -->
    
@@ -66,18 +79,29 @@
                 <h4>Activity</h4>
                 
                 <div class="button">
-                    Update your activities
+                    <div class="text">Update your activities</div>
                 </div>
             </div> 
         </div>
    
-        <div class="right">   
-            <ul>   
-                <!-- Mabe do this with knockout if its easier -->
-                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Activity"}.each do |b| %>
-                <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
-                <% end %> 
-            </ul>   
+        <div class="right">
+            <div class="inner-frame">
+                <ul>
+                    <!-- Mabe do this with knockout if its easier -->
+                    <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Activity"}.each do |b| %>
+                    <li>
+                        <div class="badge">
+                            <div class="inner">
+                                <span class="badge-name"></span>
+                            </div>
+                        </div>
+                        <div class="points">
+                            <%= b.title %> - <%= b.description %> <%= b.badgeValue %>
+                        </div>                        
+                    </li>
+                    <% end %> 
+                </ul>
+            </div>
         </div>   
     </div><!-- .ribbon -->
    
@@ -89,18 +113,29 @@
                 <h4>Hours</h4>
 
                 <div class="button">
-                    Add or update service hours
+                    <div class="text">Add or update service hours</div>
                 </div>   
             </div>   
         </div>
    
         <div class="right">   
-            <ul>   
-                <!-- Mabe do this with knockout if its easier -->
-                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Service"}.each do |b| %>
-                <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
-                <% end %> 
-            </ul>   
+            <div class="inner-frame">
+                <ul>
+                    <!-- Mabe do this with knockout if its easier -->
+                    <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Service"}.each do |b| %>
+                    <li>
+                        <div class="badge">
+                            <div class="inner">
+                                <span class="badge-name"></span>
+                            </div>
+                        </div>
+                        <div class="points">
+                            <%= b.title %> - <%= b.description %> <%= b.badgeValue %>
+                        </div>                        
+                    </li>
+                    <% end %> 
+                </ul>
+            </div>   
         </div>     
     </div><!-- .ribbon -->
    
@@ -112,17 +147,29 @@
                 <h4>Events</h4>
 
                 <div class="button">
-                    Add or update PDU events
+                    <div class="text">Add or update PDU events</div>
                 </div>
             </div>
         </div>
    
         <div class="right">   
-            <ul>   
-                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "PDU"}.each do |b| %>
-                <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
-                <% end %>     
-            </ul>   
+            <div class="inner-frame">
+                <ul>
+                    <!-- Mabe do this with knockout if its easier -->
+                    <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "PDU"}.each do |b| %>
+                    <li>
+                        <div class="badge">
+                            <div class="inner">
+                                <span class="badge-name"></span>
+                            </div>
+                        </div>
+                        <div class="points">
+                            <%= b.title %> - <%= b.description %> <%= b.badgeValue %>
+                        </div>                        
+                    </li>
+                    <% end %> 
+                </ul>
+            </div>   
         </div>   
     </div><!-- .ribbon -->
    
@@ -135,17 +182,29 @@
                 <h4>Completed</h4>
 
                 <div class="button">
-                    Add or update test data
+                    <div class="text">Add or update test data</div>
                 </div>    
             </div>
         </div>
    
         <div class="right">   
-            <ul>   
-                <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Testing"}.each do |b| %>
-                <li class="badge"><%= b.title %> - <%= b.description %> | Earned? <%= b.hasEarned %></li>
-                <% end %>
-            </ul>
+            <div class="inner-frame">
+                <ul>
+                    <!-- Mabe do this with knockout if its easier -->
+                    <% @dataModel[:StudentDashboard].badges.select{|b| b.category == "Testing"}.each do |b| %>
+                    <li>
+                        <div class="badge">
+                            <div class="inner">
+                                <span class="badge-name"></span>
+                            </div>
+                        </div>
+                        <div class="points">
+                            <%= b.title %> - <%= b.description %> <%= b.badgeValue %>
+                        </div>                        
+                    </li>
+                    <% end %> 
+                </ul>
+            </div>
         </div>   
     </div><!-- .ribbon -->   
 </div><!-- .lower-content -->
