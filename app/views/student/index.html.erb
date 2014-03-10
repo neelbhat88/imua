@@ -4,9 +4,9 @@
     <div class="wrapper">
         <div class="greeting left">   
             <h4>Hey there <%= current_user.first_name %>,</h4>
-            <h1>Welcome Back!</h1>   
+            <h2>Welcome Back!</h2>
             
-            <div class="buttons clear">
+            <div class="buttons clear ptxl">
                     
                 <a href="#"><div class="button left"><div class="text">See your progress</div></div></a>
                 <a href="#"><div class="button left double"><div class="text">Check out your badges</div></div></a>
@@ -28,7 +28,20 @@
    
 <div class="middle-content clear">   
     <div class="wrapper">
-        <h4 class="bold">Great News!</h4>
+        <h4 class="bold">My To-Do List</h4>
+        <% if @dataModel[:StudentDashboard].to_do_items.length == 0 %>
+            <h5>Great job! You don't have any items currently in your list to do.</h5>
+        <% else %>
+            <ul>
+            <% @dataModel[:StudentDashboard].to_do_items.each do |i| %>
+                <li>                    
+                    <h5><%= i.description %> - Due: <%= i.date_due.strftime("%m/%d/%Y") %><h5>
+                </li>
+            <% end %>
+            </ul>
+        <% end %>
+        
+        <h4 class="ptxl bold">Great News!</h4>
         <h5>You're meeting the minimum requirements.</h5>
        
         <div class="progress-bar">   

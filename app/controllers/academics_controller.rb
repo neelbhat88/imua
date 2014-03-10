@@ -15,9 +15,9 @@ class AcademicsController < ApplicationController
     semester = params[:semester].to_i == 0 ? user.user_info.current_semester : params[:semester].to_i
     isTeacher = params[:isTeacher]
 
-    academicsRepository = AcademicsRepository.new(user)
+    academicsRepository = AcademicsRepository.new
 
-    allclasses = academicsRepository.GetUserClassesBySemester(semester)
+    allclasses = academicsRepository.GetUserClassesBySemester(user, semester)
 
     classes = []
     allclasses.each do | a |    
@@ -25,7 +25,7 @@ class AcademicsController < ApplicationController
     end
 
     # Get total semester gpa
-    totalsemgpa = academicsRepository.GetSemesterGpa(semester)
+    totalsemgpa = academicsRepository.GetSemesterGpa(user, semester)
 
     # ToDo: Refactor these to not use Model directly
     # Get all global classes to put into dropdown
@@ -56,7 +56,7 @@ class AcademicsController < ApplicationController
     classesJson = JSON.parse(params[:classes])
     removeJson = JSON.parse(params[:classesToRemove])
 
-    academicsRepository = AcademicsRepository.new(user)
+    academicsRepository = AcademicsRepository.new
     
     ##################################################
 	  # ------------------ Classes ---------------------
@@ -79,10 +79,10 @@ class AcademicsController < ApplicationController
   	end
 
     # Save total semester GPA
-    totalsemgpa = '%.2f' % (academicsRepository.SaveTotalSemesterGpa(semester))
+    totalsemgpa = '%.2f' % (academicsRepository.SaveTotalSemesterGpa(user, semester))
 
   	# Reload all classes
-  	allclasses = academicsRepository.GetUserClassesBySemester(semester)
+  	allclasses = academicsRepository.GetUserClassesBySemester(user, semester)
 
     returnclasses = []
     allclasses.each do | a |		

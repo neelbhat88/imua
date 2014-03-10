@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
       @user.create_user_info(:school_id => @school_id, :classof => @classof)
       
       # Init Semester GPA
-      AcademicsRepository.new(@user).SaveTotalSemesterGpa(@user.user_info.current_semester)
+      AcademicsRepository.new.SaveTotalSemesterGpa(@user, @user.user_info.current_semester)
 
       redirect_to admin_users_path, notice: 'Student was successfully created.'
     else
@@ -57,7 +57,7 @@ class Admin::UsersController < ApplicationController
 
     if @user_info.update_attributes(params[:user_info])
       # Init Semester GPA
-      AcademicsRepository.new(user).SaveTotalSemesterGpa(params[:user_info][:current_semester])
+      AcademicsRepository.new.SaveTotalSemesterGpa(user, params[:user_info][:current_semester])
       redirect_to admin_users_path, notice: 'Student was successfully updated.'
     else
       render :edit

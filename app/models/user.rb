@@ -22,6 +22,7 @@
   has_many :user_semester_gpas
   has_many :user_deductions
   has_many :user_practice_tests
+  has_many :to_do_items
   
   has_one :user_info, :dependent => :destroy  
 

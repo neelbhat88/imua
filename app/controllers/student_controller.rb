@@ -10,9 +10,14 @@ class StudentController < ApplicationController
 end
 
 class StudentRepository
-	attr_reader :userBadgeRepo, :academicsRepo, :practiceTestRepo
+	attr_reader :userBadgeRepo, :academicsRepo, :practiceTestRepo, :badgeFactory, :toDoItemRepo
 
-	def initialize#(userBadgeRepo=UserBadgeRepository.new, academicsRepo=AcademicsRepository.new, practiceTestRepo=PracticeTestRepository.new)
+	def initialize(userBadgeRepo=UserBadgeRepository.new, academicsRepo=AcademicsRepository.new, practiceTestRepo=PracticeTestRepository.new, badgeFactory=BadgeFactory.new, toDoItemRepo=ToDoItemRepository.new)
+		@userBadgeRepo = userBadgeRepo
+		@academicsRepo = academicsRepo
+		@practiceTestRepo = practiceTestRepo
+		@badgeFactory = badgeFactory
+		@toDoItemRepo = toDoItemRepo
 	end	
 
 	def LoadStudentDashboard(user, semester)
@@ -21,13 +26,15 @@ class StudentRepository
 		sd.first_name = user.first_name
 		sd.last_name = user.last_name
 
-		sd.badges = BadgeFactory.new.GetBadges(:user => user, :semester => semester).map{|b| BadgeViewModel.new(b) }
-	  	sd.semester_gpa = AcademicsRepository.new(user).GetSemesterGpa(semester)	  		  	
+		sd.badges = @badgeFactory.GetBadges(:user => user, :semester => semester).map{|b| BadgeViewModel.new(b) }
+	  	sd.semester_gpa = @academicsRepo.GetSemesterGpa(user, semester)	  		  	
 	  	sd.total_activities = user.user_activities.where(:semester => semester).length	  	
 	  	sd.total_hours = user.user_services.where(:semester => semester).sum(:hours)	  			
 	  	sd.total_pdus = user.user_pdus.where(:semester => semester).length	  	
-	  	sd.percent_complete = (PracticeTestRepository.new.GetPercentCompletedInfo(user.id)[:percentComplete_f] * 100).to_i	  
-	  	sd.points_earned = UserBadgeRepository.new.GetScholarshipPointsEarned(user, semester)
+	  	sd.percent_complete = (@practiceTestRepo.GetPercentCompletedInfo(user.id)[:percentComplete_f] * 100).to_i
+	  	sd.points_earned = @userBadgeRepo.GetScholarshipPointsEarned(user, semester)
+
+	  	sd.to_do_items = @toDoItemRepo.GetItemsAssignedToUser(user)
 
 		return sd
 	end
@@ -42,7 +49,8 @@ end
 
 class StudentDashboard < Dashboard
 	attr_accessor :points_earned, :badges,
-				  :semester_gpa, :total_activities, :total_hours, :total_pdus, :percent_complete
+				  :semester_gpa, :total_activities, :total_hours, :total_pdus, :percent_complete,
+				  :to_do_items
 
 	def initialize
 		super

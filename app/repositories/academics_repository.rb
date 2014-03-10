@@ -1,28 +1,25 @@
-class AcademicsRepository
-	attr_accessor :user
-
-	def initialize(user)
-		self.user = user
+class AcademicsRepository	
+	def initialize
 	end
 
-	def GetUserClassesBySemester(semester)
-		return self.user.user_classes.where('semester = ?', semester)	
+	def GetUserClassesBySemester(user, semester)
+		return user.user_classes.where('semester = ?', semester)	
 	end
 
-	def GetSemesterGpa(semester)
-		gpas = self.user.user_semester_gpas.where(:semester => semester)
+	def GetSemesterGpa(user, semester)
+		gpas = user.user_semester_gpas.where(:semester => semester)
 
 		# There should only be one GPA for a user per semester
 		if gpas.length > 1
-			Rails.logger.error("UserId #{self.user.id} has multiple gpas for semester #{semester}")
+			Rails.logger.error("UserId #{user.id} has multiple gpas for semester #{semester}")
 		end
 
 		# Just return the first gpa
 		return '%.2f' % (gpas.first.gpa)
 	end
 
-	def SaveTotalSemesterGpa(semester)
-	    semester_classes = self.user.user_classes.where(:semester => semester)
+	def SaveTotalSemesterGpa(user, semester)
+	    semester_classes = user.user_classes.where(:semester => semester)
 	    numclasses = semester_classes.length
 	    credithourtotal = 0.00
 	    classeswithgrade = 0
@@ -43,13 +40,13 @@ class AcademicsRepository
 		end
 
 	    # Save Semester gpa
-	    user_semester_gpa = self.user.user_semester_gpas.where(:semester => semester)
+	    user_semester_gpa = user.user_semester_gpas.where(:semester => semester)
 	    if (user_semester_gpa.length > 1)
-	    	Rails.logger.error("ERROR: There should not be more than 1 user_semester_gpa. UserId #{self.user.id} Semester #{self.user.user_info.current_semester}")
+	    	Rails.logger.error("ERROR: There should not be more than 1 user_semester_gpa. UserId #{user.id} Semester #{user.user_info.current_semester}")
 	    end
 
 	    if (user_semester_gpa.length == 0)
-	    	self.user.user_semester_gpas.create(:semester=>semester, :gpa=>semester_gpa)
+	    	user.user_semester_gpas.create(:semester=>semester, :gpa=>semester_gpa)
 	    else
 	    	# There should only be one so assume the first one
 	    	user_semester_gpa[0].update_attributes(:gpa => semester_gpa)
