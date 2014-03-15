@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140305043949) do
+ActiveRecord::Schema.define(:version => 20140315162155) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -101,6 +101,33 @@ ActiveRecord::Schema.define(:version => 20140305043949) do
   add_index "school_pdus", ["school_id"], :name => "IDX_SchoolPdu_SchoolId"
 
   create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "test_prep_categories", :force => true do |t|
+    t.integer  "test_prep_subject_id"
+    t.string   "name"
+    t.integer  "level"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "test_prep_categories", ["test_prep_subject_id"], :name => "IDX_TestPrepCategory_TestPrepSubject"
+
+  create_table "test_prep_sub_categories", :force => true do |t|
+    t.integer  "test_prep_category_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "level"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "test_prep_sub_categories", ["test_prep_category_id"], :name => "IDX_TestPrepSubCategory_TestPrepCategory"
+
+  create_table "test_prep_subjects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
