@@ -55,28 +55,36 @@ $(function(){
 					}
 				});			
 			},
-			addCategory: function()
+			addCategory: function(subject)
 			{
-				$('#addCategoryModal').modal({backdrop: 'static'});
+				$('#addCategoryModal' + subject.name()).modal({backdrop: 'static'});
 			},
-			cancelCategory: function()
-			{				
-				$('#addCategoryModal').modal('hide');
-				var $categoryInput = $('#categoryNameInput');
-				var $categoryLevel = $('#categoryLevelInput');
+			cancelCategory: function(subject)
+			{												
+				var modal = '#addCategoryModal' + subject.name();
+				var selector =  modal + ' .categoryInputs';
+				var $categoryInputs = $(selector + " input");
+				var $nameInput = $(selector + " input.name");
 
-				$categoryInput.removeClass("error");
-				$categoryInput.val("");
-				$categoryLevel.val("");
+				$nameInput.removeClass("error");
+				
+				$categoryInputs.each(function(){
+					$(this).val("");
+				});
+
+				$(modal).modal('hide');
 			},
 			saveCategory: function(subject)
 			{
-				var $categoryInput = $('#categoryNameInput');
-				var $categoryLevel = $('#categoryLevelInput');
+				var modal = '#addCategoryModal' + subject.name();
+				var selector =  modal + ' .categoryInputs';
+				var $categoryInputs = $(selector + " input");
+				var $nameInput = $(selector + " input.name");
+				var $levelInput = $(selector + " input.level");
 
-				if (!$categoryInput.val())
+				if (!$nameInput.val())
 				{
-					$categoryInput.addClass("error");
+					$nameInput.addClass("error");
 					return false;
 				}
 					
@@ -86,14 +94,16 @@ $(function(){
 					dataType: "json",
 					data: {
 						subjectName: subject.name(),
-						name : $categoryInput.val(),
-						level : $categoryLevel.val()
+						name : $nameInput.val(),
+						level : $levelInput.val()
 					},
-					success: function(category){
-						$('#addCategoryModal').modal('hide');
-						$categoryInput.removeClass("error");
-						$categoryInput.val("");
-						$categoryLevel.val("");
+					success: function(category){						
+						$nameInput.removeClass("error");						
+						$categoryInputs.each(function(){
+							$(this).val("");
+						});
+
+						$(modal).modal('hide');
 
 						// Add new category to TestCategories array of the subject
 						subject.TestCategories.push(ko.mapping.fromJS(category));
@@ -106,22 +116,27 @@ $(function(){
 			},
 			cancelSubCategory: function(category)
 			{				
-				$('#addSubCategoryModal' + category.level()).modal('hide');
-				var $subCategoryInput = $('#subCategoryInputs .name');
-				$subCategoryInput.removeClass("error");
+				var modal = '#addSubCategoryModal' + category.level();	
+				var selector =  modal + ' .subCategoryInputs';
+				var $subCategoryInputs = $(selector + " input");
+				var $nameInput = $(selector + " input.name");
+				
+				$nameInput.removeClass("error");
 
-				$('#subCategoryInputs input').each(function(){
+				$subCategoryInputs.each(function(){
 					$(this).val("");
 				});				
+
+				$(modal).modal('hide');
 			},
 			saveSubCategory: function(category)
 			{		
 				var modal = '#addSubCategoryModal' + category.level();	
-				var selector =  modal + ' #subCategoryInputs';
-				var $subCategoryInputs = $(selector);
-				var $nameInput = $subCategoryInputs.find('.name')
-				var $descInput = $subCategoryInputs.find('.description')
-				var $levelInput = $subCategoryInputs.find('.level')
+				var selector =  modal + ' .subCategoryInputs';
+				var $subCategoryInputs = $(selector + " input");
+				var $nameInput = $(selector + " input.name");
+				var $descInput = $(selector + " input.description");
+				var $levelInput = $(selector + " input.level");
 
 				if (!$nameInput.val())
 				{
@@ -138,12 +153,13 @@ $(function(){
 						description: $descInput.val(),
 						level : $levelInput.val()
 					},
-					success: function(subCategory){
-						$(modal).modal('hide');
+					success: function(subCategory){						
 						$nameInput.removeClass("error");
 						$subCategoryInputs.each(function(){
 							$(this).val("");
 						});	
+
+						$(modal).modal('hide');
 
 						// Add new subcategory to TestSubCategories array of the category
 						category.TestSubCategories.push(ko.mapping.fromJS(subCategory));

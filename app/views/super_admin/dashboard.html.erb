@@ -1,7 +1,6 @@
 <% @jsinit = "new SuperAdmin().init(#{@dataModel.to_json});" %>
 
-<div class="contentContainer">
-	<h3> ACT Practice Quizzes </h3>
+<div class="contentContainer">	
 	<a href="#" data-bind="click: addSubject">Add Subject</a>	
 
 	<!-- SUBJECTS -->
@@ -14,6 +13,21 @@
 			<div data-bind="attr: {id: 'collapse' + name()}" class="panel-collapse collapse" >
 				<div class="plm pbs">
 					<a href="#" data-bind="click: $root.addCategory">Add Category</a>	
+
+					<!-- Category Modal -->
+					<div data-bind="attr: {id: 'addCategoryModal' + name()}" class="modal fade">
+						<div class="modal-dialog"><div class="modal-content">
+							<div class="modal-body">
+								<h5>Add Category</h5>
+								<div class="categoryInputs">
+									<input class="name" placeholder="Category name (e.g. Pre-Algebra)" />
+									<input class="level" placeholder="Level (e.g. 1)" />
+									<a href="#" data-bind="click: $root.saveCategory">Save</a>
+									<a href="#" data-bind="click: $root.cancelCategory">Cancel</a>
+								</div>
+							</div>
+						</div></div>
+					</div>
 				</div>
 
 				<!-- Categories -->
@@ -32,7 +46,7 @@
 									<div class="modal-dialog"><div class="modal-content">
 										<div class="modal-body">
 											<h5>Add Sub Category</h5>
-											<div id="subCategoryInputs">
+											<div class="subCategoryInputs">
 												<input class="name" placeholder="Name (e.g. Basic Operations)" />
 												<input class="description" placeholder="Description (e.g. Basic operations using whole numbers, decimals, fractions,  and integers)" />
 												<input class="level" placeholder="Level (e.g. 1)" />
@@ -59,7 +73,7 @@
 										<div class="pls pbs">
 											<a href="#" data-bind="click: $root.addQuestion">Add Question</a>
 											<div id="question" class="question" data-bind="" style="">
-												<%= render 'newquestion' %>
+												<%= render 'question' %>
 											</div>	
 										</div>									
 									</div>
@@ -80,18 +94,6 @@
 			<input id="subjectNameInput" placeholder="Subject name (e.g. Math)" />
 			<a href="#" data-bind="click: saveSubject">Save</a>
 			<a href="#" data-bind="click: cancelSubject">Cancel</a>
-		</div>
-	</div></div>
-</div>
-
-<div id="addCategoryModal" class="modal fade">
-	<div class="modal-dialog"><div class="modal-content">
-		<div class="modal-body">
-			<h5>Add Category</h5>
-			<input id="categoryNameInput" placeholder="Category name (e.g. Pre-Algebra)" />
-			<input id="categoryLevelInput" placeholder="Level (e.g. 1)" />
-			<a href="#" data-bind="click: $root.saveCategory">Save</a>
-			<a href="#" data-bind="click: $root.cancelCategory">Cancel</a>
 		</div>
 	</div></div>
 </div>
