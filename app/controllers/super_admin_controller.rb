@@ -4,7 +4,7 @@ class SuperAdminController < ApplicationController
 	
     respond_to :json
 
-	def index
+	def dashboard
 		actMathTests = PracticeTestRepository.new().LoadTestsAsArray(current_user.id, "Math")
     	actReadingTests = PracticeTestRepository.new().LoadTestsAsArray(current_user.id, "Reading")
     	actEnglishTests = PracticeTestRepository.new().LoadTestsAsArray(current_user.id, "English")

@@ -1,0 +1,97 @@
+<% @jsinit = "new SuperAdmin().init(#{@dataModel.to_json});" %>
+
+<div class="contentContainer">
+	<h3> ACT Practice Quizzes </h3>
+	<a href="#" data-bind="click: addSubject">Add Subject</a>	
+
+	<!-- SUBJECTS -->
+	<div id="accordion" data-bind="foreach: TestSubjects">
+		<div class="prepSubject" style="border: 1px solid gray;">
+			<!-- Subject header -->
+			<h4 class="pls" data-bind="text: name, attr: {href: '#collapse' + name()}" data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;"></h4>			
+
+			<!-- Subject body -->
+			<div data-bind="attr: {id: 'collapse' + name()}" class="panel-collapse collapse" >
+				<div class="plm pbs">
+					<a href="#" data-bind="click: $root.addCategory">Add Category</a>	
+				</div>
+
+				<!-- Categories -->
+				<div id="" data-bind="foreach: TestCategories" style="">
+					<div class="plm prepSubject" style="">
+						<!-- Category header -->
+						<h5 data-bind="text: name" class="mbm" style="border-bottom: 1px dotted gray;"></h5>
+
+						<!-- Category body -->
+						<div data-bind="" class="">
+							<div class="plxl pbs">
+								<a href="#" data-bind="click: $root.addSubCategory">Add Sub-Category</a>
+
+								<!-- SubCategory Modal -->
+								<div data-bind="attr: { id: 'addSubCategoryModal' + level() }" class="modal fade">
+									<div class="modal-dialog"><div class="modal-content">
+										<div class="modal-body">
+											<h5>Add Sub Category</h5>
+											<div id="subCategoryInputs">
+												<input class="name" placeholder="Name (e.g. Basic Operations)" />
+												<input class="description" placeholder="Description (e.g. Basic operations using whole numbers, decimals, fractions,  and integers)" />
+												<input class="level" placeholder="Level (e.g. 1)" />
+												<a href="#" data-bind="click: $root.saveSubCategory">Save</a>
+												<a href="#" data-bind="click: $root.cancelSubCategory">Cancel</a>
+											</div>
+										</div>
+									</div></div>
+								</div>
+								<!-- SubCategory Modal -->
+
+							</div>
+
+							<!-- SubCategories -->
+							<div data-bind="foreach: TestSubCategories" style="">
+								<div class="plxl prepSubject" style="">
+									<!-- SubCategories header -->
+									<div data-bind="" class="mbm" style="border-bottom: 1px dotted gray;">
+										<h5 data-bind="text: name" style="display:inline-block"></h5> - <h6 data-bind="text: description()" style="display:inline-block;"></h6>
+									</div>
+
+									<!-- SubCategories body -->
+									<div data-bind="" class="">
+										<div class="pls pbs">
+											<a href="#" data-bind="click: $root.addQuestion">Add Question</a>
+											<div id="question" class="question" data-bind="" style="">
+												<%= render 'newquestion' %>
+											</div>	
+										</div>									
+									</div>
+								</div>					
+							</div> <!-- SubCategories -->
+						</div> <!-- Category body -->
+					</div>
+				</div> <!-- Categories -->
+			</div> <!-- Subject body -->
+		</div>
+	</div> <!-- Subjects -->
+</div>
+
+<div id="addSubjectModal" class="modal fade">
+	<div class="modal-dialog"><div class="modal-content">
+		<div class="modal-body">
+			<h5>Add Subject</h5>
+			<input id="subjectNameInput" placeholder="Subject name (e.g. Math)" />
+			<a href="#" data-bind="click: saveSubject">Save</a>
+			<a href="#" data-bind="click: cancelSubject">Cancel</a>
+		</div>
+	</div></div>
+</div>
+
+<div id="addCategoryModal" class="modal fade">
+	<div class="modal-dialog"><div class="modal-content">
+		<div class="modal-body">
+			<h5>Add Category</h5>
+			<input id="categoryNameInput" placeholder="Category name (e.g. Pre-Algebra)" />
+			<input id="categoryLevelInput" placeholder="Level (e.g. 1)" />
+			<a href="#" data-bind="click: $root.saveCategory">Save</a>
+			<a href="#" data-bind="click: $root.cancelCategory">Cancel</a>
+		</div>
+	</div></div>
+</div>

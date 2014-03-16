@@ -3,10 +3,7 @@ $(function(){
 		var self = this;
 
 		self.viewModel = {
-			sectionToShow: ko.observable("Math"),
-			addingSubject: ko.observable(false),
-			addingCategory: ko.observable(false),
-			addingSubCategory: ko.observable(false),
+			sectionToShow: ko.observable("Math"),			
 			
 			showSection: function(data, category)
 			{
@@ -23,11 +20,12 @@ $(function(){
 
 			addSubject: function()
 			{
-				self.viewModel.addingSubject(true);
+				$('#addSubjectModal').modal({backdrop: 'static'});
 			},
 			cancelSubject: function()
 			{				
-				self.viewModel.addingSubject(false);
+				$('#addSubjectModal').modal('hide');
+
 				var $nameInput = $('#subjectNameInput');
 				$nameInput.removeClass("error");
 				$nameInput.val("");
@@ -48,7 +46,7 @@ $(function(){
 					dataType: "json",
 					data: {name: $nameInput.val()},
 					success: function(subject){
-						self.viewModel.addingSubject(false);
+						$('#addSubjectModal').modal('hide');
 						$nameInput.removeClass("error");
 						$nameInput.val("");
 
@@ -59,11 +57,11 @@ $(function(){
 			},
 			addCategory: function()
 			{
-				self.viewModel.addingCategory(true);
+				$('#addCategoryModal').modal({backdrop: 'static'});
 			},
 			cancelCategory: function()
 			{				
-				self.viewModel.addingCategory(false);
+				$('#addCategoryModal').modal('hide');
 				var $categoryInput = $('#categoryNameInput');
 				var $categoryLevel = $('#categoryLevelInput');
 
@@ -92,7 +90,7 @@ $(function(){
 						level : $categoryLevel.val()
 					},
 					success: function(category){
-						self.viewModel.addingCategory(false);
+						$('#addCategoryModal').modal('hide');
 						$categoryInput.removeClass("error");
 						$categoryInput.val("");
 						$categoryLevel.val("");
@@ -102,13 +100,13 @@ $(function(){
 					}
 				});			
 			},
-			addSubCategory: function()
+			addSubCategory: function(category)
 			{
-				self.viewModel.addingSubCategory(true);
+				$('#addSubCategoryModal' + category.level()).modal({backdrop: 'static'});
 			},
-			cancelSubCategory: function()
+			cancelSubCategory: function(category)
 			{				
-				self.viewModel.addingSubCategory(false);
+				$('#addSubCategoryModal' + category.level()).modal('hide');
 				var $subCategoryInput = $('#subCategoryInputs .name');
 				$subCategoryInput.removeClass("error");
 
@@ -117,12 +115,17 @@ $(function(){
 				});				
 			},
 			saveSubCategory: function(category)
-			{
-				var $subCategoryInput = $('#subCategoryInputs .name');
+			{		
+				var modal = '#addSubCategoryModal' + category.level();	
+				var selector =  modal + ' #subCategoryInputs';
+				var $subCategoryInputs = $(selector);
+				var $nameInput = $subCategoryInputs.find('.name')
+				var $descInput = $subCategoryInputs.find('.description')
+				var $levelInput = $subCategoryInputs.find('.level')
 
-				if (!$subCategoryInput.val())
+				if (!$nameInput.val())
 				{
-					$subCategoryInput.addClass("error");
+					$nameInput.addClass("error");
 					return false;
 				}
 					
@@ -131,14 +134,14 @@ $(function(){
 					url: "/super_admin/test_prep/sub_category",
 					data: {						
 						categoryName: category.name(),
-						name : $('#subCategoryInputs .name').val(),
-						description: $('#subCategoryInputs .description').val(),
-						level : $('#subCategoryInputs .level').val()
+						name : $nameInput.val(),
+						description: $descInput.val(),
+						level : $levelInput.val()
 					},
 					success: function(subCategory){
-						self.viewModel.addingSubCategory(false);
-						$subCategoryInput.removeClass("error");
-						$('#subCategoryInputs input').each(function(){
+						$(modal).modal('hide');
+						$nameInput.removeClass("error");
+						$subCategoryInputs.each(function(){
 							$(this).val("");
 						});	
 
@@ -156,5 +159,9 @@ $(function(){
 		ko.mapping.fromJS(dataModel, {}, self.viewModel);
 
 		ko.applyBindings(self.viewModel);
+
+		$('#accordion').on('show.bs.collapse', function () {
+	        $('#accordion .in').collapse('hide');
+	    });
 	}
 });
