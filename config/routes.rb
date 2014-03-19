@@ -97,6 +97,7 @@ Wcsf::Application.routes.draw do
   post "super_admin/test_prep/subject", to: 'super_admin#add_subject'
   post "super_admin/test_prep/category", to: 'super_admin#add_category'
   post "super_admin/test_prep/sub_category", to: 'super_admin#add_sub_category'
+  post "super_admin/test_prep/question", to: 'super_admin#add_question'
 
   get "student/dashboard", to: 'student#index'
 

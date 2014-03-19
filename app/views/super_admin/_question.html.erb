@@ -1,1 +1,21 @@
-<h6>New Question!</h6>
+<div class="edit">
+	<h5>Question</h5>
+	<div class="questionInputs">
+		<textarea class="questionText" data-bind="value: $root.questionText" class="text" cols="30"></textarea>
+		<div class="questionPreviewContainer">
+			<div class="previewIcon">
+				<span data-bind="click: $root.updateQuestionPreview" class="clickable glyphicon glyphicon-arrow-right" title="Click to preview"></span>
+				<div>Preview Text</div>
+			</div>
+			<div class="previewText pls" data-bind="text: $root.previewText"></div>
+		</div>
+		<div class="pvs"><input class="solutionUrl" placeholder="Solution video url" /></div>
+		<div class="buttonGroup">
+			<div class="cancelButton" data-bind="click: $root.cancelQuestion">Cancel</div>
+			<div class="submitButton" data-bind="click: $root.saveQuestion">Save</div>
+		</div>
+	</div>
+</div>
+
+<!-- ToDo - putting these functions on $root is weird -->
+<!-- Make all levels expandable using own expand code -->

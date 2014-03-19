@@ -3,7 +3,10 @@ $(function(){
 		var self = this;
 
 		self.viewModel = {
-			sectionToShow: ko.observable("Math"),			
+			sectionToShow: ko.observable("Math"),
+			// ToDo: This is weird here, but is there a way to add these to just the subCategory observable objects?
+			questionText: ko.observable(""),
+			previewText: ko.observable(""),
 			
 			showSection: function(data, category)
 			{
@@ -165,6 +168,70 @@ $(function(){
 						category.TestSubCategories.push(ko.mapping.fromJS(subCategory));
 					}
 				});			
+			},
+			addQuestion: function(subCategory)
+			{
+				$('#addQuestionModal' + subCategory.id()).modal({backdrop: 'static'});
+
+				self.viewModel.previewText("");
+				self.viewModel.questionText("");
+			},
+			saveQuestion: function(subCategory)
+			{				
+				var modal = '#addQuestionModal' + subCategory.id();
+				var selector =  modal + ' .questionInputs';				
+				var $questionInputs = $(selector + " input, " + selector + " textarea");
+				var $questionTextInput = $(selector + " textarea.questionText");
+				var $solutionUrlInput = $(selector + " input.solutionUrl");
+
+				
+				if (!$questionTextInput.val())
+				{
+					$questionTextInput.addClass("error");
+					return false;
+				}
+					
+				$.ajax({
+					type: "POST",
+					url: "/super_admin/test_prep/question",
+					data: {						
+						subCategoryName: subCategory.name(),
+						questionText : $questionTextInput.val(),
+						solutionUrl : $solutionUrlInput.val()
+					},
+					success: function(question)
+					{
+						self.viewModel.cancelQuestion(subCategory);
+
+						// Add new subcategory to TestSubCategories array of the category
+						subCategory.TestQuestions.push(ko.mapping.fromJS(question));
+
+						MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+					}
+				});
+			},
+			cancelQuestion: function(subCategory)
+			{				
+				var modal = '#addQuestionModal' + subCategory.id();
+				var selector =  modal + ' .questionInputs';
+				var $questionInputs = $(selector + " input, " + selector + " textarea");
+				
+				$questionInputs.removeClass("error");
+
+				self.viewModel.previewText("");
+				self.viewModel.questionText("");
+				$questionInputs.each(function(){
+					$(this).val("");
+				});
+
+				$(modal).modal('hide');
+			},
+			updateQuestionPreview: function()
+			{
+				self.viewModel.previewText(self.viewModel.questionText());
+				MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+
+				return true;
 			}
 		};
 	}
@@ -176,8 +243,14 @@ $(function(){
 
 		ko.applyBindings(self.viewModel);
 
-		$('#accordion').on('show.bs.collapse', function () {
-	        $('#accordion .in').collapse('hide');
-	    });
+		new Accordion().init();
+	}
+
+	function Question(subCategoryId){
+		var self = this;
+		
+		self.subCategoryId = subCategoryId;
+		self.questionText = ko.observable("");
+		self.solutionUrl = ko.observable("");		
 	}
 });

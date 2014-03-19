@@ -29,12 +29,19 @@ class TestPrepRepository
 
 		return TestSubCategory.new(subCategory)
 	end
+
+	def CreateQuestion(subCategoryName, questionText, solutionUrl)
+		question = TestPrepSubCategory.find_by_name(subCategoryName).test_prep_questions.create(:question_text => questionText, :solution_url => solutionUrl)
+
+		return TestQuestion.new(question)
+	end
 end
 
 class TestSubject
-	attr_accessor :name, :TestCategories
+	attr_accessor :id, :name, :TestCategories
 
 	def initialize(subject)
+		@id = subject.id
 		@name = subject.name
 
 		@TestCategories = []
@@ -45,9 +52,10 @@ class TestSubject
 end
 
 class TestCategory
-	attr_accessor :name, :level, :TestSubCategories
+	attr_accessor :id, :name, :level, :TestSubCategories
 
 	def initialize(category)
+		@id = category.id
 		@name = category.name
 		@level = category.level
 		@TestSubCategories = []
@@ -58,11 +66,27 @@ class TestCategory
 end
 
 class TestSubCategory
-	attr_accessor :name, :level, :description
+	attr_accessor :id, :name, :level, :description, :TestQuestions
 
 	def initialize(subCategory)
+		@id = subCategory.id
 		@name = subCategory.name
 		@description = subCategory.description
 		@level = subCategory.level
+
+		@TestQuestions = []
+		subCategory.test_prep_questions.each do |q|
+			@TestQuestions << TestQuestion.new(q)
+		end
+	end
+end
+
+class TestQuestion
+	attr_accessor :id, :questionText, :solutionUrl
+
+	def initialize(question)
+		@id = question.id
+		@questionText = question.question_text
+		@solutionUrl = question.solution_url
 	end
 end

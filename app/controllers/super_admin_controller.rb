@@ -51,4 +51,14 @@ class SuperAdminController < ApplicationController
 
         respond_with newSubCategory, location: super_admin_dashboard_url
     end
+
+    def add_question
+        subCategoryName = params[:subCategoryName]
+        questionText = params[:questionText]
+        solutionUrl = params[:solutionUrl]
+
+        newQuestion = TestPrepRepository.new().CreateQuestion(subCategoryName, questionText, solutionUrl)
+
+        respond_with newQuestion, location: super_admin_dashboard_url
+    end
 end

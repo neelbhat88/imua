@@ -1,18 +1,26 @@
 <% @jsinit = "new SuperAdmin().init(#{@dataModel.to_json});" %>
 
 <div class="contentContainer">	
-	<a href="#" data-bind="click: addSubject">Add Subject</a>	
+	<div class="pbm">
+		<span class="clickable" data-bind="click: addSubject">
+			<span class="glyphicon glyphicon-plus-sign add"></span> 
+			Subject
+		</span>	
+	</div>
 
 	<!-- SUBJECTS -->
-	<div id="accordion" data-bind="foreach: TestSubjects">
+	<div id="subjectAccordion" data-bind="foreach: TestSubjects">
 		<div class="prepSubject" style="border: 1px solid gray;">
 			<!-- Subject header -->
-			<h4 class="pls" data-bind="text: name, attr: {href: '#collapse' + name()}" data-toggle="collapse" data-parent="#accordion" style="cursor: pointer;"></h4>			
+			<h4 class="pls clickable bold accordionHeader" data-bind="text: name" accordion-parent="#subjectAccordion"></h4>
 
 			<!-- Subject body -->
-			<div data-bind="attr: {id: 'collapse' + name()}" class="panel-collapse collapse" >
-				<div class="plm pbs">
-					<a href="#" data-bind="click: $root.addCategory">Add Category</a>	
+			<div class="accordionBody">
+				<div class="plm pbxl">
+					<span class="clickable" data-bind="click: $root.addCategory">
+						<span class="glyphicon glyphicon-plus-sign add"></span> 
+						Category
+					</span>
 
 					<!-- Category Modal -->
 					<div data-bind="attr: {id: 'addCategoryModal' + name()}" class="modal fade">
@@ -31,15 +39,18 @@
 				</div>
 
 				<!-- Categories -->
-				<div id="" data-bind="foreach: TestCategories" style="">
+				<div id="categoryAccordion" data-bind="foreach: TestCategories" style="">
 					<div class="plm prepSubject" style="">
 						<!-- Category header -->
-						<h5 data-bind="text: name" class="mbm" style="border-bottom: 1px dotted gray;"></h5>
+						<h5 data-bind="text: level() + ' - ' + name()" class="bold accordionHeader" accordion-parent="#categoryAccordion"></h5>
 
 						<!-- Category body -->
-						<div data-bind="" class="">
-							<div class="plxl pbs">
-								<a href="#" data-bind="click: $root.addSubCategory">Add Sub-Category</a>
+						<div data-bind="" class="accordionBody">
+							<div class="plxl pbxl">
+								<span class="clickable" data-bind="click: $root.addSubCategory">
+									<span class="glyphicon glyphicon-plus-sign add"></span> 
+									Sub-Category
+								</span>
 
 								<!-- SubCategory Modal -->
 								<div data-bind="attr: { id: 'addSubCategoryModal' + level() }" class="modal fade">
@@ -61,21 +72,34 @@
 							</div>
 
 							<!-- SubCategories -->
-							<div data-bind="foreach: TestSubCategories" style="">
-								<div class="plxl prepSubject" style="">
+							<div id="subcategoryAccordion" data-bind="foreach: TestSubCategories">
+								<div class="plxl pbm prepSubject" style="">
 									<!-- SubCategories header -->
-									<div data-bind="" class="mbm" style="border-bottom: 1px dotted gray;">
-										<h5 data-bind="text: name" style="display:inline-block"></h5> - <h6 data-bind="text: description()" style="display:inline-block;"></h6>
+									<div data-bind="" class="accordionHeader" accordion-parent="#subcategoryAccordion">
+										<div data-bind="text: level() + ' - ' + name()" class="bold" style="display:inline-block"></div> - <h6 data-bind="text: description()" style="display:inline-block;"></h6>
 									</div>
 
 									<!-- SubCategories body -->
-									<div data-bind="" class="">
-										<div class="pls pbs">
-											<a href="#" data-bind="click: $root.addQuestion">Add Question</a>
-											<div id="question" class="question" data-bind="" style="">
-												<%= render 'question' %>
-											</div>	
-										</div>									
+									<div data-bind="" class="accordionBody">
+										<div class="pls pbxl">
+											<span class="clickable" data-bind="click: $root.addQuestion">
+												<span class="glyphicon glyphicon-plus-sign add"></span> 
+												Question
+											</span>
+
+											<!-- Question Modal -->
+											<div data-bind="attr: {id: 'addQuestionModal' + id()}" class="modal fade">
+												<div class="modal-dialog"><div class="modal-content">
+													<div class="modal-body">
+														<%= render 'question' %>
+													</div>
+												</div></div>
+											</div>
+										</div>
+
+										<div data-bind="foreach: TestQuestions">
+											<div data-bind="text: questionText"></div>
+										</div>			
 									</div>
 								</div>					
 							</div> <!-- SubCategories -->

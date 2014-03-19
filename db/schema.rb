@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140315162155) do
+ActiveRecord::Schema.define(:version => 20140319035538) do
 
   create_table "donors", :force => true do |t|
     t.string   "first_name"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(:version => 20140315162155) do
   end
 
   add_index "test_prep_categories", ["test_prep_subject_id"], :name => "IDX_TestPrepCategory_TestPrepSubject"
+
+  create_table "test_prep_questions", :force => true do |t|
+    t.integer  "test_prep_sub_category_id"
+    t.string   "question_text"
+    t.string   "solution_url"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "test_prep_questions", ["test_prep_sub_category_id"], :name => "IDX_TestPrepQuestion_TestPrepSubCategory"
 
   create_table "test_prep_sub_categories", :force => true do |t|
     t.integer  "test_prep_category_id"
