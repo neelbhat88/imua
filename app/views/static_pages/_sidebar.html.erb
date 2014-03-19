@@ -28,7 +28,7 @@
               <% if current_user.is_student? %>				
 				<%= link_to "Imua Portal", student_dashboard_path, :class => 'btn btn-success' %>
               <% elsif current_user.is_super_admin? %>
-                <%= link_to "Dashboard", school_classes_path, :class => 'btn btn-success' %>
+                <%= link_to "Dashboard", super_admin_dashboard_path, :class => 'btn btn-success' %>
               <% elsif current_user.is_student_admin? %>
               	<%= link_to "Dashboard", admin_students_path, :class => 'btn btn-success' %>
               <% end %>
